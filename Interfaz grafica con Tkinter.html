@@ -1,0 +1,345 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META NAME="generator" CONTENT="http://txt2tags.org">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+<TITLE>Interfaz grafica con Tkinter</TITLE>
+</HEAD><BODY BGCOLOR="white" TEXT="black">
+<CENTER>
+<H1>Interfaz grafica con Tkinter</H1>
+<FONT SIZE="4"><I>Alejandro Alvarez [contacto@codigopython.com.ar]</I></FONT><BR>
+<FONT SIZE="4">Ultima modificacion 23-10-2011</FONT>
+</CENTER>
+
+
+  <UL>
+  <LI><A HREF="#toc1">Introduccion</A>
+    <UL>
+    <LI><A HREF="#toc2">Acerca de Tk</A>
+    <LI><A HREF="#toc3">Sobre esta guia</A>
+    </UL>
+  <LI><A HREF="#toc4">Empezando por lo basico</A>
+  <LI><A HREF="#toc5">Widgets</A>
+    <UL>
+    <LI><A HREF="#toc6">Etiquetas [Label]</A>
+    <LI><A HREF="#toc7">Botones [Button]</A>
+    </UL>
+  <LI><A HREF="#gestion">Gestion del diseño</A>
+    <UL>
+    <LI><A HREF="#toc9">Gestión de la geometría</A>
+      <UL>
+      <LI><A HREF="#toc10">pack</A>
+      <LI><A HREF="#toc11">grid</A>
+      <LI><A HREF="#toc12">place</A>
+      </UL>
+    <LI><A HREF="#toc13">Frame</A>
+    <LI><A HREF="#toc14">minsize</A>
+    <LI><A HREF="#toc15">Colores</A>
+    <LI><A HREF="#toc16">Fuentes</A>
+    </UL>
+  <LI><A HREF="#toc17">Menus y barras de herramientas</A>
+  <LI><A HREF="#toc18">Ventanas de dialogos</A>
+  <LI><A HREF="#toc19">Eventos</A>
+  <LI><A HREF="#toc20">Ejemplos</A>
+  <LI><A HREF="#toc21">Notas finales</A>
+  <LI><A HREF="#toc22">Enlaces de interes</A>
+  <LI><A HREF="#glosario">Glosario</A>
+  <LI><A HREF="#toc24">Licencia</A>
+  </UL>
+
+<P>
+Algo muy buscado en Python son las guias sobre interfaces graficas ya sea PyGTK, PyQT, WxPython o TkInter entre las mas conocidas teniendo cada una sus ventajas y desventajas, asi como cada una tiene facilidades y complicaciones en su uso y aplicacion. En esta oportunidad le dare un espacio a TkInter como guia complementaria a la hecha por Sebastardo en <A HREF="http://www.codigopython.com.ar/?p=139">http://www.codigopython.com.ar/?p=139</A>, intentare ser lo mas lo mas claro posible sin pasarme por alto los pequeños detalles en lo que compone la creacion de una interfaz grafica en Python con el <A HREF="#glosario">toolkit</A> TkInter.
+</P>
+
+<H1 ID="toc1">Introduccion</H1>
+
+<H2 ID="toc2">Acerca de Tk</H2>
+
+<P>
+[FIXME]
+</P>
+
+<H2 ID="toc3">Sobre esta guia</H2>
+
+<P>
+Dejo algunas observaciones sobre el tutorial, a lo largo del tutorial es posible que haga alusion a funciones o caracteristicas de distribuciones GNU/Linux ya que es el sistema operativo que estoy utilizando durante el desarrollo de esta guia, aunque esto no influye en el objetivo de la guia ya que Python es multiplataforma al igual que TkInter.
+Para los que deseen colaborar con esta guia asi como en su contenido, pueden hacerlo registrandose en la <A HREF="http://wiki.codigopython.com.ar/registro">Wili</A>
+</P>
+
+<H1 ID="toc4">Empezando por lo basico</H1>
+
+<P>
+Lo primero que debemos hacer al igual que con otros modulos es que debemos importalo para poder comenzar a utilizarlo, y al igual que con otros modulos tenemos dos formas de hacerlo
+</P>
+<P>
+La primera y mas utilizada:
+</P>
+
+<PRE>
+  from Tkinter import *
+</PRE>
+
+<P>
+Y la segunda y menos usada:
+</P>
+
+<PRE>
+  import Tkinter
+</PRE>
+
+<DL>
+<DT><B>NOTA</B></DT><DD>
+En las versiones 3.x de Python el modulo Tk se debe llamar de esta forma <I>"from tkinter import *"</I> y no de esta forma <I>"from Tkinter import *"</I> es un cambio menor que hay que tener en cuenta si estan trabajando con Python 3.
+</DL>
+
+<P>
+La diferencia entre usar la primera y segunda forma es la misma con la que nos podemos topar a la hora de importar un modulo en Python, para verlo si volvemos al articulo <A HREF="http://wiki.codigopython.com.ar/eliluminado:pausa-entre-comandos-y-acciones">"Pausa entre comandos y acciones"</A> mostre esta diferencia utilizando al modulo <I>'time'</I> y para hacerlo use el siguiente ejemplo:
+</P>
+
+<PRE>
+  import time
+  time.sleep(10)
+</PRE>
+
+<PRE>
+  from time import sleep
+  sleep(10)
+</PRE>
+
+<P>
+Usando la forma <I>"import Tkinter"</I> cada vez que utilicemos una funcion del este modulo tendremos que anteponer la palabra <I>'Tkinter'</I>, en cambio usando la segunda forma <I>"from Tkinter import *"</I> simplemente deberemos usar el nombre de la funcion sin el nombre del modulo.
+</P>
+<P>
+Por ahora a modo de tutorial utilizaremos la primer forma pero esto queda a su desicion, ahora si retomemos la guia.
+</P>
+<P>
+Una observacion que hare antes de continuar es no debemos pasa por alto la posibilidad de que el usuario no tenga instalado las librerias de TkInter y en consecuencia nuestra aplicacion no podra funcionar, lo mejor en este caso como en muchos otros es anticiparnos a los posibles errores que puedan ir surgiendo y manejar las excepciones de la siguiente forma:
+</P>
+
+<PRE>
+  try:
+      from Tkinter import *
+  except ImportError:
+      raise ImportError,"Se requiere el modulo Tkinter"
+</PRE>
+
+<P>
+De esta forma en caso de que el potencial usuario de nuestra preciada aplicacion pueda saber cual es motivo (en el caso de que no tenga instalado Tkinter) por el cual no pudo ejecutarla.
+</P>
+<P>
+Una vez importado el modulo 'Tkinter' correctamente podemos utilizarlo para crear nuestra primera ventana de la siguiente forma:
+</P>
+
+<PRE>
+  root = Tk()
+  root.mainloop()
+</PRE>
+
+<P>
+Esas dos lineas son fundamentales, ya que dentro de ellas ira gran parte del contenido asi como la interfaz como pueden ser botones y menus, etc.. En la primera linea se crea un identificador que sera el que utilizaremos para referirnos a la ventana, en este caso lo llamamos 'root' y es una de las funciones mas importantes de Tkinter. Siempre que iniciamos un identificador en este caso lo llamamos 'root' debemos cerrarlo y todo lo contenido entre estas lineas seran parte del codigo de nuestra interfaz.[FIXME]
+</P>
+
+<DL>
+<DT><B>NOTA</B></DT><DD>
+La variable 'root' usada para nombrar al identificador puede ser reemplazada por cualquier otro nombre siempre y cuando se respeten las palabras reservadas de Python (Para mas informacion entrar aqui <A HREF="http://wiki.codigopython.com.ar/eliluminado:nombres-de-variables-y-palabras-reservadas">Palabras reservadas en Python</A>) aunque es muy utilizado usar el nombre 'root' para la ventana principal y puede ser una buena practica para que resulte mas familiar a los demas programadores que se quieran unir al desarrollo de nuestra aplicacion.
+</DL>
+
+<P>
+Con esto ya tendremos una ventana vacia que nos servira para comenzar a trabajar, a partir de ahora ire ampliando esta guia mostrando los distintos <A HREF="#glosario">widgets</A> con los que contamos en TkInter y luego para finalizar crearemos un ejemplo sencillo para unir lo se vio a lo largo de esta guia.
+</P>
+
+<H1 ID="toc5">Widgets</H1>
+
+<P>
+En esta seccion de la guia no nos centraremos en el posicinamiento y diseño de los elementos que compondran nuestra interfaz grafica lo dejaremos para la siguiente seccion <A HREF="#gestion">"Gestion del diseño"</A> en donde se vera mas detenidamente este asunto.
+</P>
+
+<H2 ID="toc6">Etiquetas [Label]</H2>
+
+<P>
+Para comenzar a llenar esa vacia ventana que acabamos de crear vamos a nombrar a las etiquetas o mas conocidas como <I>'label'</I> por su nombre en ingles, las podemos encontrar desde interfaces graficas hasta en formularios en HTML y son sumamente utiles en la construccion de interfaces y formularios, al igual que cuando creamos nuestra ventana vacia declarandola de la siguiente forma <I>"root = Tk()"</I> tendremos que hacerlo con nuestra etiqueta, para esto necesitamos escoger un nombre en mi caso escogere <B>"etiqueta"</B> para declararla y deberemos llamar al widget "Label" en vez de la funcion "Tk" como habiamos hechos anteriormente, como para orientarnos con lo ya visto quedando por ahora algo asi:
+</P>
+
+<PRE>
+  etiqueta = Label()
+</PRE>
+
+<P>
+Una vez creada la estructura basica de la etiqueta tendremos que llenar esa parentesis vacio, primero tendremos que indicar a donde pertenece ese 'label' indicando el identificador de la ventana que en nuestro caso es 'root', separado por una coma escribiremos lo siguiente <B>text=</B> en donde seguido del signo igual incluiremos el texto que deseamos que incluya la etiqueta la cual puede ser un texto (que tendremos que encerrar entre comillas al igual que cuando usamos la sentencia print) o una variable que contenga al texto. Para verlo un poco mas claro juntemos todo en dos ejemplos uno donde muestre un texto fijo que le indiquemos a la etiqueta y otro usando una variable
+</P>
+
+<UL>
+<LI><B>Ejemplo numero 1</B>:
+
+<PRE>
+  etiqueta = Label(root, text="Codigo Python")
+</PRE>
+
+<P></P>
+<LI><B>Ejemplo numero 2</B>:
+
+<PRE>
+  import getpass
+  texto = "Bienvenido %s a Codigo Python" % getpass.getuser()
+  etiqueta_2 = Label(root, text=texto)
+</PRE>
+
+</UL>
+
+<P>
+Expliquemos los dos ejemplos, en el primero usamos un texto fijo no dinamico para utilizar como valor de la etiqueta en cambio en el segundo estamos usando una variable en donde su valor varia dependiendo de la salida que tenga la funcion <I>'getpass.getuser()'</I> que obtiene el nombre de usuario que tengamos en nuestra PC, como podemos observar su funcionamiento no varia mucho de lo que nos tiene acostumbrados Python, asi que si manejarnos con Tkinter es solamente aprendernos un par de nombres de sus widgets como para poder empezar a utilizarlo.
+</P>
+<P>
+Pero (siempre hay un pero) antes de poder ejecutar este ejemplo en nuestra consola tendremos que declarar este widget en nuestra ventana dandole una ubicacion en la misma sino hacemos esto nuestra etiqueta simplemente no aparecera en nuestra ventana, para hacerlo tenemos dos formas (Esto se vera mas detenidamente mas adelante) una es usando <B>'pack'</B> y la otra <B>' grid'</B>. Como esto se vera mas adelante hare una breve sintesis de los dos:
+</P>
+
+<UL>
+<LI>'pack': [FIXME]
+<P></P>
+<LI>'grid': [FIXME]
+</UL>
+
+<P>
+Como en este ejemplo solo colocaremos una etiqueta no es necesario recurir al uso de 'grid' para posicionarlo, asi que usaremos 'pack' en su lugar. Pero lo mas importante es saber como se declara esta etiqueta en nuestra ventana y poder ver nuestro primer widget en funcionamiento, para lograr esto deberemos usar la siguiente forma:
+</P>
+
+<PRE>
+  etiqueta.pack()
+</PRE>
+
+<P>
+Como vemos es muy simple solo debemos usar el nombre que utilizamos para declarar nuestra etiqueta seguida de la forma que vayamos a utilizar para posicionarla, pero para los que no desean esperar a leer la siguiente seccion para ver como se utiliza 'grid' les dejo la misma etiqueta pero posicionandola con 'grid' en lugar de usar 'pack' como ya lo habiamos visto:
+</P>
+
+<PRE>
+  etiqueta.grid(row=1, column=1)
+</PRE>
+
+<P>
+Como se puede observar esta otra forma debimos indicarle dos parametros que sirven para especificar la posicion del widget, en este caso nuestra etiqueta. El primer parametro es <I>'row'</I> que se traduce como fila al español y el segundo es <I>'column'</I> o columna en español con ellos podemos indicar en que columna y fila debera colocarse el widget, aunque por ahora no profundisaremos entrando en detalles en la forma que trabaja cada uno ni todos los parametros que acepta cada una.
+</P>
+<P>
+Si ahora escribieramos todo lo que vimos en nuestra consola tendriamos que ver nuestra primera etiqueta en funcionamiento, contenido dentro de una ventana, quedando todo el codigo como el siguiente:
+</P>
+
+<PRE>
+  &gt;&gt;&gt; from Tkinter import *
+  &gt;&gt;&gt; root = Tk()
+  &gt;&gt;&gt; etiqueta = Label(root, text="Codigo Python")
+  &gt;&gt;&gt; etiqueta.pack()
+  &gt;&gt;&gt; root.mainloop()
+</PRE>
+
+<P>
+Y asi es como quedara nestro ejemplo terminado
+</P>
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_Label.png" BORDER="0" ALT="">
+</P>
+<P>
+Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer widget y podemos seguir con la guia.
+</P>
+
+<H2 ID="toc7">Botones [Button]</H2>
+
+<P>
+Los botones pueden contener texto o imagenes y a ellos se les puede asociar funciones o metodos, que al hacer click sobre ellos Tkinter se encargara de llamar automaticamente a ese metodo o funcion y se ejecutara el codigo Python contenido dentro de ellos.
+</P>
+<P>
+Un detalle sobre los botones es que solo puede utilizarse un tipo de fuente, pero ese texto puede ocupar varias lineas en caso de ser necesario. Ademas se puede subrayar el texto o un caracter o letra en particular, algo que es muy comun cuando se desea decirle al usuario sobre la existencia de un atajo con el teclado.
+</P>
+<P>
+Antes de crear a ese boton debemos declarar la funcion a la cual se llamara, porque como se imaginaran no podemos decirle al boton que ejecute una funcion que aun no existe, por eso vamos a escribir un par de lineas y crearemos una funcion simple como para verificar que dicho boton funciona correctamente.
+</P>
+
+<PRE>
+  def funcion():
+      print "Excelente"
+</PRE>
+
+<P>
+Con esas dos lineas nos va a servir para demostrar su funcionamiento, ahora si vamos con el boton.
+</P>
+<P>
+A continuacion les muestro el codigo con el cual vamos a trabajar:
+</P>
+
+<PRE>
+  from Tkinter import *
+  
+  def funcion():
+     print "Excelente"
+  
+  root = Tk()
+  boton = Button(root, text="Que te parece la guia?", command=funcion)
+  boton.pack()
+  root.mainloop()
+</PRE>
+
+<P>
+En el se observa la ya conocida importacion del modulo Tkinter, la funcion que ya habiamos declarado y la creacion del boton. Como se puede ver la creacion de un boton basico es muy similar al de una etiqueta pero se incluye un parametro mas que nos dara la posibilidad de especificar dentro de el la funcion que utilizaremos; el parametro mencionado es <B>'command'</B> y en ella podemos llamar a funciones o metodos, en este caso llamamos a la funcion 'funcion' que va a imprimir en la consola la palabra <I>'Excelente'</I>.
+</P>
+
+<H1 ID="gestion">Gestion del diseño</H1>
+
+<H2 ID="toc9">Gestión de la geometría</H2>
+
+<H3 ID="toc10">pack</H3>
+
+<H3 ID="toc11">grid</H3>
+
+<H3 ID="toc12">place</H3>
+
+<H2 ID="toc13">Frame</H2>
+
+<P>
+Aqui veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar el diseño de nuestra aplicacion
+</P>
+
+<H2 ID="toc14">minsize</H2>
+
+<H2 ID="toc15">Colores</H2>
+
+<H2 ID="toc16">Fuentes</H2>
+
+<H1 ID="toc17">Menus y barras de herramientas</H1>
+
+<H1 ID="toc18">Ventanas de dialogos</H1>
+
+<H1 ID="toc19">Eventos</H1>
+
+<H1 ID="toc20">Ejemplos</H1>
+
+<H1 ID="toc21">Notas finales</H1>
+
+<H1 ID="toc22">Enlaces de interes</H1>
+
+<P>
+<A HREF="http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python">http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python</A>
+<A HREF="http://mundogeek.net/archivos/2008/11/24/interfaces-graficas-de-usuario-en-python/">http://mundogeek.net/archivos/2008/11/24/interfaces-graficas-de-usuario-en-python/</A>
+<A HREF="http://foro.elhacker.net/scripting/python_curso_de_python_con_interfaces_graficas_tk-t232514.0.html">http://foro.elhacker.net/scripting/python_curso_de_python_con_interfaces_graficas_tk-t232514.0.html</A>
+<A HREF="http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm">http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm</A>
+<A HREF="http://www.ferg.org/thinking_in_tkinter/all_programs.html">http://www.ferg.org/thinking_in_tkinter/all_programs.html</A>
+<A HREF="http://www.pythonware.com/library/tkinter/introduction/label.htm">http://www.pythonware.com/library/tkinter/introduction/label.htm</A>
+<A HREF="http://infohost.nmt.edu/tcc/help/pubs/tkinter/index.html">http://infohost.nmt.edu/tcc/help/pubs/tkinter/index.html</A>
+</P>
+
+<H1 ID="glosario">Glosario</H1>
+
+<DL>
+<DT>toolkit</DT><DD>
+</DL>
+
+<DL>
+<DT>widgets</DT><DD>
+</DL>
+
+<H1 ID="toc24">Licencia</H1>
+
+<DL>
+<DT>Esta obra está licenciada bajo una Licencia Attribution-ShareAlike 3.0 Unported de Creative Commons. Para ver una copia de esta licencia, visite <A HREF="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</A> o envíenos una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.</DT><DD>
+</DL>
+
+<!-- html code generated by txt2tags 2.6.764 (http://txt2tags.org) -->
+<!-- cmdline: txt2tags -t html -\-toc /home/alejandro/proyectos/Guias/Tkinter/Interfaz grafica con Tkinter -->
+</BODY></HTML>
