@@ -3,6 +3,7 @@ Alejandro Alvarez [contacto@codigopython.com.ar]
 Ultima modificacion %%date(%d-%m-%Y)
 %!target  : html
 %!encoding: UTF-8
+%!options: --toc
 
 %%toc
 
@@ -131,7 +132,7 @@ Si ahora escribieramos todo lo que vimos en nuestra consola tendriamos que ver n
 >>> root.mainloop()
 ```
 
-Y asi es como quedara nestro ejemplo terminado
+Y asi es como quedara nuestro ejemplo terminado:
 
 [img/ejemplo_Label.png]
 
@@ -140,9 +141,9 @@ Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer w
 
 == Botones [Button] ==
 
-Los botones pueden contener texto o imagenes y a ellos se les puede asociar funciones o metodos, que al hacer click sobre ellos Tkinter se encargara de llamar automaticamente a ese metodo o funcion y se ejecutara el codigo Python contenido dentro de ellos.
+Los botones pueden contener texto o imagenes y se les puede asociar funciones o metodos, que al hacer click sobre ellos Tkinter se encargara de llamar automaticamente a ese metodo o funcion y se ejecutara el codigo Python contenido dentro de ellos.
 
-Un detalle sobre los botones es que solo puede utilizarse un tipo de fuente, pero ese texto puede ocupar varias lineas en caso de ser necesario. Ademas se puede subrayar el texto o un caracter o letra en particular, algo que es muy comun cuando se desea decirle al usuario sobre la existencia de un atajo con el teclado.
+Un detalle es que solo puede utilizarse un tipo de fuente, pero ese texto puede ocupar varias lineas en caso de ser necesario. Ademas se puede subrayar el texto, un caracter o letra en particular, algo que es muy comun cuando se desea decirle al usuario sobre la existencia de un atajo con el teclado.
 
 Antes de crear a ese boton debemos declarar la funcion a la cual se llamara, porque como se imaginaran no podemos decirle al boton que ejecute una funcion que aun no existe, por eso vamos a escribir un par de lineas y crearemos una funcion simple como para verificar que dicho boton funciona correctamente.
 
@@ -170,6 +171,25 @@ root.mainloop()
 En el se observa la ya conocida importacion del modulo Tkinter, la funcion que ya habiamos declarado y la creacion del boton. Como se puede ver la creacion de un boton basico es muy similar al de una etiqueta pero se incluye un parametro mas que nos dara la posibilidad de especificar dentro de el la funcion que utilizaremos; el parametro mencionado es **'command'** y en ella podemos llamar a funciones o metodos, en este caso llamamos a la funcion 'funcion' que va a imprimir en la consola la palabra //'Excelente'//.
 
 
+[img/ejemplo_Button.png]
+
+[img/ejemplo_Button02.png]
+
+
+== Cuadro de texto [Entry] ==
+
+% http://www.librosweb.es/xhtml/capitulo8/elementos_de_formulario.html
+% http://www.pythonware.com/library/tkinter/introduction/entry.htm
+
+Este widget nos permite tanto mostrarle informacion al usuario como tambien obtener informacion de su parte, dotando a nuestra ventana de un widget
+
+
+Para escribir varias lineas de texto utilice el widget 'Text'
+
+
+== Opciones ==
+
+%!include: Options.t2t
 
 
 
@@ -188,6 +208,8 @@ Aqui veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar
 == minsize ==
 == Colores ==
 == Fuentes ==
+== Unidades de medida ==
+% Centimetros, pulgadas, milimetros y puntos
 
 
 = Menus y barras de herramientas =
@@ -207,11 +229,17 @@ Aqui veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar
 
 = Enlaces de interes =
 http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python
+
 http://mundogeek.net/archivos/2008/11/24/interfaces-graficas-de-usuario-en-python/
+
 http://foro.elhacker.net/scripting/python_curso_de_python_con_interfaces_graficas_tk-t232514.0.html
+
 http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm
+
 http://www.ferg.org/thinking_in_tkinter/all_programs.html
+
 http://www.pythonware.com/library/tkinter/introduction/label.htm
+
 http://infohost.nmt.edu/tcc/help/pubs/tkinter/index.html
 
 

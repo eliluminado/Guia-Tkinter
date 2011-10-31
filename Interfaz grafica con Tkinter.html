@@ -8,7 +8,7 @@
 <CENTER>
 <H1>Interfaz grafica con Tkinter</H1>
 <FONT SIZE="4"><I>Alejandro Alvarez [contacto@codigopython.com.ar]</I></FONT><BR>
-<FONT SIZE="4">Ultima modificacion 23-10-2011</FONT>
+<FONT SIZE="4">Ultima modificacion 31-10-2011</FONT>
 </CENTER>
 
 
@@ -23,28 +23,31 @@
     <UL>
     <LI><A HREF="#toc6">Etiquetas [Label]</A>
     <LI><A HREF="#toc7">Botones [Button]</A>
+    <LI><A HREF="#toc8">Cuadro de texto [Entry]</A>
+    <LI><A HREF="#toc9">Opciones</A>
     </UL>
   <LI><A HREF="#gestion">Gestion del diseño</A>
     <UL>
-    <LI><A HREF="#toc9">Gestión de la geometría</A>
+    <LI><A HREF="#toc11">Gestión de la geometría</A>
       <UL>
-      <LI><A HREF="#toc10">pack</A>
-      <LI><A HREF="#toc11">grid</A>
-      <LI><A HREF="#toc12">place</A>
+      <LI><A HREF="#toc12">pack</A>
+      <LI><A HREF="#toc13">grid</A>
+      <LI><A HREF="#toc14">place</A>
       </UL>
-    <LI><A HREF="#toc13">Frame</A>
-    <LI><A HREF="#toc14">minsize</A>
-    <LI><A HREF="#toc15">Colores</A>
-    <LI><A HREF="#toc16">Fuentes</A>
+    <LI><A HREF="#toc15">Frame</A>
+    <LI><A HREF="#toc16">minsize</A>
+    <LI><A HREF="#toc17">Colores</A>
+    <LI><A HREF="#toc18">Fuentes</A>
+    <LI><A HREF="#toc19">Unidades de medida</A>
     </UL>
-  <LI><A HREF="#toc17">Menus y barras de herramientas</A>
-  <LI><A HREF="#toc18">Ventanas de dialogos</A>
-  <LI><A HREF="#toc19">Eventos</A>
-  <LI><A HREF="#toc20">Ejemplos</A>
-  <LI><A HREF="#toc21">Notas finales</A>
-  <LI><A HREF="#toc22">Enlaces de interes</A>
+  <LI><A HREF="#toc20">Menus y barras de herramientas</A>
+  <LI><A HREF="#toc21">Ventanas de dialogos</A>
+  <LI><A HREF="#toc22">Eventos</A>
+  <LI><A HREF="#toc23">Ejemplos</A>
+  <LI><A HREF="#toc24">Notas finales</A>
+  <LI><A HREF="#toc25">Enlaces de interes</A>
   <LI><A HREF="#glosario">Glosario</A>
-  <LI><A HREF="#toc24">Licencia</A>
+  <LI><A HREF="#toc27">Licencia</A>
   </UL>
 
 <P>
@@ -231,7 +234,7 @@ Si ahora escribieramos todo lo que vimos en nuestra consola tendriamos que ver n
 </PRE>
 
 <P>
-Y asi es como quedara nestro ejemplo terminado
+Y asi es como quedara nuestro ejemplo terminado:
 </P>
 <P>
 <IMG ALIGN="middle" SRC="img/ejemplo_Label.png" BORDER="0" ALT="">
@@ -243,10 +246,10 @@ Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer w
 <H2 ID="toc7">Botones [Button]</H2>
 
 <P>
-Los botones pueden contener texto o imagenes y a ellos se les puede asociar funciones o metodos, que al hacer click sobre ellos Tkinter se encargara de llamar automaticamente a ese metodo o funcion y se ejecutara el codigo Python contenido dentro de ellos.
+Los botones pueden contener texto o imagenes y se les puede asociar funciones o metodos, que al hacer click sobre ellos Tkinter se encargara de llamar automaticamente a ese metodo o funcion y se ejecutara el codigo Python contenido dentro de ellos.
 </P>
 <P>
-Un detalle sobre los botones es que solo puede utilizarse un tipo de fuente, pero ese texto puede ocupar varias lineas en caso de ser necesario. Ademas se puede subrayar el texto o un caracter o letra en particular, algo que es muy comun cuando se desea decirle al usuario sobre la existencia de un atajo con el teclado.
+Un detalle es que solo puede utilizarse un tipo de fuente, pero ese texto puede ocupar varias lineas en caso de ser necesario. Ademas se puede subrayar el texto, un caracter o letra en particular, algo que es muy comun cuando se desea decirle al usuario sobre la existencia de un atajo con el teclado.
 </P>
 <P>
 Antes de crear a ese boton debemos declarar la funcion a la cual se llamara, porque como se imaginaran no podemos decirle al boton que ejecute una funcion que aun no existe, por eso vamos a escribir un par de lineas y crearemos una funcion simple como para verificar que dicho boton funciona correctamente.
@@ -279,48 +282,489 @@ A continuacion les muestro el codigo con el cual vamos a trabajar:
 <P>
 En el se observa la ya conocida importacion del modulo Tkinter, la funcion que ya habiamos declarado y la creacion del boton. Como se puede ver la creacion de un boton basico es muy similar al de una etiqueta pero se incluye un parametro mas que nos dara la posibilidad de especificar dentro de el la funcion que utilizaremos; el parametro mencionado es <B>'command'</B> y en ella podemos llamar a funciones o metodos, en este caso llamamos a la funcion 'funcion' que va a imprimir en la consola la palabra <I>'Excelente'</I>.
 </P>
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_Button.png" BORDER="0" ALT="">
+</P>
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_Button02.png" BORDER="0" ALT="">
+</P>
+
+<H2 ID="toc8">Cuadro de texto [Entry]</H2>
+
+<P>
+Este widget nos permite tanto mostrarle informacion al usuario como tambien obtener informacion de su parte, dotando a nuestra ventana de un widget
+</P>
+<P>
+Para escribir varias lineas de texto utilice el widget 'Text'
+</P>
+
+<H2 ID="toc9">Opciones</H2>
+
+<P>
+NOTA:
+</P>
+<P>
+Para mas informacion sobre los colores visite la seccion "Colores" que se ve en <A HREF="#gestion">"Gestion del diseño"</A>
+</P>
+<P>
+anchor
+</P>
+<P>
+Tkinter nos permite controlar de que forma se va a posicionar un widget con respecto al contexto en que se encuentra
+</P>
+
+<TABLE ALIGN="center" BORDER="1" CELLPADDING="4">
+<TR>
+<TD>NW</TD>
+<TD ALIGN="center">N</TD>
+<TD ALIGN="right">NE</TD>
+</TR>
+<TR>
+<TD>W</TD>
+<TD ALIGN="center">CENTER</TD>
+<TD ALIGN="right">E</TD>
+</TR>
+<TR>
+<TD>SW</TD>
+<TD ALIGN="center">S</TD>
+<TD ALIGN="right">SE</TD>
+</TR>
+</TABLE>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+activebackground
+</P>
+<P>
+Con esta opcion podemos indicar que color se debera utilizar cuando el cursor del mouse se posicione sobre el widget.
+</P>
+
+<PRE>
+  boton = Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_activebackground.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+activeforeground
+</P>
+<P>
+Al igual que pasa con 'activebackground' con esta otra opcion podemos especificar el color en este caso de la fuente del widget cuando se posiciona el cursor sobre este.
+</P>
+
+<PRE>
+  boton = Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_activeforeground.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+background (bg)
+</P>
+<P>
+Sirve para indicar el color de fondo que tendra en area del widget cuando este se encuentre inactivo. Tambien se puede utilizar su abreviatura 'bg' como podemos ver en el segundo ejemplo.
+</P>
+
+<PRE>
+  boton = Button(root, text="Hola Mundo!!!", command=funcion, background="#38EB5C")
+</PRE>
+
+<PRE>
+  boton = Button(root, text="Hola Mundo!!!", command=funcion, bg="#38EB5C")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_background.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+bitmap
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+borderwidth (bd)
+</P>
+<P>
+Nos da la posibilidad de especificar el ancho del borde del elemento con el que estemos trabajando, Tkinter nos permite especificar el valor en varias unidades de medida (centimetros, pulgadas, milimetros y puntos) las cuales seran vistas mas adelante en la guia. Si no se utiliza junto con la opcion 'relief' visualmente es similar a utilizar las opciones 'heigth' y 'width' como se puede observar en el ejemplo. El valor por defecto es de 2 pixeles.
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola Mundo!!!", borderwidth=15)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_borderwidth.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+command
+</P>
+<P>
+Como ya lo mencionamos cuando vimos al widget Button este permite indicar la funcion o metodo que queremos que se llame cuando se preciona por ejemplo un boton, pero esta opcion tambien funciona con otros widgets de Tkinter cumpliendo la misma funcion.
+</P>
+
+<PRE>
+  def funcion():
+      print "Excelente"
+  
+  boton = Button(root, text="Que te parece la guia?", command=funcion)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_Button02.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+cursor
+</P>
+<P>
+Nos da la posiblidad de indicar que cursor queremos que se muestre cuando el mouse se posiciona sobre la etiqueta.
+En el siguiente enlace podremos encontrar una lista con los cursores disponibles en Tkinter
+<A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm</A>
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Que te parece la guia?", cursor="cross")
+</PRE>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+font
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+foreground (fg)
+</P>
+<P>
+Si deseamos cambiar el color de las letras de nuestro texto cuando el widget se encuentra inactivo tendremos que utilizar esta opcion, que trabaja de forma similar al ya visto 'background'. En este se tambien se puede utilizar su abreviatura 'fg' como podemos ver en el segundo ejemplo
+</P>
+
+<PRE>
+  boton = Button(root, text="Hola Mundo!!!", command=funcion, foreground="#38EB5C")
+</PRE>
+
+<PRE>
+  boton = Button(root, text="Hola Mundo!!!", command=funcion, fg="#38EB5C")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_foreground.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+height
+</P>
+<P>
+Permite indicar la altura a la que se posicionara nuestro widget en lineas no en pixeles. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola Mundo!!!", height=10)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_height.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+image
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+justify
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola\n Mundo!!!", justify=RIGHT)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_justify_RIGHT.png" BORDER="0" ALT="">
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola\n Mundo!!!", justify=CENTER)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_justify_CENTER.png" BORDER="0" ALT="">
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola\n Mundo!!!", justify=LEFT)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_justify_LEFT.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+relief
+</P>
+<P>
+Especifica la apariencia de un borde decorativo alrededor del widget que simula un efecto 3D sobre el elemento, el ancho de esta sombra depende del valor que se especifique con el atributo 'borderwidth', los posibles valores son SUNKEN, RAISED, GROOVE, RIDGE, FLAT. El valor por defecto es FLAT que no coloca ningun borde sobre el widget.
+</P>
+<P>
+Descripcion de los cuatro estilos:
+</P>
+
+<DL>
+<DT>SUNKEN:</DT><DD>
+Borde hundido, que provoca que el elemento que encierra parezca que se encuentra por debajo del nivel de la superficie de la pantalla.
+<P></P>
+<DT>RAISED:</DT><DD>
+Borde saliente, que provoca que el elemento que encierra parezca que se encuentra por encima del nivel de la superficie de la pantalla.
+<P></P>
+<DT>GROOVE:</DT><DD>
+Borde hundido, que visualmente parece que se encuentra por debajo del nivel de la superficie de la pantalla.
+<P></P>
+<DT>RIDGE:</DT><DD>
+Borde saliente, que visualmente parece que se encuentra por encima del nivel de la superficie de la pantalla.
+<P></P>
+<DT>FLAT:</DT><DD>
+No se muestra ningún borde.
+</DL>
+
+<P>
+Ejemplos:
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola Mundo!!!", relief=SUNKEN, borderwidth=5)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_relief_SUNKEN.png" BORDER="0" ALT="">
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola Mundo!!!", relief=RAISED, borderwidth=5)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_relief_RAISED.png" BORDER="0" ALT="">
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola Mundo!!!", relief=GROOVE, borderwidth=5)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_relief_GROOVE.png" BORDER="0" ALT="">
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola Mundo!!!", relief=RIDGE, borderwidth=5)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_relief_RIDGE.png" BORDER="0" ALT="">
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola Mundo!!!", relief=FLAT, borderwidth=5)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_relief_FLAT.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+text
+</P>
+<P>
+Este es un elemento muy importante para los widgets como Label o Button entre otros, esta opcion nos da la posibilidad de incluir un texto dentro del widget, este texto puede contener saltos de lineas en caso de ser necesario y tambien se puede utilizar una variable para indicar la cadena de texto a usar. Si se utiliza una imagen este elemento es ignorado por Tkinter.
+</P>
+<P>
+Ejemplo simple:
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Codigo Python")
+</PRE>
+
+<P>
+Ejemplo con una variable:
+</P>
+
+<PRE>
+  texto = "Codigo Python"
+  etiqueta = Label(root, text=texto)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_Label.png" BORDER="0" ALT="">
+</P>
+<P>
+Ejemplo con salto de linea (recuerden que deben usar el caracter \n para el salto de linea):
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola \n a todos")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_text.png" BORDER="0" ALT="">
+</P>
+<P>
+Ejemplo con tabulacion (recuerden que deben usar el caracter \t para la tabulacion):
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola \t a todos")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_text02.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+textvariable
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+underline
+</P>
+<P>
+Permite subrayar una letra de nuestra etiqueta, algo que es muy util para por ejemplo destacar un atajo con el teclado. La forma en que se utiliza es indicandole el indice de la cadena de texto que conforma nuestra etiqueta comenzando desde cero. El valor por defecto de esta opcion es -1 lo que logra que no se subraye ninguna letra
+</P>
+<P>
+Ejemplo con una etiqueta
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola Mundo!!!", underline=3)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_underline.png" BORDER="0" ALT="">
+</P>
+<P>
+Ejemplo con un boton
+</P>
+
+<PRE>
+  boton = Button(root, text="Imprimir Hola Mundo!!!", command=funcion, underline=3)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_underline02.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+width
+</P>
+<P>
+Esta opcion nos permite indicar en ancho del elemento con el que estamos trabajando midiendolo en caracteres no en pixeles si se trata de texto, si en cambio estamos trabajando con imagenes si deberemos medirlo en pixeles. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo.
+</P>
+
+<PRE>
+  etiqueta = Label(root, text="Hola Mundo!!!", width=30)
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_option_width.png" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<P>
+wraplength
+</P>
+
+<HR NOSHADE SIZE=1>
 
 <H1 ID="gestion">Gestion del diseño</H1>
 
-<H2 ID="toc9">Gestión de la geometría</H2>
+<H2 ID="toc11">Gestión de la geometría</H2>
 
-<H3 ID="toc10">pack</H3>
+<H3 ID="toc12">pack</H3>
 
-<H3 ID="toc11">grid</H3>
+<H3 ID="toc13">grid</H3>
 
-<H3 ID="toc12">place</H3>
+<H3 ID="toc14">place</H3>
 
-<H2 ID="toc13">Frame</H2>
+<H2 ID="toc15">Frame</H2>
 
 <P>
 Aqui veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar el diseño de nuestra aplicacion
 </P>
 
-<H2 ID="toc14">minsize</H2>
+<H2 ID="toc16">minsize</H2>
 
-<H2 ID="toc15">Colores</H2>
+<H2 ID="toc17">Colores</H2>
 
-<H2 ID="toc16">Fuentes</H2>
+<H2 ID="toc18">Fuentes</H2>
 
-<H1 ID="toc17">Menus y barras de herramientas</H1>
+<H2 ID="toc19">Unidades de medida</H2>
 
-<H1 ID="toc18">Ventanas de dialogos</H1>
+<H1 ID="toc20">Menus y barras de herramientas</H1>
 
-<H1 ID="toc19">Eventos</H1>
+<H1 ID="toc21">Ventanas de dialogos</H1>
 
-<H1 ID="toc20">Ejemplos</H1>
+<H1 ID="toc22">Eventos</H1>
 
-<H1 ID="toc21">Notas finales</H1>
+<H1 ID="toc23">Ejemplos</H1>
 
-<H1 ID="toc22">Enlaces de interes</H1>
+<H1 ID="toc24">Notas finales</H1>
+
+<H1 ID="toc25">Enlaces de interes</H1>
 
 <P>
 <A HREF="http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python">http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python</A>
+</P>
+<P>
 <A HREF="http://mundogeek.net/archivos/2008/11/24/interfaces-graficas-de-usuario-en-python/">http://mundogeek.net/archivos/2008/11/24/interfaces-graficas-de-usuario-en-python/</A>
+</P>
+<P>
 <A HREF="http://foro.elhacker.net/scripting/python_curso_de_python_con_interfaces_graficas_tk-t232514.0.html">http://foro.elhacker.net/scripting/python_curso_de_python_con_interfaces_graficas_tk-t232514.0.html</A>
+</P>
+<P>
 <A HREF="http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm">http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm</A>
+</P>
+<P>
 <A HREF="http://www.ferg.org/thinking_in_tkinter/all_programs.html">http://www.ferg.org/thinking_in_tkinter/all_programs.html</A>
+</P>
+<P>
 <A HREF="http://www.pythonware.com/library/tkinter/introduction/label.htm">http://www.pythonware.com/library/tkinter/introduction/label.htm</A>
+</P>
+<P>
 <A HREF="http://infohost.nmt.edu/tcc/help/pubs/tkinter/index.html">http://infohost.nmt.edu/tcc/help/pubs/tkinter/index.html</A>
 </P>
 
@@ -334,12 +778,12 @@ Aqui veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar
 <DT>widgets</DT><DD>
 </DL>
 
-<H1 ID="toc24">Licencia</H1>
+<H1 ID="toc27">Licencia</H1>
 
 <DL>
 <DT>Esta obra está licenciada bajo una Licencia Attribution-ShareAlike 3.0 Unported de Creative Commons. Para ver una copia de esta licencia, visite <A HREF="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</A> o envíenos una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.</DT><DD>
 </DL>
 
 <!-- html code generated by txt2tags 2.6.764 (http://txt2tags.org) -->
-<!-- cmdline: txt2tags -t html -\-toc /home/alejandro/proyectos/Guias/Tkinter/Interfaz grafica con Tkinter -->
+<!-- cmdline: txt2tags -t html /media/Principal/Alejandro/Guias/Tkinter/Interfaz grafica con Tkinter.txt -->
 </BODY></HTML>
