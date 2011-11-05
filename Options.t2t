@@ -8,12 +8,74 @@ Para mas informacion sobre los colores visite la seccion "Colores" que se ve en 
 
 anchor
 
-Tkinter nos permite controlar de que forma se va a posicionar un widget con respecto al contexto en que se encuentra
+Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen con respecto al widget en el que se encuentra. La opcion por defecto es 'CENTER' que muestra el elemento centrado.
 
 
   | NW |  N  |    NE |
   | W  |  CENTER  |    E |
   | SW |  S  |    SE |
+
+
+- Posiciona el texto/imagen en la esquina superior izquierda del widget
+
+``` boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=NW)
+
+[img/ejemplo_option_anchorNW.png]
+
+
+- Posiciona el texto/imagen en la parte superior del widget
+
+``` boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=N)
+
+[img/ejemplo_option_anchorN.png]
+
+
+- Posiciona el texto/imagen en la esquina superior derecha del widget
+
+``` boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=NE)
+
+[img/ejemplo_option_anchorNE.png]
+
+
+- Posiciona el texto/imagen en la parte izquierda del widget
+
+``` boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=W)
+
+[img/ejemplo_option_anchorW.png]
+
+
+- Posiciona el texto/imagen en el centro del widget
+
+``` boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=CENTER)
+
+[img/ejemplo_option_anchorCENTER.png]
+
+
+- Posiciona el texto/imagen en la parte derecha del widget
+
+``` boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=E)
+
+[img/ejemplo_option_anchorE.png]
+
+
+- Posiciona el texto/imagen en la esquina inferior izquierda del widget
+
+``` boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=SW)
+
+[img/ejemplo_option_anchorSW.png]
+
+
+- Posiciona el texto/imagen en la parte inferior del widget
+``` boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=S)
+
+[img/ejemplo_option_anchorS.png]
+
+
+- Posiciona el texto/imagen en la esquina inferior derecha del widget
+
+``` boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=SE)
+
+[img/ejemplo_option_anchorSE.png]
 
 --------------------------------------------------------
 
@@ -63,6 +125,8 @@ Nos da la posibilidad de especificar el ancho del borde del elemento con el que 
 
 ``` etiqueta = Label(root, text="Hola Mundo!!!", borderwidth=15)
 
+``` etiqueta = Label(root, text="Hola Mundo!!!", bd=15)
+
 [img/ejemplo_option_borderwidth.png]
 
 --------------------------------------------------------
@@ -91,10 +155,15 @@ cursor
 
 Nos da la posiblidad de indicar que cursor queremos que se muestre cuando el mouse se posiciona sobre la etiqueta.
 En el siguiente enlace podremos encontrar una lista con los cursores disponibles en Tkinter
-[http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm]
+[http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm].
+El valor 'none' consigue eliminar el cursor cuando se pasa el cursor sobre el widget.
 
 ``` etiqueta = Label(root, text="Que te parece la guia?", cursor="cross")
 
+
+--------------------------------------------------------
+
+default
 
 --------------------------------------------------------
 
@@ -135,17 +204,24 @@ image
 
 justify
 
+- RIGHT
+
 ``` etiqueta = Label(root, text="Hola\n Mundo!!!", justify=RIGHT)
 
 [img/ejemplo_option_justify_RIGHT.png]
+
+- CENTER
 
 ``` etiqueta = Label(root, text="Hola\n Mundo!!!", justify=CENTER)
 
 [img/ejemplo_option_justify_CENTER.png]
 
+- LEFT
+
 ``` etiqueta = Label(root, text="Hola\n Mundo!!!", justify=LEFT)
 
 [img/ejemplo_option_justify_LEFT.png]
+
 --------------------------------------------------------
 
 
@@ -175,21 +251,31 @@ No se muestra ningún borde.
 
 Ejemplos:
 
+- SUNKEN
+
 ``` etiqueta = Label(root, text="Hola Mundo!!!", relief=SUNKEN, borderwidth=5)
 
 [img/ejemplo_option_relief_SUNKEN.png]
+
+- RAISED
 
 ``` etiqueta = Label(root, text="Hola Mundo!!!", relief=RAISED, borderwidth=5)
 
 [img/ejemplo_option_relief_RAISED.png]
 
+- GROOVE
+
 ``` etiqueta = Label(root, text="Hola Mundo!!!", relief=GROOVE, borderwidth=5)
 
 [img/ejemplo_option_relief_GROOVE.png]
 
+- RIDGE
+
 ``` etiqueta = Label(root, text="Hola Mundo!!!", relief=RIDGE, borderwidth=5)
 
 [img/ejemplo_option_relief_RIDGE.png]
+
+- FLAT
 
 ``` etiqueta = Label(root, text="Hola Mundo!!!", relief=FLAT, borderwidth=5)
 
@@ -252,7 +338,7 @@ Ejemplo con un boton
 
 width
 
-Esta opcion nos permite indicar en ancho del elemento con el que estamos trabajando midiendolo en caracteres no en pixeles si se trata de texto, si en cambio estamos trabajando con imagenes si deberemos medirlo en pixeles. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo.
+Esta opcion nos permite indicar en ancho del elemento con el que estamos trabajando midiendolo en caracteres no en pixeles si se trata de texto, si en cambio estamos trabajando con imagenes si deberemos medirlo en pixeles, si se le da un valor negativo este servira para indicar el ancho minimo del widget. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo.
 
 
 ``` etiqueta = Label(root, text="Hola Mundo!!!", width=30)
