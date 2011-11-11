@@ -8,7 +8,7 @@
 <CENTER>
 <H1>Interfaz gráfica con Tkinter</H1>
 <FONT SIZE="4"><I>Alejandro Alvarez [contacto@codigopython.com.ar]</I></FONT><BR>
-<FONT SIZE="4">Ultima modificación 04-11-2011</FONT>
+<FONT SIZE="4">Ultima modificación 10-11-2011</FONT>
 </CENTER>
 
 
@@ -37,22 +37,26 @@
     <LI><A HREF="#toc15">Frame</A>
     <LI><A HREF="#toc16">minsize</A>
     <LI><A HREF="#toc17">Colores</A>
-    <LI><A HREF="#toc18">Fuentes</A>
-    <LI><A HREF="#toc19">Unidades de medida</A>
-    <LI><A HREF="#toc20">Imágenes</A>
       <UL>
-      <LI><A HREF="#toc21">PhotoImage</A>
-      <LI><A HREF="#toc22">PIL</A>
+      <LI><A HREF="#toc18">Nombres de colores</A>
+      <LI><A HREF="#toc19">RGB hexadecimal</A>
+      </UL>
+    <LI><A HREF="#toc20">Fuentes</A>
+    <LI><A HREF="#toc21">Unidades de medida</A>
+    <LI><A HREF="#toc22">Imágenes</A>
+      <UL>
+      <LI><A HREF="#toc23">PhotoImage</A>
+      <LI><A HREF="#toc24">PIL</A>
       </UL>
     </UL>
-  <LI><A HREF="#toc23">Menús y barras de herramientas</A>
-  <LI><A HREF="#toc24">Ventanas de diálogos</A>
-  <LI><A HREF="#toc25">Eventos</A>
-  <LI><A HREF="#toc26">Ejemplos</A>
-  <LI><A HREF="#toc27">Notas finales</A>
-  <LI><A HREF="#toc28">Enlaces de interés</A>
+  <LI><A HREF="#toc25">Menús y barras de herramientas</A>
+  <LI><A HREF="#toc26">Ventanas de diálogos</A>
+  <LI><A HREF="#toc27">Eventos</A>
+  <LI><A HREF="#toc28">Ejemplos</A>
+  <LI><A HREF="#toc29">Notas finales</A>
+  <LI><A HREF="#toc30">Enlaces de interés</A>
   <LI><A HREF="#glosario">Glosario</A>
-  <LI><A HREF="#toc30">Licencia</A>
+  <LI><A HREF="#toc32">Licencia</A>
   </UL>
 
 <P>
@@ -418,6 +422,7 @@ Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen 
 
 <UL>
 <LI>Posiciona el texto/imagen en la parte inferior del widget
+<P></P>
 <PRE>
   boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=S)
 </PRE>
@@ -870,9 +875,66 @@ Aquí veremos a 'Frame' no solo como un widget mas sino como una forma de ordena
 
 <H2 ID="toc17">Colores</H2>
 
-<H2 ID="toc18">Fuentes</H2>
+<P>
+Todos los widgets estandar de Tkinter proporcionan un conjunto basico de opciones para poder personalizarlos, que nos permiten modificar sus colores, fuentes, bordes y tamaños entre otros. La mayoria de ellos permite especificar un color de fondo y de primer plano que nos seran muy utiles cuando intentemos darle un aspecto mas pulida a nuestra aplicacion.
+</P>
+<P>
+Para especificar dichos colores tenemos dos formas una es utilizar el nombre del color o especificar la proporcion de rojo, verde y azul que componen a dicho color en digitos hexadecimales que es la mas popular y la mas precisa a la hora de trabajar.
+</P>
 
-<H2 ID="toc19">Unidades de medida</H2>
+<H3 ID="toc18">Nombres de colores</H3>
+
+<P>
+Como se habia mencionado se puede especificar un color con solo usar su nombre en ingles, por ejemplo para el color balco usariamos la palabra 'white' y para el color rojo 'red', aunque Tkinter no nos limita a usar solamente los colores basicos sino que nos ofrece una paleta bastante amplia de colores.
+</P>
+<P>
+Les dejo dos ejemplos para que puedan observarlo en funcionamiento:
+</P>
+
+<PRE>
+  boton = Button(root, text="Que te parece la guia?", command=funcion, background="red")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_colores_red.png" BORDER="0" ALT="">
+</P>
+
+<PRE>
+  boton = Button(root, text="Que te parece la guia?", command=funcion, background="CadetBlue")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_colores_CadetBlue.png" BORDER="0" ALT="">
+</P>
+<P>
+Otra de las posibilidades que tenemos es utilizar los colores del sistema para conseguir un aspecto mas acorde a la plataforma con que estemos trabajando.
+</P>
+<P>
+Podemos obtener una lista de los posibles colores que nos da Tkinter en la siguiente pagina:
+[<A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm</A>]
+</P>
+
+<H3 ID="toc19">RGB hexadecimal</H3>
+
+<P>
+Aunque este metodo sea un poco mas complicado en su uso es el mas preciso que el metodo que habiamos mencionado arriba, la forma en que se utiliza es la siguiente:
+</P>
+<P>
+#RRGGBB
+</P>
+<P>
+Donde RR, GG y BB son representaciones hexadecimales de los colores rojo, verde y azul, respectivamente. Para formar un color debemos en primer lugar elegir la intensidad que deseamos usar, especificando la cantidad de rojo, verde y azul en una escala del 0 al 255.
+</P>
+<P>
+Usando la siguiente linea desde la consola de Python podemos crear nuestros colores para Tkinter reemplazando los valores de la tupla por los que deseamos utilizar:
+</P>
+<P>
+color_rgb = "#%02x%02x%02x" % (0, 100, 0)
+</P>
+
+<H2 ID="toc20">Fuentes</H2>
+
+<H2 ID="toc21">Unidades de medida</H2>
 
 <P>
 En Tkinter podemos especificar las medidas de los elementos no solo en píxeles sino que también podemos especificar los valores en centímetros, pulgadas, milímetros y puntos para esto debemos pasar el valor como cadena que se compone de un numero entero o no seguido de una letra que indique el tipo de unidad a utilizar que se especifica en la siguiente tabla:
@@ -960,23 +1022,23 @@ Ejemplos:
 <IMG ALIGN="middle" SRC="img/ejemplo_unidad_puntos.png" BORDER="0" ALT="">
 </UL>
 
-<H2 ID="toc20">Imágenes</H2>
+<H2 ID="toc22">Imágenes</H2>
 
-<H3 ID="toc21">PhotoImage</H3>
+<H3 ID="toc23">PhotoImage</H3>
 
-<H3 ID="toc22">PIL</H3>
+<H3 ID="toc24">PIL</H3>
 
-<H1 ID="toc23">Menús y barras de herramientas</H1>
+<H1 ID="toc25">Menús y barras de herramientas</H1>
 
-<H1 ID="toc24">Ventanas de diálogos</H1>
+<H1 ID="toc26">Ventanas de diálogos</H1>
 
-<H1 ID="toc25">Eventos</H1>
+<H1 ID="toc27">Eventos</H1>
 
-<H1 ID="toc26">Ejemplos</H1>
+<H1 ID="toc28">Ejemplos</H1>
 
-<H1 ID="toc27">Notas finales</H1>
+<H1 ID="toc29">Notas finales</H1>
 
-<H1 ID="toc28">Enlaces de interés</H1>
+<H1 ID="toc30">Enlaces de interés</H1>
 
 <P>
 <A HREF="http://www.tcl.tk/man/tcl8.5/">http://www.tcl.tk/man/tcl8.5/</A>
@@ -1013,7 +1075,7 @@ Ejemplos:
 <DT>widgets</DT><DD>
 </DL>
 
-<H1 ID="toc30">Licencia</H1>
+<H1 ID="toc32">Licencia</H1>
 
 <DL>
 <DT>Esta obra está licenciada bajo una Licencia Attribution-ShareAlike 3.0 Unported de Creative Commons. Para ver una copia de esta licencia, visite <A HREF="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</A> o envíenos una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.</DT><DD>

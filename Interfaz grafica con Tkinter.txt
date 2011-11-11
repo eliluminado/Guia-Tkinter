@@ -206,7 +206,45 @@ Aquí veremos a 'Frame' no solo como un widget mas sino como una forma de ordena
 
 
 == minsize ==
+
 == Colores ==
+
+Todos los widgets estandar de Tkinter proporcionan un conjunto basico de opciones para poder personalizarlos, que nos permiten modificar sus colores, fuentes, bordes y tamaños entre otros. La mayoria de ellos permite especificar un color de fondo y de primer plano que nos seran muy utiles cuando intentemos darle un aspecto mas pulida a nuestra aplicacion.
+
+Para especificar dichos colores tenemos dos formas una es utilizar el nombre del color o especificar la proporcion de rojo, verde y azul que componen a dicho color en digitos hexadecimales que es la mas popular y la mas precisa a la hora de trabajar.
+
+=== Nombres de colores ===
+
+Como se habia mencionado se puede especificar un color con solo usar su nombre en ingles, por ejemplo para el color balco usariamos la palabra 'white' y para el color rojo 'red', aunque Tkinter no nos limita a usar solamente los colores basicos sino que nos ofrece una paleta bastante amplia de colores.
+
+Les dejo dos ejemplos para que puedan observarlo en funcionamiento:
+
+``` boton = Button(root, text="Que te parece la guia?", command=funcion, background="red")
+
+[img/ejemplo_colores_red.png]
+
+``` boton = Button(root, text="Que te parece la guia?", command=funcion, background="CadetBlue")
+
+[img/ejemplo_colores_CadetBlue.png]
+
+
+Otra de las posibilidades que tenemos es utilizar los colores del sistema para conseguir un aspecto mas acorde a la plataforma con que estemos trabajando.
+
+Podemos obtener una lista de los posibles colores que nos da Tkinter en la siguiente pagina:
+[http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm]
+
+=== RGB hexadecimal ===
+
+Aunque este metodo sea un poco mas complicado en su uso es el mas preciso que el metodo que habiamos mencionado arriba, la forma en que se utiliza es la siguiente:
+
+#RRGGBB
+
+Donde RR, GG y BB son representaciones hexadecimales de los colores rojo, verde y azul, respectivamente. Para formar un color debemos en primer lugar elegir la intensidad que deseamos usar, especificando la cantidad de rojo, verde y azul en una escala del 0 al 255.
+
+Usando la siguiente linea desde la consola de Python podemos crear nuestros colores para Tkinter reemplazando los valores de la tupla por los que deseamos utilizar:
+
+color_rgb = "#%02x%02x%02x" % (0, 100, 0)
+
 == Fuentes ==
 
 == Unidades de medida ==
