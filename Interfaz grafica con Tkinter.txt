@@ -1,4 +1,4 @@
-Interfaz gráfica con Tkinter
+﻿Interfaz gráfica con Tkinter
 Alejandro Alvarez [contacto@codigopython.com.ar]
 Ultima modificación %%date(%d-%m-%Y)
 %!target  : html
@@ -187,6 +187,8 @@ Este widget nos permite tanto mostrarle información al usuario como también ob
 Para escribir varias lineas de texto utilice el widget 'Text'
 
 
+== [Frame] =
+
 == Opciones ==
 
 %!include: Options.t2t
@@ -244,6 +246,15 @@ Donde RR, GG y BB son representaciones hexadecimales de los colores rojo, verde 
 Usando la siguiente linea desde la consola de Python podemos crear nuestros colores para Tkinter reemplazando los valores de la tupla por los que deseamos utilizar:
 
 color_rgb = "#%02x%02x%02x" % (0, 100, 0)
+
+Su uso es muy simple, solo debemos usar la forma que habiamos visto cuando coloreamos usando los nombres pero ahora deberemos reemplazar el nombre del color por su equivalente en el valor RBG Hexadecimal como en el siguiente ejemplo:
+
+``` boton = Button(root, text="Que te parece la guia?", command=funcion, background="#FA0000")
+
+[img/ejemplo_colores_red.png]
+
+Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nombre del color.
+
 
 == Fuentes ==
 
@@ -315,21 +326,21 @@ Ejemplos:
 
 = Enlaces de interés =
 
-http://www.tcl.tk/man/tcl8.5/
+[Tcl/Tk 8.5 Manual http://www.tcl.tk/man/tcl8.5/]
 
-http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python
+Entorno grafico en Python http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python]
 
-http://mundogeek.net/archivos/2008/11/24/interfaces-gráficas-de-usuario-en-python/
+[Interfaces gráficas de usuario en Python http://mundogeek.net/archivos/2008/11/24/interfaces-graficas-de-usuario-en-python/]
 
-http://foro.elhacker.net/scripting/python_curso_de_python_con_interfaces_gráficas_tk-t232514.0.html
+[Curso de Python con Interfaces graficas TK http://foro.elhacker.net/scripting/python_curso_de_python_con_interfaces_gráficas_tk-t232514.0.html]
 
-http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm
+[Python » GUI Tk http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm]
 
-http://www.ferg.org/thinking_in_tkinter/all_programs.html
+[Thinking in Tkinter http://www.ferg.org/thinking_in_tkinter/all_programs.html]
 
-http://www.pythonware.com/library/tkinter/introduction/label.htm
+[An Introduction to Tkinter http://www.pythonware.com/library/tkinter/introduction/]
 
-http://infohost.nmt.edu/tcc/help/pubs/tkinter/index.html
+[Tkinter 8.4 reference: a GUI for Python http://infohost.nmt.edu/tcc/help/pubs/tkinter/index.html]
 
 
 = Glosario =[glosario]
