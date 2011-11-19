@@ -1,0 +1,172 @@
+
+
+Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra apliacion y cada una de sus ventanas
+
+
+=== iconify ===
+
+Permite minimizar la ventana que le indiquemos, esto es util para por ejemplo minimizar una ventana padre cuando se habre una ventana hija. Lo mejor sera verlo con unos ejemplos.
+
+- En este ejemplo usamos el metodo 'iconify' en un boton para minimizar la ventana cuando se haga click sobre el:
+
+```
+from Tkinter import *
+
+root = Tk()
+boton = Button(root, text="Minimizar", command=root.iconify)
+boton.pack
+root.mainloop()
+```
+
+- En este otro ejemplo creamos un boton que abre otra ventana y minimiza la ventana padre
+
+```
+from Tkinter import *
+
+def funcion():
+    otra_ventana = Toplevel(root)
+    root.iconify()
+
+root = Tk()
+boton = Button(root, text="Abrir otra ventana", command=funcion)
+boton.pack()
+root.mainloop()
+```
+
+--------------------------------------------------------
+
+=== deiconify ===
+
+Al contrario de como vimos en 'iconify' que podiamos minimizar la ventana, con 'deiconify' podemos restaurar la ventana, como paso con 'iconify' veamoslo con unos ejemplos
+
+- Esta es una variacion de uno de los ejemplos que ya habiamos visto, pero en este cuando hacemos click en el boton 'Minimizar' este se minimiza pero pasado 5 segundos se vuelve a restaurar la ventana.
+
+```
+from Tkinter import *
+import time
+
+def funcion():
+    root.iconify()
+    time.sleep(5)
+    root.deiconify()
+
+root = Tk()
+boton = Button(root, text="Minimizar", command=funcion)
+boton.pack()
+root.mainloop()
+```
+
+--------------------------------------------------------
+
+=== title ===
+
+Permite indicar el titulo de la ventana. Podria decirse que este valor se hereda ya que si creamos una nueva ventana a traves de Toplevel esta tomaria el nombre de la ventana padre.
+
+- Ejemplo:
+
+```
+root = Tk()
+root.title("Bienvenido a Codigo Python")
+root.mainloop()
+```
+
+[img/ejemplo_title.png]
+
+
+- Heredando el titulo de la ventana padre:
+
+```
+root = Tk()
+root.title("Bienvenido a Codigo Python")
+otra_ventana = Toplevel(root)
+root.mainloop()
+```
+
+[img/ejemplo_title02.png]
+
+
+- Ejemplo de dos ventanas con titulos distintos:
+
+```
+root = Tk()
+root.title("Bienvenido a")
+otra_ventana = Toplevel(root)
+otra_ventana.title("Codigo Python")
+root.mainloop()
+```
+
+[img/ejemplo_title03.png]
+
+
+--------------------------------------------------------
+
+=== maxsize ===
+
+Establece los valores maximos de la medida de la ventana, tanto su ancho como su alto.
+
+Ejemplo:
+
+```
+root.geometry("300x300")
+root.maxsize(width=400, height=400)
+```
+
+--------------------------------------------------------
+
+=== minsize ===
+
+Establece los valores minimos de la medida de la ventana, tanto su ancho como su alto.
+
+Ejemplo:
+
+```
+root.geometry("300x300")
+root.minsize(width=200, height=200)
+```
+
+--------------------------------------------------------
+
+=== state ===
+
+Podemos cambiar el estado en el que se encuentra la ventana a 'normal', 'iconic' o 'withdraw'. Con la opcion 'normal' la ventana se comporta normalmente apareciendo en la ventana, con la opcion 'iconic' obtenemos los mismos resultados que el metodo 'iconify()'  minimizando la ventana y por ultimo con 'withdraw' obtendremos como se imaginaran el mismo resultado que con 'withdraw' ocultando la ventana. La forma en que se declaran son las siguientes:
+
+```
+root.state(newstate="normal")
+root.state(newstate="withdraw")
+root.state(newstate="iconic")
+```
+
+Veamos un ejemplo de su uso y funcionamiento:
+
+```
+from Tkinter import *
+import time
+
+def funcion():
+    root.state(newstate='withdraw')
+    time.sleep(5)
+    root.state(newstate='normal')
+
+root = Tk()
+boton = Button(root, text="Probando el metodo state", command=funcion)
+boton.pack()
+root.mainloop()
+```
+
+--------------------------------------------------------
+
+=== resizable ===
+
+Nos permite indicar que si la ventana debe o no poder redimensionarse ya sea en su ancho o el su alto, dandole a sus parametros 'width'(Ancho) y 'height' (Largo) los valores 'True' o 'False'. Con True habilitamos el redimencionamiento y con False los deshabilitamos. Si estamos usando a su ves los metodos 'minsize' y/o 'maxsize' el valor maximo al cual se pueda redimencionar dependera de estos dos metodos en caso de existir.
+
+- Redimencionar solo el ancho:
+
+``` root.resizable(width=True, height=False)
+
+- Redimencionar solo el alto:
+
+``` root.resizable(width=False, height=True)
+
+- Bloquear el redimencionamiento de la ventana:
+
+``` root.resizable(width=False, height=False)

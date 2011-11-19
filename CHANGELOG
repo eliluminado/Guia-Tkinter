@@ -20,3 +20,7 @@
 
 2011-11-13 Alejandro Alvarez <contacto@codigopython.com.ar>
         * Correcciones menores en la subseccion "Colores"
+
+2011-11-19 Alejandro Alvarez <contacto@codigopython.com.ar>
+        * Se agrega la seccion metodos
+        * Se añaden varios metodos para ventanas con descripcion y ejemplos

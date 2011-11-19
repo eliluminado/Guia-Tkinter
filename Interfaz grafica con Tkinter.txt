@@ -197,17 +197,36 @@ Para escribir varias lineas de texto utilice el widget 'Text'
 
 = Gestión del diseño =[gestion]
 
+== Metodos ==
+
+%!include: metodos.t2t
+
+
 == Gestión de la geometría ==
+
+Todos los widgets de Tkinter tienen acceso a metodos especificos para la gestion de la geometria, que tienen como proposito ordenar y organizar dichos widgets en el area donde estan contenidos.
+
+Para conseguir esto tenemos tres gestores para la geometria, aunque muchos recomiendan solamente usar solo uno de ellos, esperamos que luego de leer acerca de estos tres seas capaz de elegir el que mas se adapte a tus necesidades y a tu forma de trabajar.
+
+
 === pack ===
+
+%!include: pack.t2t
+
 === grid ===
+
+%!include: grid.t2t
+
 === place ===
+
+%!include: place.t2t
+
 
 == Frame ==
 
 Aquí veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar el diseño de nuestra aplicación
 
 
-== minsize ==
 
 == Colores ==
 
@@ -350,6 +369,7 @@ Entorno grafico en Python http://www.codigopython.com.ar/miniguias/entorno-grafi
 
 : widgets
 
+Es un termino generico para referirse a cualquiera de los elementos basicos que componen la interfaz grafica de una aplicacion. Ejemplos de widgets son botones, etiquetas, cuadros de texto, etc.
 
 = Licencia =
 

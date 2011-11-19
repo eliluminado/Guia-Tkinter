@@ -1,4 +1,4 @@
-
+﻿
 
 NOTA:
 
@@ -66,6 +66,7 @@ Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen 
 
 
 - Posiciona el texto/imagen en la parte inferior del widget
+
 ``` boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=S)
 
 [img/ejemplo_option_anchorS.png]

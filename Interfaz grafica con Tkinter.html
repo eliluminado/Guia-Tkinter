@@ -8,7 +8,7 @@
 <CENTER>
 <H1>﻿Interfaz gráfica con Tkinter</H1>
 <FONT SIZE="4"><I>Alejandro Alvarez [contacto@codigopython.com.ar]</I></FONT><BR>
-<FONT SIZE="4">Ultima modificación 13-11-2011</FONT>
+<FONT SIZE="4">Ultima modificación 19-11-2011</FONT>
 </CENTER>
 
 
@@ -28,35 +28,43 @@
     </UL>
   <LI><A HREF="#gestion">Gestión del diseño</A>
     <UL>
-    <LI><A HREF="#toc11">Gestión de la geometría</A>
+    <LI><A HREF="#toc11">Metodos</A>
       <UL>
-      <LI><A HREF="#toc12">pack</A>
-      <LI><A HREF="#toc13">grid</A>
-      <LI><A HREF="#toc14">place</A>
+      <LI><A HREF="#toc12">iconify</A>
+      <LI><A HREF="#toc13">deiconify</A>
+      <LI><A HREF="#toc14">title</A>
+      <LI><A HREF="#toc15">maxsize</A>
+      <LI><A HREF="#toc16">minsize</A>
+      <LI><A HREF="#toc17">state</A>
+      <LI><A HREF="#toc18">resizable</A>
       </UL>
-    <LI><A HREF="#toc15">Frame</A>
-    <LI><A HREF="#toc16">minsize</A>
-    <LI><A HREF="#toc17">Colores</A>
+    <LI><A HREF="#toc19">Gestión de la geometría</A>
       <UL>
-      <LI><A HREF="#toc18">Nombres de colores</A>
-      <LI><A HREF="#toc19">RGB hexadecimal</A>
+      <LI><A HREF="#toc20">pack</A>
+      <LI><A HREF="#toc21">grid</A>
+      <LI><A HREF="#toc22">place</A>
       </UL>
-    <LI><A HREF="#toc20">Fuentes</A>
-    <LI><A HREF="#toc21">Unidades de medida</A>
-    <LI><A HREF="#toc22">Imágenes</A>
+    <LI><A HREF="#toc23">Frame</A>
+    <LI><A HREF="#toc24">Colores</A>
       <UL>
-      <LI><A HREF="#toc23">PhotoImage</A>
-      <LI><A HREF="#toc24">PIL</A>
+      <LI><A HREF="#toc25">Nombres de colores</A>
+      <LI><A HREF="#toc26">RGB hexadecimal</A>
+      </UL>
+    <LI><A HREF="#toc27">Fuentes</A>
+    <LI><A HREF="#toc28">Unidades de medida</A>
+    <LI><A HREF="#toc29">Imágenes</A>
+      <UL>
+      <LI><A HREF="#toc30">PhotoImage</A>
+      <LI><A HREF="#toc31">PIL</A>
       </UL>
     </UL>
-  <LI><A HREF="#toc25">Menús y barras de herramientas</A>
-  <LI><A HREF="#toc26">Ventanas de diálogos</A>
-  <LI><A HREF="#toc27">Eventos</A>
-  <LI><A HREF="#toc28">Ejemplos</A>
-  <LI><A HREF="#toc29">Notas finales</A>
-  <LI><A HREF="#toc30">Enlaces de interés</A>
+  <LI><A HREF="#toc32">Menús y barras de herramientas</A>
+  <LI><A HREF="#toc33">Ventanas de diálogos</A>
+  <LI><A HREF="#toc34">Eventos</A>
+  <LI><A HREF="#toc35">Ejemplos</A>
+  <LI><A HREF="#toc36">Notas finales</A>
+  <LI><A HREF="#toc37">Enlaces de interés</A>
   <LI><A HREF="#glosario">Glosario</A>
-  <LI><A HREF="#toc32">Licencia</A>
   </UL>
 
 <P>
@@ -857,23 +865,265 @@ wraplength
 
 <H1 ID="gestion">Gestión del diseño</H1>
 
-<H2 ID="toc11">Gestión de la geometría</H2>
+<H2 ID="toc11">Metodos</H2>
 
-<H3 ID="toc12">pack</H3>
+<P>
+Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra apliacion y cada una de sus ventanas
+</P>
 
-<H3 ID="toc13">grid</H3>
+<H3 ID="toc12">iconify</H3>
 
-<H3 ID="toc14">place</H3>
+<P>
+Permite minimizar la ventana que le indiquemos, esto es util para por ejemplo minimizar una ventana padre cuando se habre una ventana hija. Lo mejor sera verlo con unos ejemplos.
+</P>
 
-<H2 ID="toc15">Frame</H2>
+<UL>
+<LI>En este ejemplo usamos el metodo 'iconify' en un boton para minimizar la ventana cuando se haga click sobre el:
+<P></P>
+
+<PRE>
+  from Tkinter import *
+  
+  root = Tk()
+  boton = Button(root, text="Minimizar", command=root.iconify)
+  boton.pack
+  root.mainloop()
+</PRE>
+
+<P></P>
+<LI>En este otro ejemplo creamos un boton que abre otra ventana y minimiza la ventana padre
+<P></P>
+
+<PRE>
+  from Tkinter import *
+  
+  def funcion():
+      otra_ventana = Toplevel(root)
+      root.iconify()
+  
+  root = Tk()
+  boton = Button(root, text="Abrir otra ventana", command=funcion)
+  boton.pack()
+  root.mainloop()
+</PRE>
+
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc13">deiconify</H3>
+
+<P>
+Al contrario de como vimos en 'iconify' que podiamos minimizar la ventana, con 'deiconify' podemos restaurar la ventana, como paso con 'iconify' veamoslo con unos ejemplos
+</P>
+
+<UL>
+<LI>Esta es una variacion de uno de los ejemplos que ya habiamos visto, pero en este cuando hacemos click en el boton 'Minimizar' este se minimiza pero pasado 5 segundos se vuelve a restaurar la ventana.
+<P></P>
+
+<PRE>
+  from Tkinter import *
+  import time
+  
+  def funcion():
+      root.iconify()
+      time.sleep(5)
+      root.deiconify()
+  
+  root = Tk()
+  boton = Button(root, text="Minimizar", command=funcion)
+  boton.pack()
+  root.mainloop()
+</PRE>
+
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc14">title</H3>
+
+<P>
+Permite indicar el titulo de la ventana. Podria decirse que este valor se hereda ya que si creamos una nueva ventana a traves de Toplevel esta tomaria el nombre de la ventana padre.
+</P>
+
+<UL>
+<LI>Ejemplo:
+<P></P>
+
+<PRE>
+  root = Tk()
+  root.title("Bienvenido a Codigo Python")
+  root.mainloop()
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="img/ejemplo_title.png" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Heredando el titulo de la ventana padre:
+<P></P>
+<PRE>
+  root = Tk()
+  root.title("Bienvenido a Codigo Python")
+  otra_ventana = Toplevel(root)
+  root.mainloop()
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="img/ejemplo_title02.png" BORDER="0" ALT="">
+</UL>
+
+<UL>
+<LI>Ejemplo de dos ventanas con titulos distintos:
+<P></P>
+<PRE>
+  root = Tk()
+  root.title("Bienvenido a")
+  otra_ventana = Toplevel(root)
+  otra_ventana.title("Codigo Python")
+  root.mainloop()
+</PRE>
+
+<P></P>
+<IMG ALIGN="middle" SRC="img/ejemplo_title03.png" BORDER="0" ALT="">
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc15">maxsize</H3>
+
+<P>
+Establece los valores maximos de la medida de la ventana, tanto su ancho como su alto.
+</P>
+<P>
+Ejemplo:
+</P>
+
+<PRE>
+  root.geometry("300x300")
+  root.maxsize(width=400, height=400)
+</PRE>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc16">minsize</H3>
+
+<P>
+Establece los valores minimos de la medida de la ventana, tanto su ancho como su alto.
+</P>
+<P>
+Ejemplo:
+</P>
+
+<PRE>
+  root.geometry("300x300")
+  root.minsize(width=200, height=200)
+</PRE>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc17">state</H3>
+
+<P>
+Podemos cambiar el estado en el que se encuentra la ventana a 'normal', 'iconic' o 'withdraw'. Con la opcion 'normal' la ventana se comporta normalmente apareciendo en la ventana, con la opcion 'iconic' obtenemos los mismos resultados que el metodo 'iconify()'  minimizando la ventana y por ultimo con 'withdraw' obtendremos como se imaginaran el mismo resultado que con 'withdraw' ocultando la ventana. La forma en que se declaran son las siguientes:
+</P>
+
+<PRE>
+  root.state(newstate="normal")
+  root.state(newstate="withdraw")
+  root.state(newstate="iconic")
+</PRE>
+
+<P>
+Veamos un ejemplo de su uso y funcionamiento:
+</P>
+
+<PRE>
+  from Tkinter import *
+  import time
+  
+  def funcion():
+      root.state(newstate='withdraw')
+      time.sleep(5)
+      root.state(newstate='normal')
+  
+  root = Tk()
+  boton = Button(root, text="Probando el metodo state", command=funcion)
+  boton.pack()
+  root.mainloop()
+</PRE>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc18">resizable</H3>
+
+<P>
+Nos permite indicar que si la ventana debe o no poder redimensionarse ya sea en su ancho o el su alto, dandole a sus parametros 'width'(Ancho) y 'height' (Largo) los valores 'True' o 'False'. Con True habilitamos el redimencionamiento y con False los deshabilitamos. Si estamos usando a su ves los metodos 'minsize' y/o 'maxsize' el valor maximo al cual se pueda redimencionar dependera de estos dos metodos en caso de existir.
+</P>
+
+<UL>
+<LI>Redimencionar solo el ancho:
+<P></P>
+
+<PRE>
+  root.resizable(width=True, height=False)
+</PRE>
+
+<P></P>
+<LI>Redimencionar solo el alto:
+<P></P>
+
+<PRE>
+  root.resizable(width=False, height=True)
+</PRE>
+
+<P></P>
+<LI>Bloquear el redimencionamiento de la ventana:
+<P></P>
+
+<PRE>
+  root.resizable(width=False, height=False)
+</PRE>
+
+</UL>
+
+<H2 ID="toc19">Gestión de la geometría</H2>
+
+<P>
+Todos los widgets de Tkinter tienen acceso a metodos especificos para la gestion de la geometria, que tienen como proposito ordenar y organizar dichos widgets en el area donde estan contenidos.
+</P>
+<P>
+Para conseguir esto tenemos tres gestores para la geometria, aunque muchos recomiendan solamente usar solo uno de ellos, esperamos que luego de leer acerca de estos tres seas capaz de elegir el que mas se adapte a tus necesidades y a tu forma de trabajar.
+</P>
+
+<H3 ID="toc20">pack</H3>
+
+<P>
+.
+</P>
+
+<H3 ID="toc21">grid</H3>
+
+<P>
+.
+</P>
+
+<H3 ID="toc22">place</H3>
+
+<P>
+.
+</P>
+
+<H2 ID="toc23">Frame</H2>
 
 <P>
 Aquí veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar el diseño de nuestra aplicación
 </P>
 
-<H2 ID="toc16">minsize</H2>
-
-<H2 ID="toc17">Colores</H2>
+<H2 ID="toc24">Colores</H2>
 
 <P>
 Todos los widgets estandar de Tkinter proporcionan un conjunto basico de opciones para poder personalizarlos, que nos permiten modificar sus colores, fuentes, bordes y tamaños entre otros. La mayoria de ellos permite especificar un color de fondo y de primer plano que nos seran muy utiles cuando intentemos darle un aspecto mas pulida a nuestra aplicacion.
@@ -882,7 +1132,7 @@ Todos los widgets estandar de Tkinter proporcionan un conjunto basico de opcione
 Para especificar dichos colores tenemos dos formas una es utilizar el nombre del color o especificar la proporcion de rojo, verde y azul que componen a dicho color en digitos hexadecimales que es la mas popular y la mas precisa a la hora de trabajar.
 </P>
 
-<H3 ID="toc18">Nombres de colores</H3>
+<H3 ID="toc25">Nombres de colores</H3>
 
 <P>
 Como se habia mencionado se puede especificar un color con solo usar su nombre en ingles, por ejemplo para el color balco usariamos la palabra 'white' y para el color rojo 'red', aunque Tkinter no nos limita a usar solamente los colores basicos sino que nos ofrece una paleta bastante amplia de colores.
@@ -914,7 +1164,7 @@ Podemos obtener una lista de los posibles colores que nos da Tkinter en la sigui
 [<A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm</A>]
 </P>
 
-<H3 ID="toc19">RGB hexadecimal</H3>
+<H3 ID="toc26">RGB hexadecimal</H3>
 
 <P>
 Aunque este metodo sea un poco mas complicado en su uso es el mas preciso que el metodo que habiamos mencionado arriba, la forma en que se utiliza es la siguiente:
@@ -946,9 +1196,9 @@ Su uso es muy simple, solo debemos usar la forma que habiamos visto cuando color
 Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nombre del color.
 </P>
 
-<H2 ID="toc20">Fuentes</H2>
+<H2 ID="toc27">Fuentes</H2>
 
-<H2 ID="toc21">Unidades de medida</H2>
+<H2 ID="toc28">Unidades de medida</H2>
 
 <P>
 En Tkinter podemos especificar las medidas de los elementos no solo en píxeles sino que también podemos especificar los valores en centímetros, pulgadas, milímetros y puntos para esto debemos pasar el valor como cadena que se compone de un numero entero o no seguido de una letra que indique el tipo de unidad a utilizar que se especifica en la siguiente tabla:
@@ -1036,23 +1286,23 @@ Ejemplos:
 <IMG ALIGN="middle" SRC="img/ejemplo_unidad_puntos.png" BORDER="0" ALT="">
 </UL>
 
-<H2 ID="toc22">Imágenes</H2>
+<H2 ID="toc29">Imágenes</H2>
 
-<H3 ID="toc23">PhotoImage</H3>
+<H3 ID="toc30">PhotoImage</H3>
 
-<H3 ID="toc24">PIL</H3>
+<H3 ID="toc31">PIL</H3>
 
-<H1 ID="toc25">Menús y barras de herramientas</H1>
+<H1 ID="toc32">Menús y barras de herramientas</H1>
 
-<H1 ID="toc26">Ventanas de diálogos</H1>
+<H1 ID="toc33">Ventanas de diálogos</H1>
 
-<H1 ID="toc27">Eventos</H1>
+<H1 ID="toc34">Eventos</H1>
 
-<H1 ID="toc28">Ejemplos</H1>
+<H1 ID="toc35">Ejemplos</H1>
 
-<H1 ID="toc29">Notas finales</H1>
+<H1 ID="toc36">Notas finales</H1>
 
-<H1 ID="toc30">Enlaces de interés</H1>
+<H1 ID="toc37">Enlaces de interés</H1>
 
 <P>
 <A HREF="http://www.tcl.tk/man/tcl8.5/">Tcl/Tk 8.5 Manual</A>
@@ -1087,11 +1337,11 @@ Entorno grafico en Python <A HREF="http://www.codigopython.com.ar/miniguias/ento
 
 <DL>
 <DT>widgets</DT><DD>
-</DL>
-
-<H1 ID="toc32">Licencia</H1>
-
-<DL>
+<P></P>
+Es un termino generico para referirse a cualquiera de los elementos basicos que componen la interfaz grafica de una aplicacion. Ejemplos de widgets son botones, etiquetas, cuadros de texto, etc.
+<P></P>
+= Licencia =
+<P></P>
 <DT>Esta obra está licenciada bajo una Licencia Attribution-ShareAlike 3.0 Unported de Creative Commons. Para ver una copia de esta licencia, visite <A HREF="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</A> o envíenos una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.</DT><DD>
 </DL>
 
