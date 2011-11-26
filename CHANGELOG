@@ -24,3 +24,6 @@
 2011-11-19 Alejandro Alvarez <contacto@codigopython.com.ar>
         * Se agrega la seccion metodos
         * Se añaden varios metodos para ventanas con descripcion y ejemplos
+
+2011-11-26 Alejandro Alvarez <contacto@codigopython.com.ar>
+        * Se añade el metodo geometry con descripcion y ejemplo

@@ -8,7 +8,7 @@
 <CENTER>
 <H1>﻿Interfaz gráfica con Tkinter</H1>
 <FONT SIZE="4"><I>Alejandro Alvarez [contacto@codigopython.com.ar]</I></FONT><BR>
-<FONT SIZE="4">Ultima modificación 19-11-2011</FONT>
+<FONT SIZE="4">Ultima modificación 26-11-2011</FONT>
 </CENTER>
 
 
@@ -37,34 +37,36 @@
       <LI><A HREF="#toc16">minsize</A>
       <LI><A HREF="#toc17">state</A>
       <LI><A HREF="#toc18">resizable</A>
+      <LI><A HREF="#toc19">geometry</A>
       </UL>
-    <LI><A HREF="#toc19">Gestión de la geometría</A>
+    <LI><A HREF="#toc20">Gestión de la geometría</A>
       <UL>
-      <LI><A HREF="#toc20">pack</A>
-      <LI><A HREF="#toc21">grid</A>
-      <LI><A HREF="#toc22">place</A>
+      <LI><A HREF="#toc21">pack</A>
+      <LI><A HREF="#toc22">grid</A>
+      <LI><A HREF="#toc23">place</A>
       </UL>
-    <LI><A HREF="#toc23">Frame</A>
-    <LI><A HREF="#toc24">Colores</A>
+    <LI><A HREF="#toc24">Frame</A>
+    <LI><A HREF="#toc25">Colores</A>
       <UL>
-      <LI><A HREF="#toc25">Nombres de colores</A>
-      <LI><A HREF="#toc26">RGB hexadecimal</A>
+      <LI><A HREF="#toc26">Nombres de colores</A>
+      <LI><A HREF="#toc27">RGB hexadecimal</A>
       </UL>
-    <LI><A HREF="#toc27">Fuentes</A>
-    <LI><A HREF="#toc28">Unidades de medida</A>
-    <LI><A HREF="#toc29">Imágenes</A>
+    <LI><A HREF="#toc28">Fuentes</A>
+    <LI><A HREF="#toc29">Unidades de medida</A>
+    <LI><A HREF="#toc30">Imágenes</A>
       <UL>
-      <LI><A HREF="#toc30">PhotoImage</A>
-      <LI><A HREF="#toc31">PIL</A>
+      <LI><A HREF="#toc31">PhotoImage</A>
+      <LI><A HREF="#toc32">PIL</A>
       </UL>
     </UL>
-  <LI><A HREF="#toc32">Menús y barras de herramientas</A>
-  <LI><A HREF="#toc33">Ventanas de diálogos</A>
-  <LI><A HREF="#toc34">Eventos</A>
-  <LI><A HREF="#toc35">Ejemplos</A>
-  <LI><A HREF="#toc36">Notas finales</A>
-  <LI><A HREF="#toc37">Enlaces de interés</A>
+  <LI><A HREF="#toc33">Menús y barras de herramientas</A>
+  <LI><A HREF="#toc34">Ventanas de diálogos</A>
+  <LI><A HREF="#toc35">Eventos</A>
+  <LI><A HREF="#toc36">Ejemplos</A>
+  <LI><A HREF="#toc37">Notas finales</A>
+  <LI><A HREF="#toc38">Enlaces de interés</A>
   <LI><A HREF="#glosario">Glosario</A>
+  <LI><A HREF="#toc40">Licencia</A>
   </UL>
 
 <P>
@@ -1090,7 +1092,88 @@ Nos permite indicar que si la ventana debe o no poder redimensionarse ya sea en 
 
 </UL>
 
-<H2 ID="toc19">Gestión de la geometría</H2>
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc19">geometry</H3>
+
+<P>
+Este metodo es uno, junto con el resto (no hay que desmerecerer la funcion de ninguno :) ), muy importante ya que nos permitira indicar tanto el tamaño de la ventana como su posicion, esto nos permitira trabajar con varias ventanas de una forma mas prolija y agradable para el usuario si se planifican bien los objetivos y se utilizan las herrramientas adecuadas en este caso hablaremos de 'geometry'.
+</P>
+<P>
+Para su utilizacion tenemos dos posibilidades una es indicar solo el tamaño de la ventana usando la siguiente forma
+</P>
+
+<PRE>
+  root.geometry("WxH")
+</PRE>
+
+<P>
+o indicando ademas del tamaño de la ventana la posicion de la misma de la siguiente forma
+</P>
+
+<PRE>
+  root.geometry("WxH±X±Y")
+</PRE>
+
+<P>
+Resumiendo la cadena que toma este metodo tiene esta forma:
+</P>
+<P>
+wxh±x±y
+</P>
+<P>
+Donde las letras tienen este significado:
+</P>
+
+<UL>
+<LI>w: Ancho de la ventana en pixeles
+<LI>h: Alto de la ventana en pixeles
+<LI>x: Posicion en el eje X
+<LI>y: Posicion en el eje Y
+</UL>
+
+<P>
+El ancho y el alto deben ser reemplazados por las letras W y H respectivamente, separadas por una letra 'x' y su valor debera ser en pixeles, seguido de estos dos pueden ir de manera opcional dos valores mas que indicaran la posicion de la ventana en la pantalla donde se debera indicar estos valores, tambien en pixeles, para el eje x y el eje y. Una observacion que se debe hacer es que los valores que tome tanto el ancho como el alto de la ventana ademas de ser unicamente en pixeles deberan de ser numeros enteros positivos.
+</P>
+<P>
+El significado del signo mas y menos indica que si se le pasa un valor positivo este sera contado desde la esquina superior izquierda de la pantalla en cambio si le pasamos un valor negativo este sera tomado en cuenta partiendo como origen desde la esquina inferior derecha; este es un detalle que hay que tener muy en cuenta cuando deseamos posicionar una ventana.
+</P>
+<P>
+Un ejemplo de esto es el siguiente
+</P>
+
+<PRE>
+  #!/usr/bin/env python
+  
+  from Tkinter import *
+  
+  # Primer ventana con valores positivos
+  primer_ventana = Tk()
+  primer_ventana.geometry("300x300+0+0")
+  # A modo estetico le di un titulo
+  primer_ventana.title("Posicion x=+0 y=+0")
+  # Este tambien es estetico y no influye en el uso del metodo
+  etiqueta = Label(primer_ventana, text="Posicion x=+0 y=+0", width=100, height=100, anchor=CENTER)
+  etiqueta.pack()
+  primer_ventana.mainloop()
+  
+  # Segunda ventana con valores negativos
+  segunda_ventana = Tk()
+  segunda_ventana.geometry("300x300-0-0")
+  segunda_ventana.title("Posicion x=-0 y=-0")
+  etiqueta = Label(segunda_ventana, text="Posicion x=-0 y=-0", width=100, height=100, anchor=CENTER)
+  etiqueta.pack()
+  segunda_ventana.mainloop()
+</PRE>
+
+<P>
+Como se observa se crean dos ventanas donde a una se le pasa valores positivos y a la otra por el contrario sus valores seran negativos.
+</P>
+<P>
+<IMG ALIGN="middle" SRC="img/ejemplo_geometry01.png" BORDER="0" ALT="">
+</P>
+
+<H2 ID="toc20">Gestión de la geometría</H2>
 
 <P>
 Todos los widgets de Tkinter tienen acceso a metodos especificos para la gestion de la geometria, que tienen como proposito ordenar y organizar dichos widgets en el area donde estan contenidos.
@@ -1099,31 +1182,31 @@ Todos los widgets de Tkinter tienen acceso a metodos especificos para la gestion
 Para conseguir esto tenemos tres gestores para la geometria, aunque muchos recomiendan solamente usar solo uno de ellos, esperamos que luego de leer acerca de estos tres seas capaz de elegir el que mas se adapte a tus necesidades y a tu forma de trabajar.
 </P>
 
-<H3 ID="toc20">pack</H3>
+<H3 ID="toc21">pack</H3>
 
 <P>
 .
 </P>
 
-<H3 ID="toc21">grid</H3>
+<H3 ID="toc22">grid</H3>
 
 <P>
 .
 </P>
 
-<H3 ID="toc22">place</H3>
+<H3 ID="toc23">place</H3>
 
 <P>
 .
 </P>
 
-<H2 ID="toc23">Frame</H2>
+<H2 ID="toc24">Frame</H2>
 
 <P>
 Aquí veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar el diseño de nuestra aplicación
 </P>
 
-<H2 ID="toc24">Colores</H2>
+<H2 ID="toc25">Colores</H2>
 
 <P>
 Todos los widgets estandar de Tkinter proporcionan un conjunto basico de opciones para poder personalizarlos, que nos permiten modificar sus colores, fuentes, bordes y tamaños entre otros. La mayoria de ellos permite especificar un color de fondo y de primer plano que nos seran muy utiles cuando intentemos darle un aspecto mas pulida a nuestra aplicacion.
@@ -1132,7 +1215,7 @@ Todos los widgets estandar de Tkinter proporcionan un conjunto basico de opcione
 Para especificar dichos colores tenemos dos formas una es utilizar el nombre del color o especificar la proporcion de rojo, verde y azul que componen a dicho color en digitos hexadecimales que es la mas popular y la mas precisa a la hora de trabajar.
 </P>
 
-<H3 ID="toc25">Nombres de colores</H3>
+<H3 ID="toc26">Nombres de colores</H3>
 
 <P>
 Como se habia mencionado se puede especificar un color con solo usar su nombre en ingles, por ejemplo para el color balco usariamos la palabra 'white' y para el color rojo 'red', aunque Tkinter no nos limita a usar solamente los colores basicos sino que nos ofrece una paleta bastante amplia de colores.
@@ -1164,7 +1247,7 @@ Podemos obtener una lista de los posibles colores que nos da Tkinter en la sigui
 [<A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm</A>]
 </P>
 
-<H3 ID="toc26">RGB hexadecimal</H3>
+<H3 ID="toc27">RGB hexadecimal</H3>
 
 <P>
 Aunque este metodo sea un poco mas complicado en su uso es el mas preciso que el metodo que habiamos mencionado arriba, la forma en que se utiliza es la siguiente:
@@ -1196,9 +1279,9 @@ Su uso es muy simple, solo debemos usar la forma que habiamos visto cuando color
 Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nombre del color.
 </P>
 
-<H2 ID="toc27">Fuentes</H2>
+<H2 ID="toc28">Fuentes</H2>
 
-<H2 ID="toc28">Unidades de medida</H2>
+<H2 ID="toc29">Unidades de medida</H2>
 
 <P>
 En Tkinter podemos especificar las medidas de los elementos no solo en píxeles sino que también podemos especificar los valores en centímetros, pulgadas, milímetros y puntos para esto debemos pasar el valor como cadena que se compone de un numero entero o no seguido de una letra que indique el tipo de unidad a utilizar que se especifica en la siguiente tabla:
@@ -1286,23 +1369,23 @@ Ejemplos:
 <IMG ALIGN="middle" SRC="img/ejemplo_unidad_puntos.png" BORDER="0" ALT="">
 </UL>
 
-<H2 ID="toc29">Imágenes</H2>
+<H2 ID="toc30">Imágenes</H2>
 
-<H3 ID="toc30">PhotoImage</H3>
+<H3 ID="toc31">PhotoImage</H3>
 
-<H3 ID="toc31">PIL</H3>
+<H3 ID="toc32">PIL</H3>
 
-<H1 ID="toc32">Menús y barras de herramientas</H1>
+<H1 ID="toc33">Menús y barras de herramientas</H1>
 
-<H1 ID="toc33">Ventanas de diálogos</H1>
+<H1 ID="toc34">Ventanas de diálogos</H1>
 
-<H1 ID="toc34">Eventos</H1>
+<H1 ID="toc35">Eventos</H1>
 
-<H1 ID="toc35">Ejemplos</H1>
+<H1 ID="toc36">Ejemplos</H1>
 
-<H1 ID="toc36">Notas finales</H1>
+<H1 ID="toc37">Notas finales</H1>
 
-<H1 ID="toc37">Enlaces de interés</H1>
+<H1 ID="toc38">Enlaces de interés</H1>
 
 <P>
 <A HREF="http://www.tcl.tk/man/tcl8.5/">Tcl/Tk 8.5 Manual</A>
@@ -1339,11 +1422,13 @@ Entorno grafico en Python <A HREF="http://www.codigopython.com.ar/miniguias/ento
 <DT>widgets</DT><DD>
 <P></P>
 Es un termino generico para referirse a cualquiera de los elementos basicos que componen la interfaz grafica de una aplicacion. Ejemplos de widgets son botones, etiquetas, cuadros de texto, etc.
-<P></P>
-= Licencia =
-<P></P>
-<DT>Esta obra está licenciada bajo una Licencia Attribution-ShareAlike 3.0 Unported de Creative Commons. Para ver una copia de esta licencia, visite <A HREF="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</A> o envíenos una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.</DT><DD>
 </DL>
+
+<H1 ID="toc40">Licencia</H1>
+
+<P>
+Esta obra está licenciada bajo una Licencia Attribution-ShareAlike 3.0 Unported de Creative Commons. Para ver una copia de esta licencia, visite <A HREF="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</A> o envíenos una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+</P>
 
 <!-- html code generated by txt2tags 2.6.764 (http://txt2tags.org) -->
 <!-- cmdline: txt2tags -t html /media/Principal/Alejandro/Guias/Tkinter/Interfaz grafica con Tkinter.txt -->
