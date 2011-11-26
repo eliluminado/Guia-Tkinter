@@ -170,3 +170,96 @@ Nos permite indicar que si la ventana debe o no poder redimensionarse ya sea en 
 - Bloquear el redimencionamiento de la ventana:
 
 ``` root.resizable(width=False, height=False)
+
+
+--------------------------------------------------------
+
+=== geometry ===
+
+Este metodo es uno, junto con el resto (no hay que desmerecerer la funcion de ninguno :) ), muy importante ya que nos permitira indicar tanto el tamaño de la ventana como su posicion, esto nos permitira trabajar con varias ventanas de una forma mas prolija y agradable para el usuario si se planifican bien los objetivos y se utilizan las herrramientas adecuadas en este caso hablaremos de 'geometry'.
+
+Para su utilizacion tenemos dos posibilidades una es indicar solo el tamaño de la ventana usando la siguiente forma
+
+``` root.geometry("WxH")
+
+o indicando ademas del tamaño de la ventana la posicion de la misma de la siguiente forma
+
+``` root.geometry("WxH±X±Y")
+
+Resumiendo la cadena que toma este metodo tiene esta forma:
+
+wxh±x±y
+
+Donde las letras tienen este significado:
+
+- w: Ancho de la ventana en pixeles
+- h: Alto de la ventana en pixeles
+- x: Posicion en el eje X
+- y: Posicion en el eje Y
+
+
+El ancho y el alto deben ser reemplazados por las letras W y H respectivamente, separadas por una letra 'x' y su valor debera ser en pixeles, seguido de estos dos pueden ir de manera opcional dos valores mas que indicaran la posicion de la ventana en la pantalla donde se debera indicar estos valores, tambien en pixeles, para el eje x y el eje y. Una observacion que se debe hacer es que los valores que tome tanto el ancho como el alto de la ventana ademas de ser unicamente en pixeles deberan de ser numeros enteros positivos.
+
+El significado del signo mas y menos indica que si se le pasa un valor positivo este sera contado desde la esquina superior izquierda de la pantalla en cambio si le pasamos un valor negativo este sera tomado en cuenta partiendo como origen desde la esquina inferior derecha; este es un detalle que hay que tener muy en cuenta cuando deseamos posicionar una ventana.
+
+
+Un ejemplo de esto es el siguiente
+
+```
+#!/usr/bin/env python
+
+from Tkinter import *
+
+# Primer ventana con valores positivos
+primer_ventana = Tk()
+primer_ventana.geometry("300x300+0+0")
+# A modo estetico le di un titulo
+primer_ventana.title("Posicion x=+0 y=+0")
+# Este tambien es estetico y no influye en el uso del metodo
+etiqueta = Label(primer_ventana, text="Posicion x=+0 y=+0", width=100, height=100, anchor=CENTER)
+etiqueta.pack()
+primer_ventana.mainloop()
+
+# Segunda ventana con valores negativos
+segunda_ventana = Tk()
+segunda_ventana.geometry("300x300-0-0")
+segunda_ventana.title("Posicion x=-0 y=-0")
+etiqueta = Label(segunda_ventana, text="Posicion x=-0 y=-0", width=100, height=100, anchor=CENTER)
+etiqueta.pack()
+segunda_ventana.mainloop()
+```
+
+Como se observa se crean dos ventanas donde a una se le pasa valores positivos y a la otra por el contrario sus valores seran negativos.
+
+[img/ejemplo_geometry01.png]
+
+% Usar root.winfo_screenwidth() y root.winfo_screenheight() para un ejemplo mas avanzado
+% centrando una ventana en la pantalla
+
+--------------------------------------------------------
+
+
+=== withdraw ===
+
+Este metodo permite ocultar una ventana; la forma que podemos usar para restaurarla es con 'deiconify()' o 'iconify()', o a traves del metodo 'state' que nos puede resultar mas comodo de usar. No se requiere de ningun argumento para funcionar como sucede tanto con 'deiconify' e 'iconify'.
+
+``` root.withdraw()
+
+Un ejemplo para ver como funciona es el siguiente:
+
+```
+#!/usr/bin/env python
+
+from Tkinter import *
+import time
+
+def funcion():
+    root.withdraw()
+    time.sleep(5)
+    root.deiconify()
+
+root = Tk()
+boton = Button(root, text="Probando el metodo state", command=funcion)
+boton.pack()
+root.mainloop()
+```

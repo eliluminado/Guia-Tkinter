@@ -38,35 +38,36 @@
       <LI><A HREF="#toc17">state</A>
       <LI><A HREF="#toc18">resizable</A>
       <LI><A HREF="#toc19">geometry</A>
+      <LI><A HREF="#toc20">withdraw</A>
       </UL>
-    <LI><A HREF="#toc20">Gestión de la geometría</A>
+    <LI><A HREF="#toc21">Gestión de la geometría</A>
       <UL>
-      <LI><A HREF="#toc21">pack</A>
-      <LI><A HREF="#toc22">grid</A>
-      <LI><A HREF="#toc23">place</A>
+      <LI><A HREF="#toc22">pack</A>
+      <LI><A HREF="#toc23">grid</A>
+      <LI><A HREF="#toc24">place</A>
       </UL>
-    <LI><A HREF="#toc24">Frame</A>
-    <LI><A HREF="#toc25">Colores</A>
+    <LI><A HREF="#toc25">Frame</A>
+    <LI><A HREF="#toc26">Colores</A>
       <UL>
-      <LI><A HREF="#toc26">Nombres de colores</A>
-      <LI><A HREF="#toc27">RGB hexadecimal</A>
+      <LI><A HREF="#toc27">Nombres de colores</A>
+      <LI><A HREF="#toc28">RGB hexadecimal</A>
       </UL>
-    <LI><A HREF="#toc28">Fuentes</A>
-    <LI><A HREF="#toc29">Unidades de medida</A>
-    <LI><A HREF="#toc30">Imágenes</A>
+    <LI><A HREF="#toc29">Fuentes</A>
+    <LI><A HREF="#toc30">Unidades de medida</A>
+    <LI><A HREF="#toc31">Imágenes</A>
       <UL>
-      <LI><A HREF="#toc31">PhotoImage</A>
-      <LI><A HREF="#toc32">PIL</A>
+      <LI><A HREF="#toc32">PhotoImage</A>
+      <LI><A HREF="#toc33">PIL</A>
       </UL>
     </UL>
-  <LI><A HREF="#toc33">Menús y barras de herramientas</A>
-  <LI><A HREF="#toc34">Ventanas de diálogos</A>
-  <LI><A HREF="#toc35">Eventos</A>
-  <LI><A HREF="#toc36">Ejemplos</A>
-  <LI><A HREF="#toc37">Notas finales</A>
-  <LI><A HREF="#toc38">Enlaces de interés</A>
+  <LI><A HREF="#toc34">Menús y barras de herramientas</A>
+  <LI><A HREF="#toc35">Ventanas de diálogos</A>
+  <LI><A HREF="#toc36">Eventos</A>
+  <LI><A HREF="#toc37">Ejemplos</A>
+  <LI><A HREF="#toc38">Notas finales</A>
+  <LI><A HREF="#toc39">Enlaces de interés</A>
   <LI><A HREF="#glosario">Glosario</A>
-  <LI><A HREF="#toc40">Licencia</A>
+  <LI><A HREF="#toc41">Licencia</A>
   </UL>
 
 <P>
@@ -1173,7 +1174,40 @@ Como se observa se crean dos ventanas donde a una se le pasa valores positivos y
 <IMG ALIGN="middle" SRC="img/ejemplo_geometry01.png" BORDER="0" ALT="">
 </P>
 
-<H2 ID="toc20">Gestión de la geometría</H2>
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc20">withdraw</H3>
+
+<P>
+Este metodo permite ocultar una ventana; la forma que podemos usar para restaurarla es con 'deiconify()' o 'iconify()', o a traves del metodo 'state' que nos puede resultar mas comodo de usar. No se requiere de ningun argumento para funcionar como sucede tanto con 'deiconify' e 'iconify'.
+</P>
+
+<PRE>
+  root.withdraw()
+</PRE>
+
+<P>
+Un ejemplo para ver como funciona es el siguiente:
+</P>
+
+<PRE>
+  #!/usr/bin/env python
+  
+  from Tkinter import *
+  import time
+  
+  def funcion():
+      root.withdraw()
+      time.sleep(5)
+      root.deiconify()
+  
+  root = Tk()
+  boton = Button(root, text="Probando el metodo state", command=funcion)
+  boton.pack()
+  root.mainloop()
+</PRE>
+
+<H2 ID="toc21">Gestión de la geometría</H2>
 
 <P>
 Todos los widgets de Tkinter tienen acceso a metodos especificos para la gestion de la geometria, que tienen como proposito ordenar y organizar dichos widgets en el area donde estan contenidos.
@@ -1182,31 +1216,31 @@ Todos los widgets de Tkinter tienen acceso a metodos especificos para la gestion
 Para conseguir esto tenemos tres gestores para la geometria, aunque muchos recomiendan solamente usar solo uno de ellos, esperamos que luego de leer acerca de estos tres seas capaz de elegir el que mas se adapte a tus necesidades y a tu forma de trabajar.
 </P>
 
-<H3 ID="toc21">pack</H3>
+<H3 ID="toc22">pack</H3>
 
 <P>
 .
 </P>
 
-<H3 ID="toc22">grid</H3>
+<H3 ID="toc23">grid</H3>
 
 <P>
 .
 </P>
 
-<H3 ID="toc23">place</H3>
+<H3 ID="toc24">place</H3>
 
 <P>
 .
 </P>
 
-<H2 ID="toc24">Frame</H2>
+<H2 ID="toc25">Frame</H2>
 
 <P>
 Aquí veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar el diseño de nuestra aplicación
 </P>
 
-<H2 ID="toc25">Colores</H2>
+<H2 ID="toc26">Colores</H2>
 
 <P>
 Todos los widgets estandar de Tkinter proporcionan un conjunto basico de opciones para poder personalizarlos, que nos permiten modificar sus colores, fuentes, bordes y tamaños entre otros. La mayoria de ellos permite especificar un color de fondo y de primer plano que nos seran muy utiles cuando intentemos darle un aspecto mas pulida a nuestra aplicacion.
@@ -1215,7 +1249,7 @@ Todos los widgets estandar de Tkinter proporcionan un conjunto basico de opcione
 Para especificar dichos colores tenemos dos formas una es utilizar el nombre del color o especificar la proporcion de rojo, verde y azul que componen a dicho color en digitos hexadecimales que es la mas popular y la mas precisa a la hora de trabajar.
 </P>
 
-<H3 ID="toc26">Nombres de colores</H3>
+<H3 ID="toc27">Nombres de colores</H3>
 
 <P>
 Como se habia mencionado se puede especificar un color con solo usar su nombre en ingles, por ejemplo para el color balco usariamos la palabra 'white' y para el color rojo 'red', aunque Tkinter no nos limita a usar solamente los colores basicos sino que nos ofrece una paleta bastante amplia de colores.
@@ -1247,7 +1281,7 @@ Podemos obtener una lista de los posibles colores que nos da Tkinter en la sigui
 [<A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm</A>]
 </P>
 
-<H3 ID="toc27">RGB hexadecimal</H3>
+<H3 ID="toc28">RGB hexadecimal</H3>
 
 <P>
 Aunque este metodo sea un poco mas complicado en su uso es el mas preciso que el metodo que habiamos mencionado arriba, la forma en que se utiliza es la siguiente:
@@ -1279,9 +1313,9 @@ Su uso es muy simple, solo debemos usar la forma que habiamos visto cuando color
 Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nombre del color.
 </P>
 
-<H2 ID="toc28">Fuentes</H2>
+<H2 ID="toc29">Fuentes</H2>
 
-<H2 ID="toc29">Unidades de medida</H2>
+<H2 ID="toc30">Unidades de medida</H2>
 
 <P>
 En Tkinter podemos especificar las medidas de los elementos no solo en píxeles sino que también podemos especificar los valores en centímetros, pulgadas, milímetros y puntos para esto debemos pasar el valor como cadena que se compone de un numero entero o no seguido de una letra que indique el tipo de unidad a utilizar que se especifica en la siguiente tabla:
@@ -1369,23 +1403,23 @@ Ejemplos:
 <IMG ALIGN="middle" SRC="img/ejemplo_unidad_puntos.png" BORDER="0" ALT="">
 </UL>
 
-<H2 ID="toc30">Imágenes</H2>
+<H2 ID="toc31">Imágenes</H2>
 
-<H3 ID="toc31">PhotoImage</H3>
+<H3 ID="toc32">PhotoImage</H3>
 
-<H3 ID="toc32">PIL</H3>
+<H3 ID="toc33">PIL</H3>
 
-<H1 ID="toc33">Menús y barras de herramientas</H1>
+<H1 ID="toc34">Menús y barras de herramientas</H1>
 
-<H1 ID="toc34">Ventanas de diálogos</H1>
+<H1 ID="toc35">Ventanas de diálogos</H1>
 
-<H1 ID="toc35">Eventos</H1>
+<H1 ID="toc36">Eventos</H1>
 
-<H1 ID="toc36">Ejemplos</H1>
+<H1 ID="toc37">Ejemplos</H1>
 
-<H1 ID="toc37">Notas finales</H1>
+<H1 ID="toc38">Notas finales</H1>
 
-<H1 ID="toc38">Enlaces de interés</H1>
+<H1 ID="toc39">Enlaces de interés</H1>
 
 <P>
 <A HREF="http://www.tcl.tk/man/tcl8.5/">Tcl/Tk 8.5 Manual</A>
@@ -1424,7 +1458,7 @@ Entorno grafico en Python <A HREF="http://www.codigopython.com.ar/miniguias/ento
 Es un termino generico para referirse a cualquiera de los elementos basicos que componen la interfaz grafica de una aplicacion. Ejemplos de widgets son botones, etiquetas, cuadros de texto, etc.
 </DL>
 
-<H1 ID="toc40">Licencia</H1>
+<H1 ID="toc41">Licencia</H1>
 
 <P>
 Esta obra está licenciada bajo una Licencia Attribution-ShareAlike 3.0 Unported de Creative Commons. Para ver una copia de esta licencia, visite <A HREF="http://creativecommons.org/licenses/by-sa/3.0/">http://creativecommons.org/licenses/by-sa/3.0/</A> o envíenos una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
