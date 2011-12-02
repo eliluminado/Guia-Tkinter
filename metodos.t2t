@@ -263,3 +263,35 @@ boton = Button(root, text="Probando el metodo state", command=funcion)
 boton.pack()
 root.mainloop()
 ```
+
+--------------------------------------------------------
+
+
+=== transient ===
+
+Este método lo permite es hacer que una ventana permanezca siempre encima de otra, si la ventana padre se minimiza la ventana que lleva el método '.transient()' también lo hará y si esta ventana padre se cerrara la ventana hija también se cerraría.
+
+Veamoslo con un ejemplo:
+
+```
+#!/usr/bin/env python
+
+from Tkinter import *
+
+root = Tk()
+root.title("Ventana padre")
+# Creamos una ventana hija de root
+otra_ventana = Toplevel(root)
+otra_ventana.title("Ventana hija")
+# Este es solo para decoracion
+etiqueta = Label(otra_ventana, text='Este es un ejemplo de transient')
+etiqueta.pack()
+# Posicionamos las dos ventanas para que sea mas claro el ejemplo
+root.geometry("400x400+100+100")
+otra_ventana.geometry("200x200+150+150")
+# Y ahora si llamamos a este metodo
+otra_ventana.transient(root)
+root.mainloop()
+```
+
+Como ven si intentan mover la ventana padre observaran que esta permanece siempre debajo de la ventana hija.
