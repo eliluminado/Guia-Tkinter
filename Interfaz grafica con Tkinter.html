@@ -8,7 +8,7 @@
 <CENTER>
 <H1>﻿Interfaz gráfica con Tkinter</H1>
 <FONT SIZE="4"><I>Alejandro Alvarez [contacto@codigopython.com.ar]</I></FONT><BR>
-<FONT SIZE="4">Ultima modificación 01-12-2011</FONT>
+<FONT SIZE="4">Ultima modificación 02-12-2011</FONT>
 </CENTER>
 
 
@@ -872,19 +872,31 @@ wraplength
 <H2 ID="toc11">Metodos</H2>
 
 <P>
-Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra apliacion y cada una de sus ventanas
+Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra aplicacion y cada una de sus ventanas
 </P>
 
 <H3 ID="toc12">iconify</H3>
 
-<P>
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
 Permite minimizar la ventana que le indiquemos, esto es util para por ejemplo minimizar una ventana padre cuando se habre una ventana hija. Lo mejor sera verlo con unos ejemplos.
-</P>
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+No tiene
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+</DL>
 
 <UL>
 <LI>En este ejemplo usamos el metodo 'iconify' en un boton para minimizar la ventana cuando se haga click sobre el:
 <P></P>
-
 <PRE>
   from Tkinter import *
   
@@ -897,7 +909,6 @@ Permite minimizar la ventana que le indiquemos, esto es util para por ejemplo mi
 <P></P>
 <LI>En este otro ejemplo creamos un boton que abre otra ventana y minimiza la ventana padre
 <P></P>
-
 <PRE>
   from Tkinter import *
   
@@ -918,14 +929,26 @@ Permite minimizar la ventana que le indiquemos, esto es util para por ejemplo mi
 
 <H3 ID="toc13">deiconify</H3>
 
-<P>
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
 Al contrario de como vimos en 'iconify' que podiamos minimizar la ventana, con 'deiconify' podemos restaurar la ventana, como paso con 'iconify' veamoslo con unos ejemplos
-</P>
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+No tiene
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+</DL>
 
 <UL>
 <LI>Esta es una variacion de uno de los ejemplos que ya habiamos visto, pero en este cuando hacemos click en el boton 'Minimizar' este se minimiza pero pasado 5 segundos se vuelve a restaurar la ventana.
 <P></P>
-
 <PRE>
   from Tkinter import *
   import time
@@ -948,14 +971,25 @@ Al contrario de como vimos en 'iconify' que podiamos minimizar la ventana, con '
 
 <H3 ID="toc14">title</H3>
 
-<P>
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
 Permite indicar el titulo de la ventana. Podria decirse que este valor se hereda ya que si creamos una nueva ventana a traves de Toplevel esta tomaria el nombre de la ventana padre.
-</P>
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+String (Cadena)
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+</DL>
 
 <UL>
-<LI>Ejemplo:
-<P></P>
-
+<LI>Ejemplos simple:
 <PRE>
   root = Tk()
   root.title("Bienvenido a Codigo Python")
@@ -999,52 +1033,118 @@ Permite indicar el titulo de la ventana. Podria decirse que este valor se hereda
 
 <H3 ID="toc15">maxsize</H3>
 
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Establece los valores maximos de la medida de la ventana, tanto su ancho como su alto. Estos valores se entregan en pixeles siendo el primer valor el ancho y el segundo el largo, aunque el orden de estos valores pueden alterarse como se observa en los ejemplos.
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+(W, H)
+<P></P>
+Donde:
+<P></P>
+W = Ancho (Width)
+<P></P>
+H = Alto (Height)
+</DL>
+
 <P>
-Establece los valores maximos de la medida de la ventana, tanto su ancho como su alto.
+o tambien de esta forma
 </P>
 <P>
-Ejemplo:
+(width=W, height=H)
 </P>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
 
 <PRE>
   root.geometry("300x300")
-  root.maxsize(width=400, height=400)
+  root.maxsize(400, 600)
 </PRE>
+
+<P></P>
+
+<PRE>
+  root.geometry("300x300")
+  root.maxsize(height=600, witdh=400)
+</PRE>
+
+<P></P>
+</DL>
 
 <HR NOSHADE SIZE=1>
 
 <H3 ID="toc16">minsize</H3>
 
-<P>
-Establece los valores minimos de la medida de la ventana, tanto su ancho como su alto.
-</P>
-<P>
-Ejemplo:
-</P>
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Establece los valores minimos de la medida de la ventana, tanto su ancho como su alto. Estos valores se entregan en pixeles siendo el primer valor el ancho y el segundo el largo, aunque el orden de estos valores pueden alterarse como se observa en los ejemplos.
+</DL>
 
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+(W, H)
+<P></P>
+Donde:
+<P></P>
+W = Ancho (Width)
+<P></P>
+H = Alto (Height)
+<P></P>
+o tambien de esta forma
+<P></P>
+(width=W, height=H)
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
 <PRE>
   root.geometry("300x300")
-  root.minsize(width=200, height=200)
+  root.minsize(400, 600)
 </PRE>
+
+<P></P>
+<PRE>
+  root.geometry("300x300")
+  root.minsize(height=600, witdh=400)
+</PRE>
+
+<P></P>
+</DL>
 
 <HR NOSHADE SIZE=1>
 
 <H3 ID="toc17">state</H3>
 
-<P>
-Podemos cambiar el estado en el que se encuentra la ventana a 'normal', 'iconic' o 'withdraw'. Con la opcion 'normal' la ventana se comporta normalmente apareciendo en la ventana, con la opcion 'iconic' obtenemos los mismos resultados que el metodo 'iconify()'  minimizando la ventana y por ultimo con 'withdraw' obtendremos como se imaginaran el mismo resultado que con 'withdraw' ocultando la ventana. La forma en que se declaran son las siguientes:
-</P>
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
+Podemos cambiar el estado en el que se encuentra la ventana a 'normal', 'iconic' o 'withdraw'. Con la opcion 'normal' la ventana se comporta normalmente apareciendo en la ventana, con la opcion 'iconic' obtenemos los mismos resultados que el metodo 'iconify()'  minimizando la ventana y por ultimo con 'withdraw' obtendremos como se imaginaran el mismo resultado que con 'withdraw' ocultando la ventana.
+</DL>
 
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+newstate=ESTADO
+<P></P>
+Donde ESTADO toma estos valores:
 <PRE>
-  root.state(newstate="normal")
-  root.state(newstate="withdraw")
-  root.state(newstate="iconic")
+  "normal"
+  "withdraw"
+  "iconic"
 </PRE>
 
-<P>
-Veamos un ejemplo de su uso y funcionamiento:
-</P>
-
+<P></P>
+<DT>Ejemplos:</DT><DD>
+<P></P>
 <PRE>
   from Tkinter import *
   import time
@@ -1060,18 +1160,43 @@ Veamos un ejemplo de su uso y funcionamiento:
   root.mainloop()
 </PRE>
 
+<P></P>
+</DL>
+
 <HR NOSHADE SIZE=1>
 
 <H3 ID="toc18">resizable</H3>
 
-<P>
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
 Nos permite indicar que si la ventana debe o no poder redimensionarse ya sea en su ancho o el su alto, dandole a sus parametros 'width'(Ancho) y 'height' (Largo) los valores 'True' o 'False'. Con True habilitamos el redimencionamiento y con False los deshabilitamos. Si estamos usando a su ves los metodos 'minsize' y/o 'maxsize' el valor maximo al cual se pueda redimencionar dependera de estos dos metodos en caso de existir.
-</P>
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+(W, H)
+<P></P>
+Donde:
+<P></P>
+W = Al ancho y puede tomar los valores True o False
+<P></P>
+H = Al alto y puede tomar los valores True o False
+<P></P>
+o tambien esta forma:
+<P></P>
+(width=W, height=H)
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
+</DL>
 
 <UL>
 <LI>Redimencionar solo el ancho:
 <P></P>
-
 <PRE>
   root.resizable(width=True, height=False)
 </PRE>
@@ -1079,7 +1204,6 @@ Nos permite indicar que si la ventana debe o no poder redimensionarse ya sea en 
 <P></P>
 <LI>Redimencionar solo el alto:
 <P></P>
-
 <PRE>
   root.resizable(width=False, height=True)
 </PRE>
@@ -1087,7 +1211,6 @@ Nos permite indicar que si la ventana debe o no poder redimensionarse ya sea en 
 <P></P>
 <LI>Bloquear el redimencionamiento de la ventana:
 <P></P>
-
 <PRE>
   root.resizable(width=False, height=False)
 </PRE>
@@ -1098,34 +1221,38 @@ Nos permite indicar que si la ventana debe o no poder redimensionarse ya sea en 
 
 <H3 ID="toc19">geometry</H3>
 
-<P>
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
 Este metodo es uno, junto con el resto (no hay que desmerecerer la funcion de ninguno :) ), muy importante ya que nos permitira indicar tanto el tamaño de la ventana como su posicion, esto nos permitira trabajar con varias ventanas de una forma mas prolija y agradable para el usuario si se planifican bien los objetivos y se utilizan las herrramientas adecuadas en este caso hablaremos de 'geometry'.
-</P>
-<P>
+<P></P>
 Para su utilizacion tenemos dos posibilidades una es indicar solo el tamaño de la ventana usando la siguiente forma
-</P>
-
+<P></P>
 <PRE>
   root.geometry("WxH")
 </PRE>
 
-<P>
+<P></P>
 o indicando ademas del tamaño de la ventana la posicion de la misma de la siguiente forma
-</P>
-
+<P></P>
 <PRE>
   root.geometry("WxH±X±Y")
 </PRE>
 
-<P>
-Resumiendo la cadena que toma este metodo tiene esta forma:
-</P>
-<P>
-wxh±x±y
-</P>
-<P>
+<P></P>
+El ancho y el alto deben ser reemplazados por las letras W y H respectivamente, separadas por una letra 'x' y su valor debera ser en pixeles, seguido de estos dos pueden ir de manera opcional dos valores mas que indicaran la posicion de la ventana en la pantalla donde se debera indicar estos valores, tambien en pixeles, para el eje x y el eje y. Una observacion que se debe hacer es que los valores que tome tanto el ancho como el alto de la ventana ademas de ser unicamente en pixeles deberan de ser numeros enteros positivos.
+<P></P>
+El significado del signo mas y menos indica que si se le pasa un valor positivo este sera contado desde la esquina superior izquierda de la pantalla en cambio si le pasamos un valor negativo este sera tomado en cuenta partiendo como origen desde la esquina inferior derecha; este es un detalle que hay que tener muy en cuenta cuando deseamos posicionar una ventana.
+</DL>
+
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+"wxh±x±y"
+<P></P>
 Donde las letras tienen este significado:
-</P>
+<P></P>
+</DL>
 
 <UL>
 <LI>w: Ancho de la ventana en pixeles
@@ -1134,16 +1261,9 @@ Donde las letras tienen este significado:
 <LI>y: Posicion en el eje Y
 </UL>
 
-<P>
-El ancho y el alto deben ser reemplazados por las letras W y H respectivamente, separadas por una letra 'x' y su valor debera ser en pixeles, seguido de estos dos pueden ir de manera opcional dos valores mas que indicaran la posicion de la ventana en la pantalla donde se debera indicar estos valores, tambien en pixeles, para el eje x y el eje y. Una observacion que se debe hacer es que los valores que tome tanto el ancho como el alto de la ventana ademas de ser unicamente en pixeles deberan de ser numeros enteros positivos.
-</P>
-<P>
-El significado del signo mas y menos indica que si se le pasa un valor positivo este sera contado desde la esquina superior izquierda de la pantalla en cambio si le pasamos un valor negativo este sera tomado en cuenta partiendo como origen desde la esquina inferior derecha; este es un detalle que hay que tener muy en cuenta cuando deseamos posicionar una ventana.
-</P>
-<P>
-Un ejemplo de esto es el siguiente
-</P>
-
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
 <PRE>
   #!/usr/bin/env python
   
@@ -1168,29 +1288,36 @@ Un ejemplo de esto es el siguiente
   segunda_ventana.mainloop()
 </PRE>
 
-<P>
+<P></P>
 Como se observa se crean dos ventanas donde a una se le pasa valores positivos y a la otra por el contrario sus valores seran negativos.
-</P>
-<P>
+<P></P>
 <IMG ALIGN="middle" SRC="img/ejemplo_geometry01.png" BORDER="0" ALT="">
-</P>
+</DL>
 
 <HR NOSHADE SIZE=1>
 
 <H3 ID="toc20">withdraw</H3>
 
-<P>
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
 Este metodo permite ocultar una ventana; la forma que podemos usar para restaurarla es con 'deiconify()' o 'iconify()', o a traves del metodo 'state' que nos puede resultar mas comodo de usar. No se requiere de ningun argumento para funcionar como sucede tanto con 'deiconify' e 'iconify'.
-</P>
-
+<P></P>
 <PRE>
   root.withdraw()
 </PRE>
 
-<P>
-Un ejemplo para ver como funciona es el siguiente:
-</P>
+</DL>
 
+<DL>
+<DT>Argumentos:</DT><DD>
+<P></P>
+No tiene
+</DL>
+
+<DL>
+<DT>Ejemplos:</DT><DD>
+<P></P>
 <PRE>
   #!/usr/bin/env python
   
@@ -1208,17 +1335,24 @@ Un ejemplo para ver como funciona es el siguiente:
   root.mainloop()
 </PRE>
 
+<P></P>
+</DL>
+
 <HR NOSHADE SIZE=1>
 
 <H3 ID="toc21">transient</H3>
 
-<P>
+<DL>
+<DT>Descripcion:</DT><DD>
+<P></P>
 Este método lo permite es hacer que una ventana permanezca siempre encima de otra, si la ventana padre se minimiza la ventana que lleva el método '.transient()' también lo hará y si esta ventana padre se cerrara la ventana hija también se cerraría.
-</P>
-<P>
-Veamoslo con un ejemplo:
-</P>
-
+<P></P>
+<DT>Argumentos:</DT><DD>
+<P></P>
+[FIXME]
+<P></P>
+<DT>Ejemplos:</DT><DD>
+<P></P>
 <PRE>
   #!/usr/bin/env python
   
@@ -1240,9 +1374,9 @@ Veamoslo con un ejemplo:
   root.mainloop()
 </PRE>
 
-<P>
+<P></P>
 Como ven si intentan mover la ventana padre observaran que esta permanece siempre debajo de la ventana hija.
-</P>
+</DL>
 
 <H2 ID="toc22">Gestión de la geometría</H2>
 

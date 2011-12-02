@@ -33,3 +33,8 @@
 
 2011-12-01 Alejandro Alvarez <contacto@codigopython.com.ar>
         * Se añade el metodo transient con descripcion y ejemplo
+
+2011-12-02 Alejandro Alvarez <contacto@codigopython.com.ar>
+        * Se mejora la presentacion de los metodos
+        * Correcciones en los metodos maxsize y minsize
+        * Correciones menores
