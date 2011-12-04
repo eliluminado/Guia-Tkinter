@@ -297,6 +297,7 @@ El ancho y el alto deben ser reemplazados por las letras W y H respectivamente, 
 
 El significado del signo mas y menos indica que si se le pasa un valor positivo este sera contado desde la esquina superior izquierda de la pantalla en cambio si le pasamos un valor negativo este sera tomado en cuenta partiendo como origen desde la esquina inferior derecha; este es un detalle que hay que tener muy en cuenta cuando deseamos posicionar una ventana.
 
+Si no le dieramos argumentos nos devolveria la medida y la posicion de la ventana.
 
 : Argumentos:
 
@@ -339,6 +340,24 @@ segunda_ventana.mainloop()
 Como se observa se crean dos ventanas donde a una se le pasa valores positivos y a la otra por el contrario sus valores seran negativos.
 
 [img/ejemplo_geometry01.png]
+
+
+- Si no le pasamos ningun argumento nos devolveria el tamaño y la posicion de la ventana como vemos a continuacion:
+
+```
+Python 2.7.1+ (r271:86832, Apr 11 2011, 18:13:53)
+[GCC 4.5.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from Tkinter import *
+>>> root = Tk()
+>>> root.geometry()
+'200x200+0+24'
+>>> root.geometry("400x400+50+50")
+''
+>>> root.geometry()
+'400x400+50+50'
+>>>
+```
 
 % Usar root.winfo_screenwidth() y root.winfo_screenheight() para un ejemplo mas avanzado
 % centrando una ventana en la pantalla

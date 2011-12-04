@@ -22,19 +22,23 @@
         * Correcciones menores en la subseccion "Colores"
 
 2011-11-19 Alejandro Alvarez <contacto@codigopython.com.ar>
-        * Se agrega la seccion metodos
-        * Se añaden varios metodos para ventanas con descripcion y ejemplos
+        * Se agrega la sección métodos
+        * Se añaden varios métodos para ventanas con descripción y ejemplos
 
 2011-11-26 Alejandro Alvarez <contacto@codigopython.com.ar>
-        * Se añade el metodo geometry con descripcion y ejemplo
+        * Se añade el método geometry con descripción y ejemplo
 
 2011-11-26 Alejandro Alvarez <contacto@codigopython.com.ar>
-        * Se añade el metodo withdraw con descripcion y ejemplo
+        * Se añade el método withdraw con descripción y ejemplo
 
 2011-12-01 Alejandro Alvarez <contacto@codigopython.com.ar>
-        * Se añade el metodo transient con descripcion y ejemplo
+        * Se añade el método transient con descripción y ejemplo
 
 2011-12-02 Alejandro Alvarez <contacto@codigopython.com.ar>
-        * Se mejora la presentacion de los metodos
-        * Correcciones en los metodos maxsize y minsize
-        * Correciones menores
+        * Se mejora la presentación de los métodos
+        * Correcciones en los métodos maxsize y minsize
+        * Correcciones menores
+
+2011-12-04 Alejandro Alvarez <contacto@codigopython.com.ar>
+        * Correcciones en el método geometry, se añade un nuevo ejemplo
+        * Correcciones de ortografía en el archivo CHANGELOG

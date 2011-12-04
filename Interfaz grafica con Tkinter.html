@@ -8,7 +8,7 @@
 <CENTER>
 <H1>﻿Interfaz gráfica con Tkinter</H1>
 <FONT SIZE="4"><I>Alejandro Alvarez [contacto@codigopython.com.ar]</I></FONT><BR>
-<FONT SIZE="4">Ultima modificación 02-12-2011</FONT>
+<FONT SIZE="4">Ultima modificación 04-12-2011</FONT>
 </CENTER>
 
 
@@ -1243,9 +1243,9 @@ o indicando ademas del tamaño de la ventana la posicion de la misma de la sigui
 El ancho y el alto deben ser reemplazados por las letras W y H respectivamente, separadas por una letra 'x' y su valor debera ser en pixeles, seguido de estos dos pueden ir de manera opcional dos valores mas que indicaran la posicion de la ventana en la pantalla donde se debera indicar estos valores, tambien en pixeles, para el eje x y el eje y. Una observacion que se debe hacer es que los valores que tome tanto el ancho como el alto de la ventana ademas de ser unicamente en pixeles deberan de ser numeros enteros positivos.
 <P></P>
 El significado del signo mas y menos indica que si se le pasa un valor positivo este sera contado desde la esquina superior izquierda de la pantalla en cambio si le pasamos un valor negativo este sera tomado en cuenta partiendo como origen desde la esquina inferior derecha; este es un detalle que hay que tener muy en cuenta cuando deseamos posicionar una ventana.
-</DL>
-
-<DL>
+<P></P>
+Si no le dieramos argumentos nos devolveria la medida y la posicion de la ventana.
+<P></P>
 <DT>Argumentos:</DT><DD>
 <P></P>
 "wxh±x±y"
@@ -1293,6 +1293,26 @@ Como se observa se crean dos ventanas donde a una se le pasa valores positivos y
 <P></P>
 <IMG ALIGN="middle" SRC="img/ejemplo_geometry01.png" BORDER="0" ALT="">
 </DL>
+
+<UL>
+<LI>Si no le pasamos ningun argumento nos devolveria el tamaño y la posicion de la ventana como vemos a continuacion:
+<P></P>
+<PRE>
+  Python 2.7.1+ (r271:86832, Apr 11 2011, 18:13:53)
+  [GCC 4.5.2] on linux2
+  Type "help", "copyright", "credits" or "license" for more information.
+  &gt;&gt;&gt; from Tkinter import *
+  &gt;&gt;&gt; root = Tk()
+  &gt;&gt;&gt; root.geometry()
+  '200x200+0+24'
+  &gt;&gt;&gt; root.geometry("400x400+50+50")
+  ''
+  &gt;&gt;&gt; root.geometry()
+  '400x400+50+50'
+  &gt;&gt;&gt;
+</PRE>
+
+</UL>
 
 <HR NOSHADE SIZE=1>
 
