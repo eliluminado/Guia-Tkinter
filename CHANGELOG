@@ -42,3 +42,6 @@
 2011-12-04 Alejandro Alvarez <contacto@codigopython.com.ar>
         * Correcciones en el método geometry, se añade un nuevo ejemplo
         * Correcciones de ortografía en el archivo CHANGELOG
+
+2011-12-19 Alejandro Alvarez <contacto@codigopython.com.ar>
+        * Cambios menores en el archivo README
