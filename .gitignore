@@ -1,0 +1,11 @@
+# Archivo generados por el sistema operativo #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Compilados de Python #
+######################
+*.pyc
+*.pyo
