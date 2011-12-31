@@ -1,6 +1,38 @@
-Interfaz gráfica con Tkinter
-Alejandro Alvarez [contacto@codigopython.com.ar]
-Ultima modificación %%date(%d-%m-%Y)
+FAQ
+Codigo Python [contacto@codigopython.com.ar]
+Ultima modificacion %%date(%d-%m-%Y)
 %!target  : html
 %!encoding: UTF-8
 %!options: --toc
+
+
+= FAQ para la guía de Tkinter =
+
+Esta FAQ se encuentra en construcción, cualquier aporte o sugerencia siempre son bienvenidos. Pueden encontrar mas informacion en el manual de esta guia.
+
+: A quienes esta destinada la guía
+Esta guía esta destinada a todos los que desean iniciarse en la construcción de interfaces gráficas, a través de un entorno simple y fácil de aprender a de mas de ser portable por ser distribuido junto con Python en los entornos Windows y preinstalado en la mayoría de las distribuciones Linux
+
+
+: Como puedo realizar un aporte
+Cualquier aporte o comentario siempre son bienvenidos y pueden hacerlo a través del foro
+[http://foro.codigopython.com.ar/forum-4.html] o mandándome un correo a
+[contacto@codigopython.com.ar], también es posible que me encuentren a través de Gtalk y MSN
+desde ese correo.
+
+
+: Donde puedo bajarme una copia
+Siempre podes bajarte una copia comprimida del codigo fuente desde el repositorio del proyecto a traves del siguiente link:
+[https://github.com/eliluminado/Guia-Tkinter/zipball/master]
+
+
+: Cual es la licencia de la guía
+El contenido de esta guia junto a su documentacion esta bajo licencia Creative Commons Atribución-CompartirIgual 3.0 Unported (CC BY-SA 3.0)
+
+
+: Que permite y que hacer dicha licencia
+Esta licencia permite compartir-copiar, distribuir, ejecutar y comunicar públicamente la obra, hacer obras derivadas y hacer un uso comercial de esta. Bajo las condiciones siguientes:
+
+Atribución: Debe reconocer los créditos de la obra de la manera especificada por el autor o el licenciante (pero no de una manera que sugiera que tiene su apoyo o que apoyan el uso que hace de su obra).
+
+Compartir bajo la Misma Licencia: Si altera o transforma esta obra, o genera una obra derivada, sólo puede distribuir la obra generada bajo una licencia idéntica a ésta.
