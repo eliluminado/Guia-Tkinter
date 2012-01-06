@@ -45,3 +45,19 @@
 
 2011-12-19 Alejandro Alvarez <contacto@codigopython.com.ar>
         * Cambios menores en el archivo README
+
+2011-12-26 Alejandro Alvarez <contacto@codigopython.com.ar>
+        * Se incluye un archivo .gitignore para ignorar determinado archivos en el repositorio
+
+2011-12-30 Alejandro Alvarez <contacto@codigopython.com.ar>
+        * Se añade logo para indicar que es un trabajo libre
+        * Proximamente un generador de los archivos HTML para la guia
+        * Correcciones menores
+
+2011-12-31 Alejandro Alvarez <contacto@codigopython.com.ar>
+        * Se corrige el texto de la licencia por la version completa de la misma
+        * Se actualiza el contenido de la documentacion
+
+2011-01-05 Alejandro Alvarez <contacto@codigopython.com.ar>
+        * Se añade una introduccion a la seccion Opciones
+        * Se actualiza el archivo CHANGELOG con los ultimos cambios
