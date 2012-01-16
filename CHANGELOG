@@ -51,13 +51,20 @@
 
 2011-12-30 Alejandro Alvarez <contacto@codigopython.com.ar>
         * Se añade logo para indicar que es un trabajo libre
-        * Proximamente un generador de los archivos HTML para la guia
+        * Próximamente un generador de los archivos HTML para la guía
         * Correcciones menores
 
 2011-12-31 Alejandro Alvarez <contacto@codigopython.com.ar>
-        * Se corrige el texto de la licencia por la version completa de la misma
-        * Se actualiza el contenido de la documentacion
+        * Se corrige el texto de la licencia por la versión completa de la misma
+        * Se actualiza el contenido de la documentación
 
 2011-01-05 Alejandro Alvarez <contacto@codigopython.com.ar>
-        * Se añade una introduccion a la seccion Opciones
-        * Se actualiza el archivo CHANGELOG con los ultimos cambios
+        * Se añade una introducción a la sección Opciones
+        * Se actualiza el archivo CHANGELOG con los últimos cambios
+
+2012-01-16 Alejandro Alvarez <contacto@codigopython.com.ar>
+        * Se termina la descripción para el widget Entry
+        * Se añade la sección Índices
+        * Se añade la sección Métodos para el widget Entry
+        * Correcciones de ortografía
+        * Se añaden imágenes de ejemplos para Entry
