@@ -40,51 +40,54 @@
       <LI><A HREF="#toc17">Validando un campo de texto</A>
       </UL>
     <LI><A HREF="#toc18">Opciones</A>
-    <LI><A HREF="#toc19">Variables</A>
+      <UL>
+      <LI><A HREF="#toc19">Disponibles para</A>
+      </UL>
+    <LI><A HREF="#toc20">Variables</A>
     </UL>
   <LI><A HREF="#gestion">Gestión del diseño</A>
     <UL>
-    <LI><A HREF="#toc21">Métodos</A>
+    <LI><A HREF="#toc22">Métodos</A>
       <UL>
-      <LI><A HREF="#toc22">iconify</A>
-      <LI><A HREF="#toc23">deiconify</A>
-      <LI><A HREF="#toc24">title</A>
-      <LI><A HREF="#toc25">maxsize</A>
-      <LI><A HREF="#toc26">minsize</A>
-      <LI><A HREF="#toc27">state</A>
-      <LI><A HREF="#toc28">resizable</A>
-      <LI><A HREF="#toc29">geometry</A>
-      <LI><A HREF="#toc30">withdraw</A>
-      <LI><A HREF="#toc31">transient</A>
+      <LI><A HREF="#toc23">iconify</A>
+      <LI><A HREF="#toc24">deiconify</A>
+      <LI><A HREF="#toc25">title</A>
+      <LI><A HREF="#toc26">maxsize</A>
+      <LI><A HREF="#toc27">minsize</A>
+      <LI><A HREF="#toc28">state</A>
+      <LI><A HREF="#toc29">resizable</A>
+      <LI><A HREF="#toc30">geometry</A>
+      <LI><A HREF="#toc31">withdraw</A>
+      <LI><A HREF="#toc32">transient</A>
       </UL>
-    <LI><A HREF="#toc32">Gestión de la geometría</A>
+    <LI><A HREF="#toc33">Gestión de la geometría</A>
       <UL>
-      <LI><A HREF="#toc33">pack</A>
-      <LI><A HREF="#toc34">grid</A>
-      <LI><A HREF="#toc35">place</A>
+      <LI><A HREF="#toc34">pack</A>
+      <LI><A HREF="#toc35">grid</A>
+      <LI><A HREF="#toc36">place</A>
       </UL>
-    <LI><A HREF="#toc36">Frame</A>
+    <LI><A HREF="#toc37">Frame</A>
     <LI><A HREF="#colores">Colores</A>
       <UL>
-      <LI><A HREF="#toc38">Nombres de colores</A>
-      <LI><A HREF="#toc39">RGB hexadecimal</A>
+      <LI><A HREF="#toc39">Nombres de colores</A>
+      <LI><A HREF="#toc40">RGB hexadecimal</A>
       </UL>
-    <LI><A HREF="#toc40">Fuentes</A>
-    <LI><A HREF="#toc41">Unidades de medida</A>
-    <LI><A HREF="#toc42">Imágenes</A>
+    <LI><A HREF="#toc41">Fuentes</A>
+    <LI><A HREF="#toc42">Unidades de medida</A>
+    <LI><A HREF="#toc43">Imágenes</A>
       <UL>
-      <LI><A HREF="#toc43">PhotoImage</A>
-      <LI><A HREF="#toc44">PIL</A>
+      <LI><A HREF="#toc44">PhotoImage</A>
+      <LI><A HREF="#toc45">PIL</A>
       </UL>
     </UL>
-  <LI><A HREF="#toc45">Menús y barras de herramientas</A>
-  <LI><A HREF="#toc46">Ventanas de diálogos</A>
-  <LI><A HREF="#toc47">Eventos</A>
-  <LI><A HREF="#toc48">Ejemplos</A>
-  <LI><A HREF="#toc49">Notas finales</A>
-  <LI><A HREF="#toc50">Enlaces de interés</A>
+  <LI><A HREF="#toc46">Menús y barras de herramientas</A>
+  <LI><A HREF="#toc47">Ventanas de diálogos</A>
+  <LI><A HREF="#toc48">Eventos</A>
+  <LI><A HREF="#toc49">Ejemplos</A>
+  <LI><A HREF="#toc50">Notas finales</A>
+  <LI><A HREF="#toc51">Enlaces de interés</A>
   <LI><A HREF="#glosario">Glosario</A>
-  <LI><A HREF="#toc52">Licencia</A>
+  <LI><A HREF="#toc53">Licencia</A>
   </UL>
 
 <P>
@@ -1215,19 +1218,857 @@ wraplength
 <HR NOSHADE SIZE=1>
 
 <A NAME="toc19"></A>
+<H3>Disponibles para</H3>
+
+<TABLE BORDER="1" CELLPADDING="4">
+<TR>
+<TD>Nombre</TD>
+<TD>Tipo</TD>
+<TD>Label</TD>
+<TD>Button</TD>
+<TD>Checkbutton</TD>
+<TD>Entry</TD>
+<TD>Listbox</TD>
+<TD>Radiobutton</TD>
+<TD>Font</TD>
+<TD>Frame</TD>
+<TD>Scale</TD>
+</TR>
+<TR>
+<TD>activebackground, activeforeground</TD>
+<TD>color</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>anchor</TD>
+<TD>constant</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>background (bg), foreground (fg)</TD>
+<TD>color</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>bigincrement</TD>
+<TD>value</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>bitmap</TD>
+<TD>bitmap</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>borderwidth (bd)</TD>
+<TD>dimension</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>colormap</TD>
+<TD>window</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>command</TD>
+<TD>callback</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>cursor</TD>
+<TD>cursor</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>default</TD>
+<TD>constant</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>digits</TD>
+<TD>value</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>disabledforeground</TD>
+<TD>color</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>exportselection</TD>
+<TD>flag</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>family</TD>
+<TD>string</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>font</TD>
+<TD>font</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>from (from_)</TD>
+<TD>value</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>highlightbackground, highlightcolor</TD>
+<TD>color</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>highlightthickness</TD>
+<TD>distance</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>image</TD>
+<TD>image</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>indicatoron</TD>
+<TD>bool</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>insertbackground</TD>
+<TD>color</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>insertborderwidth</TD>
+<TD>color</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>insertofftime, insertontime</TD>
+<TD>int</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>insertwidth</TD>
+<TD>int</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>integer</TD>
+<TD>constant</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>justify</TD>
+<TD>constant</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>label</TD>
+<TD>string</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>length</TD>
+<TD>distance</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>offvalue, onvalue</TD>
+<TD>value</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>orient</TD>
+<TD>constant</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>overstrike</TD>
+<TD>flag</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>padx, pady</TD>
+<TD>distance</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>relief</TD>
+<TD>constant</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>repeatdelay</TD>
+<TD>time</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>repeatinterval</TD>
+<TD>time</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>resolution</TD>
+<TD>value</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>selectbackground</TD>
+<TD>color</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>selectborderwidth</TD>
+<TD>int</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>selectcolor</TD>
+<TD>color</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>selectforeground</TD>
+<TD>color</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>selectimage</TD>
+<TD>image</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>selectmode</TD>
+<TD>constant</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>setgrid</TD>
+<TD>bool</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>show</TD>
+<TD>character</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>showvalue</TD>
+<TD>flag</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>size</TD>
+<TD>integer</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>slant</TD>
+<TD>constant</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>sliderlength</TD>
+<TD>distance</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>sliderrelief</TD>
+<TD>constant</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>state</TD>
+<TD>constant</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>takefocus</TD>
+<TD>flag</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>text</TD>
+<TD>string</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>textvariable</TD>
+<TD>variable</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>tickinterval</TD>
+<TD>time</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>to</TD>
+<TD>value</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>troughcolor</TD>
+<TD>color</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>underline</TD>
+<TD>int</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>value</TD>
+<TD>None</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>variable</TD>
+<TD>variable</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>width, height</TD>
+<TD>int</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+</TR>
+<TR>
+<TD>wraplength</TD>
+<TD>distance</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>xscrollcommand</TD>
+<TD>callback</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+<TR>
+<TD>xscrollcommand, yscrollcommand</TD>
+<TD>command</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>Si</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+<TD>No</TD>
+</TR>
+</TABLE>
+
+<A NAME="toc20"></A>
 <H2>Variables</H2>
 
 <A NAME="gestion"></A>
 <H1>Gestión del diseño</H1>
 
-<A NAME="toc21"></A>
+<A NAME="toc22"></A>
 <H2>Métodos</H2>
 
 <P>
 Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra aplicacion y cada una de sus ventanas
 </P>
 
-<A NAME="toc22"></A>
+<A NAME="toc23"></A>
 <H3>iconify</H3>
 
 <DL>
@@ -1280,7 +2121,7 @@ No tiene
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc23"></A>
+<A NAME="toc24"></A>
 <H3>deiconify</H3>
 
 <DL>
@@ -1323,7 +2164,7 @@ No tiene
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc24"></A>
+<A NAME="toc25"></A>
 <H3>title</H3>
 
 <DL>
@@ -1386,7 +2227,7 @@ String (Cadena)
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc25"></A>
+<A NAME="toc26"></A>
 <H3>maxsize</H3>
 
 <DL>
@@ -1435,7 +2276,7 @@ o tambien de esta forma
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc26"></A>
+<A NAME="toc27"></A>
 <H3>minsize</H3>
 
 <DL>
@@ -1479,7 +2320,7 @@ o tambien de esta forma
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc27"></A>
+<A NAME="toc28"></A>
 <H3>state</H3>
 
 <DL>
@@ -1523,7 +2364,7 @@ Donde ESTADO toma estos valores:
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc28"></A>
+<A NAME="toc29"></A>
 <H3>resizable</H3>
 
 <DL>
@@ -1578,7 +2419,7 @@ o tambien esta forma:
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc29"></A>
+<A NAME="toc30"></A>
 <H3>geometry</H3>
 
 <DL>
@@ -1676,7 +2517,7 @@ Como se observa se crean dos ventanas donde a una se le pasa valores positivos y
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc30"></A>
+<A NAME="toc31"></A>
 <H3>withdraw</H3>
 
 <DL>
@@ -1721,7 +2562,7 @@ No tiene
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc31"></A>
+<A NAME="toc32"></A>
 <H3>transient</H3>
 
 <DL>
@@ -1760,7 +2601,7 @@ Este método lo permite es hacer que una ventana permanezca siempre encima de ot
 Como ven si intentan mover la ventana padre observaran que esta permanece siempre debajo de la ventana hija.
 </DL>
 
-<A NAME="toc32"></A>
+<A NAME="toc33"></A>
 <H2>Gestión de la geometría</H2>
 
 <P>
@@ -1770,28 +2611,28 @@ Todos los widgets de Tkinter tienen acceso a métodos específicos para la gesti
 Para conseguir esto tenemos tres gestores para la geometría, aunque muchos recomiendan solamente usar solo uno de ellos, esperamos que luego de leer acerca de estos tres seas capaz de elegir el que mas se adapte a tus necesidades y a tu forma de trabajar.
 </P>
 
-<A NAME="toc33"></A>
+<A NAME="toc34"></A>
 <H3>pack</H3>
 
 <P>
 .
 </P>
 
-<A NAME="toc34"></A>
+<A NAME="toc35"></A>
 <H3>grid</H3>
 
 <P>
 .
 </P>
 
-<A NAME="toc35"></A>
+<A NAME="toc36"></A>
 <H3>place</H3>
 
 <P>
 .
 </P>
 
-<A NAME="toc36"></A>
+<A NAME="toc37"></A>
 <H2>Frame</H2>
 
 <P>
@@ -1808,7 +2649,7 @@ Todos los widgets estándar de Tkinter proporcionan un conjunto básico de opcio
 Para especificar dichos colores tenemos dos formas una es utilizar el nombre del color o especificar la proporción de rojo, verde y azul que componen a dicho color en dígitos hexadecimales que es la mas popular y la mas precisa a la hora de trabajar.
 </P>
 
-<A NAME="toc38"></A>
+<A NAME="toc39"></A>
 <H3>Nombres de colores</H3>
 
 <P>
@@ -1841,7 +2682,7 @@ Podemos obtener una lista de los posibles colores que nos da Tkinter en la sigui
 [<A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm</A>]
 </P>
 
-<A NAME="toc39"></A>
+<A NAME="toc40"></A>
 <H3>RGB hexadecimal</H3>
 
 <P>
@@ -1874,10 +2715,10 @@ Su uso es muy simple, solo debemos usar la forma que habíamos visto cuando colo
 Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nombre del color.
 </P>
 
-<A NAME="toc40"></A>
+<A NAME="toc41"></A>
 <H2>Fuentes</H2>
 
-<A NAME="toc41"></A>
+<A NAME="toc42"></A>
 <H2>Unidades de medida</H2>
 
 <P>
@@ -1966,31 +2807,31 @@ Ejemplos:
 <IMG ALIGN="middle" SRC="img/ejemplo_unidad_puntos.png" BORDER="0" ALT="">
 </UL>
 
-<A NAME="toc42"></A>
+<A NAME="toc43"></A>
 <H2>Imágenes</H2>
 
-<A NAME="toc43"></A>
+<A NAME="toc44"></A>
 <H3>PhotoImage</H3>
 
-<A NAME="toc44"></A>
+<A NAME="toc45"></A>
 <H3>PIL</H3>
 
-<A NAME="toc45"></A>
+<A NAME="toc46"></A>
 <H1>Menús y barras de herramientas</H1>
 
-<A NAME="toc46"></A>
+<A NAME="toc47"></A>
 <H1>Ventanas de diálogos</H1>
 
-<A NAME="toc47"></A>
+<A NAME="toc48"></A>
 <H1>Eventos</H1>
 
-<A NAME="toc48"></A>
+<A NAME="toc49"></A>
 <H1>Ejemplos</H1>
 
-<A NAME="toc49"></A>
+<A NAME="toc50"></A>
 <H1>Notas finales</H1>
 
-<A NAME="toc50"></A>
+<A NAME="toc51"></A>
 <H1>Enlaces de interés</H1>
 
 <P>
@@ -2031,7 +2872,7 @@ Entorno grafico en Python <A HREF="http://www.codigopython.com.ar/miniguias/ento
 Es un termino generico para referirse a cualquiera de los elementos básicos que componen la interfaz grafica de una aplicación. Ejemplos de widgets son botones, etiquetas, cuadros de texto, etc.
 </DL>
 
-<A NAME="toc52"></A>
+<A NAME="toc53"></A>
 <H1>Licencia</H1>
 
 <P>
@@ -2039,5 +2880,5 @@ Esta obra está licenciada bajo una Licencia Attribution-ShareAlike 3.0 Unported
 </P>
 
 <!-- html code generated by txt2tags 2.6 (http://txt2tags.org) -->
-<!-- cmdline: txt2tags -t html /media/Principal/Alejandro/Guias/Tkinter/Interfaz grafica con Tkinter.txt -->
+<!-- cmdline: txt2tags Interfaz grafica con Tkinter.txt -->
 </BODY></HTML>

@@ -459,6 +459,11 @@ Como habiamos mencionado contamos con cuatro clases de variables con Tkinter las
 %!include: Options.t2t
 
 
+=== Disponibles para ===
+
+%!csv: Opciones_de_widgets.csv
+
+
 == Variables ==
 
 % Referencia: http://effbot.org/zone/tkinter-entry-validate.htm
