@@ -1,0 +1,1514 @@
+'''﻿Interfaz gráfica con Tkinter'''
+
+Alejandro Alvarez [contacto@codigopython.com.ar]
+
+''Ultima modificación 20-05-2012''
+
+__TOC__
+
+ [[Image:img/Logo_Free_Cultural_Works.png|right]]
+
+Algo muy buscado en Python son las guías sobre interfaces gráficas ya sea PyGTK, PyQT, WxPython o TkInter entre las mas conocidas teniendo cada una sus ventajas y desventajas, así como cada una tiene facilidades y complicaciones en su uso y aplicación. En esta oportunidad les darémos un espacio a TkInter e intentaremos ser lo mas lo mas claro posible sin pasarnos por alto los pequeños detalles en lo que compone la creación de una interfaz gráfica en Python con el [#glosario toolkit] TkInter.
+
+== Introducción ==
+
+=== Acerca de Tk ===
+
+Tkinter es un [http://es.wikipedia.org/wiki/Binding binding] de la biblioteca gráfica Tcl/Tk para el lenguaje de programación Python, con estos queremos decir que Tk se encuentra disponible para varios lenguajes de programacion entre los cuales se encuentra Python con el nombre de Tkinter. Este no es mas que una adaptacion de esta libreria para el lenguaje Python con lo cual usar Tk en otro lenguaje no nos supondra un inconveniente.
+
+Se considera un estándar para la interfaz gráfica de usuario (GUI) para Python y es el que viene por defecto con la instalación para Microsoft Windows y preinstalado en la mayoría de las distribuciones de GNU/Linux. Con Tkinter podremos conseguir resultados casi tan buenos como con otras librerías gráficas siempre teniendo en cuenta que quizás con otras herramientas podamos realizar trabajos mas complejos donde necesitemos una plataforma mas robusta, pero como herramienta didáctica e interfaces sencillas nos sobrara, dándonos una perspectiva de lo que se trata el desarrollo de una parte muy importante de una aplicación si deseamos distribuirla. Gracias a Tkinter veremos como interactuar con el usuario pidiéndole el ingreso de datos, capturando la pulsación de teclas, movimientos del mouse, entre algunas de las cosas que podremos lograr.
+
+==== Virtudes y limitaciones ====
+
+=== Que es una interfaz grafica ===
+
+=== Instalando Tkinter ===
+
+==== Linux ====
+
+==== Windows ====
+
+==== Mac ====
+
+=== Sobre esta guía ===
+
+Dejo algunas observaciones sobre el tutorial, a lo largo de este es posible que haga alusión a funciones o características de distribuciones GNU/Linux ya que es el sistema operativo que estoy utilizando durante el desarrollo de esta guía, aunque esto no influye en el objetivo ya que Python es multiplataforma al igual que TkInter.
+Para los que deseen colaborar con esta guía así como en su contenido, pueden hacerlo registrándose en el [http://foro.codigopython.com.ar/ Foro] o desde su repositorio en GitHub [https://github.com/eliluminado/Guia-Tkinter Repositorio GIT]
+
+== Empezando por lo básico ==
+
+Lo primero que debemos hacer al igual que con otros módulos, es que debemos importarlo para poder comenzar a utilizarlo, y al igual que con otros módulos no hay una sola forma de hacerlo.
+
+La primera forma:
+
+<pre>
+from Tkinter import *
+</pre>
+
+Y la segunda:
+
+<pre>
+import Tkinter
+</pre>
+
+; '''NOTA'''
+: En las versiones 3.x de Python el modulo Tk se debe llamar de esta forma ''"from tkinter import *"'' y no de esta forma ''"from Tkinter import *"'' es un cambio menor que hay que tener en cuenta si están trabajando con Python 3.
+
+La diferencia entre usar la primera o la segunda forma es la misma con la que nos podemos topar a la hora de importar un modulo en Python, para verlo les muestro esta diferencia utilizando al modulo '''time''' y para hacerlo usamos el siguiente ejemplo:
+
+<pre>
+import time
+time.sleep(10)
+</pre>
+
+<pre>
+from time import sleep
+sleep(10)
+</pre>
+
+Usando la forma ''"import Tkinter"'' cada vez que utilicemos una función de este modulo tendremos que anteponer la palabra '''Tkinter''', en cambio usando la segunda forma ''"from Tkinter import *"'' simplemente deberemos usar el nombre de la función sin el nombre del modulo. Hay otras formas pero dependerá de tu forma de trabajar o la que te resulte mas cómoda, en todo caso puedes darle un vistazo a esta traducción de la guía de estilo escrita por [http://mundogeek.net/traducciones/guia-estilo-python.htm Guido van Rossum y Barry Warsaw]
+
+Por ahora a modo didactico usaremos la segunda forma para que los ejemplos sean mas claros, pero esto queda a su decisión. Ahora si retomemos nuestro camino.
+
+Una observación que tendremos que tener antes de continuar es no debemos pasa por alto la posibilidad de que el usuario no tenga instalado las librerías de TkInter y en consecuencia nuestra aplicación no podrá funcionar, lo mejor en este caso como en muchos otros es anticiparnos a los posibles errores que puedan ir surgiendo y manejar las excepciones de la siguiente forma:
+
+<pre>
+try:
+    import Tkinter
+except ImportError:
+    raise ImportError,"Se requiere el modulo Tkinter"
+</pre>
+
+De esta forma en caso de que el potencial usuario de nuestra preciada aplicación no puede ejecutarla pueda saber cual es motivo (en este caso es que no tenga instalado Tkinter) por el cual no pudo iniciarla.
+
+Una vez importado el modulo 'Tkinter' correctamente podemos utilizarlo para crear nuestra primera ventana de la siguiente forma:
+
+<pre>
+import Tkinter
+
+root = Tkinter.Tk()
+root.mainloop()
+</pre>
+
+Estas lineas son fundamentales, ya que dentro de ellas ira gran parte del contenido así como la interfaz como pueden ser botones y menús, etc.. En la primera linea (No tengamos en cuenta la importacion) se crea un identificador que sera el que utilizaremos para referirnos a la ventana, en este caso lo llamamos 'root' y es una de las funciones mas importantes de Tkinter. Siempre que iniciamos un identificador que en este caso lo llamamos 'root' debemos cerrarlo para capturar como veremos mas adelante eventos.
+
+; '''NOTA'''
+: La variable 'root' usada para nombrar al identificador puede ser reemplazada por cualquier otro nombre siempre y cuando se respeten las palabras reservadas de Python, aunque es muy utilizado usar el nombre 'root' para la ventana principal y puede ser una buena practica para que resulte mas familiar a los demás programadores que se quieran unir al desarrollo de nuestra aplicación.
+
+Con esto ya tendremos una ventana vacía que nos servirá para comenzar a trabajar, a partir de ahora iremos ampliando el contenido mostrando los distintos [#glosario widgets] con los que contamos en TkInter y luego para finalizar crearemos un ejemplo sencillo para unir lo se vio a lo largo de este material.
+
+== Widgets ==
+
+En esta sección no nos centraremos en el posicionamiento y diseño de los elementos que compondrán nuestra interfaz gráfica lo dejaremos para la siguiente sección [#gestion "Gestión del diseño"] en donde se vera mas detenidamente este asunto.
+
+=== Etiquetas [Label] ===
+
+Para comenzar a llenar esa vacía ventana que acabamos de crear vamos a nombrar a las etiquetas o mas conocidas como '''label''' por su nombre en ingles, las podemos encontrar desde interfaces gráficas hasta en formularios en HTML y son sumamente útiles en la construcción de interfaces y formularios, al igual que cuando creamos nuestra ventana vacía declarándola de la siguiente forma ''"root = Tkinter.Tk()"'' tendremos que hacerlo con nuestra etiqueta, para esto necesitamos escoger un nombre en mi caso escogeré '''"etiqueta"''' para declararla y deberemos llamar al widget "Label" en vez de la función "Tk" como habíamos hecho anteriormente, como para orientarnos con lo ya visto quedando por ahora algo así:
+
+<pre>
+etiqueta = Tkinter.Label()
+</pre>
+
+Una vez creada la estructura básica de la etiqueta tendremos que llenar esa paréntesis, primero tendremos que indicar a donde pertenece ese 'label' indicando el identificador de la ventana que en nuestro caso es 'root', separado por una coma escribiremos lo siguiente '''text=''' en donde seguido del signo igual incluiremos el texto que deseamos que incluya la etiqueta, la cual puede ser un texto (que tendremos que encerrar entre comillas al igual que cuando usamos la sentencia print) o una variable que contenga al texto. Para verlo un poco mas claro juntemos todo en dos ejemplos, uno donde muestre un texto fijo que le indiquemos a la etiqueta y otro usando una variable
+
+* '''Ejemplo numero 1''':
+<pre>
+etiqueta = Tkinter.Label(root, text="Codigo Python")
+</pre>
+
+
+* '''Ejemplo numero 2''':
+<pre>
+import getpass
+texto = "Bienvenido %s a Codigo Python" % getpass.getuser()
+etiqueta_2 = Tkinter.Label(root, text=texto)
+</pre>
+
+
+Expliquemos los dos ejemplos, en el primero usamos un texto fijo no dinámico para utilizar como valor de la etiqueta en cambio en el segundo estamos usando una variable en donde su valor varia dependiendo de la salida que tenga la función '''getpass.getuser()''' que obtiene el nombre de usuario que tengamos en nuestra PC, como podemos observar su funcionamiento no varia mucho de lo que nos tiene acostumbrados Python, así que manejarnos con Tkinter es solamente aprendernos un par de nombres de sus widgets como para poder empezar a utilizarlo, el resto sigue siendo codigo Python.
+
+Pero (siempre hay un pero) antes de poder ejecutar este ejemplo en nuestra consola tendremos que declarar este widget en nuestra ventana dándole una ubicación en la misma, sino hacemos esto nuestra etiqueta simplemente no aparecerá en nuestra ventana. Para hacerlo tenemos dos formas (Esto se vera mas detenidamente mas adelante) una es usando ''''pack'''' y la otra '''' grid''''. Como esto se vera mas adelante haré una breve síntesis de los dos:
+
+* 'pack': [TODO]
+
+* 'grid': [TODO]
+
+Como en este ejemplo solo colocaremos una etiqueta no es necesario recurrir al uso de 'grid' para posicionarlo, así que usaremos 'pack' en su lugar. Pero lo mas importante es saber como se declara esta etiqueta en nuestra ventana y poder ver nuestro primer widget en funcionamiento, para lograr esto deberemos usar la siguiente forma:
+
+<pre>
+etiqueta.pack()
+</pre>
+
+Como vemos es muy simple solo debemos usar el nombre que utilizamos para declarar nuestra etiqueta seguida de la forma que vayamos a utilizar para posicionarla, pero para los que no desean esperar a leer la siguiente sección para ver como se utiliza 'grid' les dejo la misma etiqueta pero posicionándola con 'grid' en lugar de usar 'pack' como ya lo habíamos visto:
+
+<pre>
+etiqueta.grid(row=1, column=1)
+</pre>
+
+Como se puede observar esta otra forma debimos indicarle dos parámetros que sirven para especificar la posición del widget, en este caso nuestra etiqueta. El primer parámetro es '''row''' que se traduce como fila al español y el segundo es '''column''' o columna en español con ellos podemos indicar en que columna y fila deberá colocarse el widget, aunque por ahora no profundizaremos entrando en detalles en la forma que trabaja cada uno ni todos los parámetros que acepta cada una.
+
+Si ahora escribiéramos todo lo que vimos en nuestra consola tendríamos que ver nuestra primera etiqueta en funcionamiento, contenido dentro de una ventana quedando todo el código como el siguiente:
+
+<pre>
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> etiqueta = Tkinter.Label(root, text="Codigo Python")
+>>> etiqueta.pack()
+>>> root.mainloop()
+</pre>
+
+Y así es como quedara nuestro ejemplo terminado:
+
+[[Image:img/ejemplo_Label.png|center]]
+
+Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer widget y podemos seguir con el proximo.
+
+=== Botones [Button] ===
+
+Los botones pueden contener texto o imágenes y se les puede asociar funciones o métodos, que al hacer clic sobre ellos Tkinter se encargara de llamar automáticamente a ese método o función y se ejecutara el código Python contenido dentro de ellos.
+
+Un detalle es que solo puede utilizarse un tipo de fuente, pero ese texto puede ocupar varias lineas en caso de ser necesario. Además se puede subrayar el texto, un carácter o letra en particular, algo que es muy común cuando se desea decirle al usuario sobre la existencia de un atajo con el teclado.
+
+Antes de crear a ese botón debemos declarar la función a la cual se llamara, porque como se imaginaran no podemos decirle al botón que ejecute una función que no existe, por eso vamos a escribir un par de lineas y crearemos una función simple como para verificar que dicho botón funciona correctamente.
+
+<pre>
+def función():
+    print "Excelente"
+</pre>
+
+Con esas dos lineas nos va a servir para demostrar su funcionamiento, ahora si vamos con el botón.
+
+A continuación les muestro el código con el cual vamos a trabajar:
+
+<pre>
+import Tkinter
+
+def función():
+   print "Excelente"
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Que te parece la guía?", command=función)
+boton.pack()
+root.mainloop()
+</pre>
+
+En el se observa la ya conocida importación del modulo Tkinter, la función que ya habíamos declarado y la creación del botón. Como se puede ver la creación de un botón básico es muy similar al de una etiqueta pero se incluye un parámetro mas que nos dará la posibilidad de especificar dentro de el la función que utilizaremos; el parámetro mencionado es ''''command'''' y en ella podemos llamar a funciones o métodos, en este caso llamamos a la función 'función' que va a imprimir en la consola la palabra '''Excelente'''.
+
+[[Image:img/ejemplo_Button.png|center]]
+
+[[Image:img/ejemplo_Button02.png|center]]
+
+=== Cuadro de texto [Entry] ===
+
+Este widget nos permite tanto mostrarle información al usuario como también obtenerla de su parte, dotando a nuestra ventana de un widget muy poderoso y útil, siendo el primero de los widgets mencionados que nos posibilitara la interacción del usuario solicitando la entrada de datos. Como venimos haciendo en esta guía se mostraran algunos conceptos básicos que te permitirán empezar a utilizarlo, pero luego en la sección 'Opciones' se detallan las opciones que tienen disponibles al crear un cuadro de texto.
+
+Este elemento es muy popular y sumamente útil así que deberemos de conocerlo y manejarlo, para esto comencemos explicando algunos conceptos básicos para entender mejor de se trata esto.
+
+Para empezar a utilizar nuestro elemento 'Entry' podemos primero declarar una variable del tipo 'StringVar' o del tipo 'IntVar' (tenemos mas opciones disponibles pero se verán mas detenidamente en otra sección), estas variables capturan el texto que el usuario ingrese en el cuadro de texto para luego poder trabajar con esos datos, aunque esta practica es muy recomendada y hasta imprescindible en ocasiones, no es un requisito obligatorio para utilizar nuestro cuadro de texto como es visto en algunos sitios web.
+
+Por esto veremos primero un uso mas básico para luego entrar mas en detalle e incorporar estas variables a nuestro repertorio.
+
+La forma que se declara un cuadro de texto es muy simple:
+
+campo_de_texto = Tkinter.Entry(root)
+
+Esa es su forma mas básica en donde como se observa no se llama a ninguna de las opciones que tenemos disponibles, antes de ver los métodos que podemos llamar para hacer uso de este widget veamos un ejemplo de su uso
+
+<pre>
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>> campo_de_texto.get()
+''
+>>>
+</pre>
+
+[[Image:img/ejemplo_Entry.png|center]]
+
+Si escribiéramos un texto en el cuadro y escribiéramos en la consola lo siguiente
+
+<pre>
+campo_de_texto.get()
+</pre>
+
+estaríamos usando el método 'get' del widget Entry que nos permite obtener el texto que contenga el cuadro de texto, como podemos observar en el siguiente ejemplo
+
+<pre>
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>> # En este caso escribi "CodigoPython.com.ar"
+>>> campo_de_texto.get()
+'CodigoPython.com.ar'
+>>>
+</pre>
+
+[[Image:img/ejemplo_Entry02.png|center]]
+
+Seguramente ese cuadrado en nuestra ventana de poco serviría si no pudiésemos interactuar con este. A continuación veremos los métodos a lo podemos llamar para trabajar con este widget.
+
+Una observación que se debe hacer, es que para escribir varias lineas de texto se debe utilizar el widget 'Text' que esta pensado para esto, que sera visto mas adelante.
+
+==== Índices ====
+
+Un concepto que hay que tener en cuenta antes de entrar con algunos métodos disponibles para 'Entry' son los índices, estos nos facilitan el insertado y eliminado de caracteres, entre otras cosas, estableciendo desde y hasta donde deseamos por ejemplo borrar o insertar texto en el cuadro de texto. Para conseguir esto contamos con varias formas que las iremos viendo de a una para luego verlas dentro de los métodos que las soportan y ya con unos ejemplos para afianzar los conocimientos.
+
+; Índices numéricos
+: 
+: Estos funcionan como los índices de las listas de Python así que su aplicación no debería ser complicada, el primer carácter comenzara a contar desde 0 en adelante. Para mas referencia repase los conceptos básicos de listas en Python.
+
+; ANCHOR
+: 
+: Este índice corresponde al inicio del texto que se encuentre seleccionado, en caso de existir un texto seleccionado.
+: Se puede usar select_from y select_adjust para alterar el comportamiento del mismo.
+
+; END
+: 
+: También podemos marcar desde un determinado carácter hasta el ultimo sin conocer la cantidad de caracteres que componen a ese campo de texto, esto es gracias a 'END' que haría de comodín para manejarnos de una forma mas sencilla. El uso de los índices (0,  END) equivaldría a seleccionar todo el texto disponible
+
+; INSERT
+: 
+: Este índice corresponde a la posición actual de donde se encuentra el cursor. Este índice se puede trabajar junto con el método 'icursor' para alterar el lugar del cursor.
+: 
+: Obviamente cuando nos referimos a cursor nos referimos a la barra vertical que nos aparece cuando escribimos no al cursor del mouse (Ver mas información aquí [http://es.wikipedia.org/wiki/Cursor_%28inform%C3%A1tica%29#Cursor_de_texto Cursor de texto]).
+
+; Coordenadas del Mouse
+: 
+: Otras de la posibilidades disponibles es usar la posición del cursor del mouse para indicar el índice.
+: 
+: La forma en que trabaja es a través de la siguiente sintaxis
+: 
+: @x
+: 
+: Donde 'x' es un valor en píxeles con respecto al borde izquierdo del campo de texto. Por ejemplo '@0' indica el carácter mas a la izquierda del campo del texto.
+
+==== Métodos ====
+
+* delete(INICIO, FIN)
+
+Elimina uno o mas elementos del campo de texto, este método recibe dos argumentos uno es el inicio desde donde se desea eliminar el contenido y el segundo argumento es hasta donde deseamos eliminar, al igual que en Python debemos comenzar el índice contando desde 0. Por ejemplo para eliminar de la siguiente cadena
+
+'0123456789'
+
+del 0 al 5, los índices que le deberíamos de dar serian (0, 6). Esto no es nada nuevo a lo ya venimos viendo en este lenguaje de programación.
+
+También podemos pasarle un solo argumento para borrar un solo carácter, veamos estos dos a través de unos ejemplos.
+
+Con un solo argumento:
+
+<pre>
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>>
+>>> campo_de_texto.delete(2)
+</pre>
+
+
+[[Image:img/ejemplo_Entry_delete01.png|center]]
+
+Con dos argumentos:
+
+<pre>
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>>
+>>> campo_de_texto.delete(0, 5)
+</pre>
+
+
+[[Image:img/ejemplo_Entry_delete02.png|center]]
+
+Otra opción que tenemos es borrar desde un inicio fijado por nosotros hasta el final del texto disponible en el campo de texto gracias a un índice que nos da Tkinter que es 'END', con esta podemos de la siguiente forma borrar desde el inicio hasta el final sin necesitar cuantos caracteres componen el texto contenido en el widget
+
+<pre>
+campo_de_texto.delete(0, END)
+</pre>
+
+
+Aunque no es necesario comenzar desde el inicio también podemos borrar desde el quinto carácter hasta el ultimo
+
+<pre>
+campo_de_texto.delete(5, END)
+</pre>
+
+
+También podemos utilizar los índices ya vistos en la sección 'Índices'.
+
+
+----
+
+* get()
+
+Obtiene el contenido del campo de texto, algo muy necesario para nosotros es poder obtener el texto contenido dentro del campo de texto. Para conseguir esto podemos hacernos del método 'get' que nos lo permitirá, este nos retornara el texto como una cadena. Veamos con un ejemplo escribiendo cualquier texto y usamos el método 'get'
+
+<pre>
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>> # Ahora deben escribir el texto
+>>> # en el campo de texto
+>>> campo_de_texto.get()
+'No se olviden de visitar http://www.codigopython.com.ar/'
+>>>
+</pre>
+
+
+El valor que nos retorne siempre sera como una cadena y es muy simple comprobarlo, coloquemos un texto en nuestro campo de texto, en mi caso escribiré la cadena 'Aguante Python' y almacenemos su valor en una variable para luego analizarla con la función 'type' de Python
+
+<pre>
+>>> var = campo_de_texto.get()
+>>> var
+'Aguante Python'
+>>> type(var)
+<type 'str'>
+>>>
+</pre>
+
+
+Si lo hacemos usando solo números en el campo de texto obtendremos el mismo resultado
+
+<pre>
+>>> var = campo_de_texto.get()
+>>> var
+'0123456789'
+>>> type(var)
+<type 'str'>
+>>>
+</pre>
+
+
+Mas adelante veremos como validar nuestros campos de textos.
+
+
+----
+
+* icursor(índice)
+
+Nos permite mover el cursor hasta la posición indicada, cuando vimos acerca de los índices vimos a INSERT y mencionamos a 'icursor'. Este método nos permite cambiar a donde deseamos que cambie la posición del cursor y junto a INSERT podemos llevar nuestra aplicación a otro nivel de interacción con el usuario.
+
+Un ejemplo simple seria el siguiente
+
+<pre>
+>>> entrada.icursor(0)
+</pre>
+
+
+<pre>
+>>> entrada.icursor(END)
+</pre>
+
+
+Recuerden de haber escrito un texto en el campo y que tenemos a nuestra disposición usar los índices para indicar la posición del cursor.
+
+
+----
+
+* index(índice)
+
+----
+
+* insert(índice, cadena)
+
+Permite la inserción de texto, supongamos que necesitamos insertar una cadena, un numero o un carácter en un campo de texto para conseguirlo es tan simple como llamar a este método pasándole dos argumentos como parámetros. De los dos argumentos mencionados uno es el índice de donde deseamos insertar el texto y el segundo es la cadena.
+
+En este ejemplo insertaremos el carácter arroba en donde se encuentre el cursor usando el índice 'INSERT'
+
+>>> entrada.insert(INSERT, "@")
+
+
+----
+
+* scan
+
+
+----
+
+* selection
+
+
+----
+
+* xview
+
+
+----
+
+==== Validando un campo de texto ====
+
+Acá es donde se muestra una de las opciones que disponemos en varios widgets y es 'textvariable' que tomara como valor la variable del tipo StringVar que habíamos mencionado en 'Entry', esta nos permitirá trabajar con varios métodos en 'Entry' que se los ire mostrando y los iremos viendo con ejemplos.
+
+Tengan en cuenta que StringVar no forma parte de Python sino de Tkinter así que la importación de este es fundamental para poder utilizarlo, aunque para algunos resulte una obviedad nunca esta de mas remarcarlo ya que si utilizamos la forma 'from Tkinter import *' estos detalles no se observan y pueden generar confusión cuando se ven los ejemplos.
+
+Como habiamos mencionado contamos con cuatro clases de variables con Tkinter las cuales son BooleanVar, DoubleVar, IntVar y StringVar, esta ultima suele ser la mas vista y utilizada en los tutoriales disponibles en internet
+
+=== Opciones ===
+
+Muchos de los widgets que utilizamos y vimos hasta ahora cuentan con opciones, con el fin de no repetir la descripcion de cada uno de ellos seran vistos uno a uno en esta seccion.
+
+NOTA:
+
+Para mas informacion sobre los colores visite la seccion "Colores" que se ve en [#colores "Gestion del diseño"]
+
+----
+
+anchor
+
+Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen con respecto al widget en el que se encuentra. La opcion por defecto es 'CENTER' que muestra el elemento centrado.
+
+{| align="center" border="1" cellpadding="4"
+|-
+| NW || N || NE
+|-
+| W || CENTER || E
+|-
+| SW || S || SE
+|}
+
+* Posiciona el texto/imagen en la esquina superior izquierda del widget
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=NW)
+</pre>
+
+
+[[Image:img/ejemplo_option_anchorNW.png|center]]
+
+* Posiciona el texto/imagen en la parte superior del widget
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=N)
+</pre>
+
+
+[[Image:img/ejemplo_option_anchorN.png|center]]
+
+* Posiciona el texto/imagen en la esquina superior derecha del widget
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=NE)
+</pre>
+
+
+[[Image:img/ejemplo_option_anchorNE.png|center]]
+
+* Posiciona el texto/imagen en la parte izquierda del widget
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=W)
+</pre>
+
+
+[[Image:img/ejemplo_option_anchorW.png|center]]
+
+* Posiciona el texto/imagen en el centro del widget
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=CENTER)
+</pre>
+
+
+[[Image:img/ejemplo_option_anchorCENTER.png|center]]
+
+* Posiciona el texto/imagen en la parte derecha del widget
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=E)
+</pre>
+
+
+[[Image:img/ejemplo_option_anchorE.png|center]]
+
+* Posiciona el texto/imagen en la esquina inferior izquierda del widget
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=SW)
+</pre>
+
+
+[[Image:img/ejemplo_option_anchorSW.png|center]]
+
+* Posiciona el texto/imagen en la parte inferior del widget
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=S)
+</pre>
+
+
+[[Image:img/ejemplo_option_anchorS.png|center]]
+
+* Posiciona el texto/imagen en la esquina inferior derecha del widget
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=SE)
+</pre>
+
+
+[[Image:img/ejemplo_option_anchorSE.png|center]]
+
+
+----
+
+activebackground
+
+Con esta opcion podemos indicar que color se debera utilizar cuando el cursor del mouse se posicione sobre el widget.
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
+</pre>
+
+[[Image:img/ejemplo_option_activebackground.png|center]]
+
+----
+
+activeforeground
+
+Al igual que pasa con 'activebackground' con esta otra opcion podemos especificar el color en este caso de la fuente del widget cuando se posiciona el cursor sobre este.
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
+</pre>
+
+[[Image:img/ejemplo_option_activeforeground.png|center]]
+
+----
+
+background (bg)
+
+Sirve para indicar el color de fondo que tendra en area del widget cuando este se encuentre inactivo. Tambien se puede utilizar su abreviatura 'bg' como podemos ver en el segundo ejemplo.
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, background="#38EB5C")
+</pre>
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, bg="#38EB5C")
+</pre>
+
+[[Image:img/ejemplo_option_background.png|center]]
+
+----
+
+bitmap
+
+----
+
+borderwidth (bd)
+
+Nos da la posibilidad de especificar el ancho del borde del elemento con el que estemos trabajando, Tkinter nos permite especificar el valor en varias unidades de medida (centimetros, pulgadas, milimetros y puntos) las cuales seran vistas mas adelante en la guia. Si no se utiliza junto con la opcion 'relief' visualmente es similar a utilizar las opciones 'heigth' y 'width' como se puede observar en el ejemplo. El valor por defecto es de 2 pixeles.
+
+<pre>
+etiqueta = Label(root, text="Hola Mundo!!!", borderwidth=15)
+</pre>
+
+<pre>
+etiqueta = Label(root, text="Hola Mundo!!!", bd=15)
+</pre>
+
+[[Image:img/ejemplo_option_borderwidth.png|center]]
+
+----
+
+command
+
+Como ya lo mencionamos cuando vimos al widget Button este permite indicar la funcion o metodo que queremos que se llame cuando se preciona por ejemplo un boton, pero esta opcion tambien funciona con otros widgets de Tkinter cumpliendo la misma funcion.
+
+<pre>
+def funcion():
+    print "Excelente"
+
+boton = Button(root, text="Que te parece la guia?", command=funcion)
+</pre>
+
+[[Image:img/ejemplo_Button02.png|center]]
+
+----
+
+cursor
+
+Nos da la posiblidad de indicar que cursor queremos que se muestre cuando el mouse se posiciona sobre la etiqueta.
+En el siguiente enlace podremos encontrar una lista con los cursores disponibles en Tkinter
+[http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm].
+El valor 'none' consigue eliminar el cursor cuando se pasa el cursor sobre el widget.
+
+<pre>
+etiqueta = Label(root, text="Que te parece la guia?", cursor="cross")
+</pre>
+
+----
+
+default
+
+----
+
+font
+
+----
+
+foreground (fg)
+
+Si deseamos cambiar el color de las letras de nuestro texto cuando el widget se encuentra inactivo tendremos que utilizar esta opcion, que trabaja de forma similar al ya visto 'background'. En este se tambien se puede utilizar su abreviatura 'fg' como podemos ver en el segundo ejemplo
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, foreground="#38EB5C")
+</pre>
+
+<pre>
+boton = Button(root, text="Hola Mundo!!!", command=funcion, fg="#38EB5C")
+</pre>
+
+[[Image:img/ejemplo_option_foreground.png|center]]
+
+----
+
+height
+
+Permite indicar la altura a la que se posicionara nuestro widget en lineas no en pixeles. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo
+
+<pre>
+etiqueta = Label(root, text="Hola Mundo!!!", height=10)
+</pre>
+
+[[Image:img/ejemplo_option_height.png|center]]
+
+----
+
+image
+
+----
+
+justify
+
+* RIGHT
+
+<pre>
+etiqueta = Label(root, text="Hola\n Mundo!!!", justify=RIGHT)
+</pre>
+
+
+[[Image:img/ejemplo_option_justify_RIGHT.png|center]]
+
+* CENTER
+
+<pre>
+etiqueta = Label(root, text="Hola\n Mundo!!!", justify=CENTER)
+</pre>
+
+
+[[Image:img/ejemplo_option_justify_CENTER.png|center]]
+
+* LEFT
+
+<pre>
+etiqueta = Label(root, text="Hola\n Mundo!!!", justify=LEFT)
+</pre>
+
+
+[[Image:img/ejemplo_option_justify_LEFT.png|center]]
+
+
+----
+
+relief
+
+Especifica la apariencia de un borde decorativo alrededor del widget que simula un efecto 3D sobre el elemento, el ancho de esta sombra depende del valor que se especifique con el atributo 'borderwidth', los posibles valores son SUNKEN, RAISED, GROOVE, RIDGE, FLAT. El valor por defecto es FLAT que no coloca ningun borde sobre el widget.
+
+Descripcion de los cuatro estilos:
+
+; SUNKEN:
+: Borde hundido, que provoca que el elemento que encierra parezca que se encuentra por debajo del nivel de la superficie de la pantalla.
+: 
+; RAISED:
+: Borde saliente, que provoca que el elemento que encierra parezca que se encuentra por encima del nivel de la superficie de la pantalla.
+: 
+; GROOVE:
+: Borde hundido, que visualmente parece que se encuentra por debajo del nivel de la superficie de la pantalla.
+: 
+; RIDGE:
+: Borde saliente, que visualmente parece que se encuentra por encima del nivel de la superficie de la pantalla.
+: 
+; FLAT:
+: No se muestra ningún borde.
+
+Ejemplos:
+
+* SUNKEN
+
+<pre>
+etiqueta = Label(root, text="Hola Mundo!!!", relief=SUNKEN, borderwidth=5)
+</pre>
+
+
+[[Image:img/ejemplo_option_relief_SUNKEN.png|center]]
+
+* RAISED
+
+<pre>
+etiqueta = Label(root, text="Hola Mundo!!!", relief=RAISED, borderwidth=5)
+</pre>
+
+
+[[Image:img/ejemplo_option_relief_RAISED.png|center]]
+
+* GROOVE
+
+<pre>
+etiqueta = Label(root, text="Hola Mundo!!!", relief=GROOVE, borderwidth=5)
+</pre>
+
+
+[[Image:img/ejemplo_option_relief_GROOVE.png|center]]
+
+* RIDGE
+
+<pre>
+etiqueta = Label(root, text="Hola Mundo!!!", relief=RIDGE, borderwidth=5)
+</pre>
+
+
+[[Image:img/ejemplo_option_relief_RIDGE.png|center]]
+
+* FLAT
+
+<pre>
+etiqueta = Label(root, text="Hola Mundo!!!", relief=FLAT, borderwidth=5)
+</pre>
+
+
+[[Image:img/ejemplo_option_relief_FLAT.png|center]]
+
+
+----
+
+text
+
+Este es un elemento muy importante para los widgets como Label o Button entre otros, esta opcion nos da la posibilidad de incluir un texto dentro del widget, este texto puede contener saltos de lineas en caso de ser necesario y tambien se puede utilizar una variable para indicar la cadena de texto a usar. Si se utiliza una imagen este elemento es ignorado por Tkinter.
+
+Ejemplo simple:
+
+<pre>
+etiqueta = Label(root, text="Codigo Python")
+</pre>
+
+Ejemplo con una variable:
+
+<pre>
+texto = "Codigo Python"
+etiqueta = Label(root, text=texto)
+</pre>
+
+[[Image:img/ejemplo_Label.png|center]]
+
+Ejemplo con salto de linea (recuerden que deben usar el caracter \n para el salto de linea):
+
+<pre>
+etiqueta = Label(root, text="Hola \n a todos")
+</pre>
+
+[[Image:img/ejemplo_option_text.png|center]]
+
+Ejemplo con tabulacion (recuerden que deben usar el caracter \t para la tabulacion):
+
+<pre>
+etiqueta = Label(root, text="Hola \t a todos")
+</pre>
+
+[[Image:img/ejemplo_option_text02.png|center]]
+
+----
+
+textvariable
+
+----
+
+underline
+
+Permite subrayar una letra de nuestra etiqueta, algo que es muy util para por ejemplo destacar un atajo con el teclado. La forma en que se utiliza es indicandole el indice de la cadena de texto que conforma nuestra etiqueta comenzando desde cero. El valor por defecto de esta opcion es -1 lo que logra que no se subraye ninguna letra
+
+Ejemplo con una etiqueta
+
+<pre>
+etiqueta = Label(root, text="Hola Mundo!!!", underline=3)
+</pre>
+
+[[Image:img/ejemplo_option_underline.png|center]]
+
+Ejemplo con un boton
+
+<pre>
+boton = Button(root, text="Imprimir Hola Mundo!!!", command=funcion, underline=3)
+</pre>
+
+[[Image:img/ejemplo_option_underline02.png|center]]
+
+----
+
+width
+
+Esta opcion nos permite indicar en ancho del elemento con el que estamos trabajando midiendolo en caracteres no en pixeles si se trata de texto, si en cambio estamos trabajando con imagenes si deberemos medirlo en pixeles, si se le da un valor negativo este servira para indicar el ancho minimo del widget. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo.
+
+<pre>
+etiqueta = Label(root, text="Hola Mundo!!!", width=30)
+</pre>
+
+[[Image:img/ejemplo_option_width.png|center]]
+
+----
+
+wraplength
+
+----
+
+=== Variables ===
+
+== Gestión del diseño ==
+
+=== Métodos ===
+
+Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra aplicacion y cada una de sus ventanas
+
+==== iconify ====
+
+; Descripcion:
+: 
+: Permite minimizar la ventana que le indiquemos, esto es util para por ejemplo minimizar una ventana padre cuando se habre una ventana hija. Lo mejor sera verlo con unos ejemplos.
+
+; Argumentos:
+: 
+: No tiene
+
+; Ejemplos:
+: 
+
+* En este ejemplo usamos el metodo 'iconify' en un boton para minimizar la ventana cuando se haga click sobre el:
+
+<pre>
+from Tkinter import *
+
+root = Tk()
+boton = Button(root, text="Minimizar", command=root.iconify)
+boton.pack
+root.mainloop()
+</pre>
+
+
+* En este otro ejemplo creamos un boton que abre otra ventana y minimiza la ventana padre
+
+<pre>
+from Tkinter import *
+
+def funcion():
+    otra_ventana = Toplevel(root)
+    root.iconify()
+
+root = Tk()
+boton = Button(root, text="Abrir otra ventana", command=funcion)
+boton.pack()
+root.mainloop()
+</pre>
+
+
+
+----
+
+==== deiconify ====
+
+; Descripcion:
+: 
+: Al contrario de como vimos en 'iconify' que podiamos minimizar la ventana, con 'deiconify' podemos restaurar la ventana, como paso con 'iconify' veamoslo con unos ejemplos
+
+; Argumentos:
+: 
+: No tiene
+
+; Ejemplos:
+: 
+
+* Esta es una variacion de uno de los ejemplos que ya habiamos visto, pero en este cuando hacemos click en el boton 'Minimizar' este se minimiza pero pasado 5 segundos se vuelve a restaurar la ventana.
+
+<pre>
+from Tkinter import *
+import time
+
+def funcion():
+    root.iconify()
+    time.sleep(5)
+    root.deiconify()
+
+root = Tk()
+boton = Button(root, text="Minimizar", command=funcion)
+boton.pack()
+root.mainloop()
+</pre>
+
+
+
+----
+
+==== title ====
+
+; Descripcion:
+: 
+: Permite indicar el titulo de la ventana. Podria decirse que este valor se hereda ya que si creamos una nueva ventana a traves de Toplevel esta tomaria el nombre de la ventana padre.
+
+; Argumentos:
+: 
+: String (Cadena)
+
+; Ejemplos:
+: 
+
+* Ejemplos simple:
+<pre>
+root = Tk()
+root.title("Bienvenido a Codigo Python")
+root.mainloop()
+</pre>
+
+
+[[Image:img/ejemplo_title.png|center]]
+
+* Heredando el titulo de la ventana padre:
+
+<pre>
+root = Tk()
+root.title("Bienvenido a Codigo Python")
+otra_ventana = Toplevel(root)
+root.mainloop()
+</pre>
+
+
+[[Image:img/ejemplo_title02.png|center]]
+
+* Ejemplo de dos ventanas con titulos distintos:
+
+<pre>
+root = Tk()
+root.title("Bienvenido a")
+otra_ventana = Toplevel(root)
+otra_ventana.title("Codigo Python")
+root.mainloop()
+</pre>
+
+
+[[Image:img/ejemplo_title03.png|center]]
+
+----
+
+==== maxsize ====
+
+; Descripcion:
+: 
+: Establece los valores maximos de la medida de la ventana, tanto su ancho como su alto. Estos valores se entregan en pixeles siendo el primer valor el ancho y el segundo el largo, aunque el orden de estos valores pueden alterarse como se observa en los ejemplos.
+
+; Argumentos:
+: 
+: (W, H)
+: 
+: Donde:
+: 
+: W = Ancho (Width)
+: 
+: H = Alto (Height)
+
+o tambien de esta forma
+
+(width=W, height=H)
+
+; Ejemplos:
+: 
+<pre>
+root.geometry("300x300")
+root.maxsize(400, 600)
+</pre>
+
+: 
+<pre>
+root.geometry("300x300")
+root.maxsize(height=600, witdh=400)
+</pre>
+
+: 
+
+----
+
+==== minsize ====
+
+; Descripcion:
+: 
+: Establece los valores minimos de la medida de la ventana, tanto su ancho como su alto. Estos valores se entregan en pixeles siendo el primer valor el ancho y el segundo el largo, aunque el orden de estos valores pueden alterarse como se observa en los ejemplos.
+
+; Argumentos:
+: 
+: (W, H)
+: 
+: Donde:
+: 
+: W = Ancho (Width)
+: 
+: H = Alto (Height)
+: 
+: o tambien de esta forma
+: 
+: (width=W, height=H)
+
+; Ejemplos:
+: 
+<pre>
+root.geometry("300x300")
+root.minsize(400, 600)
+</pre>
+
+: 
+<pre>
+root.geometry("300x300")
+root.minsize(height=600, witdh=400)
+</pre>
+
+: 
+
+----
+
+==== state ====
+
+; Descripcion:
+: 
+: Podemos cambiar el estado en el que se encuentra la ventana a 'normal', 'iconic' o 'withdraw'. Con la opcion 'normal' la ventana se comporta normalmente apareciendo en la ventana, con la opcion 'iconic' obtenemos los mismos resultados que el metodo 'iconify()'  minimizando la ventana y por ultimo con 'withdraw' obtendremos como se imaginaran el mismo resultado que con 'withdraw' ocultando la ventana.
+
+; Argumentos:
+: 
+: newstate=ESTADO
+: 
+: Donde ESTADO toma estos valores:
+<pre>
+"normal"
+"withdraw"
+"iconic"
+</pre>
+
+: 
+; Ejemplos:
+: 
+<pre>
+from Tkinter import *
+import time
+
+def funcion():
+    root.state(newstate='withdraw')
+    time.sleep(5)
+    root.state(newstate='normal')
+
+root = Tk()
+boton = Button(root, text="Probando el metodo state", command=funcion)
+boton.pack()
+root.mainloop()
+</pre>
+
+: 
+
+----
+
+==== resizable ====
+
+; Descripcion:
+: 
+: Nos permite indicar que si la ventana debe o no poder redimensionarse ya sea en su ancho o el su alto, dandole a sus parametros 'width'(Ancho) y 'height' (Largo) los valores 'True' o 'False'. Con True habilitamos el redimencionamiento y con False los deshabilitamos. Si estamos usando a su ves los metodos 'minsize' y/o 'maxsize' el valor maximo al cual se pueda redimencionar dependera de estos dos metodos en caso de existir.
+
+; Argumentos:
+: 
+: (W, H)
+: 
+: Donde:
+: 
+: W = Al ancho y puede tomar los valores True o False
+: 
+: H = Al alto y puede tomar los valores True o False
+: 
+: o tambien esta forma:
+: 
+: (width=W, height=H)
+
+; Ejemplos:
+: 
+
+* Redimencionar solo el ancho:
+
+<pre>
+root.resizable(width=True, height=False)
+</pre>
+
+
+* Redimencionar solo el alto:
+
+<pre>
+root.resizable(width=False, height=True)
+</pre>
+
+
+* Bloquear el redimencionamiento de la ventana:
+
+<pre>
+root.resizable(width=False, height=False)
+</pre>
+
+
+----
+
+==== geometry ====
+
+; Descripcion:
+: 
+: Este metodo es uno, junto con el resto (no hay que desmerecerer la funcion de ninguno :) ), muy importante ya que nos permitira indicar tanto el tamaño de la ventana como su posicion, esto nos permitira trabajar con varias ventanas de una forma mas prolija y agradable para el usuario si se planifican bien los objetivos y se utilizan las herrramientas adecuadas en este caso hablaremos de 'geometry'.
+: 
+: Para su utilizacion tenemos dos posibilidades una es indicar solo el tamaño de la ventana usando la siguiente forma
+: 
+<pre>
+root.geometry("WxH")
+</pre>
+
+: 
+: o indicando ademas del tamaño de la ventana la posicion de la misma de la siguiente forma
+: 
+<pre>
+root.geometry("WxH±X±Y")
+</pre>
+
+: 
+: El ancho y el alto deben ser reemplazados por las letras W y H respectivamente, separadas por una letra 'x' y su valor debera ser en pixeles, seguido de estos dos pueden ir de manera opcional dos valores mas que indicaran la posicion de la ventana en la pantalla donde se debera indicar estos valores, tambien en pixeles, para el eje x y el eje y. Una observacion que se debe hacer es que los valores que tome tanto el ancho como el alto de la ventana ademas de ser unicamente en pixeles deberan de ser numeros enteros positivos.
+: 
+: El significado del signo mas y menos indica que si se le pasa un valor positivo este sera contado desde la esquina superior izquierda de la pantalla en cambio si le pasamos un valor negativo este sera tomado en cuenta partiendo como origen desde la esquina inferior derecha; este es un detalle que hay que tener muy en cuenta cuando deseamos posicionar una ventana.
+: 
+: Si no le dieramos argumentos nos devolveria la medida y la posicion de la ventana.
+: 
+; Argumentos:
+: 
+: "wxh±x±y"
+: 
+: Donde las letras tienen este significado:
+: 
+
+* w: Ancho de la ventana en pixeles
+* h: Alto de la ventana en pixeles
+* x: Posicion en el eje X
+* y: Posicion en el eje Y
+
+; Ejemplos:
+: 
+<pre>
+#!/usr/bin/env python
+
+from Tkinter import *
+
+# Primer ventana con valores positivos
+primer_ventana = Tk()
+primer_ventana.geometry("300x300+0+0")
+# A modo estetico le di un titulo
+primer_ventana.title("Posicion x=+0 y=+0")
+# Este tambien es estetico y no influye en el uso del metodo
+etiqueta = Label(primer_ventana, text="Posicion x=+0 y=+0", width=100, height=100, anchor=CENTER)
+etiqueta.pack()
+primer_ventana.mainloop()
+
+# Segunda ventana con valores negativos
+segunda_ventana = Tk()
+segunda_ventana.geometry("300x300-0-0")
+segunda_ventana.title("Posicion x=-0 y=-0")
+etiqueta = Label(segunda_ventana, text="Posicion x=-0 y=-0", width=100, height=100, anchor=CENTER)
+etiqueta.pack()
+segunda_ventana.mainloop()
+</pre>
+
+: 
+: Como se observa se crean dos ventanas donde a una se le pasa valores positivos y a la otra por el contrario sus valores seran negativos.
+: 
+: [[Image:img/ejemplo_geometry01.png|center]]
+
+* Si no le pasamos ningun argumento nos devolveria el tamaño y la posicion de la ventana como vemos a continuacion:
+
+<pre>
+Python 2.7.1+ (r271:86832, Apr 11 2011, 18:13:53)
+[GCC 4.5.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from Tkinter import *
+>>> root = Tk()
+>>> root.geometry()
+'200x200+0+24'
+>>> root.geometry("400x400+50+50")
+''
+>>> root.geometry()
+'400x400+50+50'
+>>>
+</pre>
+
+
+----
+
+==== withdraw ====
+
+; Descripcion:
+: 
+: Este metodo permite ocultar una ventana; la forma que podemos usar para restaurarla es con 'deiconify()' o 'iconify()', o a traves del metodo 'state' que nos puede resultar mas comodo de usar. No se requiere de ningun argumento para funcionar como sucede tanto con 'deiconify' e 'iconify'.
+: 
+<pre>
+root.withdraw()
+</pre>
+
+
+; Argumentos:
+: 
+: No tiene
+
+; Ejemplos:
+: 
+<pre>
+#!/usr/bin/env python
+
+from Tkinter import *
+import time
+
+def funcion():
+    root.withdraw()
+    time.sleep(5)
+    root.deiconify()
+
+root = Tk()
+boton = Button(root, text="Probando el metodo state", command=funcion)
+boton.pack()
+root.mainloop()
+</pre>
+
+: 
+
+----
+
+==== transient ====
+
+; Descripcion:
+: 
+: Este método lo permite es hacer que una ventana permanezca siempre encima de otra, si la ventana padre se minimiza la ventana que lleva el método '.transient()' también lo hará y si esta ventana padre se cerrara la ventana hija también se cerraría.
+: 
+; Argumentos:
+: 
+: [FIXME]
+: 
+; Ejemplos:
+: 
+<pre>
+#!/usr/bin/env python
+
+from Tkinter import *
+
+root = Tk()
+root.title("Ventana padre")
+# Creamos una ventana hija de root
+otra_ventana = Toplevel(root)
+otra_ventana.title("Ventana hija")
+# Este es solo para decoracion
+etiqueta = Label(otra_ventana, text='Este es un ejemplo de transient')
+etiqueta.pack()
+# Posicionamos las dos ventanas para que sea mas claro el ejemplo
+root.geometry("400x400+100+100")
+otra_ventana.geometry("200x200+150+150")
+# Y ahora si llamamos a este metodo
+otra_ventana.transient(root)
+root.mainloop()
+</pre>
+
+: 
+: Como ven si intentan mover la ventana padre observaran que esta permanece siempre debajo de la ventana hija.
+
+=== Gestión de la geometría ===
+
+Todos los widgets de Tkinter tienen acceso a métodos específicos para la gestion de la geometría, que tienen como propósito ordenar y organizar dichos widgets en el área donde están contenidos.
+
+Para conseguir esto tenemos tres gestores para la geometría, aunque muchos recomiendan solamente usar solo uno de ellos, esperamos que luego de leer acerca de estos tres seas capaz de elegir el que mas se adapte a tus necesidades y a tu forma de trabajar.
+
+==== pack ====
+
+.
+
+==== grid ====
+
+.
+
+==== place ====
+
+.
+
+=== Frame ===
+
+Aquí veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar el diseño de nuestra aplicación
+
+=== Colores ===
+
+Todos los widgets estándar de Tkinter proporcionan un conjunto básico de opciones para poder personalizarlos, que nos permiten modificar sus colores, fuentes, bordes y tamaños entre otros. La mayoría de ellos permite especificar un color de fondo y de primer plano que nos serán muy útiles cuando intentemos darle un aspecto mas pulida a nuestra aplicación.
+
+Para especificar dichos colores tenemos dos formas una es utilizar el nombre del color o especificar la proporción de rojo, verde y azul que componen a dicho color en dígitos hexadecimales que es la mas popular y la mas precisa a la hora de trabajar.
+
+==== Nombres de colores ====
+
+Como se había mencionado se puede especificar un color con solo usar su nombre en ingles, por ejemplo para el color basico usaríamos la palabra 'white' y para el color rojo 'red', aunque Tkinter no nos limita a usar solamente los colores básicos sino que nos ofrece una paleta bastante amplia de colores.
+
+Les dejo dos ejemplos para que puedan observarlo en funcionamiento:
+
+<pre>
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=función, background="red")
+</pre>
+
+[[Image:img/ejemplo_colores_red.png|center]]
+
+<pre>
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=función, background="CadetBlue")
+</pre>
+
+[[Image:img/ejemplo_colores_CadetBlue.png|center]]
+
+Otra de las posibilidades que tenemos es utilizar los colores del sistema para conseguir un aspecto mas acorde a la plataforma con que estemos trabajando.
+
+Podemos obtener una lista de los posibles colores que nos da Tkinter en la siguiente pagina:
+[[http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm]]
+
+==== RGB hexadecimal ====
+
+Aunque este método sea un poco mas complicado en su uso es el mas preciso que el método que habíamos mencionado arriba, la forma en que se utiliza es la siguiente:
+
+#RRGGBB
+
+Donde RR, GG y BB son representaciones hexadecimales de los colores rojo, verde y azul, respectivamente. Para formar un color debemos en primer lugar elegir la intensidad que deseamos usar, especificando la cantidad de rojo, verde y azul en una escala del 0 al 255.
+
+Usando la siguiente linea desde la consola de Python podemos crear nuestros colores para Tkinter reemplazando los valores de la tupla por los que deseamos utilizar:
+
+color_rgb = "#%02x%02x%02x" % (0, 100, 0)
+
+Su uso es muy simple, solo debemos usar la forma que habíamos visto cuando coloreamos usando los nombres pero ahora deberemos reemplazar el nombre del color por su equivalente en el valor RBG Hexadecimal como en el siguiente ejemplo:
+
+<pre>
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=función, background="#FA0000")
+</pre>
+
+[[Image:img/ejemplo_colores_red.png|center]]
+
+Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nombre del color.
+
+=== Fuentes ===
+
+=== Unidades de medida ===
+
+En Tkinter podemos especificar las medidas de los elementos no solo en píxeles sino que también podemos especificar los valores en centímetros, pulgadas, milímetros y puntos para esto debemos pasar el valor como cadena que se compone de un numero entero o no seguido de una letra que indique el tipo de unidad a utilizar que se especifica en la siguiente tabla:
+
+{| border="1" cellpadding="4"
+|-
+! Símbolo !! Descripción
+|-
+| c || Centímetros
+|-
+| i || Pulgadas
+|-
+| m || Milímetros
+|-
+| p || Puntos de impresora (alrededor de 0.35mm)
+|}
+
+Si el valor que se pasa es un numero entero este es considerado como un valor en píxeles
+
+Ejemplos:
+
+* Píxeles:
+
+<pre>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth=10)
+</pre>
+
+
+[img/ejemplo_unidad_píxeles.png]
+
+* Centímetros:
+
+<pre>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='1c')
+</pre>
+
+
+[[Image:img/ejemplo_unidad_centimetros.png|center]]
+
+* Pulgadas:
+
+<pre>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='0.5i')
+</pre>
+
+
+[[Image:img/ejemplo_unidad_pulgadas.png|center]]
+
+* Milímetros:
+
+<pre>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10m')
+</pre>
+
+
+[[Image:img/ejemplo_unidad_milimetros.png|center]]
+
+* Puntos:
+
+<pre>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10p')
+</pre>
+
+
+[[Image:img/ejemplo_unidad_puntos.png|center]]
+
+=== Imágenes ===
+
+==== PhotoImage ====
+
+==== PIL ====
+
+== Menús y barras de herramientas ==
+
+== Ventanas de diálogos ==
+
+== Eventos ==
+
+== Ejemplos ==
+
+== Notas finales ==
+
+== Enlaces de interés ==
+
+[http://www.tcl.tk/man/tcl8.5/ Tcl/Tk 8.5 Manual]
+
+Entorno grafico en Python [http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python]]
+
+[http://mundogeek.net/archivos/2008/11/24/interfaces-graficas-de-usuario-en-python/ Interfaces gráficas de usuario en Python]
+
+[Curso de Python con Interfaces graficas TK [http://foro.elhacker.net/scripting/python_curso_de_python_con_interfaces_gr]áficas_tk-t232514.0.html]
+
+[http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm Python » GUI Tk]
+
+[http://www.ferg.org/thinking_in_tkinter/all_programs.html Thinking in Tkinter]
+
+[http://www.pythonware.com/library/tkinter/introduction/ An Introduction to Tkinter]
+
+[http://infohost.nmt.edu/tcc/help/pubs/tkinter/index.html Tkinter 8.4 reference: a GUI for Python]
+
+== Glosario ==
+
+; toolkit
+
+; widgets
+: 
+: Es un termino generico para referirse a cualquiera de los elementos básicos que componen la interfaz grafica de una aplicación. Ejemplos de widgets son botones, etiquetas, cuadros de texto, etc.
+
+== Licencia ==
+
+Esta obra está licenciada bajo una Licencia Attribution-ShareAlike 3.0 Unported de Creative Commons. Para ver una copia de esta licencia, visite [http://creativecommons.org/licenses/by-sa/3.0/ http://creativecommons.org/licenses/by-sa/3.0/] o envíenos una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+
+<!-- wiki code generated by txt2tags 2.6 (http://txt2tags.org) -->
+<!-- cmdline: txt2tags -t wiki /media/Principal/Alejandro/Guias/Tkinter/Interfaz grafica con Tkinter.txt -->
