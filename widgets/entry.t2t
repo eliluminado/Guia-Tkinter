@@ -1,0 +1,265 @@
+
+
+Este widget nos permite tanto mostrarle información al usuario como también obtenerla de su parte, dotando a nuestra ventana de un widget muy poderoso y útil, siendo el primero de los widgets mencionados que nos posibilitara la interacción del usuario solicitando la entrada de datos. Como venimos haciendo en esta guía se mostraran algunos conceptos básicos que te permitirán empezar a utilizarlo, pero luego en la sección 'Opciones' se detallan las opciones que tienen disponibles al crear un cuadro de texto.
+
+Este elemento es muy popular y sumamente útil así que deberemos de conocerlo y manejarlo, para esto comencemos explicando algunos conceptos básicos para entender mejor de se trata esto.
+
+Para empezar a utilizar nuestro elemento 'Entry' podemos primero declarar una variable del tipo 'StringVar' o del tipo 'IntVar' (tenemos mas opciones disponibles pero se verán mas detenidamente en otra sección), estas variables capturan el texto que el usuario ingrese en el cuadro de texto para luego poder trabajar con esos datos, aunque esta practica es muy recomendada y hasta imprescindible en ocasiones, no es un requisito obligatorio para utilizar nuestro cuadro de texto como es visto en algunos sitios web.
+
+Por esto veremos primero un uso mas básico para luego entrar mas en detalle e incorporar estas variables a nuestro repertorio.
+
+La forma en que se declara un cuadro de texto es muy simple:
+
+campo_de_texto = Tkinter.Entry(root)
+
+Esa es su forma mas básica en donde como se observa no se llama a ninguna de las opciones que tenemos disponibles, antes de ver los métodos que podemos llamar para hacer uso de este widget veamos un ejemplo de su uso
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>> campo_de_texto.get()
+''
+>>>
+```
+[widgets/img/Entry/Entry-01.jpg]
+
+Si escribiéramos un texto en el cuadro y escribimos en la consola lo siguiente
+
+``` campo_de_texto.get()
+
+estaríamos usando el método 'get' del widget Entry que nos permite obtener el texto que contenga el cuadro de texto, como podemos observar en el siguiente ejemplo
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>> # En este caso escribi "CodigoPython.com.ar"
+>>> campo_de_texto.get()
+'CodigoPython.com.ar'
+>>>
+```
+[widgets/img/Entry/Entry-02.jpg]
+
+Seguramente ese rectángulo en nuestra ventana de poco serviría si no pudiésemos interactuar con este. A continuación veremos los métodos a lo podemos llamar para trabajar con este widget.
+
+Una observación que se debe hacer, es que para escribir varias lineas de texto se debe utilizar el widget 'Text' que esta pensado para esto, que sera visto mas adelante.
+
+
+=== Índices ===
+
+Un concepto que hay que tener en cuenta antes de empezar a utilizar algunos métodos disponibles para 'Entry' son los índices, estos nos facilitan el insertado y eliminado de caracteres entre otras cosas, estableciendo desde y hasta donde deseamos por ejemplo borrar o insertar texto en el cuadro de texto. Para conseguir esto contamos con varias formas que las iremos viendo de a una para luego verlas dentro de los métodos que las soportan y ya con unos ejemplos para afianzar los conocimientos.
+
+
+: Índices numéricos
+
+Estos funcionan como los índices de las listas de Python así que su aplicación no debería ser complicada, el primer carácter comenzara a contar desde 0 en adelante. Para mas referencia repase los conceptos básicos de listas y tuplas en Python.
+
+
+: ANCHOR
+
+Este índice corresponde al inicio del texto que se encuentre seleccionado, en caso de existir un texto seleccionado.
+Se puede usar select_from y select_adjust para alterar el comportamiento del mismo.
+
+
+: END
+
+También podemos marcar desde un determinado carácter hasta el ultimo sin conocer la cantidad de caracteres que componen a ese campo de texto, esto es gracias a 'END' que haría de comodín para manejarnos de una forma mas sencilla. El uso de los índices (0,  END) equivaldría a seleccionar todo el texto disponible.
+
+
+: INSERT
+
+Este índice corresponde a la posición actual de donde se encuentra el cursor. Este índice se puede trabajar junto con el método 'icursor' para alterar el lugar del cursor.
+
+Obviamente cuando nos referimos a cursor nos referimos a la barra vertical que nos aparece cuando escribimos no al cursor del mouse (Ver mas información aquí [Cursor de texto http://es.wikipedia.org/wiki/Cursor_%28inform%C3%A1tica%29#Cursor_de_texto]).
+
+% sel.first
+
+% sel.last
+
+: Coordenadas del Mouse
+
+% Se agradece la colaboración para este índice por que yo no tengo ni idea de como se usa en la practica
+Otras de la posibilidades disponibles es usar la posición del cursor del mouse para indicar el índice.
+
+La forma en que trabaja es a través de la siguiente sintaxis
+
+@x
+
+Donde 'x' es un valor en píxeles con respecto al borde izquierdo del campo de texto. Por ejemplo '@0' indica el carácter mas a la izquierda del campo del texto.
+
+
+=== Métodos ===
+
+Como habíamos comentando cuando estábamos viendo el widget Entry, dijimos que existían métodos que nos permitían trabajar con este, los cuales iremos viendo a continuación.
+
+
+- delete(INICIO, FIN)
+
+Elimina uno o mas elementos del campo de texto, este método recibe dos argumentos uno es el inicio desde donde se desea eliminar el contenido y el segundo argumento es hasta donde deseamos eliminar, al igual que en Python debemos comenzar el índice contando desde 0. Por ejemplo para eliminar de la siguiente cadena
+
+'0123456789'
+
+de los caracteres del 0 al 5, los índices que le deberíamos de dar serian (0, 6). Esto no es nada nuevo a lo ya venimos viendo en este lenguaje de programación.
+
+También podemos pasarle un solo argumento para borrar un solo carácter, veamos estos dos a través de unos ejemplos.
+
+Con un solo argumento:
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>> campo_de_texto.get()
+'CodigoPython.com.ar'
+>>> campo_de_texto.delete(0)
+>>> campo_de_texto.get()
+'odigoPython.com.ar'
+>>> 
+
+```
+[widgets/img/Entry/Entry-03.jpg]
+
+Con dos argumentos:
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>> campo_de_texto.get()
+'CodigoPython.com.ar'
+>>> campo_de_texto.delete(12, 19)
+>>> campo_de_texto.get()
+'CodigoPython'
+>>> 
+```
+
+[widgets/img/Entry/Entry-04.jpg]
+
+Otra opción que tenemos es borrar desde un inicio fijado por nosotros hasta el final del texto disponible en el campo de texto gracias a un índice que nos da Tkinter que es 'END', con este podemos de la siguiente forma borrar desde el inicio hasta el final sin necesitar conocer cuantos caracteres componen el texto contenido en el widget
+
+``` campo_de_texto.delete(0, END)
+
+Aunque no es necesario comenzar desde el inicio también podemos borrar desde el quinto carácter hasta el ultimo
+
+``` campo_de_texto.delete(5, END)
+
+También podemos utilizar los índices ya vistos en la sección 'Índices'.
+
+--------------------------------------------------------
+
+
+- get()
+
+Obtiene el contenido del campo de texto. Algo muy necesario para nosotros es poder obtener el texto contenido dentro del campo de texto, para conseguir esto podemos hacernos del método 'get' que nos lo permitirá, este nos retornara el texto como una cadena. Veamos con un ejemplo escribiendo cualquier texto y usamos el método 'get'
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>> # Ahora deben escribir el texto
+>>> # en el campo de texto
+>>> campo_de_texto.get()
+'No se olviden de visitar http://www.codigopython.com.ar/'
+>>>
+```
+
+El valor que nos retorne siempre sera como una cadena y es muy simple comprobarlo, coloquemos un texto en nuestro campo de texto, en mi caso escribiré la cadena 'Aguante Python' y almacenemos su valor en una variable para luego analizarla con la función 'type' de Python
+
+```
+>>> var = campo_de_texto.get()
+>>> var
+'Aguante Python'
+>>> type(var)
+<type 'str'>
+>>>
+```
+
+Si lo hacemos usando solo números en el campo de texto obtendremos el mismo resultado
+
+```
+>>> var = campo_de_texto.get()
+>>> var
+'0123456789'
+>>> type(var)
+<type 'str'>
+>>>
+```
+
+Mas adelante veremos como validar nuestros campos de textos.
+
+--------------------------------------------------------
+
+
+- icursor(INDICE)
+
+Nos permite mover el cursor hasta la posición indicada, cuando vimos acerca de los índices vimos a INSERT y mencionamos a 'icursor'. Este método nos permite cambiar a donde deseamos que cambie la posición del cursor y junto a INSERT podemos llevar nuestra aplicación a otro nivel de interacción con el usuario.
+
+% No se ocurre ningún ejemplo así que están invitados a compartir su imaginación
+Un ejemplo simple seria el siguiente
+
+``` >>> entrada.icursor(0)
+
+``` >>> entrada.icursor(END)
+
+Recuerden de haber escrito un texto en el campo y que tenemos a nuestra disposición los índices para indicar la posición del cursor.
+
+--------------------------------------------------------
+
+
+- index(INDICE)
+
+% Dejo este espacio abierto para aquellos que entiendan el funcionamiento de este método
+
+--------------------------------------------------------
+
+
+- insert(INDICE, CADENA)
+
+Permite la inserción de texto. Supongamos que necesitamos insertar una cadena, un numero o un carácter en un campo de texto, para conseguirlo es tan simple como llamar a este método pasándole dos argumentos como parámetros. De los dos argumentos mencionados uno es el índice de donde deseamos insertar el texto y el segundo es la cadena o caracter.
+
+En este ejemplo insertaremos la cadena "GNU/" desde el índice 0
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> campo_de_texto = Tkinter.Entry(root)
+>>> campo_de_texto.pack()
+>>> campo_de_texto.get()
+>>> campo_de_texto.insert(0, "GNU/")
+>>> campo_de_texto.get()
+'GNU/Linux'
+>>> 
+```
+
+--------------------------------------------------------
+
+
+- scan
+
+% Demasiado complejo para mi se aceptan sugerencias y aportes
+--------------------------------------------------------
+
+
+- selection
+
+--------------------------------------------------------
+
+
+- xview
+
+--------------------------------------------------------
+
+
+Con lo que vimos ahora estamos mas cerca de dominar los cuadros de texto, aunque no hay que apresurarnos que nos queda mucho camino por delante.
+
+
+=== Validando un campo de texto ===
+% Referencia: http://effbot.org/zone/Tkinter-entry-validate.htm
+
+Para referencias acerca de textvariable vea la sección "Variables".

@@ -1,45 +1,57 @@
 '''﻿Interfaz gráfica con Tkinter'''
 
-Alejandro Alvarez [contacto@codigopython.com.ar]
+Codigo Python [contacto@codigopython.com.ar]
 
-''Ultima modificación 20-05-2012''
+''Ultima modificación 01-06-2012''
 
-__TOC__
+
+Licencia:
+
+[http://creativecommons.org/licenses/by-sa/3.0/deed.es (img/cc-by-sa.png)]
+
+Este trabajo esta licenciado bajo la licencia de Creative Commons Atribución-CompartirIgual 3.0 Unported. Para ver una copia de esta licencia, visita [http://creativecommons.org/licenses/by-sa/3.0/deed.es http://creativecommons.org/licenses/by-sa/3.0/deed.es] o envía una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+
+Puede descargar la versión más reciente de esta guía gratuitamente en la web
+[https://github.com/eliluminado/Guia-Tkinter https://github.com/eliluminado/Guia-Tkinter]
 
  [[Image:img/Logo_Free_Cultural_Works.png|right]]
 
-Algo muy buscado en Python son las guías sobre interfaces gráficas ya sea PyGTK, PyQT, WxPython o TkInter entre las mas conocidas teniendo cada una sus ventajas y desventajas, así como cada una tiene facilidades y complicaciones en su uso y aplicación. En esta oportunidad les darémos un espacio a TkInter e intentaremos ser lo mas lo mas claro posible sin pasarnos por alto los pequeños detalles en lo que compone la creación de una interfaz gráfica en Python con el [#glosario toolkit] TkInter.
+Algo muy buscado en Python son las guías sobre interfaces gráficas ya sea PyGTK, PyQT, WxPython o TkInter entre las mas conocidas teniendo cada una sus ventajas y desventajas, así como cada una tiene facilidades y complicaciones en su uso y aplicación. En esta oportunidad les daremos un espacio a TkInter e intentaremos ser lo mas lo mas claro posible sin pasarnos por alto los pequeños detalles en lo que compone la creación de una interfaz gráfica en Python con el toolkit Tkinter.
 
-== Introducción ==
+== 1. Índice ==
 
-=== Acerca de Tk ===
+__TOC__
+== 2. Introducción ==
 
-Tkinter es un [http://es.wikipedia.org/wiki/Binding binding] de la biblioteca gráfica Tcl/Tk para el lenguaje de programación Python, con estos queremos decir que Tk se encuentra disponible para varios lenguajes de programacion entre los cuales se encuentra Python con el nombre de Tkinter. Este no es mas que una adaptacion de esta libreria para el lenguaje Python con lo cual usar Tk en otro lenguaje no nos supondra un inconveniente.
+=== 2.1. Acerca de Tk ===
+
+Tkinter es un [http://es.wikipedia.org/wiki/Binding binding] de la biblioteca gráfica Tcl/Tk para el lenguaje de programación Python, con estos queremos decir que Tk se encuentra disponible para varios lenguajes de programación entre los cuales se encuentra Python con el nombre de Tkinter. Este no es mas que una adaptación de esta librería para el lenguaje Python con lo cual usar Tk en otro lenguaje no nos supondrá un inconveniente.
 
 Se considera un estándar para la interfaz gráfica de usuario (GUI) para Python y es el que viene por defecto con la instalación para Microsoft Windows y preinstalado en la mayoría de las distribuciones de GNU/Linux. Con Tkinter podremos conseguir resultados casi tan buenos como con otras librerías gráficas siempre teniendo en cuenta que quizás con otras herramientas podamos realizar trabajos mas complejos donde necesitemos una plataforma mas robusta, pero como herramienta didáctica e interfaces sencillas nos sobrara, dándonos una perspectiva de lo que se trata el desarrollo de una parte muy importante de una aplicación si deseamos distribuirla. Gracias a Tkinter veremos como interactuar con el usuario pidiéndole el ingreso de datos, capturando la pulsación de teclas, movimientos del mouse, entre algunas de las cosas que podremos lograr.
 
-==== Virtudes y limitaciones ====
+==== 2.1.1. Historia ====
 
-=== Que es una interfaz grafica ===
+==== 2.1.2. Virtudes y limitaciones ====
 
-=== Instalando Tkinter ===
+=== 2.2. Que es una interfaz grafica ===
 
-==== Linux ====
+=== 2.3. Instalando Tkinter ===
 
-==== Windows ====
+==== 2.3.1. Linux ====
 
-==== Mac ====
+==== 2.3.2. Windows ====
 
-=== Sobre esta guía ===
+==== 2.3.3. Mac ====
 
-Dejo algunas observaciones sobre el tutorial, a lo largo de este es posible que haga alusión a funciones o características de distribuciones GNU/Linux ya que es el sistema operativo que estoy utilizando durante el desarrollo de esta guía, aunque esto no influye en el objetivo ya que Python es multiplataforma al igual que TkInter.
-Para los que deseen colaborar con esta guía así como en su contenido, pueden hacerlo registrándose en el [http://foro.codigopython.com.ar/ Foro] o desde su repositorio en GitHub [https://github.com/eliluminado/Guia-Tkinter Repositorio GIT]
+=== 2.4. Sobre esta guía ===
 
-== Empezando por lo básico ==
+Para los que deseen colaborar con esta guía así como en su contenido, pueden hacerlo registrándose en el [http://foro.codigopython.com.ar/ Foro] o desde su repositorio en GitHub [https://github.com/eliluminado/Guia-Tkinter https://github.com/eliluminado/Guia-Tkinter]
+
+== 3. Empezando por lo básico ==
 
 Lo primero que debemos hacer al igual que con otros módulos, es que debemos importarlo para poder comenzar a utilizarlo, y al igual que con otros módulos no hay una sola forma de hacerlo.
 
-La primera forma:
+La primer forma (y la mas popular):
 
 <pre>
 from Tkinter import *
@@ -52,9 +64,9 @@ import Tkinter
 </pre>
 
 ; '''NOTA'''
-: En las versiones 3.x de Python el modulo Tk se debe llamar de esta forma ''"from tkinter import *"'' y no de esta forma ''"from Tkinter import *"'' es un cambio menor que hay que tener en cuenta si están trabajando con Python 3.
+: En las versiones 3.x de Python el modulo Tk se debe llamar de esta forma ''"from Tkinter import *"'' y no de esta otra forma ''"from Tkinter import *"'', es un cambio menor que hay que tener en cuenta si están trabajando con Python 3.
 
-La diferencia entre usar la primera o la segunda forma es la misma con la que nos podemos topar a la hora de importar un modulo en Python, para verlo les muestro esta diferencia utilizando al modulo '''time''' y para hacerlo usamos el siguiente ejemplo:
+La diferencia entre usar la primera o la segunda forma es la misma con la que nos podemos encontrar a la hora de importar un modulo en Python, para verlo les muestro esta diferencia utilizando al modulo '''time''' y usamos el siguiente ejemplo:
 
 <pre>
 import time
@@ -66,11 +78,11 @@ from time import sleep
 sleep(10)
 </pre>
 
-Usando la forma ''"import Tkinter"'' cada vez que utilicemos una función de este modulo tendremos que anteponer la palabra '''Tkinter''', en cambio usando la segunda forma ''"from Tkinter import *"'' simplemente deberemos usar el nombre de la función sin el nombre del modulo. Hay otras formas pero dependerá de tu forma de trabajar o la que te resulte mas cómoda, en todo caso puedes darle un vistazo a esta traducción de la guía de estilo escrita por [http://mundogeek.net/traducciones/guia-estilo-python.htm Guido van Rossum y Barry Warsaw]
+Usando la forma ''"import Tkinter"'' cada vez que utilicemos una función de este modulo tendremos que anteponer la palabra '''Tkinter''', en cambio usando la segunda forma ''"from Tkinter import *"'' simplemente deberemos usar el nombre de la función sin el nombre del modulo. Hay otras formas pero dependerá de tu forma de trabajar o la que te resulte mas cómoda, en todo caso puedes darle un vistazo a esta traducción de la guía de estilo escrita por Guido van Rossum y Barry Warsaw [http://mundogeek.net/traducciones/guia-estilo-python.htm http://mundogeek.net/traducciones/guia-estilo-python.htm]
 
-Por ahora a modo didactico usaremos la segunda forma para que los ejemplos sean mas claros, pero esto queda a su decisión. Ahora si retomemos nuestro camino.
+Por ahora a modo didactico usaremos la segunda forma para que los ejemplos sean mas claros, pero esto queda a tu eleccion. Ahora si retomemos nuestro camino.
 
-Una observación que tendremos que tener antes de continuar es no debemos pasa por alto la posibilidad de que el usuario no tenga instalado las librerías de TkInter y en consecuencia nuestra aplicación no podrá funcionar, lo mejor en este caso como en muchos otros es anticiparnos a los posibles errores que puedan ir surgiendo y manejar las excepciones de la siguiente forma:
+Una observación que tendremos que tener antes de continuar es no debemos pasa por alto la posibilidad de que el usuario no tenga instalado las librerías de Tkinter y en consecuencia nuestra aplicación no podrá funcionar, lo mejor en este caso como en muchos otros es anticiparnos a los posibles errores que puedan ir surgiendo y manejar las excepciones de la siguiente forma:
 
 <pre>
 try:
@@ -81,7 +93,7 @@ except ImportError:
 
 De esta forma en caso de que el potencial usuario de nuestra preciada aplicación no puede ejecutarla pueda saber cual es motivo (en este caso es que no tenga instalado Tkinter) por el cual no pudo iniciarla.
 
-Una vez importado el modulo 'Tkinter' correctamente podemos utilizarlo para crear nuestra primera ventana de la siguiente forma:
+Una vez importado el modulo Tkinter correctamente podemos utilizarlo para crear nuestra primera ventana de la siguiente forma:
 
 <pre>
 import Tkinter
@@ -90,18 +102,19 @@ root = Tkinter.Tk()
 root.mainloop()
 </pre>
 
-Estas lineas son fundamentales, ya que dentro de ellas ira gran parte del contenido así como la interfaz como pueden ser botones y menús, etc.. En la primera linea (No tengamos en cuenta la importacion) se crea un identificador que sera el que utilizaremos para referirnos a la ventana, en este caso lo llamamos 'root' y es una de las funciones mas importantes de Tkinter. Siempre que iniciamos un identificador que en este caso lo llamamos 'root' debemos cerrarlo para capturar como veremos mas adelante eventos.
+Estas lineas son fundamentales, ya que de ellas dependerá gran parte del contenido así como pueden ser botones y menús, aunque mas adelante conforme vayamos viendo temas mas avanzados podremos hacer uso de otras herramientas y técnicas. 
+En la primera linea (No tengamos en cuenta la importación) se crea un identificador que sera el que utilizaremos para referirnos a la ventana, en este caso lo llamamos 'root' y es una de las funciones mas importantes de Tkinter. Siempre que iniciamos un identificador que en este caso lo llamamos 'root' debemos cerrarlo para capturar como veremos mas adelante los eventos.
 
 ; '''NOTA'''
 : La variable 'root' usada para nombrar al identificador puede ser reemplazada por cualquier otro nombre siempre y cuando se respeten las palabras reservadas de Python, aunque es muy utilizado usar el nombre 'root' para la ventana principal y puede ser una buena practica para que resulte mas familiar a los demás programadores que se quieran unir al desarrollo de nuestra aplicación.
 
-Con esto ya tendremos una ventana vacía que nos servirá para comenzar a trabajar, a partir de ahora iremos ampliando el contenido mostrando los distintos [#glosario widgets] con los que contamos en TkInter y luego para finalizar crearemos un ejemplo sencillo para unir lo se vio a lo largo de este material.
+Con esto ya tendremos una ventana vacía que nos servirá para comenzar a trabajar, a partir de ahora iremos ampliando el contenido mostrando los distintos widgets con los que contamos en Tkinter y luego para finalizar crearemos un ejemplo sencillo para unir lo se vio a lo largo de este material.
 
-== Widgets ==
+== 4. Widgets ==
 
-En esta sección no nos centraremos en el posicionamiento y diseño de los elementos que compondrán nuestra interfaz gráfica lo dejaremos para la siguiente sección [#gestion "Gestión del diseño"] en donde se vera mas detenidamente este asunto.
+En esta sección no nos centraremos en el posicionamiento y diseño de los elementos que compondrán nuestra interfaz gráfica, lo dejaremos para la siguiente sección [[#gestion|"Gestión del diseño"]] en donde se vera mas detenidamente este asunto.
 
-=== Etiquetas [Label] ===
+=== 4.1. Etiquetas [Label] ===
 
 Para comenzar a llenar esa vacía ventana que acabamos de crear vamos a nombrar a las etiquetas o mas conocidas como '''label''' por su nombre en ingles, las podemos encontrar desde interfaces gráficas hasta en formularios en HTML y son sumamente útiles en la construcción de interfaces y formularios, al igual que cuando creamos nuestra ventana vacía declarándola de la siguiente forma ''"root = Tkinter.Tk()"'' tendremos que hacerlo con nuestra etiqueta, para esto necesitamos escoger un nombre en mi caso escogeré '''"etiqueta"''' para declararla y deberemos llamar al widget "Label" en vez de la función "Tk" como habíamos hecho anteriormente, como para orientarnos con lo ya visto quedando por ahora algo así:
 
@@ -109,7 +122,7 @@ Para comenzar a llenar esa vacía ventana que acabamos de crear vamos a nombrar 
 etiqueta = Tkinter.Label()
 </pre>
 
-Una vez creada la estructura básica de la etiqueta tendremos que llenar esa paréntesis, primero tendremos que indicar a donde pertenece ese 'label' indicando el identificador de la ventana que en nuestro caso es 'root', separado por una coma escribiremos lo siguiente '''text=''' en donde seguido del signo igual incluiremos el texto que deseamos que incluya la etiqueta, la cual puede ser un texto (que tendremos que encerrar entre comillas al igual que cuando usamos la sentencia print) o una variable que contenga al texto. Para verlo un poco mas claro juntemos todo en dos ejemplos, uno donde muestre un texto fijo que le indiquemos a la etiqueta y otro usando una variable
+Una vez creada la estructura básica de la etiqueta, tendremos que llenar esa paréntesis. Primero tendremos que indicar a donde pertenece ese 'label' indicando el identificador de la ventana que en nuestro caso es 'root', separado por una coma escribiremos lo siguiente '''text=''' en donde seguido del signo igual incluiremos el texto que deseamos que incluya la etiqueta, la cual puede ser un texto (que tendremos que encerrar entre comillas al igual que cuando usamos la sentencia print) o una variable que contenga al texto. Para verlo un poco mas claro juntemos todo en dos ejemplos, uno donde muestre un texto fijo que le indiquemos a la etiqueta y otro usando una variable
 
 * '''Ejemplo numero 1''':
 <pre>
@@ -125,13 +138,15 @@ etiqueta_2 = Tkinter.Label(root, text=texto)
 </pre>
 
 
-Expliquemos los dos ejemplos, en el primero usamos un texto fijo no dinámico para utilizar como valor de la etiqueta en cambio en el segundo estamos usando una variable en donde su valor varia dependiendo de la salida que tenga la función '''getpass.getuser()''' que obtiene el nombre de usuario que tengamos en nuestra PC, como podemos observar su funcionamiento no varia mucho de lo que nos tiene acostumbrados Python, así que manejarnos con Tkinter es solamente aprendernos un par de nombres de sus widgets como para poder empezar a utilizarlo, el resto sigue siendo codigo Python.
+Expliquemos los dos ejemplos, en el primero usamos un texto fijo no dinámico para utilizar como valor de la etiqueta en cambio en el segundo estamos usando una variable en donde su valor varia dependiendo de la salida que obtengamos al ejecutar '''getpass.getuser()''' que obtiene el nombre de usuario que tengamos en nuestra PC, como podemos observar su funcionamiento no varia mucho de lo que nos tiene acostumbrados Python, así que manejarnos con Tkinter es solamente aprendernos un par de nombres de sus widgets como para poder empezar a utilizarlo, el resto sigue siendo codigo Python.
 
-Pero (siempre hay un pero) antes de poder ejecutar este ejemplo en nuestra consola tendremos que declarar este widget en nuestra ventana dándole una ubicación en la misma, sino hacemos esto nuestra etiqueta simplemente no aparecerá en nuestra ventana. Para hacerlo tenemos dos formas (Esto se vera mas detenidamente mas adelante) una es usando ''''pack'''' y la otra '''' grid''''. Como esto se vera mas adelante haré una breve síntesis de los dos:
+Pero (siempre hay un pero) antes de poder ejecutar este ejemplo en nuestra consola tendremos que declarar este widget en nuestra ventana dándole una ubicación en la misma, sino hacemos esto nuestra etiqueta simplemente no aparecerá en nuestra ventana. Para hacerlo tenemos tres formas (Esto se vera mas detenidamente mas adelante) una es usando ''''pack'''' y las otras dos son ''''grid'''' y ''''place''''. Como esto se vera mas adelante haré una breve síntesis de las tres opciones que tenemos:
 
-* 'pack': [TODO]
+* 'pack': 
 
-* 'grid': [TODO]
+* 'grid': 
+
+* 'place: 
 
 Como en este ejemplo solo colocaremos una etiqueta no es necesario recurrir al uso de 'grid' para posicionarlo, así que usaremos 'pack' en su lugar. Pero lo mas importante es saber como se declara esta etiqueta en nuestra ventana y poder ver nuestro primer widget en funcionamiento, para lograr esto deberemos usar la siguiente forma:
 
@@ -150,22 +165,22 @@ Como se puede observar esta otra forma debimos indicarle dos parámetros que sir
 Si ahora escribiéramos todo lo que vimos en nuestra consola tendríamos que ver nuestra primera etiqueta en funcionamiento, contenido dentro de una ventana quedando todo el código como el siguiente:
 
 <pre>
->>> import Tkinter
->>> root = Tkinter.Tk()
->>> etiqueta = Tkinter.Label(root, text="Codigo Python")
->>> etiqueta.pack()
->>> root.mainloop()
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; etiqueta = Tkinter.Label(root, text="Codigo Python")
+&gt;&gt;&gt; etiqueta.pack()
+&gt;&gt;&gt; root.mainloop()
 </pre>
 
 Y así es como quedara nuestro ejemplo terminado:
 
-[[Image:img/ejemplo_Label.png|center]]
+[[Image:widgets/img/Label/Label-01.jpg|center]]
 
 Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer widget y podemos seguir con el proximo.
 
-=== Botones [Button] ===
+=== 4.2. Botones [Button] ===
 
-Los botones pueden contener texto o imágenes y se les puede asociar funciones o métodos, que al hacer clic sobre ellos Tkinter se encargara de llamar automáticamente a ese método o función y se ejecutara el código Python contenido dentro de ellos.
+Los botones pueden contener texto o imágenes y se les puede asociar funciones o métodos, que al hacer clic sobre ellos Tkinter se encargara de llamar automáticamente a ese método o función y ejecutara el código Python contenido dentro de ellos.
 
 Un detalle es que solo puede utilizarse un tipo de fuente, pero ese texto puede ocupar varias lineas en caso de ser necesario. Además se puede subrayar el texto, un carácter o letra en particular, algo que es muy común cuando se desea decirle al usuario sobre la existencia de un atajo con el teclado.
 
@@ -176,29 +191,29 @@ def función():
     print "Excelente"
 </pre>
 
-Con esas dos lineas nos va a servir para demostrar su funcionamiento, ahora si vamos con el botón.
+Con esas dos lineas nos va a servir para demostrar su funcionamiento, ahora si vamos por el botón.
 
 A continuación les muestro el código con el cual vamos a trabajar:
 
 <pre>
 import Tkinter
 
-def función():
+def funcion():
    print "Excelente"
 
 root = Tkinter.Tk()
-boton = Tkinter.Button(root, text="Que te parece la guía?", command=función)
+boton = Tkinter.Button(root, text="Que te parece la guía?", command=funcion)
 boton.pack()
 root.mainloop()
 </pre>
 
-En el se observa la ya conocida importación del modulo Tkinter, la función que ya habíamos declarado y la creación del botón. Como se puede ver la creación de un botón básico es muy similar al de una etiqueta pero se incluye un parámetro mas que nos dará la posibilidad de especificar dentro de el la función que utilizaremos; el parámetro mencionado es ''''command'''' y en ella podemos llamar a funciones o métodos, en este caso llamamos a la función 'función' que va a imprimir en la consola la palabra '''Excelente'''.
+En el se observa la ya conocida importación del modulo Tkinter, la función que ya habíamos declarado y la creación del botón. Como se puede ver la creación de un botón básico es muy similar al de una etiqueta pero se incluye un parámetro mas que nos dará la posibilidad de especificar dentro de el la función que utilizaremos; el parámetro mencionado es ''''command'''' y en el podemos llamar a funciones o métodos, en este caso llamamos a la función 'función' que va a imprimir en la consola la palabra '''Excelente'''.
 
-[[Image:img/ejemplo_Button.png|center]]
+[[Image:widgets/img/Button/Button-01.jpg|center]]
 
-[[Image:img/ejemplo_Button02.png|center]]
+[[Image:widgets/img/Button/Button-02.jpg|center]]
 
-=== Cuadro de texto [Entry] ===
+=== 4.3. Cuadro de texto [Entry] ===
 
 Este widget nos permite tanto mostrarle información al usuario como también obtenerla de su parte, dotando a nuestra ventana de un widget muy poderoso y útil, siendo el primero de los widgets mencionados que nos posibilitara la interacción del usuario solicitando la entrada de datos. Como venimos haciendo en esta guía se mostraran algunos conceptos básicos que te permitirán empezar a utilizarlo, pero luego en la sección 'Opciones' se detallan las opciones que tienen disponibles al crear un cuadro de texto.
 
@@ -208,25 +223,25 @@ Para empezar a utilizar nuestro elemento 'Entry' podemos primero declarar una va
 
 Por esto veremos primero un uso mas básico para luego entrar mas en detalle e incorporar estas variables a nuestro repertorio.
 
-La forma que se declara un cuadro de texto es muy simple:
+La forma en que se declara un cuadro de texto es muy simple:
 
 campo_de_texto = Tkinter.Entry(root)
 
 Esa es su forma mas básica en donde como se observa no se llama a ninguna de las opciones que tenemos disponibles, antes de ver los métodos que podemos llamar para hacer uso de este widget veamos un ejemplo de su uso
 
 <pre>
->>> import Tkinter
->>> root = Tkinter.Tk()
->>> campo_de_texto = Tkinter.Entry(root)
->>> campo_de_texto.pack()
->>> campo_de_texto.get()
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; campo_de_texto.get()
 ''
->>>
+&gt;&gt;&gt;
 </pre>
 
-[[Image:img/ejemplo_Entry.png|center]]
+[[Image:widgets/img/Entry/Entry-01.jpg|center]]
 
-Si escribiéramos un texto en el cuadro y escribiéramos en la consola lo siguiente
+Si escribiéramos un texto en el cuadro y escribimos en la consola lo siguiente
 
 <pre>
 campo_de_texto.get()
@@ -235,29 +250,29 @@ campo_de_texto.get()
 estaríamos usando el método 'get' del widget Entry que nos permite obtener el texto que contenga el cuadro de texto, como podemos observar en el siguiente ejemplo
 
 <pre>
->>> import Tkinter
->>> root = Tkinter.Tk()
->>> campo_de_texto = Tkinter.Entry(root)
->>> campo_de_texto.pack()
->>> # En este caso escribi "CodigoPython.com.ar"
->>> campo_de_texto.get()
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; # En este caso escribi "CodigoPython.com.ar"
+&gt;&gt;&gt; campo_de_texto.get()
 'CodigoPython.com.ar'
->>>
+&gt;&gt;&gt;
 </pre>
 
-[[Image:img/ejemplo_Entry02.png|center]]
+[[Image:widgets/img/Entry/Entry-02.jpg|center]]
 
-Seguramente ese cuadrado en nuestra ventana de poco serviría si no pudiésemos interactuar con este. A continuación veremos los métodos a lo podemos llamar para trabajar con este widget.
+Seguramente ese rectángulo en nuestra ventana de poco serviría si no pudiésemos interactuar con este. A continuación veremos los métodos a lo podemos llamar para trabajar con este widget.
 
 Una observación que se debe hacer, es que para escribir varias lineas de texto se debe utilizar el widget 'Text' que esta pensado para esto, que sera visto mas adelante.
 
-==== Índices ====
+==== 4.3.1. Índices ====
 
-Un concepto que hay que tener en cuenta antes de entrar con algunos métodos disponibles para 'Entry' son los índices, estos nos facilitan el insertado y eliminado de caracteres, entre otras cosas, estableciendo desde y hasta donde deseamos por ejemplo borrar o insertar texto en el cuadro de texto. Para conseguir esto contamos con varias formas que las iremos viendo de a una para luego verlas dentro de los métodos que las soportan y ya con unos ejemplos para afianzar los conocimientos.
+Un concepto que hay que tener en cuenta antes de empezar a utilizar algunos métodos disponibles para 'Entry' son los índices, estos nos facilitan el insertado y eliminado de caracteres entre otras cosas, estableciendo desde y hasta donde deseamos por ejemplo borrar o insertar texto en el cuadro de texto. Para conseguir esto contamos con varias formas que las iremos viendo de a una para luego verlas dentro de los métodos que las soportan y ya con unos ejemplos para afianzar los conocimientos.
 
 ; Índices numéricos
 : 
-: Estos funcionan como los índices de las listas de Python así que su aplicación no debería ser complicada, el primer carácter comenzara a contar desde 0 en adelante. Para mas referencia repase los conceptos básicos de listas en Python.
+: Estos funcionan como los índices de las listas de Python así que su aplicación no debería ser complicada, el primer carácter comenzara a contar desde 0 en adelante. Para mas referencia repase los conceptos básicos de listas y tuplas en Python.
 
 ; ANCHOR
 : 
@@ -266,7 +281,7 @@ Un concepto que hay que tener en cuenta antes de entrar con algunos métodos dis
 
 ; END
 : 
-: También podemos marcar desde un determinado carácter hasta el ultimo sin conocer la cantidad de caracteres que componen a ese campo de texto, esto es gracias a 'END' que haría de comodín para manejarnos de una forma mas sencilla. El uso de los índices (0,  END) equivaldría a seleccionar todo el texto disponible
+: También podemos marcar desde un determinado carácter hasta el ultimo sin conocer la cantidad de caracteres que componen a ese campo de texto, esto es gracias a 'END' que haría de comodín para manejarnos de una forma mas sencilla. El uso de los índices (0,  END) equivaldría a seleccionar todo el texto disponible.
 
 ; INSERT
 : 
@@ -284,7 +299,9 @@ Un concepto que hay que tener en cuenta antes de entrar con algunos métodos dis
 : 
 : Donde 'x' es un valor en píxeles con respecto al borde izquierdo del campo de texto. Por ejemplo '@0' indica el carácter mas a la izquierda del campo del texto.
 
-==== Métodos ====
+==== 4.3.2. Métodos ====
+
+Como habíamos comentando cuando estábamos viendo el widget Entry, dijimos que existían métodos que nos permitían trabajar con este, los cuales iremos viendo a continuación.
 
 * delete(INICIO, FIN)
 
@@ -292,39 +309,47 @@ Elimina uno o mas elementos del campo de texto, este método recibe dos argument
 
 '0123456789'
 
-del 0 al 5, los índices que le deberíamos de dar serian (0, 6). Esto no es nada nuevo a lo ya venimos viendo en este lenguaje de programación.
+de los caracteres del 0 al 5, los índices que le deberíamos de dar serian (0, 6). Esto no es nada nuevo a lo ya venimos viendo en este lenguaje de programación.
 
 También podemos pasarle un solo argumento para borrar un solo carácter, veamos estos dos a través de unos ejemplos.
 
 Con un solo argumento:
 
 <pre>
->>> import Tkinter
->>> root = Tkinter.Tk()
->>> campo_de_texto = Tkinter.Entry(root)
->>> campo_de_texto.pack()
->>>
->>> campo_de_texto.delete(2)
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; campo_de_texto.get()
+'CodigoPython.com.ar'
+&gt;&gt;&gt; campo_de_texto.delete(0)
+&gt;&gt;&gt; campo_de_texto.get()
+'odigoPython.com.ar'
+&gt;&gt;&gt; 
+
 </pre>
 
-
-[[Image:img/ejemplo_Entry_delete01.png|center]]
+[[Image:widgets/img/Entry/Entry-03.jpg|center]]
 
 Con dos argumentos:
 
 <pre>
->>> import Tkinter
->>> root = Tkinter.Tk()
->>> campo_de_texto = Tkinter.Entry(root)
->>> campo_de_texto.pack()
->>>
->>> campo_de_texto.delete(0, 5)
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; campo_de_texto.get()
+'CodigoPython.com.ar'
+&gt;&gt;&gt; campo_de_texto.delete(12, 19)
+&gt;&gt;&gt; campo_de_texto.get()
+'CodigoPython'
+&gt;&gt;&gt; 
 </pre>
 
 
-[[Image:img/ejemplo_Entry_delete02.png|center]]
+[[Image:widgets/img/Entry/Entry-04.jpg|center]]
 
-Otra opción que tenemos es borrar desde un inicio fijado por nosotros hasta el final del texto disponible en el campo de texto gracias a un índice que nos da Tkinter que es 'END', con esta podemos de la siguiente forma borrar desde el inicio hasta el final sin necesitar cuantos caracteres componen el texto contenido en el widget
+Otra opción que tenemos es borrar desde un inicio fijado por nosotros hasta el final del texto disponible en el campo de texto gracias a un índice que nos da Tkinter que es 'END', con este podemos de la siguiente forma borrar desde el inicio hasta el final sin necesitar conocer cuantos caracteres componen el texto contenido en el widget
 
 <pre>
 campo_de_texto.delete(0, END)
@@ -345,42 +370,42 @@ También podemos utilizar los índices ya vistos en la sección 'Índices'.
 
 * get()
 
-Obtiene el contenido del campo de texto, algo muy necesario para nosotros es poder obtener el texto contenido dentro del campo de texto. Para conseguir esto podemos hacernos del método 'get' que nos lo permitirá, este nos retornara el texto como una cadena. Veamos con un ejemplo escribiendo cualquier texto y usamos el método 'get'
+Obtiene el contenido del campo de texto. Algo muy necesario para nosotros es poder obtener el texto contenido dentro del campo de texto, para conseguir esto podemos hacernos del método 'get' que nos lo permitirá, este nos retornara el texto como una cadena. Veamos con un ejemplo escribiendo cualquier texto y usamos el método 'get'
 
 <pre>
->>> import Tkinter
->>> root = Tkinter.Tk()
->>> campo_de_texto = Tkinter.Entry(root)
->>> campo_de_texto.pack()
->>> # Ahora deben escribir el texto
->>> # en el campo de texto
->>> campo_de_texto.get()
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; # Ahora deben escribir el texto
+&gt;&gt;&gt; # en el campo de texto
+&gt;&gt;&gt; campo_de_texto.get()
 'No se olviden de visitar http://www.codigopython.com.ar/'
->>>
+&gt;&gt;&gt;
 </pre>
 
 
 El valor que nos retorne siempre sera como una cadena y es muy simple comprobarlo, coloquemos un texto en nuestro campo de texto, en mi caso escribiré la cadena 'Aguante Python' y almacenemos su valor en una variable para luego analizarla con la función 'type' de Python
 
 <pre>
->>> var = campo_de_texto.get()
->>> var
+&gt;&gt;&gt; var = campo_de_texto.get()
+&gt;&gt;&gt; var
 'Aguante Python'
->>> type(var)
-<type 'str'>
->>>
+&gt;&gt;&gt; type(var)
+&lt;type 'str'&gt;
+&gt;&gt;&gt;
 </pre>
 
 
 Si lo hacemos usando solo números en el campo de texto obtendremos el mismo resultado
 
 <pre>
->>> var = campo_de_texto.get()
->>> var
+&gt;&gt;&gt; var = campo_de_texto.get()
+&gt;&gt;&gt; var
 '0123456789'
->>> type(var)
-<type 'str'>
->>>
+&gt;&gt;&gt; type(var)
+&lt;type 'str'&gt;
+&gt;&gt;&gt;
 </pre>
 
 
@@ -389,38 +414,49 @@ Mas adelante veremos como validar nuestros campos de textos.
 
 ----
 
-* icursor(índice)
+* icursor(INDICE)
 
 Nos permite mover el cursor hasta la posición indicada, cuando vimos acerca de los índices vimos a INSERT y mencionamos a 'icursor'. Este método nos permite cambiar a donde deseamos que cambie la posición del cursor y junto a INSERT podemos llevar nuestra aplicación a otro nivel de interacción con el usuario.
 
 Un ejemplo simple seria el siguiente
 
 <pre>
->>> entrada.icursor(0)
+&gt;&gt;&gt; entrada.icursor(0)
 </pre>
 
 
 <pre>
->>> entrada.icursor(END)
+&gt;&gt;&gt; entrada.icursor(END)
 </pre>
 
 
-Recuerden de haber escrito un texto en el campo y que tenemos a nuestra disposición usar los índices para indicar la posición del cursor.
+Recuerden de haber escrito un texto en el campo y que tenemos a nuestra disposición los índices para indicar la posición del cursor.
 
 
 ----
 
-* index(índice)
+* index(INDICE)
 
 ----
 
-* insert(índice, cadena)
+* insert(INDICE, CADENA)
 
-Permite la inserción de texto, supongamos que necesitamos insertar una cadena, un numero o un carácter en un campo de texto para conseguirlo es tan simple como llamar a este método pasándole dos argumentos como parámetros. De los dos argumentos mencionados uno es el índice de donde deseamos insertar el texto y el segundo es la cadena.
+Permite la inserción de texto. Supongamos que necesitamos insertar una cadena, un numero o un carácter en un campo de texto, para conseguirlo es tan simple como llamar a este método pasándole dos argumentos como parámetros. De los dos argumentos mencionados uno es el índice de donde deseamos insertar el texto y el segundo es la cadena o caracter.
 
-En este ejemplo insertaremos el carácter arroba en donde se encuentre el cursor usando el índice 'INSERT'
+En este ejemplo insertaremos la cadena "GNU/" desde el índice 0
 
->>> entrada.insert(INSERT, "@")
+<pre>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; campo_de_texto.get()
+&gt;&gt;&gt; campo_de_texto.insert(0, "GNU/")
+&gt;&gt;&gt; campo_de_texto.get()
+'GNU/Linux'
+&gt;&gt;&gt; 
+</pre>
+
 
 
 ----
@@ -440,21 +476,19 @@ En este ejemplo insertaremos el carácter arroba en donde se encuentre el cursor
 
 ----
 
-==== Validando un campo de texto ====
+Con lo que vimos ahora estamos mas cerca de dominar los cuadros de texto, aunque no hay que apresurarnos que nos queda mucho camino por delante.
 
-Acá es donde se muestra una de las opciones que disponemos en varios widgets y es 'textvariable' que tomara como valor la variable del tipo StringVar que habíamos mencionado en 'Entry', esta nos permitirá trabajar con varios métodos en 'Entry' que se los ire mostrando y los iremos viendo con ejemplos.
+==== 4.3.3. Validando un campo de texto ====
 
-Tengan en cuenta que StringVar no forma parte de Python sino de Tkinter así que la importación de este es fundamental para poder utilizarlo, aunque para algunos resulte una obviedad nunca esta de mas remarcarlo ya que si utilizamos la forma 'from Tkinter import *' estos detalles no se observan y pueden generar confusión cuando se ven los ejemplos.
+Para referencias acerca de textvariable vea la sección "Variables".
 
-Como habiamos mencionado contamos con cuatro clases de variables con Tkinter las cuales son BooleanVar, DoubleVar, IntVar y StringVar, esta ultima suele ser la mas vista y utilizada en los tutoriales disponibles en internet
-
-=== Opciones ===
+=== 4.4. Opciones ===
 
 Muchos de los widgets que utilizamos y vimos hasta ahora cuentan con opciones, con el fin de no repetir la descripcion de cada uno de ellos seran vistos uno a uno en esta seccion.
 
 NOTA:
 
-Para mas informacion sobre los colores visite la seccion "Colores" que se ve en [#colores "Gestion del diseño"]
+Para mas informacion sobre los colores visite la seccion "Colores" que se ve en [[#colores|"Gestion del diseño"]]
 
 ----
 
@@ -462,108 +496,114 @@ anchor
 
 Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen con respecto al widget en el que se encuentra. La opcion por defecto es 'CENTER' que muestra el elemento centrado.
 
-{| align="center" border="1" cellpadding="4"
+{| align="center" border="1"
 |-
-| NW || N || NE
+| NW
+| align="center" | N
+| align="right" | NE
 |-
-| W || CENTER || E
+| W
+| align="center" | CENTER
+| align="right" | E
 |-
-| SW || S || SE
+| SW
+| align="center" | S
+| align="right" | SE
 |}
 
 * Posiciona el texto/imagen en la esquina superior izquierda del widget
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=NW)
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="nw")
 </pre>
 
 
-[[Image:img/ejemplo_option_anchorNW.png|center]]
+[[Image:widgets/img/opciones/anchor/anchor_nw.jpg|center]]
 
 * Posiciona el texto/imagen en la parte superior del widget
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=N)
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="n")
 </pre>
 
 
-[[Image:img/ejemplo_option_anchorN.png|center]]
+[[Image:widgets/img/opciones/anchor/anchor_n.jpg|center]]
 
 * Posiciona el texto/imagen en la esquina superior derecha del widget
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=NE)
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="ne")
 </pre>
 
 
-[[Image:img/ejemplo_option_anchorNE.png|center]]
+[[Image:widgets/img/opciones/anchor/anchor_ne.jpg|center]]
 
 * Posiciona el texto/imagen en la parte izquierda del widget
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=W)
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="w")
 </pre>
 
 
-[[Image:img/ejemplo_option_anchorW.png|center]]
+[[Image:widgets/img/opciones/anchor/anchor_w.jpg|center]]
 
 * Posiciona el texto/imagen en el centro del widget
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=CENTER)
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="center")
 </pre>
 
 
-[[Image:img/ejemplo_option_anchorCENTER.png|center]]
+[[Image:widgets/img/opciones/anchor/anchor_center.jpg|center]]
 
 * Posiciona el texto/imagen en la parte derecha del widget
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=E)
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="e")
 </pre>
 
 
-[[Image:img/ejemplo_option_anchorE.png|center]]
+[[Image:widgets/img/opciones/anchor/anchor_e.jpg|center]]
 
 * Posiciona el texto/imagen en la esquina inferior izquierda del widget
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=SW)
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="sw")
 </pre>
 
 
-[[Image:img/ejemplo_option_anchorSW.png|center]]
+[[Image:widgets/img/opciones/anchor/anchor_sw.jpg|center]]
 
 * Posiciona el texto/imagen en la parte inferior del widget
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=S)
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="s")
 </pre>
 
 
-[[Image:img/ejemplo_option_anchorS.png|center]]
+[[Image:widgets/img/opciones/anchor/anchor_s.jpg|center]]
 
 * Posiciona el texto/imagen en la esquina inferior derecha del widget
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor=SE)
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="se")
 </pre>
 
 
-[[Image:img/ejemplo_option_anchorSE.png|center]]
+[[Image:widgets/img/opciones/anchor/anchor_se.jpg|center]]
 
 
 ----
 
 activebackground
 
-Con esta opcion podemos indicar que color se debera utilizar cuando el cursor del mouse se posicione sobre el widget.
+Con esta opcion podemos indicar que color de fondo se debera utilizar cuando el cursor del mouse se posicione sobre el widget, Para algunos elementos y en algunas plataformas solo sera visible cuando se hace click sobre el.
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
 </pre>
 
-[[Image:img/ejemplo_option_activebackground.png|center]]
+[[Image:widgets/img/opciones/activebackground.jpg|center]]
 
 ----
 
@@ -572,26 +612,26 @@ activeforeground
 Al igual que pasa con 'activebackground' con esta otra opcion podemos especificar el color en este caso de la fuente del widget cuando se posiciona el cursor sobre este.
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
 </pre>
 
-[[Image:img/ejemplo_option_activeforeground.png|center]]
+[[Image:widgets/img/opciones/activeforeground.jpg|center]]
 
 ----
 
 background (bg)
 
-Sirve para indicar el color de fondo que tendra en area del widget cuando este se encuentre inactivo. Tambien se puede utilizar su abreviatura 'bg' como podemos ver en el segundo ejemplo.
+Sirve para indicar el color de fondo que tendra en area del widget cuando este se encuentre inactivo. Tambien se puede utilizar su forma abreviada 'bg' como podemos ver en el segundo ejemplo.
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, background="#38EB5C")
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, background="#38EB5C")
 </pre>
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, bg="#38EB5C")
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, bg="#38EB5C")
 </pre>
 
-[[Image:img/ejemplo_option_background.png|center]]
+[[Image:widgets/img/opciones/background.jpg|center]]
 
 ----
 
@@ -604,14 +644,14 @@ borderwidth (bd)
 Nos da la posibilidad de especificar el ancho del borde del elemento con el que estemos trabajando, Tkinter nos permite especificar el valor en varias unidades de medida (centimetros, pulgadas, milimetros y puntos) las cuales seran vistas mas adelante en la guia. Si no se utiliza junto con la opcion 'relief' visualmente es similar a utilizar las opciones 'heigth' y 'width' como se puede observar en el ejemplo. El valor por defecto es de 2 pixeles.
 
 <pre>
-etiqueta = Label(root, text="Hola Mundo!!!", borderwidth=15)
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", borderwidth=15)
 </pre>
 
 <pre>
-etiqueta = Label(root, text="Hola Mundo!!!", bd=15)
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", bd=15)
 </pre>
 
-[[Image:img/ejemplo_option_borderwidth.png|center]]
+[[Image:widgets/img/opciones/borderwidth.jpg|center]]
 
 ----
 
@@ -623,10 +663,10 @@ Como ya lo mencionamos cuando vimos al widget Button este permite indicar la fun
 def funcion():
     print "Excelente"
 
-boton = Button(root, text="Que te parece la guia?", command=funcion)
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion)
 </pre>
 
-[[Image:img/ejemplo_Button02.png|center]]
+[[Image:widgets/img/Button/Button-01.jpg|center]]
 
 ----
 
@@ -634,12 +674,14 @@ cursor
 
 Nos da la posiblidad de indicar que cursor queremos que se muestre cuando el mouse se posiciona sobre la etiqueta.
 En el siguiente enlace podremos encontrar una lista con los cursores disponibles en Tkinter
-[http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm].
+[http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm] (Ver seccion "Anexos" para ver el listado completo).
 El valor 'none' consigue eliminar el cursor cuando se pasa el cursor sobre el widget.
 
 <pre>
-etiqueta = Label(root, text="Que te parece la guia?", cursor="cross")
+etiqueta = Tkinter.Label(root, text="Que te parece la guia?", cursor="hand1")
 </pre>
+
+[[Image:widgets/img/opciones/cursor.jpg|center]]
 
 ----
 
@@ -656,14 +698,14 @@ foreground (fg)
 Si deseamos cambiar el color de las letras de nuestro texto cuando el widget se encuentra inactivo tendremos que utilizar esta opcion, que trabaja de forma similar al ya visto 'background'. En este se tambien se puede utilizar su abreviatura 'fg' como podemos ver en el segundo ejemplo
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, foreground="#38EB5C")
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, foreground="#38EB5C")
 </pre>
 
 <pre>
-boton = Button(root, text="Hola Mundo!!!", command=funcion, fg="#38EB5C")
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, fg="#38EB5C")
 </pre>
 
-[[Image:img/ejemplo_option_foreground.png|center]]
+[[Image:widgets/img/opciones/foreground.jpg|center]]
 
 ----
 
@@ -672,10 +714,10 @@ height
 Permite indicar la altura a la que se posicionara nuestro widget en lineas no en pixeles. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo
 
 <pre>
-etiqueta = Label(root, text="Hola Mundo!!!", height=10)
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", height=10)
 </pre>
 
-[[Image:img/ejemplo_option_height.png|center]]
+[[Image:widgets/img/opciones/height.jpg|center]]
 
 ----
 
@@ -688,29 +730,29 @@ justify
 * RIGHT
 
 <pre>
-etiqueta = Label(root, text="Hola\n Mundo!!!", justify=RIGHT)
+etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="right")
 </pre>
 
 
-[[Image:img/ejemplo_option_justify_RIGHT.png|center]]
+[[Image:widgets/img/opciones/justify/justify_right.jpg|center]]
 
 * CENTER
 
 <pre>
-etiqueta = Label(root, text="Hola\n Mundo!!!", justify=CENTER)
+etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="center")
 </pre>
 
 
-[[Image:img/ejemplo_option_justify_CENTER.png|center]]
+[[Image:widgets/img/opciones/justify/justify_center.jpg|center]]
 
 * LEFT
 
 <pre>
-etiqueta = Label(root, text="Hola\n Mundo!!!", justify=LEFT)
+etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="left")
 </pre>
 
 
-[[Image:img/ejemplo_option_justify_LEFT.png|center]]
+[[Image:widgets/img/opciones/justify/justify_left.jpg|center]]
 
 
 ----
@@ -741,47 +783,47 @@ Ejemplos:
 * SUNKEN
 
 <pre>
-etiqueta = Label(root, text="Hola Mundo!!!", relief=SUNKEN, borderwidth=5)
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="sunken", borderwidth=5)
 </pre>
 
 
-[[Image:img/ejemplo_option_relief_SUNKEN.png|center]]
+[[Image:widgets/img/opciones/relief/relief_sunken.jpg|center]]
 
 * RAISED
 
 <pre>
-etiqueta = Label(root, text="Hola Mundo!!!", relief=RAISED, borderwidth=5)
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="raised", borderwidth=5)
 </pre>
 
 
-[[Image:img/ejemplo_option_relief_RAISED.png|center]]
+[[Image:widgets/img/opciones/relief/relief_raised.jpg|center]]
 
 * GROOVE
 
 <pre>
-etiqueta = Label(root, text="Hola Mundo!!!", relief=GROOVE, borderwidth=5)
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="groove", borderwidth=5)
 </pre>
 
 
-[[Image:img/ejemplo_option_relief_GROOVE.png|center]]
+[[Image:widgets/img/opciones/relief/relief_groove.jpg|center]]
 
 * RIDGE
 
 <pre>
-etiqueta = Label(root, text="Hola Mundo!!!", relief=RIDGE, borderwidth=5)
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="ridge", borderwidth=5)
 </pre>
 
 
-[[Image:img/ejemplo_option_relief_RIDGE.png|center]]
+[[Image:widgets/img/opciones/relief/relief_ridge.jpg|center]]
 
 * FLAT
 
 <pre>
-etiqueta = Label(root, text="Hola Mundo!!!", relief=FLAT, borderwidth=5)
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="flat", borderwidth=5)
 </pre>
 
 
-[[Image:img/ejemplo_option_relief_FLAT.png|center]]
+[[Image:widgets/img/opciones/relief/relief_flat.jpg|center]]
 
 
 ----
@@ -793,33 +835,33 @@ Este es un elemento muy importante para los widgets como Label o Button entre ot
 Ejemplo simple:
 
 <pre>
-etiqueta = Label(root, text="Codigo Python")
+etiqueta = Tkinter.Label(root, text="Codigo Python")
 </pre>
 
 Ejemplo con una variable:
 
 <pre>
 texto = "Codigo Python"
-etiqueta = Label(root, text=texto)
+etiqueta = Tkinter.Label(root, text=texto)
 </pre>
 
-[[Image:img/ejemplo_Label.png|center]]
+[[Image:widgets/img/Label/Label-01.jpg|center]]
 
 Ejemplo con salto de linea (recuerden que deben usar el caracter \n para el salto de linea):
 
 <pre>
-etiqueta = Label(root, text="Hola \n a todos")
+etiqueta = Tkinter.Label(root, text="Hola \n a todos")
 </pre>
 
-[[Image:img/ejemplo_option_text.png|center]]
+[[Image:widgets/img/opciones/text-01.jpg|center]]
 
 Ejemplo con tabulacion (recuerden que deben usar el caracter \t para la tabulacion):
 
 <pre>
-etiqueta = Label(root, text="Hola \t a todos")
+etiqueta = Tkinter.Label(root, text="Hola \t a todos")
 </pre>
 
-[[Image:img/ejemplo_option_text02.png|center]]
+[[Image:widgets/img/opciones/text-02.jpg|center]]
 
 ----
 
@@ -834,18 +876,18 @@ Permite subrayar una letra de nuestra etiqueta, algo que es muy util para por ej
 Ejemplo con una etiqueta
 
 <pre>
-etiqueta = Label(root, text="Hola Mundo!!!", underline=3)
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", underline=3)
 </pre>
 
-[[Image:img/ejemplo_option_underline.png|center]]
+[[Image:widgets/img/opciones/underline-01.jpg|center]]
 
 Ejemplo con un boton
 
 <pre>
-boton = Button(root, text="Imprimir Hola Mundo!!!", command=funcion, underline=3)
+boton = Tkinter.Button(root, text="Imprimir Hola Mundo!!!", command=funcion, underline=3)
 </pre>
 
-[[Image:img/ejemplo_option_underline02.png|center]]
+[[Image:widgets/img/opciones/underline-02.jpg|center]]
 
 ----
 
@@ -854,10 +896,10 @@ width
 Esta opcion nos permite indicar en ancho del elemento con el que estamos trabajando midiendolo en caracteres no en pixeles si se trata de texto, si en cambio estamos trabajando con imagenes si deberemos medirlo en pixeles, si se le da un valor negativo este servira para indicar el ancho minimo del widget. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo.
 
 <pre>
-etiqueta = Label(root, text="Hola Mundo!!!", width=30)
+etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", width=30)
 </pre>
 
-[[Image:img/ejemplo_option_width.png|center]]
+[[Image:widgets/img/opciones/activeforeground.jpg|center]]
 
 ----
 
@@ -865,15 +907,794 @@ wraplength
 
 ----
 
-=== Variables ===
+==== 4.4.1. Disponibles para ====
 
-== Gestión del diseño ==
+{| border="1"
+|-
+! Nombre
+! Tipo
+! Label
+! Button
+! Checkbutton
+! Entry
+! Listbox
+! Radiobutton
+! Font
+! Frame
+! Scale
+|-
+| activebackground, activeforeground
+| color
+| No
+| Si
+| Si
+| No
+| No
+| Si
+| No
+| No
+| Si
+|-
+| anchor
+| constant
+| Si
+| Si
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| background (bg), foreground (fg)
+| color
+| Si
+| Si
+| Si
+| Si
+| Si
+| Si
+| No
+| Si
+| Si
+|-
+| bigincrement
+| value
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| bitmap
+| bitmap
+| Si
+| Si
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| borderwidth (bd)
+| dimension
+| Si
+| Si
+| Si
+| Si
+| Si
+| Si
+| No
+| Si
+| Si
+|-
+| colormap
+| window
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+| No
+|-
+| command
+| callback
+| No
+| Si
+| Si
+| No
+| No
+| Si
+| No
+| No
+| Si
+|-
+| cursor
+| cursor
+| Si
+| Si
+| Si
+| Si
+| Si
+| Si
+| No
+| Si
+| Si
+|-
+| default
+| constant
+| No
+| Si
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| digits
+| value
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| disabledforeground
+| color
+| No
+| Si
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| exportselection
+| flag
+| No
+| No
+| No
+| Si
+| Si
+| No
+| No
+| No
+| No
+|-
+| family
+| string
+| No
+| No
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| font
+| font
+| Si
+| Si
+| Si
+| Si
+| Si
+| Si
+| No
+| No
+| Si
+|-
+| from (from_)
+| value
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| highlightbackground, highlightcolor
+| color
+| Si
+| Si
+| Si
+| Si
+| No
+| Si
+| No
+| Si
+| Si
+|-
+| highlightthickness
+| distance
+| Si
+| Si
+| Si
+| Si
+| No
+| Si
+| No
+| Si
+| Si
+|-
+| image
+| image
+| Si
+| Si
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| indicatoron
+| bool
+| No
+| No
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| insertbackground
+| color
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+| No
+| No
+|-
+| insertborderwidth
+| color
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+| No
+| No
+|-
+| insertofftime, insertontime
+| int
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+| No
+| No
+|-
+| insertwidth
+| int
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+| No
+| No
+|-
+| integer
+| constant
+| No
+| No
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| justify
+| constant
+| Si
+| Si
+| Si
+| Si
+| No
+| Si
+| No
+| No
+| No
+|-
+| label
+| string
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| length
+| distance
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| offvalue, onvalue
+| value
+| No
+| No
+| Si
+| No
+| No
+| No
+| No
+| No
+| No
+|-
+| orient
+| constant
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| overstrike
+| flag
+| No
+| No
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| padx, pady
+| distance
+| No
+| Si
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| relief
+| constant
+| Si
+| Si
+| Si
+| Si
+| Si
+| Si
+| No
+| Si
+| Si
+|-
+| repeatdelay
+| time
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| repeatinterval
+| time
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| resolution
+| value
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| selectbackground
+| color
+| No
+| No
+| No
+| Si
+| Si
+| No
+| No
+| No
+| No
+|-
+| selectborderwidth
+| int
+| No
+| No
+| No
+| Si
+| Si
+| No
+| No
+| No
+| No
+|-
+| selectcolor
+| color
+| No
+| No
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| selectforeground
+| color
+| No
+| No
+| No
+| Si
+| Si
+| No
+| No
+| No
+| No
+|-
+| selectimage
+| image
+| No
+| No
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| selectmode
+| constant
+| No
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+| No
+|-
+| setgrid
+| bool
+| No
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+| No
+|-
+| show
+| character
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+| No
+| No
+|-
+| showvalue
+| flag
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| size
+| integer
+| No
+| No
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| slant
+| constant
+| No
+| No
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| sliderlength
+| distance
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| sliderrelief
+| constant
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| state
+| constant
+| No
+| Si
+| Si
+| Si
+| No
+| Si
+| No
+| No
+| Si
+|-
+| takefocus
+| flag
+| No
+| Si
+| Si
+| Si
+| Si
+| Si
+| No
+| Si
+| Si
+|-
+| text
+| string
+| Si
+| Si
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| textvariable
+| variable
+| Si
+| Si
+| Si
+| Si
+| No
+| Si
+| No
+| No
+| No
+|-
+| tickinterval
+| time
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| to
+| value
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| troughcolor
+| color
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| No
+| Si
+|-
+| underline
+| int
+| Si
+| Si
+| Si
+| No
+| No
+| Si
+| Si
+| No
+| No
+|-
+| value
+| None
+| No
+| No
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| variable
+| variable
+| No
+| No
+| Si
+| No
+| No
+| Si
+| No
+| No
+| Si
+|-
+| width, height
+| int
+| Si
+| Si
+| Si
+| Si
+| Si
+| Si
+| No
+| Si
+| Si
+|-
+| wraplength
+| distance
+| Si
+| Si
+| Si
+| No
+| No
+| Si
+| No
+| No
+| No
+|-
+| xscrollcommand
+| callback
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+| No
+| No
+|-
+| xscrollcommand, yscrollcommand
+| command
+| No
+| No
+| No
+| No
+| Si
+| No
+| No
+| No
+| No
+|}
 
-=== Métodos ===
+=== 4.5. Variables ===
+
+Acá es donde se muestra una de las opciones que disponemos en varios widgets y es 'textvariable' que tomara como valor la variable del tipo StringVar que habíamos mencionado en 'Entry', esta nos permitirá trabajar con varios métodos en Entry que se los iré mostrando y los iremos viendo con ejemplos.
+
+Tengan en cuenta que StringVar no forma parte de Python sino de Tkinter así que la importación de este es fundamental para poder utilizarlo, aunque para algunos resulte una obviedad nunca esta de mas remarcarlo ya que si utilizamos la forma 'from Tkinter import *' estos detalles no se observan y pueden generar confusión cuando se ven los ejemplos.
+
+Como habíamos mencionado contamos con cuatro clases de variables con Tkinter las cuales son BooleanVar, DoubleVar, IntVar y StringVar, esta ultima suele ser la mas vista y utilizada en los tutoriales disponibles en internet pero no por esto mas importante que las demás.
+
+== 5. Gestión del diseño ==
+
+=== 5.1. Métodos ===
 
 Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra aplicacion y cada una de sus ventanas
 
-==== iconify ====
+==== 5.1.1. iconify ====
 
 ; Descripcion:
 : 
@@ -889,11 +1710,11 @@ Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra
 * En este ejemplo usamos el metodo 'iconify' en un boton para minimizar la ventana cuando se haga click sobre el:
 
 <pre>
-from Tkinter import *
+import Tkinter
 
-root = Tk()
-boton = Button(root, text="Minimizar", command=root.iconify)
-boton.pack
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Minimizar", command=root.iconify)
+boton.pack()
 root.mainloop()
 </pre>
 
@@ -901,14 +1722,14 @@ root.mainloop()
 * En este otro ejemplo creamos un boton que abre otra ventana y minimiza la ventana padre
 
 <pre>
-from Tkinter import *
+import Tkinter
 
 def funcion():
-    otra_ventana = Toplevel(root)
+    otra_ventana = Tkinter.Toplevel(root)
     root.iconify()
 
-root = Tk()
-boton = Button(root, text="Abrir otra ventana", command=funcion)
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Abrir otra ventana", command=funcion)
 boton.pack()
 root.mainloop()
 </pre>
@@ -917,7 +1738,7 @@ root.mainloop()
 
 ----
 
-==== deiconify ====
+==== 5.1.2. deiconify ====
 
 ; Descripcion:
 : 
@@ -933,7 +1754,7 @@ root.mainloop()
 * Esta es una variacion de uno de los ejemplos que ya habiamos visto, pero en este cuando hacemos click en el boton 'Minimizar' este se minimiza pero pasado 5 segundos se vuelve a restaurar la ventana.
 
 <pre>
-from Tkinter import *
+import Tkinter
 import time
 
 def funcion():
@@ -941,8 +1762,8 @@ def funcion():
     time.sleep(5)
     root.deiconify()
 
-root = Tk()
-boton = Button(root, text="Minimizar", command=funcion)
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Minimizar", command=funcion)
 boton.pack()
 root.mainloop()
 </pre>
@@ -951,7 +1772,7 @@ root.mainloop()
 
 ----
 
-==== title ====
+==== 5.1.3. title ====
 
 ; Descripcion:
 : 
@@ -966,42 +1787,133 @@ root.mainloop()
 
 * Ejemplos simple:
 <pre>
-root = Tk()
+root = Tkinter.Tk()
 root.title("Bienvenido a Codigo Python")
 root.mainloop()
 </pre>
 
 
-[[Image:img/ejemplo_title.png|center]]
+[[Image:diseno/metodos/img/title-01.jpg|center]]
 
 * Heredando el titulo de la ventana padre:
 
 <pre>
-root = Tk()
+root = Tkinter.Tk()
 root.title("Bienvenido a Codigo Python")
-otra_ventana = Toplevel(root)
+otra_ventana = Tkinter.Toplevel(root)
 root.mainloop()
 </pre>
 
 
-[[Image:img/ejemplo_title02.png|center]]
+[[Image:diseno/metodos/img/title-02.jpg|center]]
 
 * Ejemplo de dos ventanas con titulos distintos:
 
 <pre>
-root = Tk()
+root = Tkinter.Tk()
 root.title("Bienvenido a")
-otra_ventana = Toplevel(root)
+otra_ventana = Tkinter.Toplevel(root)
 otra_ventana.title("Codigo Python")
 root.mainloop()
 </pre>
 
 
-[[Image:img/ejemplo_title03.png|center]]
+[[Image:diseno/metodos/img/title-03.jpg|center]]
+
 
 ----
 
-==== maxsize ====
+==== 5.1.4. geometry ====
+
+; Descripcion:
+: 
+: Este metodo es uno, junto con el resto (no hay que desmerecerer la funcion de ninguno :) ), muy importante ya que nos permitira indicar tanto el tamaño de la ventana como su posicion, esto nos permitira trabajar con varias ventanas de una forma mas prolija y agradable para el usuario si se planifican bien los objetivos y se utilizan las herrramientas adecuadas en este caso hablaremos de 'geometry'.
+: 
+: Para su utilizacion tenemos dos posibilidades una es indicar solo el tamaño de la ventana usando la siguiente forma
+: 
+<pre>
+root.geometry("WxH")
+</pre>
+
+: 
+: o indicando ademas del tamaño de la ventana la posicion de la misma de la siguiente forma
+: 
+<pre>
+root.geometry("WxH±X±Y")
+</pre>
+
+: 
+: El ancho y el alto deben ser reemplazados por las letras W y H respectivamente, separadas por una letra 'x' y su valor debera ser en pixeles, seguido de estos dos pueden ir de manera opcional dos valores mas que indicaran la posicion de la ventana en la pantalla donde se debera indicar estos valores, tambien en pixeles, para el eje x y el eje y. Una observacion que se debe hacer es que los valores que tome tanto el ancho como el alto de la ventana ademas de ser unicamente en pixeles deberan de ser numeros enteros positivos.
+: 
+: El significado del signo mas y menos indica que si se le pasa un valor positivo este sera contado desde la esquina superior izquierda de la pantalla en cambio si le pasamos un valor negativo este sera tomado en cuenta partiendo como origen desde la esquina inferior derecha; este es un detalle que hay que tener muy en cuenta cuando deseamos posicionar una ventana.
+: 
+: Si no le dieramos argumentos nos devolveria la medida y la posicion de la ventana.
+: 
+; Argumentos:
+: 
+: "wxh±x±y"
+: 
+: Donde las letras tienen este significado:
+: 
+
+* w: Ancho de la ventana en pixeles
+* h: Alto de la ventana en pixeles
+* x: Posicion en el eje X
+* y: Posicion en el eje Y
+
+; Ejemplos:
+: 
+<pre>
+#!/usr/bin/env python
+
+import Tkinter
+
+# Primer ventana con valores positivos
+primer_ventana = Tkinter.Tk()
+primer_ventana.geometry("300x300+0+0")
+# A modo estetico le di un titulo
+primer_ventana.title("Posicion x=+0 y=+0")
+# Este tambien es estetico y no influye en el uso del metodo
+etiqueta = Tkinter.Label(primer_ventana, text="Posicion x=+0 y=+0", width=100, height=100, anchor="center")
+etiqueta.pack()
+
+# Segunda ventana con valores negativos
+segunda_ventana = Tkinter.Tk()
+segunda_ventana.geometry("300x300-0-0")
+segunda_ventana.title("Posicion x=-0 y=-0")
+etiqueta = Tkinter.Label(segunda_ventana, text="Posicion x=-0 y=-0", width=100, height=100, anchor="center")
+etiqueta.pack()
+
+primer_ventana.mainloop()
+segunda_ventana.mainloop()
+</pre>
+
+: 
+: Como se observa se crean dos ventanas donde a una se le pasa valores positivos y a la otra por el contrario sus valores seran negativos.
+: 
+: [[Image:diseno/metodos/img/geometry.jpg|center]]
+
+* Si no le pasamos ningun argumento nos devolveria el tamaño y la posicion de la ventana como vemos a continuacion:
+
+<pre>
+Python 2.7.1+ (r271:86832, Apr 11 2011, 18:13:53)
+[GCC 4.5.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; root.geometry()
+'200x200+0+24'
+&gt;&gt;&gt; root.geometry("400x400+50+50")
+''
+&gt;&gt;&gt; root.geometry()
+'400x400+50+50'
+&gt;&gt;&gt;
+</pre>
+
+
+----
+
+==== 5.1.5. maxsize ====
 
 ; Descripcion:
 : 
@@ -1038,7 +1950,7 @@ root.maxsize(height=600, witdh=400)
 
 ----
 
-==== minsize ====
+==== 5.1.6. minsize ====
 
 ; Descripcion:
 : 
@@ -1075,7 +1987,7 @@ root.minsize(height=600, witdh=400)
 
 ----
 
-==== state ====
+==== 5.1.7. state ====
 
 ; Descripcion:
 : 
@@ -1096,7 +2008,7 @@ root.minsize(height=600, witdh=400)
 ; Ejemplos:
 : 
 <pre>
-from Tkinter import *
+import Tkinter
 import time
 
 def funcion():
@@ -1104,8 +2016,8 @@ def funcion():
     time.sleep(5)
     root.state(newstate='normal')
 
-root = Tk()
-boton = Button(root, text="Probando el metodo state", command=funcion)
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Probando el metodo state", command=funcion)
 boton.pack()
 root.mainloop()
 </pre>
@@ -1114,7 +2026,7 @@ root.mainloop()
 
 ----
 
-==== resizable ====
+==== 5.1.8. resizable ====
 
 ; Descripcion:
 : 
@@ -1158,98 +2070,10 @@ root.resizable(width=False, height=False)
 </pre>
 
 
-----
-
-==== geometry ====
-
-; Descripcion:
-: 
-: Este metodo es uno, junto con el resto (no hay que desmerecerer la funcion de ninguno :) ), muy importante ya que nos permitira indicar tanto el tamaño de la ventana como su posicion, esto nos permitira trabajar con varias ventanas de una forma mas prolija y agradable para el usuario si se planifican bien los objetivos y se utilizan las herrramientas adecuadas en este caso hablaremos de 'geometry'.
-: 
-: Para su utilizacion tenemos dos posibilidades una es indicar solo el tamaño de la ventana usando la siguiente forma
-: 
-<pre>
-root.geometry("WxH")
-</pre>
-
-: 
-: o indicando ademas del tamaño de la ventana la posicion de la misma de la siguiente forma
-: 
-<pre>
-root.geometry("WxH±X±Y")
-</pre>
-
-: 
-: El ancho y el alto deben ser reemplazados por las letras W y H respectivamente, separadas por una letra 'x' y su valor debera ser en pixeles, seguido de estos dos pueden ir de manera opcional dos valores mas que indicaran la posicion de la ventana en la pantalla donde se debera indicar estos valores, tambien en pixeles, para el eje x y el eje y. Una observacion que se debe hacer es que los valores que tome tanto el ancho como el alto de la ventana ademas de ser unicamente en pixeles deberan de ser numeros enteros positivos.
-: 
-: El significado del signo mas y menos indica que si se le pasa un valor positivo este sera contado desde la esquina superior izquierda de la pantalla en cambio si le pasamos un valor negativo este sera tomado en cuenta partiendo como origen desde la esquina inferior derecha; este es un detalle que hay que tener muy en cuenta cuando deseamos posicionar una ventana.
-: 
-: Si no le dieramos argumentos nos devolveria la medida y la posicion de la ventana.
-: 
-; Argumentos:
-: 
-: "wxh±x±y"
-: 
-: Donde las letras tienen este significado:
-: 
-
-* w: Ancho de la ventana en pixeles
-* h: Alto de la ventana en pixeles
-* x: Posicion en el eje X
-* y: Posicion en el eje Y
-
-; Ejemplos:
-: 
-<pre>
-#!/usr/bin/env python
-
-from Tkinter import *
-
-# Primer ventana con valores positivos
-primer_ventana = Tk()
-primer_ventana.geometry("300x300+0+0")
-# A modo estetico le di un titulo
-primer_ventana.title("Posicion x=+0 y=+0")
-# Este tambien es estetico y no influye en el uso del metodo
-etiqueta = Label(primer_ventana, text="Posicion x=+0 y=+0", width=100, height=100, anchor=CENTER)
-etiqueta.pack()
-primer_ventana.mainloop()
-
-# Segunda ventana con valores negativos
-segunda_ventana = Tk()
-segunda_ventana.geometry("300x300-0-0")
-segunda_ventana.title("Posicion x=-0 y=-0")
-etiqueta = Label(segunda_ventana, text="Posicion x=-0 y=-0", width=100, height=100, anchor=CENTER)
-etiqueta.pack()
-segunda_ventana.mainloop()
-</pre>
-
-: 
-: Como se observa se crean dos ventanas donde a una se le pasa valores positivos y a la otra por el contrario sus valores seran negativos.
-: 
-: [[Image:img/ejemplo_geometry01.png|center]]
-
-* Si no le pasamos ningun argumento nos devolveria el tamaño y la posicion de la ventana como vemos a continuacion:
-
-<pre>
-Python 2.7.1+ (r271:86832, Apr 11 2011, 18:13:53)
-[GCC 4.5.2] on linux2
-Type "help", "copyright", "credits" or "license" for more information.
->>> from Tkinter import *
->>> root = Tk()
->>> root.geometry()
-'200x200+0+24'
->>> root.geometry("400x400+50+50")
-''
->>> root.geometry()
-'400x400+50+50'
->>>
-</pre>
-
 
 ----
 
-==== withdraw ====
+==== 5.1.9. withdraw ====
 
 ; Descripcion:
 : 
@@ -1269,7 +2093,7 @@ root.withdraw()
 <pre>
 #!/usr/bin/env python
 
-from Tkinter import *
+import Tkinter
 import time
 
 def funcion():
@@ -1277,8 +2101,8 @@ def funcion():
     time.sleep(5)
     root.deiconify()
 
-root = Tk()
-boton = Button(root, text="Probando el metodo state", command=funcion)
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Probando el metodo withdraw", command=funcion)
 boton.pack()
 root.mainloop()
 </pre>
@@ -1287,30 +2111,28 @@ root.mainloop()
 
 ----
 
-==== transient ====
+==== 5.1.10. transient ====
 
 ; Descripcion:
 : 
 : Este método lo permite es hacer que una ventana permanezca siempre encima de otra, si la ventana padre se minimiza la ventana que lleva el método '.transient()' también lo hará y si esta ventana padre se cerrara la ventana hija también se cerraría.
 : 
 ; Argumentos:
-: 
-: [FIXME]
-: 
+
 ; Ejemplos:
 : 
 <pre>
 #!/usr/bin/env python
 
-from Tkinter import *
+import Tkinter
 
-root = Tk()
+root = Tkinter.Tk()
 root.title("Ventana padre")
 # Creamos una ventana hija de root
-otra_ventana = Toplevel(root)
+otra_ventana = Tkinter.Toplevel(root)
 otra_ventana.title("Ventana hija")
 # Este es solo para decoracion
-etiqueta = Label(otra_ventana, text='Este es un ejemplo de transient')
+etiqueta = Tkinter.Label(otra_ventana, text='Este es un ejemplo de transient')
 etiqueta.pack()
 # Posicionamos las dos ventanas para que sea mas claro el ejemplo
 root.geometry("400x400+100+100")
@@ -1323,60 +2145,57 @@ root.mainloop()
 : 
 : Como ven si intentan mover la ventana padre observaran que esta permanece siempre debajo de la ventana hija.
 
-=== Gestión de la geometría ===
+=== 5.2. Gestión de la geometría ===
 
-Todos los widgets de Tkinter tienen acceso a métodos específicos para la gestion de la geometría, que tienen como propósito ordenar y organizar dichos widgets en el área donde están contenidos.
+Todos los widgets de Tkinter tienen acceso a métodos específicos para la gestión de la geometría, que tienen como propósito ordenarlos y organizarlos en el área donde están contenidos.
 
 Para conseguir esto tenemos tres gestores para la geometría, aunque muchos recomiendan solamente usar solo uno de ellos, esperamos que luego de leer acerca de estos tres seas capaz de elegir el que mas se adapte a tus necesidades y a tu forma de trabajar.
 
-==== pack ====
+==== 5.2.1. pack ====
 
 .
 
-==== grid ====
+==== 5.2.2. grid ====
 
 .
 
-==== place ====
+==== 5.2.3. place ====
 
 .
 
-=== Frame ===
+=== 5.3. Frame ===
 
-Aquí veremos a 'Frame' no solo como un widget mas sino como una forma de ordenar el diseño de nuestra aplicación
+=== 5.4. Colores ===
 
-=== Colores ===
+Todos los widgets estándar de Tkinter proporcionan un conjunto básico de opciones para poder personalizarlos, que nos permiten modificar sus colores, fuentes, bordes y tamaños entre otros. La mayoría de ellos permite especificar un color de fondo y de primer plano que nos serán muy útiles cuando intentemos darle un aspecto mas pulido a nuestra aplicación.
 
-Todos los widgets estándar de Tkinter proporcionan un conjunto básico de opciones para poder personalizarlos, que nos permiten modificar sus colores, fuentes, bordes y tamaños entre otros. La mayoría de ellos permite especificar un color de fondo y de primer plano que nos serán muy útiles cuando intentemos darle un aspecto mas pulida a nuestra aplicación.
+Para especificar dichos colores tenemos dos formas, una es utilizar el nombre del color y la otra consiste en especificar la proporción de rojo, verde y azul que componen a dicho color en dígitos hexadecimales que es la forma mas popular y la mas precisa a la hora de trabajar.
 
-Para especificar dichos colores tenemos dos formas una es utilizar el nombre del color o especificar la proporción de rojo, verde y azul que componen a dicho color en dígitos hexadecimales que es la mas popular y la mas precisa a la hora de trabajar.
+==== 5.4.1. Nombres de colores ====
 
-==== Nombres de colores ====
-
-Como se había mencionado se puede especificar un color con solo usar su nombre en ingles, por ejemplo para el color basico usaríamos la palabra 'white' y para el color rojo 'red', aunque Tkinter no nos limita a usar solamente los colores básicos sino que nos ofrece una paleta bastante amplia de colores.
+Como se había mencionado se puede especificar un color con solo usar su nombre en ingles, por ejemplo para el color blanco usaríamos la palabra 'white' y para el color rojo 'red', aunque Tkinter no nos limita a usar solamente los colores básicos sino que nos ofrece una paleta bastante amplia de colores.
 
 Les dejo dos ejemplos para que puedan observarlo en funcionamiento:
 
 <pre>
-boton = Tkinter.Button(root, text="Que te parece la guia?", command=función, background="red")
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion, background="red")
 </pre>
 
-[[Image:img/ejemplo_colores_red.png|center]]
+[[Image:colors/img/color_red.jpg|center]]
 
 <pre>
-boton = Tkinter.Button(root, text="Que te parece la guia?", command=función, background="CadetBlue")
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion, background="CadetBlue")
 </pre>
 
-[[Image:img/ejemplo_colores_CadetBlue.png|center]]
+[[Image:colors/img/color_CadetBlue.jpg|center]]
 
 Otra de las posibilidades que tenemos es utilizar los colores del sistema para conseguir un aspecto mas acorde a la plataforma con que estemos trabajando.
 
-Podemos obtener una lista de los posibles colores que nos da Tkinter en la siguiente pagina:
-[[http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm]]
+Podemos obtener una lista de los posibles colores que nos da Tkinter en la siguiente pagina [[http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm]] o también en los anexos de esta guía los podrán encontrar:
 
-==== RGB hexadecimal ====
+==== 5.4.2. RGB hexadecimal ====
 
-Aunque este método sea un poco mas complicado en su uso es el mas preciso que el método que habíamos mencionado arriba, la forma en que se utiliza es la siguiente:
+Aunque este método sea un poco mas complicado en su uso, es mas preciso que el método que habíamos mencionado arriba. La forma en que se utiliza es la siguiente:
 
 #RRGGBB
 
@@ -1384,7 +2203,9 @@ Donde RR, GG y BB son representaciones hexadecimales de los colores rojo, verde 
 
 Usando la siguiente linea desde la consola de Python podemos crear nuestros colores para Tkinter reemplazando los valores de la tupla por los que deseamos utilizar:
 
-color_rgb = "#%02x%02x%02x" % (0, 100, 0)
+<pre>
+color_rojo = "#%02x%02x%02x" % (255, 0, 0)
+</pre>
 
 Su uso es muy simple, solo debemos usar la forma que habíamos visto cuando coloreamos usando los nombres pero ahora deberemos reemplazar el nombre del color por su equivalente en el valor RBG Hexadecimal como en el siguiente ejemplo:
 
@@ -1392,30 +2213,39 @@ Su uso es muy simple, solo debemos usar la forma que habíamos visto cuando colo
 boton = Tkinter.Button(root, text="Que te parece la guia?", command=función, background="#FA0000")
 </pre>
 
-[[Image:img/ejemplo_colores_red.png|center]]
+[[Image:colors/img/color_FA0000.jpg|center]]
 
 Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nombre del color.
 
-=== Fuentes ===
+==== 5.4.3. Consejos ====
 
-=== Unidades de medida ===
+En esta parte final de la seccion colores nos detendremos un momento para analizar la utilizacion de colores en nuestra aplicacion y la utilizacion de paletas y esquemas de colores que nos permitan conseguir aspectos mas prolijos y agradables a la vista.
 
-En Tkinter podemos especificar las medidas de los elementos no solo en píxeles sino que también podemos especificar los valores en centímetros, pulgadas, milímetros y puntos para esto debemos pasar el valor como cadena que se compone de un numero entero o no seguido de una letra que indique el tipo de unidad a utilizar que se especifica en la siguiente tabla:
+=== 5.5. Fuentes ===
 
-{| border="1" cellpadding="4"
+=== 5.6. Unidades de medida ===
+
+En Tkinter podemos especificar las medidas de los elementos no solo en píxeles sino que también podemos especificar los valores en centímetros, pulgadas, milímetros y puntos; para esto debemos pasar el valor como cadena que se compone de un numero entero o no (porque también podemos usar decimales en caso de ser necesario), seguido de una letra que indique el tipo de unidad a utilizar, que están especificados en la siguiente tabla:
+
+{| border="1"
 |-
-! Símbolo !! Descripción
+! Símbolo
+! colspan="2" | Descripción
 |-
-| c || Centímetros
+| align="center" | c
+| Centímetros
 |-
-| i || Pulgadas
+| align="center" | i
+| Pulgadas
 |-
-| m || Milímetros
+| align="center" | m
+| Milímetros
 |-
-| p || Puntos de impresora (alrededor de 0.35mm)
+| align="center" | p
+| Puntos de impresora (alrededor de 0.35mm)
 |}
 
-Si el valor que se pasa es un numero entero este es considerado como un valor en píxeles
+Si el valor que se pasa es un numero sin letra de unidad este es considerado como un valor en píxeles, siendo esta unidad el valor por defecto.
 
 Ejemplos:
 
@@ -1426,7 +2256,7 @@ boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth=10)
 </pre>
 
 
-[img/ejemplo_unidad_píxeles.png]
+[[Image:dimensiones/img/dimensiones_pixeles.jpg|center]]
 
 * Centímetros:
 
@@ -1435,16 +2265,16 @@ boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='1c')
 </pre>
 
 
-[[Image:img/ejemplo_unidad_centimetros.png|center]]
+[[Image:dimensiones/img/dimensiones_centrimetros.jpg|center]]
 
 * Pulgadas:
 
 <pre>
-boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='0.5i')
+boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='1i')
 </pre>
 
 
-[[Image:img/ejemplo_unidad_pulgadas.png|center]]
+[[Image:dimensiones/img/dimensiones_pulgadas.jpg|center]]
 
 * Milímetros:
 
@@ -1453,7 +2283,7 @@ boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10m')
 </pre>
 
 
-[[Image:img/ejemplo_unidad_milimetros.png|center]]
+[[Image:dimensiones/img/dimensiones_milimetros.jpg|center]]
 
 * Puntos:
 
@@ -1462,43 +2292,43 @@ boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10p')
 </pre>
 
 
-[[Image:img/ejemplo_unidad_puntos.png|center]]
+[[Image:dimensiones/img/dimensiones_puntos.jpg|center]]
 
-=== Imágenes ===
+Estas unidades de medida a excepción de los píxeles, no es recomendable usarlos ya que no están pensados específicamente para trabajar con elementos de la pantalla de nuestro ordenador y al usarlos es muy probable que no consigamos los tamaños o proporciones que esperábamos en la pantalla, por ejemplo los puntos se utiliza muy frecuentemente para la impresión ya que fueron diseñados para ese propósito y lo mismo pasa con los milímetros o las pulgadas que fueron diseñadas para otros ámbitos.
 
-==== PhotoImage ====
+=== 5.7. Imágenes ===
 
-==== PIL ====
+==== 5.7.1. PhotoImage ====
 
-== Menús y barras de herramientas ==
+==== 5.7.2. PIL ====
 
-== Ventanas de diálogos ==
+== 6. Menús y barras de herramientas ==
 
-== Eventos ==
+== 7. Ventanas de diálogos ==
 
-== Ejemplos ==
+== 8. Eventos ==
 
-== Notas finales ==
+== 9. Ejemplos Avanzados ==
 
-== Enlaces de interés ==
+== 10. Notas finales ==
+
+== 11. Enlaces de interés ==
 
 [http://www.tcl.tk/man/tcl8.5/ Tcl/Tk 8.5 Manual]
 
-Entorno grafico en Python [http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python]]
+[http://www.codigopython.com.ar/miniguias/entorno-grafico-en-python Entorno grafico en Python]
 
 [http://mundogeek.net/archivos/2008/11/24/interfaces-graficas-de-usuario-en-python/ Interfaces gráficas de usuario en Python]
 
-[Curso de Python con Interfaces graficas TK [http://foro.elhacker.net/scripting/python_curso_de_python_con_interfaces_gr]áficas_tk-t232514.0.html]
-
 [http://www.java2s.com/Code/Python/GUI-Tk/CatalogGUI-Tk.htm Python » GUI Tk]
 
-[http://www.ferg.org/thinking_in_tkinter/all_programs.html Thinking in Tkinter]
+[http://www.ferg.org/thinking_in_Tkinter/all_programs.html Thinking in Tkinter]
 
-[http://www.pythonware.com/library/tkinter/introduction/ An Introduction to Tkinter]
+[http://www.pythonware.com/library/Tkinter/introduction/ An Introduction to Tkinter]
 
-[http://infohost.nmt.edu/tcc/help/pubs/tkinter/index.html Tkinter 8.4 reference: a GUI for Python]
+[http://infohost.nmt.edu/tcc/help/pubs/Tkinter/index.html Tkinter 8.4 reference: a GUI for Python]
 
-== Glosario ==
+== 12. Glosario ==
 
 ; toolkit
 
@@ -1506,9 +2336,7816 @@ Entorno grafico en Python [http://www.codigopython.com.ar/miniguias/entorno-graf
 : 
 : Es un termino generico para referirse a cualquiera de los elementos básicos que componen la interfaz grafica de una aplicación. Ejemplos de widgets son botones, etiquetas, cuadros de texto, etc.
 
-== Licencia ==
+== 13. Anexos ==
 
-Esta obra está licenciada bajo una Licencia Attribution-ShareAlike 3.0 Unported de Creative Commons. Para ver una copia de esta licencia, visite [http://creativecommons.org/licenses/by-sa/3.0/ http://creativecommons.org/licenses/by-sa/3.0/] o envíenos una carta a Creative Commons, 171 Second Street, Suite 300, San Francisco, California, 94105, USA.
+=== 13.1. Colores ===
 
-<!-- wiki code generated by txt2tags 2.6 (http://txt2tags.org) -->
+Paleta de colores de Tk:
+
+{| border="1"
+|-
+! Nombre
+! Rojo
+! Verde
+! Azul
+|-
+| alice blue
+| 240
+| 248
+| 255
+|-
+| AliceBlue
+| 240
+| 248
+| 255
+|-
+| antique white
+| 250
+| 235
+| 215
+|-
+| AntiqueWhite
+| 250
+| 235
+| 215
+|-
+| AntiqueWhite1
+| 255
+| 239
+| 219
+|-
+| AntiqueWhite2
+| 238
+| 223
+| 204
+|-
+| AntiqueWhite3
+| 205
+| 192
+| 176
+|-
+| AntiqueWhite4
+| 139
+| 131
+| 120
+|-
+| aquamarine
+| 127
+| 255
+| 212
+|-
+| aquamarine1
+| 127
+| 255
+| 212
+|-
+| aquamarine2
+| 118
+| 238
+| 198
+|-
+| aquamarine3
+| 102
+| 205
+| 170
+|-
+| aquamarine4
+| 69
+| 139
+| 116
+|-
+| azure
+| 240
+| 255
+| 255
+|-
+| azure1
+| 240
+| 255
+| 255
+|-
+| azure2
+| 224
+| 238
+| 238
+|-
+| azure3
+| 193
+| 205
+| 205
+|-
+| azure4
+| 131
+| 139
+| 139
+|-
+| beige
+| 245
+| 245
+| 220
+|-
+| bisque
+| 255
+| 228
+| 196
+|-
+| bisque1
+| 255
+| 228
+| 196
+|-
+| bisque2
+| 238
+| 213
+| 183
+|-
+| bisque3
+| 205
+| 183
+| 158
+|-
+| bisque4
+| 139
+| 125
+| 107
+|-
+| black
+| 0
+| 0
+| 0
+|-
+| blanched almond
+| 255
+| 235
+| 205
+|-
+| BlanchedAlmond
+| 255
+| 235
+| 205
+|-
+| blue
+| 0
+| 0
+| 255
+|-
+| blue violet
+| 138
+| 43
+| 226
+|-
+| blue1
+| 0
+| 0
+| 255
+|-
+| blue2
+| 0
+| 0
+| 238
+|-
+| blue3
+| 0
+| 0
+| 205
+|-
+| blue4
+| 0
+| 0
+| 139
+|-
+| BlueViolet
+| 138
+| 43
+| 226
+|-
+| brown
+| 165
+| 42
+| 42
+|-
+| brown1
+| 255
+| 64
+| 64
+|-
+| brown2
+| 238
+| 59
+| 59
+|-
+| brown3
+| 205
+| 51
+| 51
+|-
+| brown4
+| 139
+| 35
+| 35
+|-
+| burlywood
+| 222
+| 184
+| 135
+|-
+| burlywood1
+| 255
+| 211
+| 155
+|-
+| burlywood2
+| 238
+| 197
+| 145
+|-
+| burlywood3
+| 205
+| 170
+| 125
+|-
+| burlywood4
+| 139
+| 115
+| 85
+|-
+| cadet blue
+| 95
+| 158
+| 160
+|-
+| CadetBlue
+| 95
+| 158
+| 160
+|-
+| CadetBlue1
+| 152
+| 245
+| 255
+|-
+| CadetBlue2
+| 142
+| 229
+| 238
+|-
+| CadetBlue3
+| 122
+| 197
+| 205
+|-
+| CadetBlue4
+| 83
+| 134
+| 139
+|-
+| chartreuse
+| 127
+| 255
+| 0
+|-
+| chartreuse1
+| 127
+| 255
+| 0
+|-
+| chartreuse2
+| 118
+| 238
+| 0
+|-
+| chartreuse3
+| 102
+| 205
+| 0
+|-
+| chartreuse4
+| 69
+| 139
+| 0
+|-
+| chocolate
+| 210
+| 105
+| 30
+|-
+| chocolate1
+| 255
+| 127
+| 36
+|-
+| chocolate2
+| 238
+| 118
+| 33
+|-
+| chocolate3
+| 205
+| 102
+| 29
+|-
+| chocolate4
+| 139
+| 69
+| 19
+|-
+| coral
+| 255
+| 127
+| 80
+|-
+| coral1
+| 255
+| 114
+| 86
+|-
+| coral2
+| 238
+| 106
+| 80
+|-
+| coral3
+| 205
+| 91
+| 69
+|-
+| coral4
+| 139
+| 62
+| 47
+|-
+| cornflower blue
+| 100
+| 149
+| 237
+|-
+| CornflowerBlue
+| 100
+| 149
+| 237
+|-
+| cornsilk
+| 255
+| 248
+| 220
+|-
+| cornsilk1
+| 255
+| 248
+| 220
+|-
+| cornsilk2
+| 238
+| 232
+| 205
+|-
+| cornsilk3
+| 205
+| 200
+| 177
+|-
+| cornsilk4
+| 139
+| 136
+| 120
+|-
+| cyan
+| 0
+| 255
+| 255
+|-
+| cyan1
+| 0
+| 255
+| 255
+|-
+| cyan2
+| 0
+| 238
+| 238
+|-
+| cyan3
+| 0
+| 205
+| 205
+|-
+| cyan4
+| 0
+| 139
+| 139
+|-
+| dark blue
+| 0
+| 0
+| 139
+|-
+| dark cyan
+| 0
+| 139
+| 139
+|-
+| dark goldenrod
+| 184
+| 134
+| 11
+|-
+| dark gray
+| 169
+| 169
+| 169
+|-
+| dark green
+| 0
+| 100
+| 0
+|-
+| dark grey
+| 169
+| 169
+| 169
+|-
+| dark khaki
+| 189
+| 183
+| 107
+|-
+| dark magenta
+| 139
+| 0
+| 139
+|-
+| dark olive green
+| 85
+| 107
+| 47
+|-
+| dark orange
+| 255
+| 140
+| 0
+|-
+| dark orchid
+| 153
+| 50
+| 204
+|-
+| dark red
+| 139
+| 0
+| 0
+|-
+| dark salmon
+| 233
+| 150
+| 122
+|-
+| dark sea green
+| 143
+| 188
+| 143
+|-
+| dark slate blue
+| 72
+| 61
+| 139
+|-
+| dark slate gray
+| 47
+| 79
+| 79
+|-
+| dark slate grey
+| 47
+| 79
+| 79
+|-
+| dark turquoise
+| 0
+| 206
+| 209
+|-
+| dark violet
+| 148
+| 0
+| 211
+|-
+| DarkBlue
+| 0
+| 0
+| 139
+|-
+| DarkCyan
+| 0
+| 139
+| 139
+|-
+| DarkGoldenrod
+| 184
+| 134
+| 11
+|-
+| DarkGoldenrod1
+| 255
+| 185
+| 15
+|-
+| DarkGoldenrod2
+| 238
+| 173
+| 14
+|-
+| DarkGoldenrod3
+| 205
+| 149
+| 12
+|-
+| DarkGoldenrod4
+| 139
+| 101
+| 8
+|-
+| DarkGray
+| 169
+| 169
+| 169
+|-
+| DarkGreen
+| 0
+| 100
+| 0
+|-
+| DarkGrey
+| 169
+| 169
+| 169
+|-
+| DarkKhaki
+| 189
+| 183
+| 107
+|-
+| DarkMagenta
+| 139
+| 0
+| 139
+|-
+| DarkOliveGreen
+| 85
+| 107
+| 47
+|-
+| DarkOliveGreen1
+| 202
+| 255
+| 112
+|-
+| DarkOliveGreen2
+| 188
+| 238
+| 104
+|-
+| DarkOliveGreen3
+| 162
+| 205
+| 90
+|-
+| DarkOliveGreen4
+| 110
+| 139
+| 61
+|-
+| DarkOrange
+| 255
+| 140
+| 0
+|-
+| DarkOrange1
+| 255
+| 127
+| 0
+|-
+| DarkOrange2
+| 238
+| 118
+| 0
+|-
+| DarkOrange3
+| 205
+| 102
+| 0
+|-
+| DarkOrange4
+| 139
+| 69
+| 0
+|-
+| DarkOrchid
+| 153
+| 50
+| 204
+|-
+| DarkOrchid1
+| 191
+| 62
+| 255
+|-
+| DarkOrchid2
+| 178
+| 58
+| 238
+|-
+| DarkOrchid3
+| 154
+| 50
+| 205
+|-
+| DarkOrchid4
+| 104
+| 34
+| 139
+|-
+| DarkRed
+| 139
+| 0
+| 0
+|-
+| DarkSalmon
+| 233
+| 150
+| 122
+|-
+| DarkSeaGreen
+| 143
+| 188
+| 143
+|-
+| DarkSeaGreen1
+| 193
+| 255
+| 193
+|-
+| DarkSeaGreen2
+| 180
+| 238
+| 180
+|-
+| DarkSeaGreen3
+| 155
+| 205
+| 155
+|-
+| DarkSeaGreen4
+| 105
+| 139
+| 105
+|-
+| DarkSlateBlue
+| 72
+| 61
+| 139
+|-
+| DarkSlateGray
+| 47
+| 79
+| 79
+|-
+| DarkSlateGray1
+| 151
+| 255
+| 255
+|-
+| DarkSlateGray2
+| 141
+| 238
+| 238
+|-
+| DarkSlateGray3
+| 121
+| 205
+| 205
+|-
+| DarkSlateGray4
+| 82
+| 139
+| 139
+|-
+| DarkSlateGrey
+| 47
+| 79
+| 79
+|-
+| DarkTurquoise
+| 0
+| 206
+| 209
+|-
+| DarkViolet
+| 148
+| 0
+| 211
+|-
+| deep pink
+| 255
+| 20
+| 147
+|-
+| deep sky blue
+| 0
+| 191
+| 255
+|-
+| DeepPink
+| 255
+| 20
+| 147
+|-
+| DeepPink1
+| 255
+| 20
+| 147
+|-
+| DeepPink2
+| 238
+| 18
+| 137
+|-
+| DeepPink3
+| 205
+| 16
+| 118
+|-
+| DeepPink4
+| 139
+| 10
+| 80
+|-
+| DeepSkyBlue
+| 0
+| 191
+| 255
+|-
+| DeepSkyBlue1
+| 0
+| 191
+| 255
+|-
+| DeepSkyBlue2
+| 0
+| 178
+| 238
+|-
+| DeepSkyBlue3
+| 0
+| 154
+| 205
+|-
+| DeepSkyBlue4
+| 0
+| 104
+| 139
+|-
+| dim gray
+| 105
+| 105
+| 105
+|-
+| dim grey
+| 105
+| 105
+| 105
+|-
+| DimGray
+| 105
+| 105
+| 105
+|-
+| DimGrey
+| 105
+| 105
+| 105
+|-
+| dodger blue
+| 30
+| 144
+| 255
+|-
+| DodgerBlue
+| 30
+| 144
+| 255
+|-
+| DodgerBlue1
+| 30
+| 144
+| 255
+|-
+| DodgerBlue2
+| 28
+| 134
+| 238
+|-
+| DodgerBlue3
+| 24
+| 116
+| 205
+|-
+| DodgerBlue4
+| 16
+| 78
+| 139
+|-
+| firebrick
+| 178
+| 34
+| 34
+|-
+| firebrick1
+| 255
+| 48
+| 48
+|-
+| firebrick2
+| 238
+| 44
+| 44
+|-
+| firebrick3
+| 205
+| 38
+| 38
+|-
+| firebrick4
+| 139
+| 26
+| 26
+|-
+| floral white
+| 255
+| 250
+| 240
+|-
+| FloralWhite
+| 255
+| 250
+| 240
+|-
+| forest green
+| 34
+| 139
+| 34
+|-
+| ForestGreen
+| 34
+| 139
+| 34
+|-
+| gainsboro
+| 220
+| 220
+| 220
+|-
+| ghost white
+| 248
+| 248
+| 255
+|-
+| GhostWhite
+| 248
+| 248
+| 255
+|-
+| gold
+| 255
+| 215
+| 0
+|-
+| gold1
+| 255
+| 215
+| 0
+|-
+| gold2
+| 238
+| 201
+| 0
+|-
+| gold3
+| 205
+| 173
+| 0
+|-
+| gold4
+| 139
+| 117
+| 0
+|-
+| goldenrod
+| 218
+| 165
+| 32
+|-
+| goldenrod1
+| 255
+| 193
+| 37
+|-
+| goldenrod2
+| 238
+| 180
+| 34
+|-
+| goldenrod3
+| 205
+| 155
+| 29
+|-
+| goldenrod4
+| 139
+| 105
+| 20
+|-
+| gray
+| 190
+| 190
+| 190
+|-
+| gray0
+| 0
+| 0
+| 0
+|-
+| gray1
+| 3
+| 3
+| 3
+|-
+| gray10
+| 26
+| 26
+| 26
+|-
+| gray100
+| 255
+| 255
+| 255
+|-
+| gray11
+| 28
+| 28
+| 28
+|-
+| gray12
+| 31
+| 31
+| 31
+|-
+| gray13
+| 33
+| 33
+| 33
+|-
+| gray14
+| 36
+| 36
+| 36
+|-
+| gray15
+| 38
+| 38
+| 38
+|-
+| gray16
+| 41
+| 41
+| 41
+|-
+| gray17
+| 43
+| 43
+| 43
+|-
+| gray18
+| 46
+| 46
+| 46
+|-
+| gray19
+| 48
+| 48
+| 48
+|-
+| gray2
+| 5
+| 5
+| 5
+|-
+| gray20
+| 51
+| 51
+| 51
+|-
+| gray21
+| 54
+| 54
+| 54
+|-
+| gray22
+| 56
+| 56
+| 56
+|-
+| gray23
+| 59
+| 59
+| 59
+|-
+| gray24
+| 61
+| 61
+| 61
+|-
+| gray25
+| 64
+| 64
+| 64
+|-
+| gray26
+| 66
+| 66
+| 66
+|-
+| gray27
+| 69
+| 69
+| 69
+|-
+| gray28
+| 71
+| 71
+| 71
+|-
+| gray29
+| 74
+| 74
+| 74
+|-
+| gray3
+| 8
+| 8
+| 8
+|-
+| gray30
+| 77
+| 77
+| 77
+|-
+| gray31
+| 79
+| 79
+| 79
+|-
+| gray32
+| 82
+| 82
+| 82
+|-
+| gray33
+| 84
+| 84
+| 84
+|-
+| gray34
+| 87
+| 87
+| 87
+|-
+| gray35
+| 89
+| 89
+| 89
+|-
+| gray36
+| 92
+| 92
+| 92
+|-
+| gray37
+| 94
+| 94
+| 94
+|-
+| gray38
+| 97
+| 97
+| 97
+|-
+| gray39
+| 99
+| 99
+| 99
+|-
+| gray4
+| 10
+| 10
+| 10
+|-
+| gray40
+| 102
+| 102
+| 102
+|-
+| gray41
+| 105
+| 105
+| 105
+|-
+| gray42
+| 107
+| 107
+| 107
+|-
+| gray43
+| 110
+| 110
+| 110
+|-
+| gray44
+| 112
+| 112
+| 112
+|-
+| gray45
+| 115
+| 115
+| 115
+|-
+| gray46
+| 117
+| 117
+| 117
+|-
+| gray47
+| 120
+| 120
+| 120
+|-
+| gray48
+| 122
+| 122
+| 122
+|-
+| gray49
+| 125
+| 125
+| 125
+|-
+| gray5
+| 13
+| 13
+| 13
+|-
+| gray50
+| 127
+| 127
+| 127
+|-
+| gray51
+| 130
+| 130
+| 130
+|-
+| gray52
+| 133
+| 133
+| 133
+|-
+| gray53
+| 135
+| 135
+| 135
+|-
+| gray54
+| 138
+| 138
+| 138
+|-
+| gray55
+| 140
+| 140
+| 140
+|-
+| gray56
+| 143
+| 143
+| 143
+|-
+| gray57
+| 145
+| 145
+| 145
+|-
+| gray58
+| 148
+| 148
+| 148
+|-
+| gray59
+| 150
+| 150
+| 150
+|-
+| gray6
+| 15
+| 15
+| 15
+|-
+| gray60
+| 153
+| 153
+| 153
+|-
+| gray61
+| 156
+| 156
+| 156
+|-
+| gray62
+| 158
+| 158
+| 158
+|-
+| gray63
+| 161
+| 161
+| 161
+|-
+| gray64
+| 163
+| 163
+| 163
+|-
+| gray65
+| 166
+| 166
+| 166
+|-
+| gray66
+| 168
+| 168
+| 168
+|-
+| gray67
+| 171
+| 171
+| 171
+|-
+| gray68
+| 173
+| 173
+| 173
+|-
+| gray69
+| 176
+| 176
+| 176
+|-
+| gray7
+| 18
+| 18
+| 18
+|-
+| gray70
+| 179
+| 179
+| 179
+|-
+| gray71
+| 181
+| 181
+| 181
+|-
+| gray72
+| 184
+| 184
+| 184
+|-
+| gray73
+| 186
+| 186
+| 186
+|-
+| gray74
+| 189
+| 189
+| 189
+|-
+| gray75
+| 191
+| 191
+| 191
+|-
+| gray76
+| 194
+| 194
+| 194
+|-
+| gray77
+| 196
+| 196
+| 196
+|-
+| gray78
+| 199
+| 199
+| 199
+|-
+| gray79
+| 201
+| 201
+| 201
+|-
+| gray8
+| 20
+| 20
+| 20
+|-
+| gray80
+| 204
+| 204
+| 204
+|-
+| gray81
+| 207
+| 207
+| 207
+|-
+| gray82
+| 209
+| 209
+| 209
+|-
+| gray83
+| 212
+| 212
+| 212
+|-
+| gray84
+| 214
+| 214
+| 214
+|-
+| gray85
+| 217
+| 217
+| 217
+|-
+| gray86
+| 219
+| 219
+| 219
+|-
+| gray87
+| 222
+| 222
+| 222
+|-
+| gray88
+| 224
+| 224
+| 224
+|-
+| gray89
+| 227
+| 227
+| 227
+|-
+| gray9
+| 23
+| 23
+| 23
+|-
+| gray90
+| 229
+| 229
+| 229
+|-
+| gray91
+| 232
+| 232
+| 232
+|-
+| gray92
+| 235
+| 235
+| 235
+|-
+| gray93
+| 237
+| 237
+| 237
+|-
+| gray94
+| 240
+| 240
+| 240
+|-
+| gray95
+| 242
+| 242
+| 242
+|-
+| gray96
+| 245
+| 245
+| 245
+|-
+| gray97
+| 247
+| 247
+| 247
+|-
+| gray98
+| 250
+| 250
+| 250
+|-
+| gray99
+| 252
+| 252
+| 252
+|-
+| green
+| 0
+| 255
+| 0
+|-
+| green yellow
+| 173
+| 255
+| 47
+|-
+| green1
+| 0
+| 255
+| 0
+|-
+| green2
+| 0
+| 238
+| 0
+|-
+| green3
+| 0
+| 205
+| 0
+|-
+| green4
+| 0
+| 139
+| 0
+|-
+| GreenYellow
+| 173
+| 255
+| 47
+|-
+| grey
+| 190
+| 190
+| 190
+|-
+| grey0
+| 0
+| 0
+| 0
+|-
+| grey1
+| 3
+| 3
+| 3
+|-
+| grey10
+| 26
+| 26
+| 26
+|-
+| grey100
+| 255
+| 255
+| 255
+|-
+| grey11
+| 28
+| 28
+| 28
+|-
+| grey12
+| 31
+| 31
+| 31
+|-
+| grey13
+| 33
+| 33
+| 33
+|-
+| grey14
+| 36
+| 36
+| 36
+|-
+| grey15
+| 38
+| 38
+| 38
+|-
+| grey16
+| 41
+| 41
+| 41
+|-
+| grey17
+| 43
+| 43
+| 43
+|-
+| grey18
+| 46
+| 46
+| 46
+|-
+| grey19
+| 48
+| 48
+| 48
+|-
+| grey2
+| 5
+| 5
+| 5
+|-
+| grey20
+| 51
+| 51
+| 51
+|-
+| grey21
+| 54
+| 54
+| 54
+|-
+| grey22
+| 56
+| 56
+| 56
+|-
+| grey23
+| 59
+| 59
+| 59
+|-
+| grey24
+| 61
+| 61
+| 61
+|-
+| grey25
+| 64
+| 64
+| 64
+|-
+| grey26
+| 66
+| 66
+| 66
+|-
+| grey27
+| 69
+| 69
+| 69
+|-
+| grey28
+| 71
+| 71
+| 71
+|-
+| grey29
+| 74
+| 74
+| 74
+|-
+| grey3
+| 8
+| 8
+| 8
+|-
+| grey30
+| 77
+| 77
+| 77
+|-
+| grey31
+| 79
+| 79
+| 79
+|-
+| grey32
+| 82
+| 82
+| 82
+|-
+| grey33
+| 84
+| 84
+| 84
+|-
+| grey34
+| 87
+| 87
+| 87
+|-
+| grey35
+| 89
+| 89
+| 89
+|-
+| grey36
+| 92
+| 92
+| 92
+|-
+| grey37
+| 94
+| 94
+| 94
+|-
+| grey38
+| 97
+| 97
+| 97
+|-
+| grey39
+| 99
+| 99
+| 99
+|-
+| grey4
+| 10
+| 10
+| 10
+|-
+| grey40
+| 102
+| 102
+| 102
+|-
+| grey41
+| 105
+| 105
+| 105
+|-
+| grey42
+| 107
+| 107
+| 107
+|-
+| grey43
+| 110
+| 110
+| 110
+|-
+| grey44
+| 112
+| 112
+| 112
+|-
+| grey45
+| 115
+| 115
+| 115
+|-
+| grey46
+| 117
+| 117
+| 117
+|-
+| grey47
+| 120
+| 120
+| 120
+|-
+| grey48
+| 122
+| 122
+| 122
+|-
+| grey49
+| 125
+| 125
+| 125
+|-
+| grey5
+| 13
+| 13
+| 13
+|-
+| grey50
+| 127
+| 127
+| 127
+|-
+| grey51
+| 130
+| 130
+| 130
+|-
+| grey52
+| 133
+| 133
+| 133
+|-
+| grey53
+| 135
+| 135
+| 135
+|-
+| grey54
+| 138
+| 138
+| 138
+|-
+| grey55
+| 140
+| 140
+| 140
+|-
+| grey56
+| 143
+| 143
+| 143
+|-
+| grey57
+| 145
+| 145
+| 145
+|-
+| grey58
+| 148
+| 148
+| 148
+|-
+| grey59
+| 150
+| 150
+| 150
+|-
+| grey6
+| 15
+| 15
+| 15
+|-
+| grey60
+| 153
+| 153
+| 153
+|-
+| grey61
+| 156
+| 156
+| 156
+|-
+| grey62
+| 158
+| 158
+| 158
+|-
+| grey63
+| 161
+| 161
+| 161
+|-
+| grey64
+| 163
+| 163
+| 163
+|-
+| grey65
+| 166
+| 166
+| 166
+|-
+| grey66
+| 168
+| 168
+| 168
+|-
+| grey67
+| 171
+| 171
+| 171
+|-
+| grey68
+| 173
+| 173
+| 173
+|-
+| grey69
+| 176
+| 176
+| 176
+|-
+| grey7
+| 18
+| 18
+| 18
+|-
+| grey70
+| 179
+| 179
+| 179
+|-
+| grey71
+| 181
+| 181
+| 181
+|-
+| grey72
+| 184
+| 184
+| 184
+|-
+| grey73
+| 186
+| 186
+| 186
+|-
+| grey74
+| 189
+| 189
+| 189
+|-
+| grey75
+| 191
+| 191
+| 191
+|-
+| grey76
+| 194
+| 194
+| 194
+|-
+| grey77
+| 196
+| 196
+| 196
+|-
+| grey78
+| 199
+| 199
+| 199
+|-
+| grey79
+| 201
+| 201
+| 201
+|-
+| grey8
+| 20
+| 20
+| 20
+|-
+| grey80
+| 204
+| 204
+| 204
+|-
+| grey81
+| 207
+| 207
+| 207
+|-
+| grey82
+| 209
+| 209
+| 209
+|-
+| grey83
+| 212
+| 212
+| 212
+|-
+| grey84
+| 214
+| 214
+| 214
+|-
+| grey85
+| 217
+| 217
+| 217
+|-
+| grey86
+| 219
+| 219
+| 219
+|-
+| grey87
+| 222
+| 222
+| 222
+|-
+| grey88
+| 224
+| 224
+| 224
+|-
+| grey89
+| 227
+| 227
+| 227
+|-
+| grey9
+| 23
+| 23
+| 23
+|-
+| grey90
+| 229
+| 229
+| 229
+|-
+| grey91
+| 232
+| 232
+| 232
+|-
+| grey92
+| 235
+| 235
+| 235
+|-
+| grey93
+| 237
+| 237
+| 237
+|-
+| grey94
+| 240
+| 240
+| 240
+|-
+| grey95
+| 242
+| 242
+| 242
+|-
+| grey96
+| 245
+| 245
+| 245
+|-
+| grey97
+| 247
+| 247
+| 247
+|-
+| grey98
+| 250
+| 250
+| 250
+|-
+| grey99
+| 252
+| 252
+| 252
+|-
+| honeydew
+| 240
+| 255
+| 240
+|-
+| honeydew1
+| 240
+| 255
+| 240
+|-
+| honeydew2
+| 224
+| 238
+| 224
+|-
+| honeydew3
+| 193
+| 205
+| 193
+|-
+| honeydew4
+| 131
+| 139
+| 131
+|-
+| hot pink
+| 255
+| 105
+| 180
+|-
+| HotPink
+| 255
+| 105
+| 180
+|-
+| HotPink1
+| 255
+| 110
+| 180
+|-
+| HotPink2
+| 238
+| 106
+| 167
+|-
+| HotPink3
+| 205
+| 96
+| 144
+|-
+| HotPink4
+| 139
+| 58
+| 98
+|-
+| indian red
+| 205
+| 92
+| 92
+|-
+| IndianRed
+| 205
+| 92
+| 92
+|-
+| IndianRed1
+| 255
+| 106
+| 106
+|-
+| IndianRed2
+| 238
+| 99
+| 99
+|-
+| IndianRed3
+| 205
+| 85
+| 85
+|-
+| IndianRed4
+| 139
+| 58
+| 58
+|-
+| ivory
+| 255
+| 255
+| 240
+|-
+| ivory1
+| 255
+| 255
+| 240
+|-
+| ivory2
+| 238
+| 238
+| 224
+|-
+| ivory3
+| 205
+| 205
+| 193
+|-
+| ivory4
+| 139
+| 139
+| 131
+|-
+| khaki
+| 240
+| 230
+| 140
+|-
+| khaki1
+| 255
+| 246
+| 143
+|-
+| khaki2
+| 238
+| 230
+| 133
+|-
+| khaki3
+| 205
+| 198
+| 115
+|-
+| khaki4
+| 139
+| 134
+| 78
+|-
+| lavender
+| 230
+| 230
+| 250
+|-
+| lavender blush
+| 255
+| 240
+| 245
+|-
+| LavenderBlush
+| 255
+| 240
+| 245
+|-
+| LavenderBlush1
+| 255
+| 240
+| 245
+|-
+| LavenderBlush2
+| 238
+| 224
+| 229
+|-
+| LavenderBlush3
+| 205
+| 193
+| 197
+|-
+| LavenderBlush4
+| 139
+| 131
+| 134
+|-
+| lawn green
+| 124
+| 252
+| 0
+|-
+| LawnGreen
+| 124
+| 252
+| 0
+|-
+| lemon chiffon
+| 255
+| 250
+| 205
+|-
+| LemonChiffon
+| 255
+| 250
+| 205
+|-
+| LemonChiffon1
+| 255
+| 250
+| 205
+|-
+| LemonChiffon2
+| 238
+| 233
+| 191
+|-
+| LemonChiffon3
+| 205
+| 201
+| 165
+|-
+| LemonChiffon4
+| 139
+| 137
+| 112
+|-
+| light blue
+| 173
+| 216
+| 230
+|-
+| light coral
+| 240
+| 128
+| 128
+|-
+| light cyan
+| 224
+| 255
+| 255
+|-
+| light goldenrod
+| 238
+| 221
+| 130
+|-
+| light goldenrod yellow
+| 250
+| 250
+| 210
+|-
+| light gray
+| 211
+| 211
+| 211
+|-
+| light green
+| 144
+| 238
+| 144
+|-
+| light grey
+| 211
+| 211
+| 211
+|-
+| light pink
+| 255
+| 182
+| 193
+|-
+| light salmon
+| 255
+| 160
+| 122
+|-
+| light sea green
+| 32
+| 178
+| 170
+|-
+| light sky blue
+| 135
+| 206
+| 250
+|-
+| light slate blue
+| 132
+| 112
+| 255
+|-
+| light slate gray
+| 119
+| 136
+| 153
+|-
+| light slate grey
+| 119
+| 136
+| 153
+|-
+| light steel blue
+| 176
+| 196
+| 222
+|-
+| light yellow
+| 255
+| 255
+| 224
+|-
+| LightBlue
+| 173
+| 216
+| 230
+|-
+| LightBlue1
+| 191
+| 239
+| 255
+|-
+| LightBlue2
+| 178
+| 223
+| 238
+|-
+| LightBlue3
+| 154
+| 192
+| 205
+|-
+| LightBlue4
+| 104
+| 131
+| 139
+|-
+| LightCoral
+| 240
+| 128
+| 128
+|-
+| LightCyan
+| 224
+| 255
+| 255
+|-
+| LightCyan1
+| 224
+| 255
+| 255
+|-
+| LightCyan2
+| 209
+| 238
+| 238
+|-
+| LightCyan3
+| 180
+| 205
+| 205
+|-
+| LightCyan4
+| 122
+| 139
+| 139
+|-
+| LightGoldenrod
+| 238
+| 221
+| 130
+|-
+| LightGoldenrod1
+| 255
+| 236
+| 139
+|-
+| LightGoldenrod2
+| 238
+| 220
+| 130
+|-
+| LightGoldenrod3
+| 205
+| 190
+| 112
+|-
+| LightGoldenrod4
+| 139
+| 129
+| 76
+|-
+| LightGoldenrodYellow
+| 250
+| 250
+| 210
+|-
+| LightGray
+| 211
+| 211
+| 211
+|-
+| LightGreen
+| 144
+| 238
+| 144
+|-
+| LightGrey
+| 211
+| 211
+| 211
+|-
+| LightPink
+| 255
+| 182
+| 193
+|-
+| LightPink1
+| 255
+| 174
+| 185
+|-
+| LightPink2
+| 238
+| 162
+| 173
+|-
+| LightPink3
+| 205
+| 140
+| 149
+|-
+| LightPink4
+| 139
+| 95
+| 101
+|-
+| LightSalmon
+| 255
+| 160
+| 122
+|-
+| LightSalmon1
+| 255
+| 160
+| 122
+|-
+| LightSalmon2
+| 238
+| 149
+| 114
+|-
+| LightSalmon3
+| 205
+| 129
+| 98
+|-
+| LightSalmon4
+| 139
+| 87
+| 66
+|-
+| LightSeaGreen
+| 32
+| 178
+| 170
+|-
+| LightSkyBlue
+| 135
+| 206
+| 250
+|-
+| LightSkyBlue1
+| 176
+| 226
+| 255
+|-
+| LightSkyBlue2
+| 164
+| 211
+| 238
+|-
+| LightSkyBlue3
+| 141
+| 182
+| 205
+|-
+| LightSkyBlue4
+| 96
+| 123
+| 139
+|-
+| LightSlateBlue
+| 132
+| 112
+| 255
+|-
+| LightSlateGray
+| 119
+| 136
+| 153
+|-
+| LightSlateGrey
+| 119
+| 136
+| 153
+|-
+| LightSteelBlue
+| 176
+| 196
+| 222
+|-
+| LightSteelBlue1
+| 202
+| 225
+| 255
+|-
+| LightSteelBlue2
+| 188
+| 210
+| 238
+|-
+| LightSteelBlue3
+| 162
+| 181
+| 205
+|-
+| LightSteelBlue4
+| 110
+| 123
+| 139
+|-
+| LightYellow
+| 255
+| 255
+| 224
+|-
+| LightYellow1
+| 255
+| 255
+| 224
+|-
+| LightYellow2
+| 238
+| 238
+| 209
+|-
+| LightYellow3
+| 205
+| 205
+| 180
+|-
+| LightYellow4
+| 139
+| 139
+| 122
+|-
+| lime green
+| 50
+| 205
+| 50
+|-
+| LimeGreen
+| 50
+| 205
+| 50
+|-
+| linen
+| 250
+| 240
+| 230
+|-
+| magenta
+| 255
+| 0
+| 255
+|-
+| magenta1
+| 255
+| 0
+| 255
+|-
+| magenta2
+| 238
+| 0
+| 238
+|-
+| magenta3
+| 205
+| 0
+| 205
+|-
+| magenta4
+| 139
+| 0
+| 139
+|-
+| maroon
+| 176
+| 48
+| 96
+|-
+| maroon1
+| 255
+| 52
+| 179
+|-
+| maroon2
+| 238
+| 48
+| 167
+|-
+| maroon3
+| 205
+| 41
+| 144
+|-
+| maroon4
+| 139
+| 28
+| 98
+|-
+| medium aquamarine
+| 102
+| 205
+| 170
+|-
+| medium blue
+| 0
+| 0
+| 205
+|-
+| medium orchid
+| 186
+| 85
+| 211
+|-
+| medium purple
+| 147
+| 112
+| 219
+|-
+| medium sea green
+| 60
+| 179
+| 113
+|-
+| medium slate blue
+| 123
+| 104
+| 238
+|-
+| medium spring green
+| 0
+| 250
+| 154
+|-
+| medium turquoise
+| 72
+| 209
+| 204
+|-
+| medium violet red
+| 199
+| 21
+| 133
+|-
+| MediumAquamarine
+| 102
+| 205
+| 170
+|-
+| MediumBlue
+| 0
+| 0
+| 205
+|-
+| MediumOrchid
+| 186
+| 85
+| 211
+|-
+| MediumOrchid1
+| 224
+| 102
+| 255
+|-
+| MediumOrchid2
+| 209
+| 95
+| 238
+|-
+| MediumOrchid3
+| 180
+| 82
+| 205
+|-
+| MediumOrchid4
+| 122
+| 55
+| 139
+|-
+| MediumPurple
+| 147
+| 112
+| 219
+|-
+| MediumPurple1
+| 171
+| 130
+| 255
+|-
+| MediumPurple2
+| 159
+| 121
+| 238
+|-
+| MediumPurple3
+| 137
+| 104
+| 205
+|-
+| MediumPurple4
+| 93
+| 71
+| 139
+|-
+| MediumSeaGreen
+| 60
+| 179
+| 113
+|-
+| MediumSlateBlue
+| 123
+| 104
+| 238
+|-
+| MediumSpringGreen
+| 0
+| 250
+| 154
+|-
+| MediumTurquoise
+| 72
+| 209
+| 204
+|-
+| MediumVioletRed
+| 199
+| 21
+| 133
+|-
+| midnight blue
+| 25
+| 25
+| 112
+|-
+| MidnightBlue
+| 25
+| 25
+| 112
+|-
+| mint cream
+| 245
+| 255
+| 250
+|-
+| MintCream
+| 245
+| 255
+| 250
+|-
+| misty rose
+| 255
+| 228
+| 225
+|-
+| MistyRose
+| 255
+| 228
+| 225
+|-
+| MistyRose1
+| 255
+| 228
+| 225
+|-
+| MistyRose2
+| 238
+| 213
+| 210
+|-
+| MistyRose3
+| 205
+| 183
+| 181
+|-
+| MistyRose4
+| 139
+| 125
+| 123
+|-
+| moccasin
+| 255
+| 228
+| 181
+|-
+| navajo white
+| 255
+| 222
+| 173
+|-
+| NavajoWhite
+| 255
+| 222
+| 173
+|-
+| NavajoWhite1
+| 255
+| 222
+| 173
+|-
+| NavajoWhite2
+| 238
+| 207
+| 161
+|-
+| NavajoWhite3
+| 205
+| 179
+| 139
+|-
+| NavajoWhite4
+| 139
+| 121
+| 94
+|-
+| navy
+| 0
+| 0
+| 128
+|-
+| navy blue
+| 0
+| 0
+| 128
+|-
+| NavyBlue
+| 0
+| 0
+| 128
+|-
+| old lace
+| 253
+| 245
+| 230
+|-
+| OldLace
+| 253
+| 245
+| 230
+|-
+| olive drab
+| 107
+| 142
+| 35
+|-
+| OliveDrab
+| 107
+| 142
+| 35
+|-
+| OliveDrab1
+| 192
+| 255
+| 62
+|-
+| OliveDrab2
+| 179
+| 238
+| 58
+|-
+| OliveDrab3
+| 154
+| 205
+| 50
+|-
+| OliveDrab4
+| 105
+| 139
+| 34
+|-
+| orange
+| 255
+| 165
+| 0
+|-
+| orange red
+| 255
+| 69
+| 0
+|-
+| orange1
+| 255
+| 165
+| 0
+|-
+| orange2
+| 238
+| 154
+| 0
+|-
+| orange3
+| 205
+| 133
+| 0
+|-
+| orange4
+| 139
+| 90
+| 0
+|-
+| OrangeRed
+| 255
+| 69
+| 0
+|-
+| OrangeRed1
+| 255
+| 69
+| 0
+|-
+| OrangeRed2
+| 238
+| 64
+| 0
+|-
+| OrangeRed3
+| 205
+| 55
+| 0
+|-
+| OrangeRed4
+| 139
+| 37
+| 0
+|-
+| orchid
+| 218
+| 112
+| 214
+|-
+| orchid1
+| 255
+| 131
+| 250
+|-
+| orchid2
+| 238
+| 122
+| 233
+|-
+| orchid3
+| 205
+| 105
+| 201
+|-
+| orchid4
+| 139
+| 71
+| 137
+|-
+| pale goldenrod
+| 238
+| 232
+| 170
+|-
+| pale green
+| 152
+| 251
+| 152
+|-
+| pale turquoise
+| 175
+| 238
+| 238
+|-
+| pale violet red
+| 219
+| 112
+| 147
+|-
+| PaleGoldenrod
+| 238
+| 232
+| 170
+|-
+| PaleGreen
+| 152
+| 251
+| 152
+|-
+| PaleGreen1
+| 154
+| 255
+| 154
+|-
+| PaleGreen2
+| 144
+| 238
+| 144
+|-
+| PaleGreen3
+| 124
+| 205
+| 124
+|-
+| PaleGreen4
+| 84
+| 139
+| 84
+|-
+| PaleTurquoise
+| 175
+| 238
+| 238
+|-
+| PaleTurquoise1
+| 187
+| 255
+| 255
+|-
+| PaleTurquoise2
+| 174
+| 238
+| 238
+|-
+| PaleTurquoise3
+| 150
+| 205
+| 205
+|-
+| PaleTurquoise4
+| 102
+| 139
+| 139
+|-
+| PaleVioletRed
+| 219
+| 112
+| 147
+|-
+| PaleVioletRed1
+| 255
+| 130
+| 171
+|-
+| PaleVioletRed2
+| 238
+| 121
+| 159
+|-
+| PaleVioletRed3
+| 205
+| 104
+| 127
+|-
+| PaleVioletRed4
+| 139
+| 71
+| 93
+|-
+| papaya whip
+| 255
+| 239
+| 213
+|-
+| PapayaWhip
+| 255
+| 239
+| 213
+|-
+| peach puff
+| 255
+| 218
+| 185
+|-
+| PeachPuff
+| 255
+| 218
+| 185
+|-
+| PeachPuff1
+| 255
+| 218
+| 185
+|-
+| PeachPuff2
+| 238
+| 203
+| 173
+|-
+| PeachPuff3
+| 205
+| 175
+| 149
+|-
+| PeachPuff4
+| 139
+| 119
+| 101
+|-
+| peru
+| 205
+| 133
+| 63
+|-
+| pink
+| 255
+| 192
+| 203
+|-
+| pink1
+| 255
+| 181
+| 197
+|-
+| pink2
+| 238
+| 169
+| 184
+|-
+| pink3
+| 205
+| 145
+| 158
+|-
+| pink4
+| 139
+| 99
+| 108
+|-
+| plum
+| 221
+| 160
+| 221
+|-
+| plum1
+| 255
+| 187
+| 255
+|-
+| plum2
+| 238
+| 174
+| 238
+|-
+| plum3
+| 205
+| 150
+| 205
+|-
+| plum4
+| 139
+| 102
+| 139
+|-
+| powder blue
+| 176
+| 224
+| 230
+|-
+| PowderBlue
+| 176
+| 224
+| 230
+|-
+| purple
+| 160
+| 32
+| 240
+|-
+| purple1
+| 155
+| 48
+| 255
+|-
+| purple2
+| 145
+| 44
+| 238
+|-
+| purple3
+| 125
+| 38
+| 205
+|-
+| purple4
+| 85
+| 26
+| 139
+|-
+| red
+| 255
+| 0
+| 0
+|-
+| red1
+| 255
+| 0
+| 0
+|-
+| red2
+| 238
+| 0
+| 0
+|-
+| red3
+| 205
+| 0
+| 0
+|-
+| red4
+| 139
+| 0
+| 0
+|-
+| rosy brown
+| 188
+| 143
+| 143
+|-
+| RosyBrown
+| 188
+| 143
+| 143
+|-
+| RosyBrown1
+| 255
+| 193
+| 193
+|-
+| RosyBrown2
+| 238
+| 180
+| 180
+|-
+| RosyBrown3
+| 205
+| 155
+| 155
+|-
+| RosyBrown4
+| 139
+| 105
+| 105
+|-
+| royal blue
+| 65
+| 105
+| 225
+|-
+| RoyalBlue
+| 65
+| 105
+| 225
+|-
+| RoyalBlue1
+| 72
+| 118
+| 255
+|-
+| RoyalBlue2
+| 67
+| 110
+| 238
+|-
+| RoyalBlue3
+| 58
+| 95
+| 205
+|-
+| RoyalBlue4
+| 39
+| 64
+| 139
+|-
+| saddle brown
+| 139
+| 69
+| 19
+|-
+| SaddleBrown
+| 139
+| 69
+| 19
+|-
+| salmon
+| 250
+| 128
+| 114
+|-
+| salmon1
+| 255
+| 140
+| 105
+|-
+| salmon2
+| 238
+| 130
+| 98
+|-
+| salmon3
+| 205
+| 112
+| 84
+|-
+| salmon4
+| 139
+| 76
+| 57
+|-
+| sandy brown
+| 244
+| 164
+| 96
+|-
+| SandyBrown
+| 244
+| 164
+| 96
+|-
+| sea green
+| 46
+| 139
+| 87
+|-
+| SeaGreen
+| 46
+| 139
+| 87
+|-
+| SeaGreen1
+| 84
+| 255
+| 159
+|-
+| SeaGreen2
+| 78
+| 238
+| 148
+|-
+| SeaGreen3
+| 67
+| 205
+| 128
+|-
+| SeaGreen4
+| 46
+| 139
+| 87
+|-
+| seashell
+| 255
+| 245
+| 238
+|-
+| seashell1
+| 255
+| 245
+| 238
+|-
+| seashell2
+| 238
+| 229
+| 222
+|-
+| seashell3
+| 205
+| 197
+| 191
+|-
+| seashell4
+| 139
+| 134
+| 130
+|-
+| sienna
+| 160
+| 82
+| 45
+|-
+| sienna1
+| 255
+| 130
+| 71
+|-
+| sienna2
+| 238
+| 121
+| 66
+|-
+| sienna3
+| 205
+| 104
+| 57
+|-
+| sienna4
+| 139
+| 71
+| 38
+|-
+| sky blue
+| 135
+| 206
+| 235
+|-
+| SkyBlue
+| 135
+| 206
+| 235
+|-
+| SkyBlue1
+| 135
+| 206
+| 255
+|-
+| SkyBlue2
+| 126
+| 192
+| 238
+|-
+| SkyBlue3
+| 108
+| 166
+| 205
+|-
+| SkyBlue4
+| 74
+| 112
+| 139
+|-
+| slate blue
+| 106
+| 90
+| 205
+|-
+| slate gray
+| 112
+| 128
+| 144
+|-
+| slate grey
+| 112
+| 128
+| 144
+|-
+| SlateBlue
+| 106
+| 90
+| 205
+|-
+| SlateBlue1
+| 131
+| 111
+| 255
+|-
+| SlateBlue2
+| 122
+| 103
+| 238
+|-
+| SlateBlue3
+| 105
+| 89
+| 205
+|-
+| SlateBlue4
+| 71
+| 60
+| 139
+|-
+| SlateGray
+| 112
+| 128
+| 144
+|-
+| SlateGray1
+| 198
+| 226
+| 255
+|-
+| SlateGray2
+| 185
+| 211
+| 238
+|-
+| SlateGray3
+| 159
+| 182
+| 205
+|-
+| SlateGray4
+| 108
+| 123
+| 139
+|-
+| SlateGrey
+| 112
+| 128
+| 144
+|-
+| snow
+| 255
+| 250
+| 250
+|-
+| snow1
+| 255
+| 250
+| 250
+|-
+| snow2
+| 238
+| 233
+| 233
+|-
+| snow3
+| 205
+| 201
+| 201
+|-
+| snow4
+| 139
+| 137
+| 137
+|-
+| spring green
+| 0
+| 255
+| 127
+|-
+| SpringGreen
+| 0
+| 255
+| 127
+|-
+| SpringGreen1
+| 0
+| 255
+| 127
+|-
+| SpringGreen2
+| 0
+| 238
+| 118
+|-
+| SpringGreen3
+| 0
+| 205
+| 102
+|-
+| SpringGreen4
+| 0
+| 139
+| 69
+|-
+| steel blue
+| 70
+| 130
+| 180
+|-
+| SteelBlue
+| 70
+| 130
+| 180
+|-
+| SteelBlue1
+| 99
+| 184
+| 255
+|-
+| SteelBlue2
+| 92
+| 172
+| 238
+|-
+| SteelBlue3
+| 79
+| 148
+| 205
+|-
+| SteelBlue4
+| 54
+| 100
+| 139
+|-
+| tan
+| 210
+| 180
+| 140
+|-
+| tan1
+| 255
+| 165
+| 79
+|-
+| tan2
+| 238
+| 154
+| 73
+|-
+| tan3
+| 205
+| 133
+| 63
+|-
+| tan4
+| 139
+| 90
+| 43
+|-
+| thistle
+| 216
+| 191
+| 216
+|-
+| thistle1
+| 255
+| 225
+| 255
+|-
+| thistle2
+| 238
+| 210
+| 238
+|-
+| thistle3
+| 205
+| 181
+| 205
+|-
+| thistle4
+| 139
+| 123
+| 139
+|-
+| tomato
+| 255
+| 99
+| 71
+|-
+| tomato1
+| 255
+| 99
+| 71
+|-
+| tomato2
+| 238
+| 92
+| 66
+|-
+| tomato3
+| 205
+| 79
+| 57
+|-
+| tomato4
+| 139
+| 54
+| 38
+|-
+| turquoise
+| 64
+| 224
+| 208
+|-
+| turquoise1
+| 0
+| 245
+| 255
+|-
+| turquoise2
+| 0
+| 229
+| 238
+|-
+| turquoise3
+| 0
+| 197
+| 205
+|-
+| turquoise4
+| 0
+| 134
+| 139
+|-
+| violet
+| 238
+| 130
+| 238
+|-
+| violet red
+| 208
+| 32
+| 144
+|-
+| VioletRed
+| 208
+| 32
+| 144
+|-
+| VioletRed1
+| 255
+| 62
+| 150
+|-
+| VioletRed2
+| 238
+| 58
+| 140
+|-
+| VioletRed3
+| 205
+| 50
+| 120
+|-
+| VioletRed4
+| 139
+| 34
+| 82
+|-
+| wheat
+| 245
+| 222
+| 179
+|-
+| wheat1
+| 255
+| 231
+| 186
+|-
+| wheat2
+| 238
+| 216
+| 174
+|-
+| wheat3
+| 205
+| 186
+| 150
+|-
+| wheat4
+| 139
+| 126
+| 102
+|-
+| white
+| 255
+| 255
+| 255
+|-
+| white smoke
+| 245
+| 245
+| 245
+|-
+| WhiteSmoke
+| 245
+| 245
+| 245
+|-
+| yellow
+| 255
+| 255
+| 0
+|-
+| yellow green
+| 154
+| 205
+| 50
+|-
+| yellow1
+| 255
+| 255
+| 0
+|-
+| yellow2
+| 238
+| 238
+| 0
+|-
+| yellow3
+| 205
+| 205
+| 0
+|-
+| yellow4
+| 139
+| 139
+| 0
+|-
+| YellowGreen
+| 154
+| 205
+| 50
+|}
+
+Paleta de colores del sistema Mac OS X:
+
+En Mac OS X, los siguientes colores adicionales del sistema están disponibles (tenga en cuenta que los valores de color reales dependen del tema de sistema operativo actualmente activo).
+
+<pre>
+systemActiveAreaFill
+systemAlertActiveText
+systemAlertBackgroundActive
+systemAlertBackgroundInactive
+systemAlertInactiveText
+systemAlternatePrimaryHighlightColor
+systemAppleGuideCoachmark
+systemBevelActiveDark
+systemBevelActiveLight
+systemBevelButtonActiveText
+systemBevelButtonInactiveText
+systemBevelButtonPressedText
+systemBevelButtonStickyActiveText
+systemBevelButtonStickyInactiveText
+systemBevelInactiveDark
+systemBevelInactiveLight
+systemBlack
+systemBlackText
+systemButtonActiveDarkHighlight
+systemButtonActiveDarkShadow
+systemButtonActiveLightHighlight
+systemButtonActiveLightShadow
+systemButtonFace
+systemButtonFaceActive
+systemButtonFaceInactive
+systemButtonFacePressed
+systemButtonFrame
+systemButtonFrameActive
+systemButtonFrameInactive
+systemButtonInactiveDarkHighlight
+systemButtonInactiveDarkShadow
+systemButtonInactiveLightHighlight
+systemButtonInactiveLightShadow
+systemButtonPressedDarkHighlight
+systemButtonPressedDarkShadow
+systemButtonPressedLightHighlight
+systemButtonPressedLightShadow
+systemButtonText
+systemChasingArrows
+systemDialogActiveText
+systemDialogBackgroundActive
+systemDialogBackgroundInactive
+systemDialogInactiveText
+systemDocumentWindowBackground
+systemDocumentWindowTitleActiveText
+systemDocumentWindowTitleInactiveText
+systemDragHilite
+systemDrawerBackground
+systemFinderWindowBackground
+systemFocusHighlight
+systemHighlight
+systemHighlightAlternate
+systemHighlightSecondary
+systemHighlightText
+systemIconLabelBackground
+systemIconLabelBackgroundSelected
+systemIconLabelSelectedText
+systemIconLabelText
+systemListViewBackground
+systemListViewColumnDivider
+systemListViewEvenRowBackground
+systemListViewOddRowBackground
+systemListViewSeparator
+systemListViewSortColumnBackground
+systemListViewText
+systemListViewWindowHeaderBackground
+systemMenu
+systemMenuActive
+systemMenuActiveText
+systemMenuBackground
+systemMenuBackgroundSelected
+systemMenuDisabled
+systemMenuItemActiveText
+systemMenuItemDisabledText
+systemMenuItemSelectedText
+systemMenuText
+systemMetalBackground
+systemModelessDialogActiveText
+systemModelessDialogBackgroundActive
+systemModelessDialogBackgroundInactive
+systemModelessDialogInactiveText
+systemMovableModalBackground
+systemMovableModalWindowTitleActiveText
+systemMovableModalWindowTitleInactiveText
+systemNotificationText
+systemNotificationWindowBackground
+systemPlacardActiveText
+systemPlacardBackground
+systemPlacardInactiveText
+systemPlacardPressedText
+systemPopupArrowActive
+systemPopupArrowInactive
+systemPopupArrowPressed
+systemPopupButtonActiveText
+systemPopupButtonInactiveText
+systemPopupButtonPressedText
+systemPopupLabelActiveText
+systemPopupLabelInactiveText
+systemPopupWindowTitleActiveText
+systemPopupWindowTitleInactiveText
+systemPrimaryHighlightColor
+systemPushButtonActiveText
+systemPushButtonInactiveText
+systemPushButtonPressedText
+systemRootMenuActiveText
+systemRootMenuDisabledText
+systemRootMenuSelectedText
+systemScrollBarDelimiterActive
+systemScrollBarDelimiterInactive
+systemSecondaryGroupBoxBackground
+systemSecondaryHighlightColor
+systemSheetBackground
+systemSheetBackgroundOpaque
+systemSheetBackgroundTransparent
+systemStaticAreaFill
+systemSystemDetailText
+systemTabFrontActiveText
+systemTabFrontInactiveText
+systemTabNonFrontActiveText
+systemTabNonFrontInactiveText
+systemTabNonFrontPressedText
+systemTabPaneBackground
+systemToolbarBackground
+systemTransparent
+systemUtilityWindowBackgroundActive
+systemUtilityWindowBackgroundInactive
+systemUtilityWindowTitleActiveText
+systemUtilityWindowTitleInactiveText
+systemWhite
+systemWhiteText
+systemWindowBody
+systemWindowHeaderActiveText
+systemWindowHeaderBackground
+systemWindowHeaderInactiveText
+</pre>
+
+Paleta de colores del sistema Windows:
+
+En Windows, los siguientes colores adicionales del sistema están disponibles (tenga en cuenta que los valores de color reales dependen del tema de sistema operativo actualmente activo).
+
+<pre>
+3dDarkShadow
+3dLight
+ActiveBorder
+ActiveCaption
+AppWorkspace
+Background
+ButtonFace
+ButtonHighlight
+ButtonShadow
+ButtonText
+CaptionText
+DisabledText
+GrayText
+Highlight
+HighlightText
+InactiveBorder
+InactiveCaption
+InactiveCaptionText
+InfoBackground
+InfoText
+Menu
+MenuText
+Scrollbar
+Window
+WindowFrame
+WindowText
+</pre>
+
+Paleta de colores X11:
+
+{| border="1"
+|-
+! Nombre
+! Rojo
+! Verde
+! Azul
+|-
+| alice blue
+| 240
+| 248
+| 255
+|-
+| AliceBlue
+| 240
+| 248
+| 255
+|-
+| antique white
+| 250
+| 235
+| 215
+|-
+| AntiqueWhite
+| 250
+| 235
+| 215
+|-
+| AntiqueWhite1
+| 255
+| 239
+| 219
+|-
+| AntiqueWhite2
+| 238
+| 223
+| 204
+|-
+| AntiqueWhite3
+| 205
+| 192
+| 176
+|-
+| AntiqueWhite4
+| 139
+| 131
+| 120
+|-
+| aquamarine
+| 127
+| 255
+| 212
+|-
+| aquamarine1
+| 127
+| 255
+| 212
+|-
+| aquamarine2
+| 118
+| 238
+| 198
+|-
+| aquamarine3
+| 102
+| 205
+| 170
+|-
+| aquamarine4
+| 69
+| 139
+| 116
+|-
+| azure
+| 240
+| 255
+| 255
+|-
+| azure1
+| 240
+| 255
+| 255
+|-
+| azure2
+| 224
+| 238
+| 238
+|-
+| azure3
+| 193
+| 205
+| 205
+|-
+| azure4
+| 131
+| 139
+| 139
+|-
+| beige
+| 245
+| 245
+| 220
+|-
+| bisque
+| 255
+| 228
+| 196
+|-
+| bisque1
+| 255
+| 228
+| 196
+|-
+| bisque2
+| 238
+| 213
+| 183
+|-
+| bisque3
+| 205
+| 183
+| 158
+|-
+| bisque4
+| 139
+| 125
+| 107
+|-
+| black
+| 0
+| 0
+| 0
+|-
+| blanched almond
+| 255
+| 235
+| 205
+|-
+| BlanchedAlmond
+| 255
+| 235
+| 205
+|-
+| blue
+| 0
+| 0
+| 255
+|-
+| blue violet
+| 138
+| 43
+| 226
+|-
+| blue1
+| 0
+| 0
+| 255
+|-
+| blue2
+| 0
+| 0
+| 238
+|-
+| blue3
+| 0
+| 0
+| 205
+|-
+| blue4
+| 0
+| 0
+| 139
+|-
+| BlueViolet
+| 138
+| 43
+| 226
+|-
+| brown
+| 165
+| 42
+| 42
+|-
+| brown1
+| 255
+| 64
+| 64
+|-
+| brown2
+| 238
+| 59
+| 59
+|-
+| brown3
+| 205
+| 51
+| 51
+|-
+| brown4
+| 139
+| 35
+| 35
+|-
+| burlywood
+| 222
+| 184
+| 135
+|-
+| burlywood1
+| 255
+| 211
+| 155
+|-
+| burlywood2
+| 238
+| 197
+| 145
+|-
+| burlywood3
+| 205
+| 170
+| 125
+|-
+| burlywood4
+| 139
+| 115
+| 85
+|-
+| cadet blue
+| 95
+| 158
+| 160
+|-
+| CadetBlue
+| 95
+| 158
+| 160
+|-
+| CadetBlue1
+| 152
+| 245
+| 255
+|-
+| CadetBlue2
+| 142
+| 229
+| 238
+|-
+| CadetBlue3
+| 122
+| 197
+| 205
+|-
+| CadetBlue4
+| 83
+| 134
+| 139
+|-
+| chartreuse
+| 127
+| 255
+| 0
+|-
+| chartreuse1
+| 127
+| 255
+| 0
+|-
+| chartreuse2
+| 118
+| 238
+| 0
+|-
+| chartreuse3
+| 102
+| 205
+| 0
+|-
+| chartreuse4
+| 69
+| 139
+| 0
+|-
+| chocolate
+| 210
+| 105
+| 30
+|-
+| chocolate1
+| 255
+| 127
+| 36
+|-
+| chocolate2
+| 238
+| 118
+| 33
+|-
+| chocolate3
+| 205
+| 102
+| 29
+|-
+| chocolate4
+| 139
+| 69
+| 19
+|-
+| coral
+| 255
+| 127
+| 80
+|-
+| coral1
+| 255
+| 114
+| 86
+|-
+| coral2
+| 238
+| 106
+| 80
+|-
+| coral3
+| 205
+| 91
+| 69
+|-
+| coral4
+| 139
+| 62
+| 47
+|-
+| cornflower blue
+| 100
+| 149
+| 237
+|-
+| CornflowerBlue
+| 100
+| 149
+| 237
+|-
+| cornsilk
+| 255
+| 248
+| 220
+|-
+| cornsilk1
+| 255
+| 248
+| 220
+|-
+| cornsilk2
+| 238
+| 232
+| 205
+|-
+| cornsilk3
+| 205
+| 200
+| 177
+|-
+| cornsilk4
+| 139
+| 136
+| 120
+|-
+| cyan
+| 0
+| 255
+| 255
+|-
+| cyan1
+| 0
+| 255
+| 255
+|-
+| cyan2
+| 0
+| 238
+| 238
+|-
+| cyan3
+| 0
+| 205
+| 205
+|-
+| cyan4
+| 0
+| 139
+| 139
+|-
+| dark blue
+| 0
+| 0
+| 139
+|-
+| dark cyan
+| 0
+| 139
+| 139
+|-
+| dark goldenrod
+| 184
+| 134
+| 11
+|-
+| dark gray
+| 169
+| 169
+| 169
+|-
+| dark green
+| 0
+| 100
+| 0
+|-
+| dark grey
+| 169
+| 169
+| 169
+|-
+| dark khaki
+| 189
+| 183
+| 107
+|-
+| dark magenta
+| 139
+| 0
+| 139
+|-
+| dark olive green
+| 85
+| 107
+| 47
+|-
+| dark orange
+| 255
+| 140
+| 0
+|-
+| dark orchid
+| 153
+| 50
+| 204
+|-
+| dark red
+| 139
+| 0
+| 0
+|-
+| dark salmon
+| 233
+| 150
+| 122
+|-
+| dark sea green
+| 143
+| 188
+| 143
+|-
+| dark slate blue
+| 72
+| 61
+| 139
+|-
+| dark slate gray
+| 47
+| 79
+| 79
+|-
+| dark slate grey
+| 47
+| 79
+| 79
+|-
+| dark turquoise
+| 0
+| 206
+| 209
+|-
+| dark violet
+| 148
+| 0
+| 211
+|-
+| DarkBlue
+| 0
+| 0
+| 139
+|-
+| DarkCyan
+| 0
+| 139
+| 139
+|-
+| DarkGoldenrod
+| 184
+| 134
+| 11
+|-
+| DarkGoldenrod1
+| 255
+| 185
+| 15
+|-
+| DarkGoldenrod2
+| 238
+| 173
+| 14
+|-
+| DarkGoldenrod3
+| 205
+| 149
+| 12
+|-
+| DarkGoldenrod4
+| 139
+| 101
+| 8
+|-
+| DarkGray
+| 169
+| 169
+| 169
+|-
+| DarkGreen
+| 0
+| 100
+| 0
+|-
+| DarkGrey
+| 169
+| 169
+| 169
+|-
+| DarkKhaki
+| 189
+| 183
+| 107
+|-
+| DarkMagenta
+| 139
+| 0
+| 139
+|-
+| DarkOliveGreen
+| 85
+| 107
+| 47
+|-
+| DarkOliveGreen1
+| 202
+| 255
+| 112
+|-
+| DarkOliveGreen2
+| 188
+| 238
+| 104
+|-
+| DarkOliveGreen3
+| 162
+| 205
+| 90
+|-
+| DarkOliveGreen4
+| 110
+| 139
+| 61
+|-
+| DarkOrange
+| 255
+| 140
+| 0
+|-
+| DarkOrange1
+| 255
+| 127
+| 0
+|-
+| DarkOrange2
+| 238
+| 118
+| 0
+|-
+| DarkOrange3
+| 205
+| 102
+| 0
+|-
+| DarkOrange4
+| 139
+| 69
+| 0
+|-
+| DarkOrchid
+| 153
+| 50
+| 204
+|-
+| DarkOrchid1
+| 191
+| 62
+| 255
+|-
+| DarkOrchid2
+| 178
+| 58
+| 238
+|-
+| DarkOrchid3
+| 154
+| 50
+| 205
+|-
+| DarkOrchid4
+| 104
+| 34
+| 139
+|-
+| DarkRed
+| 139
+| 0
+| 0
+|-
+| DarkSalmon
+| 233
+| 150
+| 122
+|-
+| DarkSeaGreen
+| 143
+| 188
+| 143
+|-
+| DarkSeaGreen1
+| 193
+| 255
+| 193
+|-
+| DarkSeaGreen2
+| 180
+| 238
+| 180
+|-
+| DarkSeaGreen3
+| 155
+| 205
+| 155
+|-
+| DarkSeaGreen4
+| 105
+| 139
+| 105
+|-
+| DarkSlateBlue
+| 72
+| 61
+| 139
+|-
+| DarkSlateGray
+| 47
+| 79
+| 79
+|-
+| DarkSlateGray1
+| 151
+| 255
+| 255
+|-
+| DarkSlateGray2
+| 141
+| 238
+| 238
+|-
+| DarkSlateGray3
+| 121
+| 205
+| 205
+|-
+| DarkSlateGray4
+| 82
+| 139
+| 139
+|-
+| DarkSlateGrey
+| 47
+| 79
+| 79
+|-
+| DarkTurquoise
+| 0
+| 206
+| 209
+|-
+| DarkViolet
+| 148
+| 0
+| 211
+|-
+| DebianRed
+| 215
+| 7
+| 81
+|-
+| deep pink
+| 255
+| 20
+| 147
+|-
+| deep sky blue
+| 0
+| 191
+| 255
+|-
+| DeepPink
+| 255
+| 20
+| 147
+|-
+| DeepPink1
+| 255
+| 20
+| 147
+|-
+| DeepPink2
+| 238
+| 18
+| 137
+|-
+| DeepPink3
+| 205
+| 16
+| 118
+|-
+| DeepPink4
+| 139
+| 10
+| 80
+|-
+| DeepSkyBlue
+| 0
+| 191
+| 255
+|-
+| DeepSkyBlue1
+| 0
+| 191
+| 255
+|-
+| DeepSkyBlue2
+| 0
+| 178
+| 238
+|-
+| DeepSkyBlue3
+| 0
+| 154
+| 205
+|-
+| DeepSkyBlue4
+| 0
+| 104
+| 139
+|-
+| dim gray
+| 105
+| 105
+| 105
+|-
+| dim grey
+| 105
+| 105
+| 105
+|-
+| DimGray
+| 105
+| 105
+| 105
+|-
+| DimGrey
+| 105
+| 105
+| 105
+|-
+| dodger blue
+| 30
+| 144
+| 255
+|-
+| DodgerBlue
+| 30
+| 144
+| 255
+|-
+| DodgerBlue1
+| 30
+| 144
+| 255
+|-
+| DodgerBlue2
+| 28
+| 134
+| 238
+|-
+| DodgerBlue3
+| 24
+| 116
+| 205
+|-
+| DodgerBlue4
+| 16
+| 78
+| 139
+|-
+| firebrick
+| 178
+| 34
+| 34
+|-
+| firebrick1
+| 255
+| 48
+| 48
+|-
+| firebrick2
+| 238
+| 44
+| 44
+|-
+| firebrick3
+| 205
+| 38
+| 38
+|-
+| firebrick4
+| 139
+| 26
+| 26
+|-
+| floral white
+| 255
+| 250
+| 240
+|-
+| FloralWhite
+| 255
+| 250
+| 240
+|-
+| forest green
+| 34
+| 139
+| 34
+|-
+| ForestGreen
+| 34
+| 139
+| 34
+|-
+| gainsboro
+| 220
+| 220
+| 220
+|-
+| ghost white
+| 248
+| 248
+| 255
+|-
+| GhostWhite
+| 248
+| 248
+| 255
+|-
+| gold
+| 255
+| 215
+| 0
+|-
+| gold1
+| 255
+| 215
+| 0
+|-
+| gold2
+| 238
+| 201
+| 0
+|-
+| gold3
+| 205
+| 173
+| 0
+|-
+| gold4
+| 139
+| 117
+| 0
+|-
+| goldenrod
+| 218
+| 165
+| 32
+|-
+| goldenrod1
+| 255
+| 193
+| 37
+|-
+| goldenrod2
+| 238
+| 180
+| 34
+|-
+| goldenrod3
+| 205
+| 155
+| 29
+|-
+| goldenrod4
+| 139
+| 105
+| 20
+|-
+| gray
+| 190
+| 190
+| 190
+|-
+| gray0
+| 0
+| 0
+| 0
+|-
+| gray1
+| 3
+| 3
+| 3
+|-
+| gray10
+| 26
+| 26
+| 26
+|-
+| gray100
+| 255
+| 255
+| 255
+|-
+| gray11
+| 28
+| 28
+| 28
+|-
+| gray12
+| 31
+| 31
+| 31
+|-
+| gray13
+| 33
+| 33
+| 33
+|-
+| gray14
+| 36
+| 36
+| 36
+|-
+| gray15
+| 38
+| 38
+| 38
+|-
+| gray16
+| 41
+| 41
+| 41
+|-
+| gray17
+| 43
+| 43
+| 43
+|-
+| gray18
+| 46
+| 46
+| 46
+|-
+| gray19
+| 48
+| 48
+| 48
+|-
+| gray2
+| 5
+| 5
+| 5
+|-
+| gray20
+| 51
+| 51
+| 51
+|-
+| gray21
+| 54
+| 54
+| 54
+|-
+| gray22
+| 56
+| 56
+| 56
+|-
+| gray23
+| 59
+| 59
+| 59
+|-
+| gray24
+| 61
+| 61
+| 61
+|-
+| gray25
+| 64
+| 64
+| 64
+|-
+| gray26
+| 66
+| 66
+| 66
+|-
+| gray27
+| 69
+| 69
+| 69
+|-
+| gray28
+| 71
+| 71
+| 71
+|-
+| gray29
+| 74
+| 74
+| 74
+|-
+| gray3
+| 8
+| 8
+| 8
+|-
+| gray30
+| 77
+| 77
+| 77
+|-
+| gray31
+| 79
+| 79
+| 79
+|-
+| gray32
+| 82
+| 82
+| 82
+|-
+| gray33
+| 84
+| 84
+| 84
+|-
+| gray34
+| 87
+| 87
+| 87
+|-
+| gray35
+| 89
+| 89
+| 89
+|-
+| gray36
+| 92
+| 92
+| 92
+|-
+| gray37
+| 94
+| 94
+| 94
+|-
+| gray38
+| 97
+| 97
+| 97
+|-
+| gray39
+| 99
+| 99
+| 99
+|-
+| gray4
+| 10
+| 10
+| 10
+|-
+| gray40
+| 102
+| 102
+| 102
+|-
+| gray41
+| 105
+| 105
+| 105
+|-
+| gray42
+| 107
+| 107
+| 107
+|-
+| gray43
+| 110
+| 110
+| 110
+|-
+| gray44
+| 112
+| 112
+| 112
+|-
+| gray45
+| 115
+| 115
+| 115
+|-
+| gray46
+| 117
+| 117
+| 117
+|-
+| gray47
+| 120
+| 120
+| 120
+|-
+| gray48
+| 122
+| 122
+| 122
+|-
+| gray49
+| 125
+| 125
+| 125
+|-
+| gray5
+| 13
+| 13
+| 13
+|-
+| gray50
+| 127
+| 127
+| 127
+|-
+| gray51
+| 130
+| 130
+| 130
+|-
+| gray52
+| 133
+| 133
+| 133
+|-
+| gray53
+| 135
+| 135
+| 135
+|-
+| gray54
+| 138
+| 138
+| 138
+|-
+| gray55
+| 140
+| 140
+| 140
+|-
+| gray56
+| 143
+| 143
+| 143
+|-
+| gray57
+| 145
+| 145
+| 145
+|-
+| gray58
+| 148
+| 148
+| 148
+|-
+| gray59
+| 150
+| 150
+| 150
+|-
+| gray6
+| 15
+| 15
+| 15
+|-
+| gray60
+| 153
+| 153
+| 153
+|-
+| gray61
+| 156
+| 156
+| 156
+|-
+| gray62
+| 158
+| 158
+| 158
+|-
+| gray63
+| 161
+| 161
+| 161
+|-
+| gray64
+| 163
+| 163
+| 163
+|-
+| gray65
+| 166
+| 166
+| 166
+|-
+| gray66
+| 168
+| 168
+| 168
+|-
+| gray67
+| 171
+| 171
+| 171
+|-
+| gray68
+| 173
+| 173
+| 173
+|-
+| gray69
+| 176
+| 176
+| 176
+|-
+| gray7
+| 18
+| 18
+| 18
+|-
+| gray70
+| 179
+| 179
+| 179
+|-
+| gray71
+| 181
+| 181
+| 181
+|-
+| gray72
+| 184
+| 184
+| 184
+|-
+| gray73
+| 186
+| 186
+| 186
+|-
+| gray74
+| 189
+| 189
+| 189
+|-
+| gray75
+| 191
+| 191
+| 191
+|-
+| gray76
+| 194
+| 194
+| 194
+|-
+| gray77
+| 196
+| 196
+| 196
+|-
+| gray78
+| 199
+| 199
+| 199
+|-
+| gray79
+| 201
+| 201
+| 201
+|-
+| gray8
+| 20
+| 20
+| 20
+|-
+| gray80
+| 204
+| 204
+| 204
+|-
+| gray81
+| 207
+| 207
+| 207
+|-
+| gray82
+| 209
+| 209
+| 209
+|-
+| gray83
+| 212
+| 212
+| 212
+|-
+| gray84
+| 214
+| 214
+| 214
+|-
+| gray85
+| 217
+| 217
+| 217
+|-
+| gray86
+| 219
+| 219
+| 219
+|-
+| gray87
+| 222
+| 222
+| 222
+|-
+| gray88
+| 224
+| 224
+| 224
+|-
+| gray89
+| 227
+| 227
+| 227
+|-
+| gray9
+| 23
+| 23
+| 23
+|-
+| gray90
+| 229
+| 229
+| 229
+|-
+| gray91
+| 232
+| 232
+| 232
+|-
+| gray92
+| 235
+| 235
+| 235
+|-
+| gray93
+| 237
+| 237
+| 237
+|-
+| gray94
+| 240
+| 240
+| 240
+|-
+| gray95
+| 242
+| 242
+| 242
+|-
+| gray96
+| 245
+| 245
+| 245
+|-
+| gray97
+| 247
+| 247
+| 247
+|-
+| gray98
+| 250
+| 250
+| 250
+|-
+| gray99
+| 252
+| 252
+| 252
+|-
+| green
+| 0
+| 255
+| 0
+|-
+| green yellow
+| 173
+| 255
+| 47
+|-
+| green1
+| 0
+| 255
+| 0
+|-
+| green2
+| 0
+| 238
+| 0
+|-
+| green3
+| 0
+| 205
+| 0
+|-
+| green4
+| 0
+| 139
+| 0
+|-
+| GreenYellow
+| 173
+| 255
+| 47
+|-
+| grey
+| 190
+| 190
+| 190
+|-
+| grey0
+| 0
+| 0
+| 0
+|-
+| grey1
+| 3
+| 3
+| 3
+|-
+| grey10
+| 26
+| 26
+| 26
+|-
+| grey100
+| 255
+| 255
+| 255
+|-
+| grey11
+| 28
+| 28
+| 28
+|-
+| grey12
+| 31
+| 31
+| 31
+|-
+| grey13
+| 33
+| 33
+| 33
+|-
+| grey14
+| 36
+| 36
+| 36
+|-
+| grey15
+| 38
+| 38
+| 38
+|-
+| grey16
+| 41
+| 41
+| 41
+|-
+| grey17
+| 43
+| 43
+| 43
+|-
+| grey18
+| 46
+| 46
+| 46
+|-
+| grey19
+| 48
+| 48
+| 48
+|-
+| grey2
+| 5
+| 5
+| 5
+|-
+| grey20
+| 51
+| 51
+| 51
+|-
+| grey21
+| 54
+| 54
+| 54
+|-
+| grey22
+| 56
+| 56
+| 56
+|-
+| grey23
+| 59
+| 59
+| 59
+|-
+| grey24
+| 61
+| 61
+| 61
+|-
+| grey25
+| 64
+| 64
+| 64
+|-
+| grey26
+| 66
+| 66
+| 66
+|-
+| grey27
+| 69
+| 69
+| 69
+|-
+| grey28
+| 71
+| 71
+| 71
+|-
+| grey29
+| 74
+| 74
+| 74
+|-
+| grey3
+| 8
+| 8
+| 8
+|-
+| grey30
+| 77
+| 77
+| 77
+|-
+| grey31
+| 79
+| 79
+| 79
+|-
+| grey32
+| 82
+| 82
+| 82
+|-
+| grey33
+| 84
+| 84
+| 84
+|-
+| grey34
+| 87
+| 87
+| 87
+|-
+| grey35
+| 89
+| 89
+| 89
+|-
+| grey36
+| 92
+| 92
+| 92
+|-
+| grey37
+| 94
+| 94
+| 94
+|-
+| grey38
+| 97
+| 97
+| 97
+|-
+| grey39
+| 99
+| 99
+| 99
+|-
+| grey4
+| 10
+| 10
+| 10
+|-
+| grey40
+| 102
+| 102
+| 102
+|-
+| grey41
+| 105
+| 105
+| 105
+|-
+| grey42
+| 107
+| 107
+| 107
+|-
+| grey43
+| 110
+| 110
+| 110
+|-
+| grey44
+| 112
+| 112
+| 112
+|-
+| grey45
+| 115
+| 115
+| 115
+|-
+| grey46
+| 117
+| 117
+| 117
+|-
+| grey47
+| 120
+| 120
+| 120
+|-
+| grey48
+| 122
+| 122
+| 122
+|-
+| grey49
+| 125
+| 125
+| 125
+|-
+| grey5
+| 13
+| 13
+| 13
+|-
+| grey50
+| 127
+| 127
+| 127
+|-
+| grey51
+| 130
+| 130
+| 130
+|-
+| grey52
+| 133
+| 133
+| 133
+|-
+| grey53
+| 135
+| 135
+| 135
+|-
+| grey54
+| 138
+| 138
+| 138
+|-
+| grey55
+| 140
+| 140
+| 140
+|-
+| grey56
+| 143
+| 143
+| 143
+|-
+| grey57
+| 145
+| 145
+| 145
+|-
+| grey58
+| 148
+| 148
+| 148
+|-
+| grey59
+| 150
+| 150
+| 150
+|-
+| grey6
+| 15
+| 15
+| 15
+|-
+| grey60
+| 153
+| 153
+| 153
+|-
+| grey61
+| 156
+| 156
+| 156
+|-
+| grey62
+| 158
+| 158
+| 158
+|-
+| grey63
+| 161
+| 161
+| 161
+|-
+| grey64
+| 163
+| 163
+| 163
+|-
+| grey65
+| 166
+| 166
+| 166
+|-
+| grey66
+| 168
+| 168
+| 168
+|-
+| grey67
+| 171
+| 171
+| 171
+|-
+| grey68
+| 173
+| 173
+| 173
+|-
+| grey69
+| 176
+| 176
+| 176
+|-
+| grey7
+| 18
+| 18
+| 18
+|-
+| grey70
+| 179
+| 179
+| 179
+|-
+| grey71
+| 181
+| 181
+| 181
+|-
+| grey72
+| 184
+| 184
+| 184
+|-
+| grey73
+| 186
+| 186
+| 186
+|-
+| grey74
+| 189
+| 189
+| 189
+|-
+| grey75
+| 191
+| 191
+| 191
+|-
+| grey76
+| 194
+| 194
+| 194
+|-
+| grey77
+| 196
+| 196
+| 196
+|-
+| grey78
+| 199
+| 199
+| 199
+|-
+| grey79
+| 201
+| 201
+| 201
+|-
+| grey8
+| 20
+| 20
+| 20
+|-
+| grey80
+| 204
+| 204
+| 204
+|-
+| grey81
+| 207
+| 207
+| 207
+|-
+| grey82
+| 209
+| 209
+| 209
+|-
+| grey83
+| 212
+| 212
+| 212
+|-
+| grey84
+| 214
+| 214
+| 214
+|-
+| grey85
+| 217
+| 217
+| 217
+|-
+| grey86
+| 219
+| 219
+| 219
+|-
+| grey87
+| 222
+| 222
+| 222
+|-
+| grey88
+| 224
+| 224
+| 224
+|-
+| grey89
+| 227
+| 227
+| 227
+|-
+| grey9
+| 23
+| 23
+| 23
+|-
+| grey90
+| 229
+| 229
+| 229
+|-
+| grey91
+| 232
+| 232
+| 232
+|-
+| grey92
+| 235
+| 235
+| 235
+|-
+| grey93
+| 237
+| 237
+| 237
+|-
+| grey94
+| 240
+| 240
+| 240
+|-
+| grey95
+| 242
+| 242
+| 242
+|-
+| grey96
+| 245
+| 245
+| 245
+|-
+| grey97
+| 247
+| 247
+| 247
+|-
+| grey98
+| 250
+| 250
+| 250
+|-
+| grey99
+| 252
+| 252
+| 252
+|-
+| honeydew
+| 240
+| 255
+| 240
+|-
+| honeydew1
+| 240
+| 255
+| 240
+|-
+| honeydew2
+| 224
+| 238
+| 224
+|-
+| honeydew3
+| 193
+| 205
+| 193
+|-
+| honeydew4
+| 131
+| 139
+| 131
+|-
+| hot pink
+| 255
+| 105
+| 180
+|-
+| HotPink
+| 255
+| 105
+| 180
+|-
+| HotPink1
+| 255
+| 110
+| 180
+|-
+| HotPink2
+| 238
+| 106
+| 167
+|-
+| HotPink3
+| 205
+| 96
+| 144
+|-
+| HotPink4
+| 139
+| 58
+| 98
+|-
+| indian red
+| 205
+| 92
+| 92
+|-
+| IndianRed
+| 205
+| 92
+| 92
+|-
+| IndianRed1
+| 255
+| 106
+| 106
+|-
+| IndianRed2
+| 238
+| 99
+| 99
+|-
+| IndianRed3
+| 205
+| 85
+| 85
+|-
+| IndianRed4
+| 139
+| 58
+| 58
+|-
+| ivory
+| 255
+| 255
+| 240
+|-
+| ivory1
+| 255
+| 255
+| 240
+|-
+| ivory2
+| 238
+| 238
+| 224
+|-
+| ivory3
+| 205
+| 205
+| 193
+|-
+| ivory4
+| 139
+| 139
+| 131
+|-
+| khaki
+| 240
+| 230
+| 140
+|-
+| khaki1
+| 255
+| 246
+| 143
+|-
+| khaki2
+| 238
+| 230
+| 133
+|-
+| khaki3
+| 205
+| 198
+| 115
+|-
+| khaki4
+| 139
+| 134
+| 78
+|-
+| lavender
+| 230
+| 230
+| 250
+|-
+| lavender blush
+| 255
+| 240
+| 245
+|-
+| LavenderBlush
+| 255
+| 240
+| 245
+|-
+| LavenderBlush1
+| 255
+| 240
+| 245
+|-
+| LavenderBlush2
+| 238
+| 224
+| 229
+|-
+| LavenderBlush3
+| 205
+| 193
+| 197
+|-
+| LavenderBlush4
+| 139
+| 131
+| 134
+|-
+| lawn green
+| 124
+| 252
+| 0
+|-
+| LawnGreen
+| 124
+| 252
+| 0
+|-
+| lemon chiffon
+| 255
+| 250
+| 205
+|-
+| LemonChiffon
+| 255
+| 250
+| 205
+|-
+| LemonChiffon1
+| 255
+| 250
+| 205
+|-
+| LemonChiffon2
+| 238
+| 233
+| 191
+|-
+| LemonChiffon3
+| 205
+| 201
+| 165
+|-
+| LemonChiffon4
+| 139
+| 137
+| 112
+|-
+| light blue
+| 173
+| 216
+| 230
+|-
+| light coral
+| 240
+| 128
+| 128
+|-
+| light cyan
+| 224
+| 255
+| 255
+|-
+| light goldenrod
+| 238
+| 221
+| 130
+|-
+| light goldenrod yellow
+| 250
+| 250
+| 210
+|-
+| light gray
+| 211
+| 211
+| 211
+|-
+| light green
+| 144
+| 238
+| 144
+|-
+| light grey
+| 211
+| 211
+| 211
+|-
+| light pink
+| 255
+| 182
+| 193
+|-
+| light salmon
+| 255
+| 160
+| 122
+|-
+| light sea green
+| 32
+| 178
+| 170
+|-
+| light sky blue
+| 135
+| 206
+| 250
+|-
+| light slate blue
+| 132
+| 112
+| 255
+|-
+| light slate gray
+| 119
+| 136
+| 153
+|-
+| light slate grey
+| 119
+| 136
+| 153
+|-
+| light steel blue
+| 176
+| 196
+| 222
+|-
+| light yellow
+| 255
+| 255
+| 224
+|-
+| LightBlue
+| 173
+| 216
+| 230
+|-
+| LightBlue1
+| 191
+| 239
+| 255
+|-
+| LightBlue2
+| 178
+| 223
+| 238
+|-
+| LightBlue3
+| 154
+| 192
+| 205
+|-
+| LightBlue4
+| 104
+| 131
+| 139
+|-
+| LightCoral
+| 240
+| 128
+| 128
+|-
+| LightCyan
+| 224
+| 255
+| 255
+|-
+| LightCyan1
+| 224
+| 255
+| 255
+|-
+| LightCyan2
+| 209
+| 238
+| 238
+|-
+| LightCyan3
+| 180
+| 205
+| 205
+|-
+| LightCyan4
+| 122
+| 139
+| 139
+|-
+| LightGoldenrod
+| 238
+| 221
+| 130
+|-
+| LightGoldenrod1
+| 255
+| 236
+| 139
+|-
+| LightGoldenrod2
+| 238
+| 220
+| 130
+|-
+| LightGoldenrod3
+| 205
+| 190
+| 112
+|-
+| LightGoldenrod4
+| 139
+| 129
+| 76
+|-
+| LightGoldenrodYellow
+| 250
+| 250
+| 210
+|-
+| LightGray
+| 211
+| 211
+| 211
+|-
+| LightGreen
+| 144
+| 238
+| 144
+|-
+| LightGrey
+| 211
+| 211
+| 211
+|-
+| LightPink
+| 255
+| 182
+| 193
+|-
+| LightPink1
+| 255
+| 174
+| 185
+|-
+| LightPink2
+| 238
+| 162
+| 173
+|-
+| LightPink3
+| 205
+| 140
+| 149
+|-
+| LightPink4
+| 139
+| 95
+| 101
+|-
+| LightSalmon
+| 255
+| 160
+| 122
+|-
+| LightSalmon1
+| 255
+| 160
+| 122
+|-
+| LightSalmon2
+| 238
+| 149
+| 114
+|-
+| LightSalmon3
+| 205
+| 129
+| 98
+|-
+| LightSalmon4
+| 139
+| 87
+| 66
+|-
+| LightSeaGreen
+| 32
+| 178
+| 170
+|-
+| LightSkyBlue
+| 135
+| 206
+| 250
+|-
+| LightSkyBlue1
+| 176
+| 226
+| 255
+|-
+| LightSkyBlue2
+| 164
+| 211
+| 238
+|-
+| LightSkyBlue3
+| 141
+| 182
+| 205
+|-
+| LightSkyBlue4
+| 96
+| 123
+| 139
+|-
+| LightSlateBlue
+| 132
+| 112
+| 255
+|-
+| LightSlateGray
+| 119
+| 136
+| 153
+|-
+| LightSlateGrey
+| 119
+| 136
+| 153
+|-
+| LightSteelBlue
+| 176
+| 196
+| 222
+|-
+| LightSteelBlue1
+| 202
+| 225
+| 255
+|-
+| LightSteelBlue2
+| 188
+| 210
+| 238
+|-
+| LightSteelBlue3
+| 162
+| 181
+| 205
+|-
+| LightSteelBlue4
+| 110
+| 123
+| 139
+|-
+| LightYellow
+| 255
+| 255
+| 224
+|-
+| LightYellow1
+| 255
+| 255
+| 224
+|-
+| LightYellow2
+| 238
+| 238
+| 209
+|-
+| LightYellow3
+| 205
+| 205
+| 180
+|-
+| LightYellow4
+| 139
+| 139
+| 122
+|-
+| lime green
+| 50
+| 205
+| 50
+|-
+| LimeGreen
+| 50
+| 205
+| 50
+|-
+| linen
+| 250
+| 240
+| 230
+|-
+| magenta
+| 255
+| 0
+| 255
+|-
+| magenta1
+| 255
+| 0
+| 255
+|-
+| magenta2
+| 238
+| 0
+| 238
+|-
+| magenta3
+| 205
+| 0
+| 205
+|-
+| magenta4
+| 139
+| 0
+| 139
+|-
+| maroon
+| 176
+| 48
+| 96
+|-
+| maroon1
+| 255
+| 52
+| 179
+|-
+| maroon2
+| 238
+| 48
+| 167
+|-
+| maroon3
+| 205
+| 41
+| 144
+|-
+| maroon4
+| 139
+| 28
+| 98
+|-
+| medium aquamarine
+| 102
+| 205
+| 170
+|-
+| medium blue
+| 0
+| 0
+| 205
+|-
+| medium orchid
+| 186
+| 85
+| 211
+|-
+| medium purple
+| 147
+| 112
+| 219
+|-
+| medium sea green
+| 60
+| 179
+| 113
+|-
+| medium slate blue
+| 123
+| 104
+| 238
+|-
+| medium spring green
+| 0
+| 250
+| 154
+|-
+| medium turquoise
+| 72
+| 209
+| 204
+|-
+| medium violet red
+| 199
+| 21
+| 133
+|-
+| MediumAquamarine
+| 102
+| 205
+| 170
+|-
+| MediumBlue
+| 0
+| 0
+| 205
+|-
+| MediumOrchid
+| 186
+| 85
+| 211
+|-
+| MediumOrchid1
+| 224
+| 102
+| 255
+|-
+| MediumOrchid2
+| 209
+| 95
+| 238
+|-
+| MediumOrchid3
+| 180
+| 82
+| 205
+|-
+| MediumOrchid4
+| 122
+| 55
+| 139
+|-
+| MediumPurple
+| 147
+| 112
+| 219
+|-
+| MediumPurple1
+| 171
+| 130
+| 255
+|-
+| MediumPurple2
+| 159
+| 121
+| 238
+|-
+| MediumPurple3
+| 137
+| 104
+| 205
+|-
+| MediumPurple4
+| 93
+| 71
+| 139
+|-
+| MediumSeaGreen
+| 60
+| 179
+| 113
+|-
+| MediumSlateBlue
+| 123
+| 104
+| 238
+|-
+| MediumSpringGreen
+| 0
+| 250
+| 154
+|-
+| MediumTurquoise
+| 72
+| 209
+| 204
+|-
+| MediumVioletRed
+| 199
+| 21
+| 133
+|-
+| midnight blue
+| 25
+| 25
+| 112
+|-
+| MidnightBlue
+| 25
+| 25
+| 112
+|-
+| mint cream
+| 245
+| 255
+| 250
+|-
+| MintCream
+| 245
+| 255
+| 250
+|-
+| misty rose
+| 255
+| 228
+| 225
+|-
+| MistyRose
+| 255
+| 228
+| 225
+|-
+| MistyRose1
+| 255
+| 228
+| 225
+|-
+| MistyRose2
+| 238
+| 213
+| 210
+|-
+| MistyRose3
+| 205
+| 183
+| 181
+|-
+| MistyRose4
+| 139
+| 125
+| 123
+|-
+| moccasin
+| 255
+| 228
+| 181
+|-
+| navajo white
+| 255
+| 222
+| 173
+|-
+| NavajoWhite
+| 255
+| 222
+| 173
+|-
+| NavajoWhite1
+| 255
+| 222
+| 173
+|-
+| NavajoWhite2
+| 238
+| 207
+| 161
+|-
+| NavajoWhite3
+| 205
+| 179
+| 139
+|-
+| NavajoWhite4
+| 139
+| 121
+| 94
+|-
+| navy
+| 0
+| 0
+| 128
+|-
+| navy blue
+| 0
+| 0
+| 128
+|-
+| NavyBlue
+| 0
+| 0
+| 128
+|-
+| old lace
+| 253
+| 245
+| 230
+|-
+| OldLace
+| 253
+| 245
+| 230
+|-
+| olive drab
+| 107
+| 142
+| 35
+|-
+| OliveDrab
+| 107
+| 142
+| 35
+|-
+| OliveDrab1
+| 192
+| 255
+| 62
+|-
+| OliveDrab2
+| 179
+| 238
+| 58
+|-
+| OliveDrab3
+| 154
+| 205
+| 50
+|-
+| OliveDrab4
+| 105
+| 139
+| 34
+|-
+| orange
+| 255
+| 165
+| 0
+|-
+| orange red
+| 255
+| 69
+| 0
+|-
+| orange1
+| 255
+| 165
+| 0
+|-
+| orange2
+| 238
+| 154
+| 0
+|-
+| orange3
+| 205
+| 133
+| 0
+|-
+| orange4
+| 139
+| 90
+| 0
+|-
+| OrangeRed
+| 255
+| 69
+| 0
+|-
+| OrangeRed1
+| 255
+| 69
+| 0
+|-
+| OrangeRed2
+| 238
+| 64
+| 0
+|-
+| OrangeRed3
+| 205
+| 55
+| 0
+|-
+| OrangeRed4
+| 139
+| 37
+| 0
+|-
+| orchid
+| 218
+| 112
+| 214
+|-
+| orchid1
+| 255
+| 131
+| 250
+|-
+| orchid2
+| 238
+| 122
+| 233
+|-
+| orchid3
+| 205
+| 105
+| 201
+|-
+| orchid4
+| 139
+| 71
+| 137
+|-
+| pale goldenrod
+| 238
+| 232
+| 170
+|-
+| pale green
+| 152
+| 251
+| 152
+|-
+| pale turquoise
+| 175
+| 238
+| 238
+|-
+| pale violet red
+| 219
+| 112
+| 147
+|-
+| PaleGoldenrod
+| 238
+| 232
+| 170
+|-
+| PaleGreen
+| 152
+| 251
+| 152
+|-
+| PaleGreen1
+| 154
+| 255
+| 154
+|-
+| PaleGreen2
+| 144
+| 238
+| 144
+|-
+| PaleGreen3
+| 124
+| 205
+| 124
+|-
+| PaleGreen4
+| 84
+| 139
+| 84
+|-
+| PaleTurquoise
+| 175
+| 238
+| 238
+|-
+| PaleTurquoise1
+| 187
+| 255
+| 255
+|-
+| PaleTurquoise2
+| 174
+| 238
+| 238
+|-
+| PaleTurquoise3
+| 150
+| 205
+| 205
+|-
+| PaleTurquoise4
+| 102
+| 139
+| 139
+|-
+| PaleVioletRed
+| 219
+| 112
+| 147
+|-
+| PaleVioletRed1
+| 255
+| 130
+| 171
+|-
+| PaleVioletRed2
+| 238
+| 121
+| 159
+|-
+| PaleVioletRed3
+| 205
+| 104
+| 137
+|-
+| PaleVioletRed4
+| 139
+| 71
+| 93
+|-
+| papaya whip
+| 255
+| 239
+| 213
+|-
+| PapayaWhip
+| 255
+| 239
+| 213
+|-
+| peach puff
+| 255
+| 218
+| 185
+|-
+| PeachPuff
+| 255
+| 218
+| 185
+|-
+| PeachPuff1
+| 255
+| 218
+| 185
+|-
+| PeachPuff2
+| 238
+| 203
+| 173
+|-
+| PeachPuff3
+| 205
+| 175
+| 149
+|-
+| PeachPuff4
+| 139
+| 119
+| 101
+|-
+| peru
+| 205
+| 133
+| 63
+|-
+| pink
+| 255
+| 192
+| 203
+|-
+| pink1
+| 255
+| 181
+| 197
+|-
+| pink2
+| 238
+| 169
+| 184
+|-
+| pink3
+| 205
+| 145
+| 158
+|-
+| pink4
+| 139
+| 99
+| 108
+|-
+| plum
+| 221
+| 160
+| 221
+|-
+| plum1
+| 255
+| 187
+| 255
+|-
+| plum2
+| 238
+| 174
+| 238
+|-
+| plum3
+| 205
+| 150
+| 205
+|-
+| plum4
+| 139
+| 102
+| 139
+|-
+| powder blue
+| 176
+| 224
+| 230
+|-
+| PowderBlue
+| 176
+| 224
+| 230
+|-
+| purple
+| 160
+| 32
+| 240
+|-
+| purple1
+| 155
+| 48
+| 255
+|-
+| purple2
+| 145
+| 44
+| 238
+|-
+| purple3
+| 125
+| 38
+| 205
+|-
+| purple4
+| 85
+| 26
+| 139
+|-
+| red
+| 255
+| 0
+| 0
+|-
+| red1
+| 255
+| 0
+| 0
+|-
+| red2
+| 238
+| 0
+| 0
+|-
+| red3
+| 205
+| 0
+| 0
+|-
+| red4
+| 139
+| 0
+| 0
+|-
+| rosy brown
+| 188
+| 143
+| 143
+|-
+| RosyBrown
+| 188
+| 143
+| 143
+|-
+| RosyBrown1
+| 255
+| 193
+| 193
+|-
+| RosyBrown2
+| 238
+| 180
+| 180
+|-
+| RosyBrown3
+| 205
+| 155
+| 155
+|-
+| RosyBrown4
+| 139
+| 105
+| 105
+|-
+| royal blue
+| 65
+| 105
+| 225
+|-
+| RoyalBlue
+| 65
+| 105
+| 225
+|-
+| RoyalBlue1
+| 72
+| 118
+| 255
+|-
+| RoyalBlue2
+| 67
+| 110
+| 238
+|-
+| RoyalBlue3
+| 58
+| 95
+| 205
+|-
+| RoyalBlue4
+| 39
+| 64
+| 139
+|-
+| saddle brown
+| 139
+| 69
+| 19
+|-
+| SaddleBrown
+| 139
+| 69
+| 19
+|-
+| salmon
+| 250
+| 128
+| 114
+|-
+| salmon1
+| 255
+| 140
+| 105
+|-
+| salmon2
+| 238
+| 130
+| 98
+|-
+| salmon3
+| 205
+| 112
+| 84
+|-
+| salmon4
+| 139
+| 76
+| 57
+|-
+| sandy brown
+| 244
+| 164
+| 96
+|-
+| SandyBrown
+| 244
+| 164
+| 96
+|-
+| sea green
+| 46
+| 139
+| 87
+|-
+| SeaGreen
+| 46
+| 139
+| 87
+|-
+| SeaGreen1
+| 84
+| 255
+| 159
+|-
+| SeaGreen2
+| 78
+| 238
+| 148
+|-
+| SeaGreen3
+| 67
+| 205
+| 128
+|-
+| SeaGreen4
+| 46
+| 139
+| 87
+|-
+| seashell
+| 255
+| 245
+| 238
+|-
+| seashell1
+| 255
+| 245
+| 238
+|-
+| seashell2
+| 238
+| 229
+| 222
+|-
+| seashell3
+| 205
+| 197
+| 191
+|-
+| seashell4
+| 139
+| 134
+| 130
+|-
+| sienna
+| 160
+| 82
+| 45
+|-
+| sienna1
+| 255
+| 130
+| 71
+|-
+| sienna2
+| 238
+| 121
+| 66
+|-
+| sienna3
+| 205
+| 104
+| 57
+|-
+| sienna4
+| 139
+| 71
+| 38
+|-
+| sky blue
+| 135
+| 206
+| 235
+|-
+| SkyBlue
+| 135
+| 206
+| 235
+|-
+| SkyBlue1
+| 135
+| 206
+| 255
+|-
+| SkyBlue2
+| 126
+| 192
+| 238
+|-
+| SkyBlue3
+| 108
+| 166
+| 205
+|-
+| SkyBlue4
+| 74
+| 112
+| 139
+|-
+| slate blue
+| 106
+| 90
+| 205
+|-
+| slate gray
+| 112
+| 128
+| 144
+|-
+| slate grey
+| 112
+| 128
+| 144
+|-
+| SlateBlue
+| 106
+| 90
+| 205
+|-
+| SlateBlue1
+| 131
+| 111
+| 255
+|-
+| SlateBlue2
+| 122
+| 103
+| 238
+|-
+| SlateBlue3
+| 105
+| 89
+| 205
+|-
+| SlateBlue4
+| 71
+| 60
+| 139
+|-
+| SlateGray
+| 112
+| 128
+| 144
+|-
+| SlateGray1
+| 198
+| 226
+| 255
+|-
+| SlateGray2
+| 185
+| 211
+| 238
+|-
+| SlateGray3
+| 159
+| 182
+| 205
+|-
+| SlateGray4
+| 108
+| 123
+| 139
+|-
+| SlateGrey
+| 112
+| 128
+| 144
+|-
+| snow
+| 255
+| 250
+| 250
+|-
+| snow1
+| 255
+| 250
+| 250
+|-
+| snow2
+| 238
+| 233
+| 233
+|-
+| snow3
+| 205
+| 201
+| 201
+|-
+| snow4
+| 139
+| 137
+| 137
+|-
+| spring green
+| 0
+| 255
+| 127
+|-
+| SpringGreen
+| 0
+| 255
+| 127
+|-
+| SpringGreen1
+| 0
+| 255
+| 127
+|-
+| SpringGreen2
+| 0
+| 238
+| 118
+|-
+| SpringGreen3
+| 0
+| 205
+| 102
+|-
+| SpringGreen4
+| 0
+| 139
+| 69
+|-
+| steel blue
+| 70
+| 130
+| 180
+|-
+| SteelBlue
+| 70
+| 130
+| 180
+|-
+| SteelBlue1
+| 99
+| 184
+| 255
+|-
+| SteelBlue2
+| 92
+| 172
+| 238
+|-
+| SteelBlue3
+| 79
+| 148
+| 205
+|-
+| SteelBlue4
+| 54
+| 100
+| 139
+|-
+| tan
+| 210
+| 180
+| 140
+|-
+| tan1
+| 255
+| 165
+| 79
+|-
+| tan2
+| 238
+| 154
+| 73
+|-
+| tan3
+| 205
+| 133
+| 63
+|-
+| tan4
+| 139
+| 90
+| 43
+|-
+| thistle
+| 216
+| 191
+| 216
+|-
+| thistle1
+| 255
+| 225
+| 255
+|-
+| thistle2
+| 238
+| 210
+| 238
+|-
+| thistle3
+| 205
+| 181
+| 205
+|-
+| thistle4
+| 139
+| 123
+| 139
+|-
+| tomato
+| 255
+| 99
+| 71
+|-
+| tomato1
+| 255
+| 99
+| 71
+|-
+| tomato2
+| 238
+| 92
+| 66
+|-
+| tomato3
+| 205
+| 79
+| 57
+|-
+| tomato4
+| 139
+| 54
+| 38
+|-
+| turquoise
+| 64
+| 224
+| 208
+|-
+| turquoise1
+| 0
+| 245
+| 255
+|-
+| turquoise2
+| 0
+| 229
+| 238
+|-
+| turquoise3
+| 0
+| 197
+| 205
+|-
+| turquoise4
+| 0
+| 134
+| 139
+|-
+| violet
+| 238
+| 130
+| 238
+|-
+| violet red
+| 208
+| 32
+| 144
+|-
+| VioletRed
+| 208
+| 32
+| 144
+|-
+| VioletRed1
+| 255
+| 62
+| 150
+|-
+| VioletRed2
+| 238
+| 58
+| 140
+|-
+| VioletRed3
+| 205
+| 50
+| 120
+|-
+| VioletRed4
+| 139
+| 34
+| 82
+|-
+| wheat
+| 245
+| 222
+| 179
+|-
+| wheat1
+| 255
+| 231
+| 186
+|-
+| wheat2
+| 238
+| 216
+| 174
+|-
+| wheat3
+| 205
+| 186
+| 150
+|-
+| wheat4
+| 139
+| 126
+| 102
+|-
+| white
+| 255
+| 255
+| 255
+|-
+| white smoke
+| 245
+| 245
+| 245
+|-
+| WhiteSmoke
+| 245
+| 245
+| 245
+|-
+| yellow
+| 255
+| 255
+| 0
+|-
+| yellow green
+| 154
+| 205
+| 50
+|-
+| yellow1
+| 255
+| 255
+| 0
+|-
+| yellow2
+| 238
+| 238
+| 0
+|-
+| yellow3
+| 205
+| 205
+| 0
+|-
+| yellow4
+| 139
+| 139
+| 0
+|-
+| YellowGreen
+| 154
+| 205
+| 50
+|}
+
+== 14. Licencia ==
+
+THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW. ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR COPYRIGHT LAW IS PROHIBITED.
+
+BY EXERCISING ANY RIGHTS TO THE WORK PROVIDED HERE, YOU ACCEPT AND AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE. TO THE EXTENT THIS LICENSE MAY BE CONSIDERED TO BE A CONTRACT, THE LICENSOR GRANTS YOU THE RIGHTS CONTAINED HERE IN CONSIDERATION OF YOUR ACCEPTANCE OF SUCH TERMS AND CONDITIONS.
+
+# '''Definitions'''
+
+## '''"Adaptation"''' means a work based upon the Work, or upon the Work and other pre-existing works, such as a translation, adaptation, derivative work, arrangement of music or other alterations of a literary or artistic work, or phonogram or performance and includes cinematographic adaptations or any other form in which the Work may be recast, transformed, or adapted including in any form recognizably derived from the original, except that a work that constitutes a Collection will not be considered an Adaptation for the purpose of this License. For the avoidance of doubt, where the Work is a musical work, performance or phonogram, the synchronization of the Work in timed-relation with a moving image ("synching") will be considered an Adaptation for the purpose of this License.
+
+## '''"Collection"''' means a collection of literary or artistic works, such as encyclopedias and anthologies, or performances, phonograms or broadcasts, or other works or subject matter other than works listed in Section 1(f) below, which, by reason of the selection and arrangement of their contents, constitute intellectual creations, in which the Work is included in its entirety in unmodified form along with one or more other contributions, each constituting separate and independent works in themselves, which together are assembled into a collective whole. A work that constitutes a Collection will not be considered an Adaptation (as defined below) for the purposes of this License.
+
+## '''"Creative Commons Compatible License"''' means a license that is listed at [http://creativecommons.org/compatiblelicenses http://creativecommons.org/compatiblelicenses] that has been approved by Creative Commons as being essentially equivalent to this License, including, at a minimum, because that license: (i) contains terms that have the same purpose, meaning and effect as the License Elements of this License; and, (ii) explicitly permits the relicensing of adaptations of works made available under that license under this License or a Creative Commons jurisdiction license with the same License Elements as this License.
+
+## '''"Distribute"''' means to make available to the public the original and copies of the Work or Adaptation, as appropriate, through sale or other transfer of ownership.
+
+'''"License Elements"''' means the following high-level license attributes as selected by Licensor and indicated in the title of this License: Attribution, ShareAlike.
+
+## '''"Licensor"''' means the individual, individuals, entity or entities that offer(s) the Work under the terms of this License.
+
+## '''"Original Author"''' means, in the case of a literary or artistic work, the individual, individuals, entity or entities who created the Work or if no individual or entity can be identified, the publisher; and in addition (i) in the case of a performance the actors, singers, musicians, dancers, and other persons who act, sing, deliver, declaim, play in, interpret or otherwise perform literary or artistic works or expressions of folklore; (ii) in the case of a phonogram the producer being the person or legal entity who first fixes the sounds of a performance or other sounds; and, (iii) in the case of broadcasts, the organization that transmits the broadcast.
+
+## '''"Work"''' means the literary and/or artistic work offered under the terms of this License including without limitation any production in the literary, scientific and artistic domain, whatever may be the mode or form of its expression including digital form, such as a book, pamphlet and other writing; a lecture, address, sermon or other work of the same nature; a dramatic or dramatico-musical work; a choreographic work or entertainment in dumb show; a musical composition with or without words; a cinematographic work to which are assimilated works expressed by a process analogous to cinematography; a work of drawing, painting, architecture, sculpture, engraving or lithography; a photographic work to which are assimilated works expressed by a process analogous to photography; a work of applied art; an illustration, map, plan, sketch or three-dimensional work relative to geography, topography, architecture or science; a performance; a broadcast; a phonogram; a compilation of data to the extent it is protected as a copyrightable work; or a work performed by a variety or circus performer to the extent it is not otherwise considered a literary or artistic work.
+
+## '''"You"''' means an individual or entity exercising rights under this License who has not previously violated the terms of this License with respect to the Work, or who has received express permission from the Licensor to exercise rights under this License despite a previous violation.
+
+## '''"Publicly Perform"''' means to perform public recitations of the Work and to communicate to the public those public recitations, by any means or process, including by wire or wireless means or public digital performances; to make available to the public Works in such a way that members of the public may access these Works from a place and at a place individually chosen by them; to perform the Work to the public by any means or process and the communication to the public of the performances of the Work, including by public digital performance; to broadcast and rebroadcast the Work by any means including signs, sounds or images.
+
+## '''"Reproduce"''' means to make copies of the Work by any means including without limitation by sound or visual recordings and the right of fixation and reproducing fixations of the Work, including storage of a protected performance or phonogram in digital form or other electronic medium.
+
+# '''Fair Dealing Rights.''' Nothing in this License is intended to reduce, limit, or restrict any uses free from copyright or rights arising from limitations or exceptions that are provided for in connection with the copyright protection under copyright law or other applicable laws.
+
+# '''License Grant.''' Subject to the terms and conditions of this License, Licensor hereby grants You a worldwide, royalty-free, non-exclusive, perpetual (for the duration of the applicable copyright) license to exercise the rights in the Work as stated below:
+
+## to Reproduce the Work, to incorporate the Work into one or more Collections, and to Reproduce the Work as incorporated in the Collections;
+
+## to create and Reproduce Adaptations provided that any such Adaptation, including any translation in any medium, takes reasonable steps to clearly label, demarcate or otherwise identify that changes were made to the original Work. For example, a translation could be marked "The original work was translated from English to Spanish," or a modification could indicate "The original work has been modified.";
+
+## to Distribute and Publicly Perform the Work including as incorporated in Collections; and,
+
+## to Distribute and Publicly Perform Adaptations.
+
+## For the avoidance of doubt:
+
+### '''Non-waivable Compulsory License Schemes.''' In those jurisdictions in which the right to collect royalties through any statutory or compulsory licensing scheme cannot be waived, the Licensor reserves the exclusive right to collect such royalties for any exercise by You of the rights granted under this License;
+
+### '''Waivable Compulsory License Schemes.''' In those jurisdictions in which the right to collect royalties through any statutory or compulsory licensing scheme can be waived, the Licensor waives the exclusive right to collect such royalties for any exercise by You of the rights granted under this License; and,
+
+### '''Voluntary License Schemes.''' The Licensor waives the right to collect royalties, whether individually or, in the event that the Licensor is a member of a collecting society that administers voluntary licensing schemes, via that society, from any exercise by You of the rights granted under this License.
+
+The above rights may be exercised in all media and formats whether now known or hereafter devised. The above rights include the right to make such modifications as are technically necessary to exercise the rights in other media and formats. Subject to Section 8(f), all rights not expressly granted by Licensor are hereby reserved.
+
+# '''Restrictions.''' The license granted in Section 3 above is expressly made subject to and limited by the following restrictions:
+
+## You may Distribute or Publicly Perform the Work only under the terms of this License. You must include a copy of, or the Uniform Resource Identifier (URI) for, this License with every copy of the Work You Distribute or Publicly Perform. You may not offer or impose any terms on the Work that restrict the terms of this License or the ability of the recipient of the Work to exercise the rights granted to that recipient under the terms of the License. You may not sublicense the Work. You must keep intact all notices that refer to this License and to the disclaimer of warranties with every copy of the Work You Distribute or Publicly Perform. When You Distribute or Publicly Perform the Work, You may not impose any effective technological measures on the Work that restrict the ability of a recipient of the Work from You to exercise the rights granted to that recipient under the terms of the License. This Section 4(a) applies to the Work as incorporated in a Collection, but this does not require the Collection apart from the Work itself to be made subject to the terms of this License. If You create a Collection, upon notice from any Licensor You must, to the extent practicable, remove from the Collection any credit as required by Section 4(c), as requested. If You create an Adaptation, upon notice from any Licensor You must, to the extent practicable, remove from the Adaptation any credit as required by Section 4(c), as requested.
+
+## You may Distribute or Publicly Perform an Adaptation only under the terms of: (i) this License; (ii) a later version of this License with the same License Elements as this License; (iii) a Creative Commons jurisdiction license (either this or a later license version) that contains the same License Elements as this License (e.g., Attribution-ShareAlike 3.0 US)); (iv) a Creative Commons Compatible License. If you license the Adaptation under one of the licenses mentioned in (iv), you must comply with the terms of that license. If you license the Adaptation under the terms of any of the licenses mentioned in (i), (ii) or (iii) (the "Applicable License"), you must comply with the terms of the Applicable License generally and the following provisions: (I) You must include a copy of, or the URI for, the Applicable License with every copy of each Adaptation You Distribute or Publicly Perform; (II) You may not offer or impose any terms on the Adaptation that restrict the terms of the Applicable License or the ability of the recipient of the Adaptation to exercise the rights granted to that recipient under the terms of the Applicable License; (III) You must keep intact all notices that refer to the Applicable License and to the disclaimer of warranties with every copy of the Work as included in the Adaptation You Distribute or Publicly Perform; (IV) when You Distribute or Publicly Perform the Adaptation, You may not impose any effective technological measures on the Adaptation that restrict the ability of a recipient of the Adaptation from You to exercise the rights granted to that recipient under the terms of the Applicable License. This Section 4(b) applies to the Adaptation as incorporated in a Collection, but this does not require the Collection apart from the Adaptation itself to be made subject to the terms of the Applicable License.
+
+## If You Distribute, or Publicly Perform the Work or any Adaptations or Collections, You must, unless a request has been made pursuant to Section 4(a), keep intact all copyright notices for the Work and provide, reasonable to the medium or means You are utilizing: (i) the name of the Original Author (or pseudonym, if applicable) if supplied, and/or if the Original Author and/or Licensor designate another party or parties (e.g., a sponsor institute, publishing entity, journal) for attribution ("Attribution Parties") in Licensor's copyright notice, terms of service or by other reasonable means, the name of such party or parties; (ii) the title of the Work if supplied; (iii) to the extent reasonably practicable, the URI, if any, that Licensor specifies to be associated with the Work, unless such URI does not refer to the copyright notice or licensing information for the Work; and (iv) , consistent with Ssection 3(b), in the case of an Adaptation, a credit identifying the use of the Work in the Adaptation (e.g., "French translation of the Work by Original Author," or "Screenplay based on original Work by Original Author"). The credit required by this Section 4(c) may be implemented in any reasonable manner; provided, however, that in the case of a Adaptation or Collection, at a minimum such credit will appear, if a credit for all contributing authors of the Adaptation or Collection appears, then as part of these credits and in a manner at least as prominent as the credits for the other contributing authors. For the avoidance of doubt, You may only use the credit required by this Section for the purpose of attribution in the manner set out above and, by exercising Your rights under this License, You may not implicitly or explicitly assert or imply any connection with, sponsorship or endorsement by the Original Author, Licensor and/or Attribution Parties, as appropriate, of You or Your use of the Work, without the separate, express prior written permission of the Original Author, Licensor and/or Attribution Parties.
+
+## Except as otherwise agreed in writing by the Licensor or as may be otherwise permitted by applicable law, if You Reproduce, Distribute or Publicly Perform the Work either by itself or as part of any Adaptations or Collections, You must not distort, mutilate, modify or take other derogatory action in relation to the Work which would be prejudicial to the Original Author's honor or reputation. Licensor agrees that in those jurisdictions (e.g. Japan), in which any exercise of the right granted in Section 3(b) of this License (the right to make Adaptations) would be deemed to be a distortion, mutilation, modification or other derogatory action prejudicial to the Original Author's honor and reputation, the Licensor will waive or not assert, as appropriate, this Section, to the fullest extent permitted by the applicable national law, to enable You to reasonably exercise Your right under Section 3(b) of this License (right to make Adaptations) but not otherwise.
+
+# '''Representations, Warranties and Disclaimer'''
+
+UNLESS OTHERWISE MUTUALLY AGREED TO BY THE PARTIES IN WRITING, LICENSOR OFFERS THE WORK AS-IS AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE WORK, EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, INCLUDING, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTIBILITY, FITNESS FOR A PARTICULAR PURPOSE, NONINFRINGEMENT, OR THE ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OF ABSENCE OF ERRORS, WHETHER OR NOT DISCOVERABLE. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF IMPLIED WARRANTIES, SO SUCH EXCLUSION MAY NOT APPLY TO YOU.
+
+# '''Limitation on Liability.''' EXCEPT TO THE EXTENT REQUIRED BY APPLICABLE LAW, IN NO EVENT WILL LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY FOR ANY SPECIAL, INCIDENTAL, CONSEQUENTIAL, PUNITIVE OR EXEMPLARY DAMAGES ARISING OUT OF THIS LICENSE OR THE USE OF THE WORK, EVEN IF LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
+
+# '''Termination'''
+
+## This License and the rights granted hereunder will terminate automatically upon any breach by You of the terms of this License. Individuals or entities who have received Adaptations or Collections from You under this License, however, will not have their licenses terminated provided such individuals or entities remain in full compliance with those licenses. Sections 1, 2, 5, 6, 7, and 8 will survive any termination of this License.
+
+## Subject to the above terms and conditions, the license granted here is perpetual (for the duration of the applicable copyright in the Work). Notwithstanding the above, Licensor reserves the right to release the Work under different license terms or to stop distributing the Work at any time; provided, however that any such election will not serve to withdraw this License (or any other license that has been, or is required to be, granted under the terms of this License), and this License will continue in full force and effect unless terminated as stated above.
+
+# '''Miscellaneous'''
+
+## Each time You Distribute or Publicly Perform the Work or a Collection, the Licensor offers to the recipient a license to the Work on the same terms and conditions as the license granted to You under this License.
+
+## Each time You Distribute or Publicly Perform an Adaptation, Licensor offers to the recipient a license to the original Work on the same terms and conditions as the license granted to You under this License.
+
+## If any provision of this License is invalid or unenforceable under applicable law, it shall not affect the validity or enforceability of the remainder of the terms of this License, and without further action by the parties to this agreement, such provision shall be reformed to the minimum extent necessary to make such provision valid and enforceable.
+
+## No term or provision of this License shall be deemed waived and no breach consented to unless such waiver or consent shall be in writing and signed by the party to be charged with such waiver or consent.
+
+## This License constitutes the entire agreement between the parties with respect to the Work licensed here. There are no understandings, agreements or representations with respect to the Work not specified here. Licensor shall not be bound by any additional provisions that may appear in any communication from You. This License may not be modified without the mutual written agreement of the Licensor and You.
+
+## The rights granted under, and the subject matter referenced, in this License were drafted utilizing the terminology of the Berne Convention for the Protection of Literary and Artistic Works (as amended on September 28, 1979), the Rome Convention of 1961, the WIPO Copyright Treaty of 1996, the WIPO Performances and Phonograms Treaty of 1996 and the Universal Copyright Convention (as revised on July 24, 1971). These rights and subject matter take effect in the relevant jurisdiction in which the License terms are sought to be enforced according to the corresponding provisions of the implementation of those treaty provisions in the applicable national law. If the standard suite of rights granted under applicable copyright law includes additional rights not granted under this License, such additional rights are deemed to be included in the License; this License is not intended to restrict the license of any rights under applicable law.
+
+<!-- wiki code generated by txt2tags 2.6.944 (http://txt2tags.org) -->
 <!-- cmdline: txt2tags -t wiki /media/Principal/Alejandro/Guias/Tkinter/Interfaz grafica con Tkinter.txt -->

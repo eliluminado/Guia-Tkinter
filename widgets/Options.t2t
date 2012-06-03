@@ -1,0 +1,364 @@
+﻿
+
+
+Muchos de los widgets que utilizamos y vimos hasta ahora cuentan con opciones, con el fin de no repetir la descripcion de cada uno de ellos seran vistos uno a uno en esta seccion.
+
+
+NOTA:
+
+Para mas informacion sobre los colores visite la seccion "Colores" que se ve en ["Gestion del diseño" #colores]
+
+--------------------------------------------------------
+
+anchor
+
+Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen con respecto al widget en el que se encuentra. La opcion por defecto es 'CENTER' que muestra el elemento centrado.
+
+
+  | NW |  N  |    NE |
+  | W  |  CENTER  |    E |
+  | SW |  S  |    SE |
+
+
+- Posiciona el texto/imagen en la esquina superior izquierda del widget
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="nw")
+
+[widgets/img/opciones/anchor/anchor_nw.jpg]
+
+
+- Posiciona el texto/imagen en la parte superior del widget
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="n")
+
+[widgets/img/opciones/anchor/anchor_n.jpg]
+
+
+- Posiciona el texto/imagen en la esquina superior derecha del widget
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="ne")
+
+[widgets/img/opciones/anchor/anchor_ne.jpg]
+
+
+- Posiciona el texto/imagen en la parte izquierda del widget
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="w")
+
+[widgets/img/opciones/anchor/anchor_w.jpg]
+
+
+- Posiciona el texto/imagen en el centro del widget
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="center")
+
+[widgets/img/opciones/anchor/anchor_center.jpg]
+
+
+- Posiciona el texto/imagen en la parte derecha del widget
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="e")
+
+[widgets/img/opciones/anchor/anchor_e.jpg]
+
+
+- Posiciona el texto/imagen en la esquina inferior izquierda del widget
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="sw")
+
+[widgets/img/opciones/anchor/anchor_sw.jpg]
+
+
+- Posiciona el texto/imagen en la parte inferior del widget
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="s")
+
+[widgets/img/opciones/anchor/anchor_s.jpg]
+
+
+- Posiciona el texto/imagen en la esquina inferior derecha del widget
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="se")
+
+[widgets/img/opciones/anchor/anchor_se.jpg]
+
+--------------------------------------------------------
+
+
+activebackground
+
+Con esta opcion podemos indicar que color de fondo se debera utilizar cuando el cursor del mouse se posicione sobre el widget, Para algunos elementos y en algunas plataformas solo sera visible cuando se hace click sobre el.
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
+
+[widgets/img/opciones/activebackground.jpg]
+
+--------------------------------------------------------
+
+
+activeforeground
+
+Al igual que pasa con 'activebackground' con esta otra opcion podemos especificar el color en este caso de la fuente del widget cuando se posiciona el cursor sobre este.
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
+
+[widgets/img/opciones/activeforeground.jpg]
+
+--------------------------------------------------------
+
+background (bg)
+
+Sirve para indicar el color de fondo que tendra en area del widget cuando este se encuentre inactivo. Tambien se puede utilizar su forma abreviada 'bg' como podemos ver en el segundo ejemplo.
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, background="#38EB5C")
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, bg="#38EB5C")
+
+[widgets/img/opciones/background.jpg]
+
+--------------------------------------------------------
+
+
+bitmap
+
+--------------------------------------------------------
+
+
+borderwidth (bd)
+
+Nos da la posibilidad de especificar el ancho del borde del elemento con el que estemos trabajando, Tkinter nos permite especificar el valor en varias unidades de medida (centimetros, pulgadas, milimetros y puntos) las cuales seran vistas mas adelante en la guia. Si no se utiliza junto con la opcion 'relief' visualmente es similar a utilizar las opciones 'heigth' y 'width' como se puede observar en el ejemplo. El valor por defecto es de 2 pixeles.
+
+``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", borderwidth=15)
+
+``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", bd=15)
+
+[widgets/img/opciones/borderwidth.jpg]
+
+--------------------------------------------------------
+
+
+command
+
+Como ya lo mencionamos cuando vimos al widget Button este permite indicar la funcion o metodo que queremos que se llame cuando se preciona por ejemplo un boton, pero esta opcion tambien funciona con otros widgets de Tkinter cumpliendo la misma funcion.
+
+```
+def funcion():
+    print "Excelente"
+
+boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion)
+```
+
+[widgets/img/Button/Button-01.jpg]
+
+% Para funciones con argumentos (usar lambda)
+% http://effbot.org/zone/tkinter-callbacks.htm
+
+--------------------------------------------------------
+
+
+cursor
+
+Nos da la posiblidad de indicar que cursor queremos que se muestre cuando el mouse se posiciona sobre la etiqueta.
+En el siguiente enlace podremos encontrar una lista con los cursores disponibles en Tkinter
+[http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm http://www.tcl.tk/man/tcl8.5/TkCmd/cursors.htm] (Ver seccion "Anexos" para ver el listado completo).
+El valor 'none' consigue eliminar el cursor cuando se pasa el cursor sobre el widget.
+
+``` etiqueta = Tkinter.Label(root, text="Que te parece la guia?", cursor="hand1")
+
+[widgets/img/opciones/cursor.jpg]
+--------------------------------------------------------
+
+default
+
+--------------------------------------------------------
+
+
+font
+
+--------------------------------------------------------
+
+
+foreground (fg)
+
+Si deseamos cambiar el color de las letras de nuestro texto cuando el widget se encuentra inactivo tendremos que utilizar esta opcion, que trabaja de forma similar al ya visto 'background'. En este se tambien se puede utilizar su abreviatura 'fg' como podemos ver en el segundo ejemplo
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, foreground="#38EB5C")
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, fg="#38EB5C")
+
+[widgets/img/opciones/foreground.jpg]
+
+--------------------------------------------------------
+
+
+height
+
+Permite indicar la altura a la que se posicionara nuestro widget en lineas no en pixeles. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo
+
+``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", height=10)
+
+[widgets/img/opciones/height.jpg]
+
+--------------------------------------------------------
+
+
+image
+
+--------------------------------------------------------
+
+
+justify
+
+- RIGHT
+
+``` etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="right")
+
+[widgets/img/opciones/justify/justify_right.jpg]
+
+- CENTER
+
+``` etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="center")
+
+[widgets/img/opciones/justify/justify_center.jpg]
+
+- LEFT
+
+``` etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="left")
+
+[widgets/img/opciones/justify/justify_left.jpg]
+
+--------------------------------------------------------
+
+
+relief
+
+% Las descripciones de las sombras las obtuve de http://www.librosweb.es/referencia/css/border-style.html
+
+Especifica la apariencia de un borde decorativo alrededor del widget que simula un efecto 3D sobre el elemento, el ancho de esta sombra depende del valor que se especifique con el atributo 'borderwidth', los posibles valores son SUNKEN, RAISED, GROOVE, RIDGE, FLAT. El valor por defecto es FLAT que no coloca ningun borde sobre el widget.
+
+Descripcion de los cuatro estilos:
+
+: SUNKEN:
+Borde hundido, que provoca que el elemento que encierra parezca que se encuentra por debajo del nivel de la superficie de la pantalla.
+
+: RAISED:
+Borde saliente, que provoca que el elemento que encierra parezca que se encuentra por encima del nivel de la superficie de la pantalla.
+
+: GROOVE:
+Borde hundido, que visualmente parece que se encuentra por debajo del nivel de la superficie de la pantalla.
+
+: RIDGE:
+Borde saliente, que visualmente parece que se encuentra por encima del nivel de la superficie de la pantalla.
+
+: FLAT:
+No se muestra ningún borde.
+
+
+Ejemplos:
+
+- SUNKEN
+
+``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="sunken", borderwidth=5)
+
+[widgets/img/opciones/relief/relief_sunken.jpg]
+
+- RAISED
+
+``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="raised", borderwidth=5)
+
+[widgets/img/opciones/relief/relief_raised.jpg]
+
+- GROOVE
+
+``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="groove", borderwidth=5)
+
+[widgets/img/opciones/relief/relief_groove.jpg]
+
+- RIDGE
+
+``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="ridge", borderwidth=5)
+
+[widgets/img/opciones/relief/relief_ridge.jpg]
+
+- FLAT
+
+``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="flat", borderwidth=5)
+
+[widgets/img/opciones/relief/relief_flat.jpg]
+
+--------------------------------------------------------
+
+
+text
+
+Este es un elemento muy importante para los widgets como Label o Button entre otros, esta opcion nos da la posibilidad de incluir un texto dentro del widget, este texto puede contener saltos de lineas en caso de ser necesario y tambien se puede utilizar una variable para indicar la cadena de texto a usar. Si se utiliza una imagen este elemento es ignorado por Tkinter.
+
+Ejemplo simple:
+``` etiqueta = Tkinter.Label(root, text="Codigo Python")
+Ejemplo con una variable:
+
+```
+texto = "Codigo Python"
+etiqueta = Tkinter.Label(root, text=texto)
+```
+
+[widgets/img/Label/Label-01.jpg]
+
+Ejemplo con salto de linea (recuerden que deben usar el caracter \n para el salto de linea):
+``` etiqueta = Tkinter.Label(root, text="Hola \n a todos")
+
+[widgets/img/opciones/text-01.jpg]
+
+Ejemplo con tabulacion (recuerden que deben usar el caracter \t para la tabulacion):
+``` etiqueta = Tkinter.Label(root, text="Hola \t a todos")
+
+[widgets/img/opciones/text-02.jpg]
+
+--------------------------------------------------------
+
+
+textvariable
+
+--------------------------------------------------------
+
+
+underline
+
+Permite subrayar una letra de nuestra etiqueta, algo que es muy util para por ejemplo destacar un atajo con el teclado. La forma en que se utiliza es indicandole el indice de la cadena de texto que conforma nuestra etiqueta comenzando desde cero. El valor por defecto de esta opcion es -1 lo que logra que no se subraye ninguna letra
+
+Ejemplo con una etiqueta
+
+``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", underline=3)
+
+[widgets/img/opciones/underline-01.jpg]
+
+
+Ejemplo con un boton
+
+``` boton = Tkinter.Button(root, text="Imprimir Hola Mundo!!!", command=funcion, underline=3)
+
+[widgets/img/opciones/underline-02.jpg]
+
+--------------------------------------------------------
+
+
+width
+
+Esta opcion nos permite indicar en ancho del elemento con el que estamos trabajando midiendolo en caracteres no en pixeles si se trata de texto, si en cambio estamos trabajando con imagenes si deberemos medirlo en pixeles, si se le da un valor negativo este servira para indicar el ancho minimo del widget. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo.
+
+
+``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", width=30)
+
+[widgets/img/opciones/activeforeground.jpg]
+
+--------------------------------------------------------
+
+
+wraplength
+
+--------------------------------------------------------
+
+
+=== Disponibles para ===
+
+%!csvheader: /media/Principal/Alejandro/Guias/Tkinter/widgets/opciones_de_widgets.csv

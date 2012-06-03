@@ -1,0 +1,48 @@
+
+
+En Tkinter podemos especificar las medidas de los elementos no solo en píxeles sino que también podemos especificar los valores en centímetros, pulgadas, milímetros y puntos; para esto debemos pasar el valor como cadena que se compone de un numero entero o no (porque también podemos usar decimales en caso de ser necesario), seguido de una letra que indique el tipo de unidad a utilizar, que están especificados en la siguiente tabla:
+
+
+|| Símbolo | Descripción ||
+|     c    | Centímetros |
+|     i    | Pulgadas |
+|     m    | Milímetros |
+|     p    | Puntos de impresora (alrededor de 0.35mm) |
+
+Si el valor que se pasa es un numero sin letra de unidad este es considerado como un valor en píxeles, siendo esta unidad el valor por defecto.
+
+Ejemplos:
+
+
+- Píxeles:
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth=10)
+
+[dimensiones/img/dimensiones_pixeles.jpg]
+
+- Centímetros:
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='1c')
+
+[dimensiones/img/dimensiones_centrimetros.jpg]
+
+- Pulgadas:
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='1i')
+
+[dimensiones/img/dimensiones_pulgadas.jpg]
+
+- Milímetros:
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10m')
+
+[dimensiones/img/dimensiones_milimetros.jpg]
+
+- Puntos:
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10p')
+
+[dimensiones/img/dimensiones_puntos.jpg]
+
+
+Estas unidades de medida a excepción de los píxeles, no es recomendable usarlos ya que no están pensados específicamente para trabajar con elementos de la pantalla de nuestro ordenador y al usarlos es muy probable que no consigamos los tamaños o proporciones que esperábamos en la pantalla, por ejemplo los puntos se utiliza muy frecuentemente para la impresión ya que fueron diseñados para ese propósito y lo mismo pasa con los milímetros o las pulgadas que fueron diseñadas para otros ámbitos.

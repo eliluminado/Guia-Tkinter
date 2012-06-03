@@ -1,0 +1,36 @@
+
+
+Los botones pueden contener texto o imágenes y se les puede asociar funciones o métodos, que al hacer clic sobre ellos Tkinter se encargara de llamar automáticamente a ese método o función y ejecutara el código Python contenido dentro de ellos.
+
+Un detalle es que solo puede utilizarse un tipo de fuente, pero ese texto puede ocupar varias lineas en caso de ser necesario. Además se puede subrayar el texto, un carácter o letra en particular, algo que es muy común cuando se desea decirle al usuario sobre la existencia de un atajo con el teclado.
+
+Antes de crear a ese botón debemos declarar la función a la cual se llamara, porque como se imaginaran no podemos decirle al botón que ejecute una función que no existe, por eso vamos a escribir un par de lineas y crearemos una función simple como para verificar que dicho botón funciona correctamente.
+
+```
+def función():
+    print "Excelente"
+```
+
+Con esas dos lineas nos va a servir para demostrar su funcionamiento, ahora si vamos por el botón.
+
+
+A continuación les muestro el código con el cual vamos a trabajar:
+
+```
+import Tkinter
+
+def funcion():
+   print "Excelente"
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Que te parece la guía?", command=funcion)
+boton.pack()
+root.mainloop()
+```
+
+En el se observa la ya conocida importación del modulo Tkinter, la función que ya habíamos declarado y la creación del botón. Como se puede ver la creación de un botón básico es muy similar al de una etiqueta pero se incluye un parámetro mas que nos dará la posibilidad de especificar dentro de el la función que utilizaremos; el parámetro mencionado es **'command'** y en el podemos llamar a funciones o métodos, en este caso llamamos a la función 'función' que va a imprimir en la consola la palabra //'Excelente'//.
+
+
+[widgets/img/Button/Button-01.jpg]
+
+[widgets/img/Button/Button-02.jpg]

@@ -1,0 +1,26 @@
+
+
+== Colores ==
+
+Paleta de colores de Tk:
+
+%!csvheader: /media/Principal/Alejandro/Guias/Tkinter/colors/paletas/paleta_colores_tk.csv
+
+
+Paleta de colores del sistema Mac OS X:
+
+En Mac OS X, los siguientes colores adicionales del sistema están disponibles (tenga en cuenta que los valores de color reales dependen del tema de sistema operativo actualmente activo).
+
+%!include: ``colors/paletas/paleta_mac.txt``
+
+
+Paleta de colores del sistema Windows:
+
+En Windows, los siguientes colores adicionales del sistema están disponibles (tenga en cuenta que los valores de color reales dependen del tema de sistema operativo actualmente activo).
+
+%!include: ``colors/paletas/paleta_windows.txt``
+
+
+Paleta de colores X11:
+
+%!csvheader: /media/Principal/Alejandro/Guias/Tkinter/colors/paletas/paleta_x11.csv

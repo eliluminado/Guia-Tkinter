@@ -1,0 +1,60 @@
+
+
+Para comenzar a llenar esa vacía ventana que acabamos de crear vamos a nombrar a las etiquetas o mas conocidas como //'label'// por su nombre en ingles, las podemos encontrar desde interfaces gráficas hasta en formularios en HTML y son sumamente útiles en la construcción de interfaces y formularios, al igual que cuando creamos nuestra ventana vacía declarándola de la siguiente forma //"root = Tkinter.Tk()"// tendremos que hacerlo con nuestra etiqueta, para esto necesitamos escoger un nombre en mi caso escogeré **"etiqueta"** para declararla y deberemos llamar al widget "Label" en vez de la función "Tk" como habíamos hecho anteriormente, como para orientarnos con lo ya visto quedando por ahora algo así:
+
+``` etiqueta = Tkinter.Label()
+
+Una vez creada la estructura básica de la etiqueta, tendremos que llenar esa paréntesis. Primero tendremos que indicar a donde pertenece ese 'label' indicando el identificador de la ventana que en nuestro caso es 'root', separado por una coma escribiremos lo siguiente **text=** en donde seguido del signo igual incluiremos el texto que deseamos que incluya la etiqueta, la cual puede ser un texto (que tendremos que encerrar entre comillas al igual que cuando usamos la sentencia print) o una variable que contenga al texto. Para verlo un poco mas claro juntemos todo en dos ejemplos, uno donde muestre un texto fijo que le indiquemos a la etiqueta y otro usando una variable
+
+- **Ejemplo numero 1**:
+```
+etiqueta = Tkinter.Label(root, text="Codigo Python")
+```
+
+- **Ejemplo numero 2**:
+```
+import getpass
+texto = "Bienvenido %s a Codigo Python" % getpass.getuser()
+etiqueta_2 = Tkinter.Label(root, text=texto)
+```
+
+
+Expliquemos los dos ejemplos, en el primero usamos un texto fijo no dinámico para utilizar como valor de la etiqueta en cambio en el segundo estamos usando una variable en donde su valor varia dependiendo de la salida que obtengamos al ejecutar //'getpass.getuser()'// que obtiene el nombre de usuario que tengamos en nuestra PC, como podemos observar su funcionamiento no varia mucho de lo que nos tiene acostumbrados Python, así que manejarnos con Tkinter es solamente aprendernos un par de nombres de sus widgets como para poder empezar a utilizarlo, el resto sigue siendo codigo Python.
+
+Pero (siempre hay un pero) antes de poder ejecutar este ejemplo en nuestra consola tendremos que declarar este widget en nuestra ventana dándole una ubicación en la misma, sino hacemos esto nuestra etiqueta simplemente no aparecerá en nuestra ventana. Para hacerlo tenemos tres formas (Esto se vera mas detenidamente mas adelante) una es usando **'pack'** y las otras dos son **'grid'** y **'place'**. Como esto se vera mas adelante haré una breve síntesis de las tres opciones que tenemos:
+
+- 'pack': 
+%[TODO]
+
+- 'grid': 
+%[TODO]
+
+- 'place: 
+%[TODO]
+
+
+Como en este ejemplo solo colocaremos una etiqueta no es necesario recurrir al uso de 'grid' para posicionarlo, así que usaremos 'pack' en su lugar. Pero lo mas importante es saber como se declara esta etiqueta en nuestra ventana y poder ver nuestro primer widget en funcionamiento, para lograr esto deberemos usar la siguiente forma:
+
+``` etiqueta.pack()
+
+Como vemos es muy simple solo debemos usar el nombre que utilizamos para declarar nuestra etiqueta seguida de la forma que vayamos a utilizar para posicionarla, pero para los que no desean esperar a leer la siguiente sección para ver como se utiliza 'grid' les dejo la misma etiqueta pero posicionándola con 'grid' en lugar de usar 'pack' como ya lo habíamos visto:
+
+``` etiqueta.grid(row=1, column=1)
+
+Como se puede observar esta otra forma debimos indicarle dos parámetros que sirven para especificar la posición del widget, en este caso nuestra etiqueta. El primer parámetro es //'row'// que se traduce como fila al español y el segundo es //'column'// o columna en español con ellos podemos indicar en que columna y fila deberá colocarse el widget, aunque por ahora no profundizaremos entrando en detalles en la forma que trabaja cada uno ni todos los parámetros que acepta cada una.
+
+Si ahora escribiéramos todo lo que vimos en nuestra consola tendríamos que ver nuestra primera etiqueta en funcionamiento, contenido dentro de una ventana quedando todo el código como el siguiente:
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> etiqueta = Tkinter.Label(root, text="Codigo Python")
+>>> etiqueta.pack()
+>>> root.mainloop()
+```
+
+Y así es como quedara nuestro ejemplo terminado:
+
+[widgets/img/Label/Label-01.jpg]
+
+Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer widget y podemos seguir con el proximo.
