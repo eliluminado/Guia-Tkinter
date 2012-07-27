@@ -1,0 +1,22 @@
+
+
+
+==== Instalacion ====
+
+La instalacion de PIL se puede llevar a cabo mediante unos sencillos pasos, para estos se muestran una serie de procedimientos a realizar para los distintos sistemas operativos.
+
+Una de las formas de instalacion que tenemos a nuestra disposicion en la que no influya el sistema operativo
+
+===== Windows =====
+
++ Descarga el programa de instalación de Windows del sitio web de PIL [(http://www.pythonware.com/products/pil/) http://www.pythonware.com/products/pil/].
++ Haz doble clic en el programa de instalación para iniciar el proceso.
++ Elige el directorio adecuado para la instalación de PIL.
++ Completa la instalación y prueba la aplicación de ejemplo de forma local.
+
+===== GNU/Linux =====
+Para distribuciones deribadas de Debian
+``` $ sudo aptitude install python-imaging
+
+Para distribuciones derivadas de Ubuntu
+``` $ sudo apt-get install python-imaging

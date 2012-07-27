@@ -19,7 +19,7 @@ etiqueta_2 = Tkinter.Label(root, text=texto)
 ```
 
 
-Expliquemos los dos ejemplos, en el primero usamos un texto fijo no dinámico para utilizar como valor de la etiqueta en cambio en el segundo estamos usando una variable en donde su valor varia dependiendo de la salida que obtengamos al ejecutar //'getpass.getuser()'// que obtiene el nombre de usuario que tengamos en nuestra PC, como podemos observar su funcionamiento no varia mucho de lo que nos tiene acostumbrados Python, así que manejarnos con Tkinter es solamente aprendernos un par de nombres de sus widgets como para poder empezar a utilizarlo, el resto sigue siendo codigo Python.
+Expliquemos los dos ejemplos, en el primero usamos un texto fijo no dinámico para utilizar como valor de la etiqueta en cambio en el segundo estamos usando una variable en donde su valor varia dependiendo de la salida que obtengamos al ejecutar //'getpass.getuser()'// que obtiene el nombre de usuario que tengamos en nuestra PC, como podemos observar su funcionamiento no varia mucho de lo que nos tiene acostumbrados Python, así que manejarnos con Tkinter es solamente aprendernos un par de nombres de sus widgets como para poder empezar a utilizarlo, el resto sigue siendo código Python.
 
 Pero (siempre hay un pero) antes de poder ejecutar este ejemplo en nuestra consola tendremos que declarar este widget en nuestra ventana dándole una ubicación en la misma, sino hacemos esto nuestra etiqueta simplemente no aparecerá en nuestra ventana. Para hacerlo tenemos tres formas (Esto se vera mas detenidamente mas adelante) una es usando **'pack'** y las otras dos son **'grid'** y **'place'**. Como esto se vera mas adelante haré una breve síntesis de las tres opciones que tenemos:
 
@@ -57,4 +57,4 @@ Y así es como quedara nuestro ejemplo terminado:
 
 [widgets/img/Label/Label-01.jpg]
 
-Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer widget y podemos seguir con el proximo.
+Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer widget y podemos seguir con el próximo.
