@@ -1,0 +1,47 @@
+
+
+%Referencias:
+%http://www.tutorialspoint.com/python/tk_fonts.htm
+%http://www.tcl.tk/man/tcl8.5/TkCmd/font.htm
+%http://infohost.nmt.edu/tcc/help/pubs/tkinter/std-attrs.html#fonts
+%http://effbot.org/tkinterbook/tkinter-widget-styling.htm#fonts
+%http://www.tkdocs.com/tutorial/fonts.html#fonts
+%http://www.astro.washington.edu/users/rowen/TkinterSummary.html#ExtraModules
+
+Ha llegado el momento de ver las fuentes en Tk, es muy posible que en nuestros diseños hagamos un uso muy basico de esta carecteristica pero aun asi es bueno conocer cual es el potencial que tenemos en esta area con esta libreria.
+
+Para empezar debemos tener en claro que nos ofrece Tk con las fuentes y el uso correcto de las mismas
+
+
+Para su uso tenemos hasta varias formas de usarlo
+Font descriptors
+
+Nombres de fuentes definidas por el usuario
+
+Fuentes del sistema
+
+X font descriptors
+
+
+
+
+
+
+--------------------------------------------
+If you set a widget's font to a named font (in Tk parlance; the Tkinter equivalent is a tkFont.Font object), then that widget's font will live-update when you change the named font!
+
+To make this work automatically, use named fonts to set the option database before creating any widgets. Then your widgets will automatically be created with live-updatable fonts (unless you explicitly set their font option to some other value). The following example code reads the default font settings (by creating temporary widgets) and then sets the option database. On my system, Entry and Text widgets use one font and all other widgets use another (by default), so I only allow setting those two categories of fonts. This code should do very well if you wish to honor the standard Tk option database. A different means of getting initial font settings for the Font objects is called for if you wish to store preferences in some other fashion.
+
+Warnings:
+
+    The option database stores the name of the named font (not the Font object itself). To create a font object from a font name use tkFont.Font(name=..., exists=True).
+    If your original tkFont.Font object goes away (or any Font object not created using exists=True) then the tk named font is also deleted. This is to prevent memory leaks but it may catch you off guard if you decide to recreate Font objects only when needed. If using tkFont.Font objects to configure widgets always hold onto your original objects! 
+    
+Si se establece la fuente de un widget a una fuente con nombre (en la jerga de Tk, el equivalente a Tkinter es un objeto tkFont.Font), luego de que la fuente del widget va a vivir-se actualiza cuando se cambia la fuente llamada!
+
+Para realizar este trabajo de forma automática, utilizar fuentes con nombre para establecer la base de datos antes de crear cualquier opción de widgets. A continuación, los widgets se creará automáticamente con el live-actualizables fuentes (a menos que establezca explícitamente la opción de fuente a algún otro valor). El código de ejemplo siguiente, se lee la configuración de fuente por defecto (mediante la creación de widgets de carácter temporal) y, a continuación establece la base de datos de opción. En mi sistema, los widgets de entrada y el texto utiliza un tipo de letra y todos los otros widgets utilizar otro (por defecto), así que sólo permiten establecer estas dos categorías de fuentes. Este código debe ir muy bien si usted desea honrar a la norma de base de datos de Tk opción. Una forma diferente de conseguir la configuración inicial de la fuente de los objetos de fuente que se llama a si usted desea almacenar las preferencias de alguna otra manera.
+
+Advertencias:
+
+     La base de datos la opción almacena el nombre de la fuente con nombre (no el objeto de fuente propia). Para crear un objeto de fuente de una fuente de uso tkFont.Font nombre (name = ..., existe = true).
+     Si el objeto original de tkFont.Font desaparece (o cualquier objeto creado con fuentes no existe = true), entonces la fuente de los conocimientos tradicionales con nombre también se elimina. Esto es para evitar pérdidas de memoria, pero puede coger con la guardia baja si usted decide volver a crear los objetos de fuente sólo cuando sea necesario. Si el uso de objetos para configurar los widgets tkFont.Font siempre aferrarse a los objetos originales!

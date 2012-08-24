@@ -28,7 +28,7 @@ Algo muy buscado en Python son las guías sobre interfaces gráficas ya sea PyGT
 
 = Introducción =
 
-Sean bienvenidos a esta noble guia que pretende a lo largo de sus capitulos mostrar las herramientas y conocimientos necesarios para el desarrollo de interfaces graficas con las librerias Tk y el lenguaje de programacion Python. El contenido de esta guia no pretende ser una referencia completa de lo que puede lograr pero si servir como una base al poco contenido que se logra en español sobre Tkinter.
+Sean bienvenidos a esta noble guía que pretende a lo largo de sus capítulos mostrar las herramientas y conocimientos necesarios para el desarrollo de interfaces gráficas con las librerías Tk y el lenguaje de programación Python. El contenido de esta guía no pretende ser una referencia completa de lo que puede lograr pero si servir como una base al poco contenido que se logra encontrar en español sobre Tkinter. 
 
 == Acerca de Tk ==
 Tkinter es un [binding http://es.wikipedia.org/wiki/Binding] de la biblioteca gráfica Tcl/Tk para el lenguaje de programación Python, con estos queremos decir que Tk se encuentra disponible para varios lenguajes de programación entre los cuales se encuentra Python con el nombre de Tkinter. Este no es mas que una adaptación de esta librería para el lenguaje Python con lo cual usar Tk en otro lenguaje no nos supondrá un inconveniente.
@@ -48,6 +48,7 @@ Se considera un estándar para la interfaz gráfica de usuario (GUI) para Python
 
 == Instalando Tkinter ==
 % Por implementar
+% Referencia: http://www.tkdocs.com/tutorial/install.html
 
 === Linux ===
 === Windows ===
