@@ -8,9 +8,39 @@ NOTA:
 
 Para mas informacion sobre los colores visite la seccion "Colores" que se ve en ["Gestion del diseño" #colores]
 
+Pueden encontrar mas informacion desde la documentacion oficial de Tcl/Tk sobre las opciones estandar [http://www.tcl.tk/man/tcl8.5/TkCmd/options.htm http://www.tcl.tk/man/tcl8.5/TkCmd/options.htm]
+
 --------------------------------------------------------
 
-anchor
+
+=== activebackground ===
+
+Con esta opcion podemos indicar que color de fondo se debera utilizar cuando el cursor del mouse se posicione sobre el widget, Para algunos elementos y en algunas plataformas solo sera visible cuando se hace click sobre el.
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
+
+[widgets/img/opciones/activebackground.jpg]
+
+--------------------------------------------------------
+
+
+=== activeborderwidth ===
+
+--------------------------------------------------------
+
+
+=== activeforeground ===
+
+Al igual que pasa con 'activebackground' con esta otra opcion podemos especificar el color en este caso de la fuente del widget cuando se posiciona el cursor sobre este.
+
+``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
+
+[widgets/img/opciones/activeforeground.jpg]
+
+--------------------------------------------------------
+
+
+=== anchor ===
 
 Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen con respecto al widget en el que se encuentra. La opcion por defecto es 'CENTER' que muestra el elemento centrado.
 
@@ -85,28 +115,7 @@ Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen 
 --------------------------------------------------------
 
 
-activebackground
-
-Con esta opcion podemos indicar que color de fondo se debera utilizar cuando el cursor del mouse se posicione sobre el widget, Para algunos elementos y en algunas plataformas solo sera visible cuando se hace click sobre el.
-
-``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
-
-[widgets/img/opciones/activebackground.jpg]
-
---------------------------------------------------------
-
-
-activeforeground
-
-Al igual que pasa con 'activebackground' con esta otra opcion podemos especificar el color en este caso de la fuente del widget cuando se posiciona el cursor sobre este.
-
-``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
-
-[widgets/img/opciones/activeforeground.jpg]
-
---------------------------------------------------------
-
-background (bg)
+=== background (bg) ===
 
 Sirve para indicar el color de fondo que tendra en area del widget cuando este se encuentre inactivo. Tambien se puede utilizar su forma abreviada 'bg' como podemos ver en el segundo ejemplo.
 
@@ -119,12 +128,12 @@ Sirve para indicar el color de fondo que tendra en area del widget cuando este s
 --------------------------------------------------------
 
 
-bitmap
+=== bitmap ===
 
 --------------------------------------------------------
 
 
-borderwidth (bd)
+=== borderwidth (bd) ===
 
 Nos da la posibilidad de especificar el ancho del borde del elemento con el que estemos trabajando, Tkinter nos permite especificar el valor en varias unidades de medida (centimetros, pulgadas, milimetros y puntos) las cuales seran vistas mas adelante en la guia. Si no se utiliza junto con la opcion 'relief' visualmente es similar a utilizar las opciones 'heigth' y 'width' como se puede observar en el ejemplo. El valor por defecto es de 2 pixeles.
 
@@ -137,7 +146,7 @@ Nos da la posibilidad de especificar el ancho del borde del elemento con el que 
 --------------------------------------------------------
 
 
-command
+=== command ===
 
 Como ya lo mencionamos cuando vimos al widget Button este permite indicar la funcion o metodo que queremos que se llame cuando se preciona por ejemplo un boton, pero esta opcion tambien funciona con otros widgets de Tkinter cumpliendo la misma funcion.
 
@@ -156,7 +165,7 @@ boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion)
 --------------------------------------------------------
 
 
-cursor
+=== cursor ===
 
 Nos da la posiblidad de indicar que cursor queremos que se muestre cuando el mouse se posiciona sobre la etiqueta.
 En el siguiente enlace podremos encontrar una lista con los cursores disponibles en Tkinter
@@ -168,17 +177,33 @@ El valor 'none' consigue eliminar el cursor cuando se pasa el cursor sobre el wi
 [widgets/img/opciones/cursor.jpg]
 --------------------------------------------------------
 
-default
+
+=== compound ===
 
 --------------------------------------------------------
 
 
-font
+=== default ===
 
 --------------------------------------------------------
 
 
-foreground (fg)
+=== disabledforeground ===
+
+--------------------------------------------------------
+
+
+=== exportselection ===
+
+--------------------------------------------------------
+
+
+=== font ===
+
+--------------------------------------------------------
+
+
+=== foreground (fg) ===
 
 Si deseamos cambiar el color de las letras de nuestro texto cuando el widget se encuentra inactivo tendremos que utilizar esta opcion, que trabaja de forma similar al ya visto 'background'. En este se tambien se puede utilizar su abreviatura 'fg' como podemos ver en el segundo ejemplo
 
@@ -191,7 +216,7 @@ Si deseamos cambiar el color de las letras de nuestro texto cuando el widget se 
 --------------------------------------------------------
 
 
-height
+=== height ===
 
 Permite indicar la altura a la que se posicionara nuestro widget en lineas no en pixeles. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo
 
@@ -202,12 +227,57 @@ Permite indicar la altura a la que se posicionara nuestro widget en lineas no en
 --------------------------------------------------------
 
 
-image
+=== highlightbackground ===
 
 --------------------------------------------------------
 
 
-justify
+=== highlightcolor ===
+
+--------------------------------------------------------
+
+
+=== highlightthickness ===
+
+--------------------------------------------------------
+
+
+=== image ===
+
+--------------------------------------------------------
+
+
+=== insertbackground ===
+
+--------------------------------------------------------
+
+
+=== insertborderwidth ===
+
+--------------------------------------------------------
+
+
+=== insertofftime ===
+
+--------------------------------------------------------
+
+
+=== insertontime ===
+
+--------------------------------------------------------
+
+
+=== insertwidth ===
+
+--------------------------------------------------------
+
+
+=== jump ===
+
+--------------------------------------------------------
+
+
+=== justify ===
 
 - RIGHT
 
@@ -229,8 +299,24 @@ justify
 
 --------------------------------------------------------
 
+=== orient ===
 
-relief
+%http://www.tcl.tk/man/tcl8.5/TkCmd/options.htm#M-orient
+
+--------------------------------------------------------
+
+
+=== padx ===
+
+--------------------------------------------------------
+
+
+=== pady ===
+
+--------------------------------------------------------
+
+
+=== relief ===
 
 % Las descripciones de las sombras las obtuve de http://www.librosweb.es/referencia/css/border-style.html
 
@@ -289,7 +375,42 @@ Ejemplos:
 --------------------------------------------------------
 
 
-text
+=== repeatdelay ===
+
+--------------------------------------------------------
+
+
+=== repeatinterval ===
+
+--------------------------------------------------------
+
+
+=== selectbackground ===
+
+--------------------------------------------------------
+
+
+=== selectborderwidth ===
+
+--------------------------------------------------------
+
+
+=== selectforeground ===
+
+--------------------------------------------------------
+
+
+=== setgrid ===
+
+--------------------------------------------------------
+
+
+=== takefocus ===
+
+--------------------------------------------------------
+
+
+=== text ===
 
 Este es un elemento muy importante para los widgets como Label o Button entre otros, esta opcion nos da la posibilidad de incluir un texto dentro del widget, este texto puede contener saltos de lineas en caso de ser necesario y tambien se puede utilizar una variable para indicar la cadena de texto a usar. Si se utiliza una imagen este elemento es ignorado por Tkinter.
 
@@ -317,12 +438,20 @@ Ejemplo con tabulacion (recuerden que deben usar el caracter \t para la tabulaci
 --------------------------------------------------------
 
 
-textvariable
+=== textvariable ===
+
+%FIXME: Reemplazar texto "Variables" con ancla a la seccion
+Especifica el nombre de una variable global. El valor de la variable es una cadena de texto que se mostrará en el interior el widget, y si el valor de la variable cambia, el widget se actualizará automáticamente para reflejar el nuevo valor. La forma en que se muestra la cadena en el widget depende del widget en particular y puede ser determinada por otras opciones, tales como anclaje o justificar. Se puede ver mas detalladamente en la seccion "Variables"
 
 --------------------------------------------------------
 
 
-underline
+=== troughcolor ===
+
+--------------------------------------------------------
+
+
+=== underline ===
 
 Permite subrayar una letra de nuestra etiqueta, algo que es muy util para por ejemplo destacar un atajo con el teclado. La forma en que se utiliza es indicandole el indice de la cadena de texto que conforma nuestra etiqueta comenzando desde cero. El valor por defecto de esta opcion es -1 lo que logra que no se subraye ninguna letra
 
@@ -342,7 +471,7 @@ Ejemplo con un boton
 --------------------------------------------------------
 
 
-width
+=== width ===
 
 Esta opcion nos permite indicar en ancho del elemento con el que estamos trabajando midiendolo en caracteres no en pixeles si se trata de texto, si en cambio estamos trabajando con imagenes si deberemos medirlo en pixeles, si se le da un valor negativo este servira para indicar el ancho minimo del widget. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo.
 
@@ -354,7 +483,20 @@ Esta opcion nos permite indicar en ancho del elemento con el que estamos trabaja
 --------------------------------------------------------
 
 
-wraplength
+=== wraplength ===
+
+%FIXME: Revisar y mostrar con ejemplos
+Para los widgets que pueden realizar ajuste de líneas, esta opción especifica la longitud máxima de la línea. Las líneas que exceden este tamaño saltan a la siguiente línea, de forma que ninguna línea es más larga que la longitud especificada. El valor puede especificarse en cualquiera de las medidas normalizados para distancias de pantalla. Si este valor es menor que o igual a 0, entonces no se realiza envoltura: líneas se romperán sólo en caracteres de nueva línea en el texto.
+
+--------------------------------------------------------
+
+
+=== xscrollcommand ===
+
+--------------------------------------------------------
+
+
+=== yscrollcommand ===
 
 --------------------------------------------------------
 

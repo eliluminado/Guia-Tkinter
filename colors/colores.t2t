@@ -21,7 +21,7 @@ Les dejo dos ejemplos para que puedan observarlo en funcionamiento:
 
 Otra de las posibilidades que tenemos es utilizar los colores del sistema para conseguir un aspecto mas acorde a la plataforma con que estemos trabajando.
 
-Podemos obtener una lista de los posibles colores que nos da Tkinter en la siguiente pagina [http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm] o también en los anexos de esta guía los podrán encontrar:
+Podemos obtener una lista de los posibles colores que nos da Tcl/Tk en la siguiente pagina [http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm] o también en los anexos de esta guía los podrán encontrar:
 
 
 === RGB hexadecimal ===
@@ -48,3 +48,4 @@ Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nom
 === Consejos ===
 
 En esta parte final de la seccion colores nos detendremos un momento para analizar la utilizacion de colores en nuestra aplicacion y la utilizacion de paletas y esquemas de colores que nos permitan conseguir aspectos mas prolijos y agradables a la vista.
+%FIXME: Ampliar

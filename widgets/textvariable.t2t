@@ -1,7 +1,103 @@
 
 
-Acá es donde se muestra una de las opciones que disponemos en varios widgets y es 'textvariable' que tomara como valor la variable del tipo StringVar que habíamos mencionado en 'Entry', esta nos permitirá trabajar con varios métodos en Entry que se los iré mostrando y los iremos viendo con ejemplos.
+%Referencias
+%http://effbot.org/tkinterbook/variable.htm
+%http://docs.python.org/2/library/tkinter.html#coupling-widget-variables
+Acá es donde se muestra una de las opciones que disponemos en varios widgets y es 'textvariable' que tomara como valor la variable del tipo StringVar que habíamos mencionado en 'Entry', esta nos permitirá trabajar con varios métodos en Entry que se los iré mostrando y los iremos viendo con ejemplos. Cabe aclararse que el uso de estas variables no se limitan solamente a la opcion 'textvariable' como lo podremos iremos viendo en otros ejemplos mas adelante.
 
 Tengan en cuenta que StringVar no forma parte de Python sino de Tkinter así que la importación de este es fundamental para poder utilizarlo, aunque para algunos resulte una obviedad nunca esta de mas remarcarlo ya que si utilizamos la forma 'from Tkinter import *' estos detalles no se observan y pueden generar confusión cuando se ven los ejemplos.
 
 Como habíamos mencionado contamos con cuatro clases de variables con Tkinter las cuales son BooleanVar, DoubleVar, IntVar y StringVar, esta ultima suele ser la mas vista y utilizada en los tutoriales disponibles en internet pero no por esto mas importante que las demás.
+
+Para comenzar a utilizarlo veamoslo con un ejemplo simple, supongamos que tenemos un cuadro de texto y queremos almacenar el texto ingresado en una variable, el problema con usar el metodo 'get' del widget 'Entry' es que, lo que se almacenaria seria el valor que contiene el cuadro al momento de llamar al metodo lo cual es util, pero hay veces que queremos las modificaciones que se puedan ir realizando a dicho texto. En estos casos es donde se nos brindan herramientas como estas variables donde las modificaciones que se hacen en el cuadro de texto se ven reflejadas en la variable, mas adelante se vera que nos estan limitadas a cuadros de texto sino que contaremos con otros widgets que pueden hacer uso de estas.
+
+Un ejemplo sensillo para verlo en accion:
+
+```
+>>> #Primero creamos nuestra ventana vacia
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> #Definimos nuestra variable del tipo "StringVar"
+>>> variable = Tkinter.StringVar()
+>>> variable
+<Tkinter.StringVar instance at 0x0000000002DBDA08>
+>>> #Creamos nuestro campo de texto pasandole nuestra variable
+>>> campo_de_texto = Tkinter.Entry(root, textvariable=variable)
+>>> campo_de_texto.pack()
+>>> #Insertamos un poco de texto
+>>> campo_de_texto.insert(0, "Probando")
+>>> #Aca llamamos al metodo 'get' de 'Entry'
+>>> campo_de_texto.get()
+'Probando'
+>>>#y aca al metodo 'get' pero de nuestra variable para obtener su valor
+>>> variable.get()
+'Probando'
+>>> #Y para repetir su funcionamiento agregamos unpoco mas de texto
+>>> campo_de_texto.insert('end', " como funciona")
+>>> campo_de_texto.get()
+'Probando como funciona'
+>>> variable.get()
+'Probando como funciona'
+>>>
+```
+
+NOTA:
+Si desean ver como funcionan mas en detalle estas variables pueden ver estos objetos desde el codigo fuente de la libreria Tkinter, para esto deben dirigirse a la carpeta donde se encuentra instalado python y ahi van a la carpeta 'Lib' y luego a la carpeta 'lib-tk', alli se encuentra el codigo fuente de Tkinter, la clase que contieneal objeto 'StringVar' se encuentra dentro del archivo 'Tkinter.py' que es el que se carga cuando hacemos 'import Tkinter'
+
+Pudimos notar en ese ejemplo el uso de un metodo llamado 'get' el cual esta disponible para las cuatro tipos de variables, al igual que otros metodos que iremos viendo de a uno.
+
+Empecemos viendo esa linea donde creamos esa variable llamada 'variable', donde a 'StringVar' no le pasamos ningun argumento, si se dieron una vuelta por el codigo fuente de Tkinter.py habran visto cuando se inicializa el objeto se ve que toma 3 parametros con valores 'None', analicemos su funcionamiento
+
+master
+%TODO: Desarrollar
+
+value
+Nos permite asignar un valor a la variable cuando esta es creada
+
+```
+>>> variable = Tkinter.StringVar(value="Hola")
+>>> variable.get()
+'Hola'
+```
+
+name
+Nos permite darle un nombre opcional, por defecto Tkinter le un nombre del tipo PY_VARnum, donde 'num' es reemplazado por un numero que varia dependiendo de la cantidad de variables que hayan sido creadas. Este valor es usado internamente por el lenguaje Tcl por lo queno nos interesara modificar su valor. Para conocer su valor simplemente llamamos al atributo '_name' que nos mostrara el valor de este.
+
+```
+>>> variable = Tkinter.StringVar()
+>>> variable._name
+'PY_VAR0'
+```
+
+Ahora que ya sabemos como y con que crear nuestra variable veamos los metodos que tememos disponibles.
+
+get()
+Aunque ya vimos a 'get' no esta demas mencionarlo nuevamente ya que este seguramente sera el mas utilizado junto a 'set', 'get' nos permite obtener el valor contenido en la variable.
+
+``` >>> variable.get()
+
+set(value)
+Como se menciono en la descripcion de 'get' estos forman una gran pareja resultando en dos metodos basicos muy utiles, este metodo en particular nos permite modificar el contenido
+
+``` >>> variable.set("Valor que deseamos guardar")
+
+trace_variable(mode, callback)
+Ya vimos dos metodos sencillos, pero ahora mostraremos tres con un uso un poco mas avanzado pero una vez que entendamos como funcionan nos permitiran conseguir resultados bastantes avanzados. En primer lugar tenemos a 'trace_variable' el cual nos permite definir una funcion a la cual llamar cuando se realice una determinada accion sobre la variable para ello cuenta con dos parametros uno de ellos es 'mode' que nos pide en que modo de captura es que llamara a la funcion, puede tomar tres valores 'w', 'r' y 'u' donde 'w' es para cuando se escribe en la variable, 'r' corresponde a la lectura de la misma y por ultimo 'u'.
+%FIXME: Terminar descripcion modo 'u'
+
+trace_vdelete
+
+trace_vinfo
+
+
+
+
+Para finalizar veremos la diferencia entre las cuatro variables disponibles, ya vimos como crear y trabajar con las variables del tipo 'StringVar' pero que paso con el resto. Trabajar con 'StringVar' o con las demas es exactamente igual, las distinguimos por el tipo de valores que manejan, por ejemplo si necesitamos trabajar con cadenas de texto debemos utilizar a 'StringVar' como lo veniamos haciendo, si se trata de numeros enteros utilizaremos a 'IntVar', tambien puede ser el caso de que queremos trabajar con numeros pero con decimales para esto tenemos a 'DoubleVar' y por ultimo esta 'BooleanVar' que maneja los valores booleanos como 'True' y 'False'
+
+La siguiente tabla es a modo de resumen:
+
+| Nombre |  Tipo de valor en Python |
+| StringVar |  str  |
+| IntVar |  int  |
+| DoubleVar |  float  |
+| BooleanVar |  bool  |

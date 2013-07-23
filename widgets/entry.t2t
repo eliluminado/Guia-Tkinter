@@ -4,7 +4,7 @@ Este widget nos permite tanto mostrarle información al usuario como también ob
 
 Este elemento es muy popular y sumamente útil así que deberemos de conocerlo y manejarlo, para esto comencemos explicando algunos conceptos básicos para entender mejor de se trata esto.
 
-Para empezar a utilizar nuestro elemento 'Entry' podemos primero declarar una variable del tipo 'StringVar' o del tipo 'IntVar' (tenemos mas opciones disponibles pero se verán mas detenidamente en otra sección), estas variables capturan el texto que el usuario ingrese en el cuadro de texto para luego poder trabajar con esos datos, aunque esta practica es muy recomendada y hasta imprescindible en ocasiones, no es un requisito obligatorio para utilizar nuestro cuadro de texto como es visto en algunos sitios web.
+Para empezar a utilizar nuestro elemento 'Entry' podemos primero declarar una variable del tipo 'StringVar' o del tipo 'IntVar' (tenemos mas opciones disponibles pero se verán mas detenidamente en otra sección), estas variables capturan el texto que el usuario ingrese en el cuadro para luego poder trabajar con esos datos, aunque esta practica es muy recomendada y hasta imprescindible en ocasiones, no es un requisito obligatorio para utilizar nuestro cuadro de texto como es visto en algunos sitios web.
 
 Por esto veremos primero un uso mas básico para luego entrar mas en detalle e incorporar estas variables a nuestro repertorio.
 
@@ -50,6 +50,7 @@ Una observación que se debe hacer, es que para escribir varias lineas de texto 
 
 === Índices ===
 
+%Referencia: http://www.tcl.tk/man/tcl8.5/TkCmd/entry.htm#M23
 Un concepto que hay que tener en cuenta antes de empezar a utilizar algunos métodos disponibles para 'Entry' son los índices, estos nos facilitan el insertado y eliminado de caracteres entre otras cosas, estableciendo desde y hasta donde deseamos por ejemplo borrar o insertar texto en el cuadro de texto. Para conseguir esto contamos con varias formas que las iremos viendo de a una para luego verlas dentro de los métodos que las soportan y ya con unos ejemplos para afianzar los conocimientos.
 
 
@@ -75,9 +76,13 @@ Este índice corresponde a la posición actual de donde se encuentra el cursor. 
 
 Obviamente cuando nos referimos a cursor nos referimos a la barra vertical que nos aparece cuando escribimos no al cursor del mouse (Ver mas información aquí [Cursor de texto http://es.wikipedia.org/wiki/Cursor_%28inform%C3%A1tica%29#Cursor_de_texto]).
 
-% sel.first
 
-% sel.last
+: sel.first y sel.last
+%TODO: Terminar sel.first y sel.last
+%TODO: Mostrar con ejemplos el funcionamiento
+Así como vimos opciones para trabajar con índices sobre el texto del cuadro, tenemos dos índices mas específicos que nos permiten trabajar únicamente con el texto que se encuentre seleccionado.
+Con sel.first indicamos que deseamos trabajar con el primer carácter del texto que se encuentre seleccionado y con sel.last indicamos que deseamos trabajar con el ultimo carácter de la selección.
+
 
 : Coordenadas del Mouse
 
@@ -91,9 +96,43 @@ La forma en que trabaja es a través de la siguiente sintaxis
 Donde 'x' es un valor en píxeles con respecto al borde izquierdo del campo de texto. Por ejemplo '@0' indica el carácter mas a la izquierda del campo del texto.
 
 
+%FIXME: Ampliar conclusión
+Estos índices nos permiten tener un mayor control sobre sobre los cuadros de texto y lo veremos mas claro en la sección siguiente cuando veamos los métodos disponibles para este.
+
+NOTA:
+Una observación que se puede hacer sobre los índices es que pueden usarse abreviaturas de los nombres, por ejemplo en vez de usar 'end' se puede utilizar 'e'. Como opinión personal no recomiendo el uso de esta practica ya que puede quitar legibilidad al código y generar malas costumbres.
+
 === Métodos ===
 
+%Referencia: http://www.tcl.tk/man/tcl8.5/TkCmd/entry.htm#M31
 Como habíamos comentando cuando estábamos viendo el widget Entry, dijimos que existían métodos que nos permitían trabajar con este, los cuales iremos viendo a continuación.
+
+
+- bbox
+%TODO: Desarrollar explicacion
+--------------------------------------------------------
+
+
+- cget(OPCION)
+
+Este metodo nos permite obtener el valor de determinada opcion pasada al campo de texto, supongamos que deseamos obtener el color de fondo (background) del campo o el tipo de borde (relief) que tiene, para esto contamos con 'cget' el cual pasandole como una cadena el nombre de la opcion nos devuelve su valor.
+Por ejemplo si sobre nuestro campo de texto llamaramos al metodo 'cget' con los siguientes argumentos veriamos algo asi:
+
+```
+>>> campo_de_texto.cget('background')
+'SystemWindow'
+>>> campo_de_texto.cget('relief')
+'sunken'
+```
+
+Asi funcionaria de la misma forma para todas las opciones soportadas por el widget.
+
+--------------------------------------------------------
+
+
+- configure
+%TODO: Desarrollar explicacion
+--------------------------------------------------------
 
 
 - delete(INICIO, FIN)
@@ -118,7 +157,7 @@ Con un solo argumento:
 >>> campo_de_texto.delete(0)
 >>> campo_de_texto.get()
 'odigoPython.com.ar'
->>> 
+>>>
 
 ```
 [widgets/img/Entry/Entry-03.jpg]
@@ -135,18 +174,18 @@ Con dos argumentos:
 >>> campo_de_texto.delete(12, 19)
 >>> campo_de_texto.get()
 'CodigoPython'
->>> 
+>>>
 ```
 
 [widgets/img/Entry/Entry-04.jpg]
 
 Otra opción que tenemos es borrar desde un inicio fijado por nosotros hasta el final del texto disponible en el campo de texto gracias a un índice que nos da Tkinter que es 'END', con este podemos de la siguiente forma borrar desde el inicio hasta el final sin necesitar conocer cuantos caracteres componen el texto contenido en el widget
 
-``` campo_de_texto.delete(0, END)
+``` campo_de_texto.delete(0, Tkinter.END)
 
 Aunque no es necesario comenzar desde el inicio también podemos borrar desde el quinto carácter hasta el ultimo
 
-``` campo_de_texto.delete(5, END)
+``` campo_de_texto.delete(5, Tkinter.END)
 
 También podemos utilizar los índices ya vistos en la sección 'Índices'.
 
@@ -155,7 +194,7 @@ También podemos utilizar los índices ya vistos en la sección 'Índices'.
 
 - get()
 
-Obtiene el contenido del campo de texto. Algo muy necesario para nosotros es poder obtener el texto contenido dentro del campo de texto, para conseguir esto podemos hacernos del método 'get' que nos lo permitirá, este nos retornara el texto como una cadena. Veamos con un ejemplo escribiendo cualquier texto y usamos el método 'get'
+Obtiene el contenido del campo de texto. Algo muy necesario para nosotros es poder obtener el texto contenido dentro del campo de texto, para conseguir esto podemos hacernos del método 'get' que nos lo permitirá, este nos retornara el texto como una cadena. Veamos con un ejemplo escribiendo cualquier texto y llamamos al método 'get'
 
 ```
 >>> import Tkinter
@@ -214,7 +253,63 @@ Recuerden de haber escrito un texto en el campo y que tenemos a nuestra disposic
 
 - index(INDICE)
 
-% Dejo este espacio abierto para aquellos que entiendan el funcionamiento de este método
+Indica el valor numerico del indice indicado. La utilidad de 'index' esta en que nos permite saber por ejemplo cual es el indice del ultimo caracter, ya vimos que con END podiamos ir al ultimo caracter del cuadro de texto, pero como saber cuantos caracteres tiene esa cadena sin recurir a 'len()', ahi entra 'index' que nos permite obtener esos valores. Aclaremos estos conceptos con unos sencillos ejemplos.
+
+```
+>>> campo_de_texto.get()
+'ABCD'
+>>> campo_de_texto.index("end")
+4
+>>>
+```
+
+Ahora probemos poniendo el cursor despues del tercer caracter y veamos si podemos obtener su posicion
+
+[widgets/img/Entry/Entry-05.jpg]
+
+```
+>>> campo_de_texto.index("insert")
+3
+>>>
+```
+
+Asi como funciono con 'end' y 'insert' tambien deberia hacerlo con 'anchor', asi que volvamos a la consola. Para el primer ejemplo seleccionemos desde el indice 4 al 0, es decir seleccionemos todo el texto de derecha hacia izquierda
+
+[widgets/img/Entry/Entry-06.jpg]
+
+```
+>>> campo_de_texto.index("anchor")
+4
+>>>
+```
+
+Y ahora hagamos algo similar pero seleccionando de izquierda hacia derecha
+
+[widgets/img/Entry/Entry-07.jpg]
+
+```
+>>> campo_de_texto.index("anchor")
+0
+>>>
+```
+
+Como vemos pasandole el indice 'anchor' podemos obtener el indice numerico desde donde se inicio la seleccion del texto.
+
+Y como ultimo ejemplo como resultaria logico si le pasamos como argumento un indice numerico nos deberia devolver ese mismo numero
+
+```
+>>> campo_de_texto.index(3)
+3
+>>>
+```
+
+Salvo que le indiquemos un numero mayor a la cantidad de caracteres disponibles, que en ese caso nos devolvera el valor del ultimo indice
+
+```
+>>> campo_de_texto.index(9)
+4
+>>>
+```
 
 --------------------------------------------------------
 
@@ -234,7 +329,7 @@ En este ejemplo insertaremos la cadena "GNU/" desde el índice 0
 >>> campo_de_texto.insert(0, "GNU/")
 >>> campo_de_texto.get()
 'GNU/Linux'
->>> 
+>>>
 ```
 
 --------------------------------------------------------
@@ -242,24 +337,34 @@ En este ejemplo insertaremos la cadena "GNU/" desde el índice 0
 
 - scan
 
-% Demasiado complejo para mi se aceptan sugerencias y aportes
+% Disponible en la documentacion de Tcl/Tk pero no en Python
 --------------------------------------------------------
 
 
 - selection
+% Disponible en la documentacion de Tcl/Tk pero no en Python
+--------------------------------------------------------
 
+
+- validate
+% Disponible en la documentacion de Tcl/Tk pero no en Python
 --------------------------------------------------------
 
 
 - xview
 
+Este comando se utiliza para consultar y cambiar la posición horizontal del texto en la ventana del widget. Puede tomar cualquiera de las siguientes formas:
+%TODO: Terminar
+
 --------------------------------------------------------
 
 
+%TODO: Ampliar conclusión
 Con lo que vimos ahora estamos mas cerca de dominar los cuadros de texto, aunque no hay que apresurarnos que nos queda mucho camino por delante.
 
 
 === Validando un campo de texto ===
 % Referencia: http://effbot.org/zone/Tkinter-entry-validate.htm
 
+%TODO: Agregar ejemplo
 Para referencias acerca de textvariable vea la sección "Variables".
