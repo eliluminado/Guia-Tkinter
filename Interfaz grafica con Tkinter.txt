@@ -154,6 +154,16 @@ En esta sección no nos centraremos en el posicionamiento y diseño de los eleme
 %!include: widgets/entry.t2t
 
 
+== Casillas de verificacion [Checkbutton] ==
+
+%!include: widgets/checkbutton.t2t
+
+== Barras de desplazamiento [Scrollbar] ==
+
+
+== Campo de texto multilinea [Text] ==
+
+
 == Opciones ==
 
 %!include: widgets/Options.t2t
