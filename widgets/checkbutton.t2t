@@ -41,4 +41,38 @@ False
 <a href="http://www.dailymotion.com/video/x12ar0m_checkbutton-basico-en-tkinter_tech" target="_blank">Checkbutton Basico en Tkinter</a> <em>por <a href="http://www.dailymotion.com/eliluminado2010" target="_blank">eliluminado2010</a></em>
 '''
 
-En los dos ejemplos establecemos una variable que puede ser del tipo 'IntVar' o 'BooleanVar', las dos cumplen con su trabajo aunque trabajen con distintos tipos de datos consiguen el mismo resultado, establecida nuestra variable pasamos a crear y mostrar nuestra casilla de verificacion
+En los dos ejemplos establecemos una variable que puede ser del tipo 'IntVar' o 'BooleanVar', las dos cumplen con su trabajo aunque trabajen con distintos tipos de datos consiguen el mismo resultado, establecida nuestra variable pasamos a crear y mostrar nuestra casilla de verificacion y con ella marcandola y desmarcandola vemos como el valor de la variable alterna de True a False en el caso de 'BooleanVar' o de 0 a 1 en el caso de'IntVar'. Con este ejemplo podemos tener una idea de como trajaba 'Checkbutton' pero aun nos quedan ver algunos metodos para volverlo mas interesante.
+
+=== Métodos ===
+
+- cget(OPCION)
+
+Este metodo cumple la misma funcion que se vio en el widget 'Entry'.
+
+- configure
+
+Este metodo cumple la misma funcion que se vio en el widget 'Entry'.
+
+- deselect
+
+Desmarca la selección de la casilla de verificacion y establece el valor de la variable asociada a False. Usarlo es muy simple, para verlo deberiamos crear un 'Checkbutton' basico marcarlo y luego llamar al metodo 'deselect'
+
+``` >>> checkbutton.deselect()
+
+- flash
+
+%TODO: Desarrollar "http://www.tcl.tk/man/tcl8.5/TkCmd/checkbutton.htm#M11"
+
+- invoke
+
+%TODO: Desarrollar "http://www.tcl.tk/man/tcl8.5/TkCmd/checkbutton.htm#M12"
+
+- select
+
+Asi como contamos con una forma de desmarcar nuestro 'Checkbutton' con 'select' podemos marcarla.
+
+``` >>> checkbutton.select()
+
+- toggle
+
+Este ultimo metodo une a 'select' y 'deselect', nos permite alternar su estado actualizando el valor de su variable asociada, por ejemplo si la casilla se encontrara marcada al llamar a 'toggle' esta se desmarcaria y si volvieramos a llamar a 'toggle' esta se volveria a marcar.
