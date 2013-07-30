@@ -11,7 +11,7 @@
 <DIV CLASS="header" ID="header">
 <H1>﻿Interfaz gráfica con Tkinter</H1>
 <H2>Codigo Python [contacto@codigopython.com.ar]</H2>
-<H3>Ultima modificación 26-07-2012</H3>
+<H3>Ultima modificación 29-07-2013</H3>
 </DIV>
 
 <DIV CLASS="body" ID="body">
@@ -32,11 +32,22 @@ Puede descargar la versión más reciente de esta guía gratuitamente en la web
  <IMG ALIGN="right" SRC="img/Logo_Free_Cultural_Works.png" BORDER="0" ALT="">
 </P>
 <P>
+Agradecimientos
+</P>
+<P>
+Ante todo gracias a todos los lectores y a aquellos que me enviaron correos con consultas y suguerencias y desde ya a los ayudaron a mejorar esta guia
+</P>
+<P>
+<A HREF="https://github.com/moisesicaza/Guia-Tkinter/commit/048f4656c6bd414dc75396643d3a1cf8d3e414f5">moisesicaza</A>
+</P>
+<P>
+<A HREF="https://github.com/eliluminado/Guia-Tkinter/commit/a21e3234c232019a65ef0f29551039d70fc18e90">lordcaos</A>
+</P>
+<P>
 Algo muy buscado en Python son las guías sobre interfaces gráficas ya sea PyGTK, PyQT, WxPython o Tkinter entre las mas conocidas teniendo cada una sus ventajas y desventajas, así como cada una tiene facilidades y complicaciones en su uso y aplicación. En esta oportunidad les daremos un espacio a Tkinter e intentaremos ser lo mas lo mas claro posible sin pasarnos por alto los pequeños detalles en lo que compone la creación de una interfaz gráfica en Python con el toolkit Tkinter.
 </P>
 
-<A NAME="toc1"></A>
-<H1>1. Índice</H1>
+<H1 ID="toc1">1. Índice</H1>
 
 <DIV CLASS="toc">
 
@@ -69,72 +80,133 @@ Algo muy buscado en Python son las guías sobre interfaces gráficas ya sea PyGT
       <LI><A HREF="#toc18">4.3.2. Métodos</A>
       <LI><A HREF="#toc19">4.3.3. Validando un campo de texto</A>
       </UL>
-    <LI><A HREF="#toc20">4.4. Opciones</A>
+    <LI><A HREF="#toc20">4.4. Casillas de verificacion [Checkbutton]</A>
       <UL>
-      <LI><A HREF="#toc21">4.4.1. Disponibles para</A>
+      <LI><A HREF="#toc21">4.4.1. Métodos</A>
       </UL>
-    <LI><A HREF="#toc22">4.5. Variables</A>
+    <LI><A HREF="#toc22">4.5. Campo de texto multilinea [Text]</A>
+    <LI><A HREF="#toc23">4.6. Opciones</A>
+      <UL>
+      <LI><A HREF="#toc24">4.6.1. activebackground</A>
+      <LI><A HREF="#toc25">4.6.2. activeborderwidth</A>
+      <LI><A HREF="#toc26">4.6.3. activeforeground</A>
+      <LI><A HREF="#toc27">4.6.4. anchor</A>
+      <LI><A HREF="#toc28">4.6.5. background (bg)</A>
+      <LI><A HREF="#toc29">4.6.6. bitmap</A>
+      <LI><A HREF="#toc30">4.6.7. borderwidth (bd)</A>
+      <LI><A HREF="#toc31">4.6.8. command</A>
+      <LI><A HREF="#toc32">4.6.9. cursor</A>
+      <LI><A HREF="#toc33">4.6.10. compound</A>
+      <LI><A HREF="#toc34">4.6.11. default</A>
+      <LI><A HREF="#toc35">4.6.12. disabledbackground</A>
+      <LI><A HREF="#toc36">4.6.13. disabledforeground</A>
+      <LI><A HREF="#toc37">4.6.14. exportselection</A>
+      <LI><A HREF="#toc38">4.6.15. font</A>
+      <LI><A HREF="#toc39">4.6.16. foreground (fg)</A>
+      <LI><A HREF="#toc40">4.6.17. height</A>
+      <LI><A HREF="#toc41">4.6.18. highlightbackground</A>
+      <LI><A HREF="#toc42">4.6.19. highlightcolor</A>
+      <LI><A HREF="#toc43">4.6.20. highlightthickness</A>
+      <LI><A HREF="#toc44">4.6.21. image</A>
+      <LI><A HREF="#toc45">4.6.22. indicatoron</A>
+      <LI><A HREF="#toc46">4.6.23. insertbackground</A>
+      <LI><A HREF="#toc47">4.6.24. insertborderwidth</A>
+      <LI><A HREF="#toc48">4.6.25. insertofftime</A>
+      <LI><A HREF="#toc49">4.6.26. insertontime</A>
+      <LI><A HREF="#toc50">4.6.27. insertwidth</A>
+      <LI><A HREF="#toc51">4.6.28. jump</A>
+      <LI><A HREF="#toc52">4.6.29. justify</A>
+      <LI><A HREF="#toc53">4.6.30. offrelief</A>
+      <LI><A HREF="#toc54">4.6.31. offvalue</A>
+      <LI><A HREF="#toc55">4.6.32. onvalue</A>
+      <LI><A HREF="#toc56">4.6.33. orient</A>
+      <LI><A HREF="#toc57">4.6.34. overrelief</A>
+      <LI><A HREF="#toc58">4.6.35. padx</A>
+      <LI><A HREF="#toc59">4.6.36. pady</A>
+      <LI><A HREF="#toc60">4.6.37. relief</A>
+      <LI><A HREF="#toc61">4.6.38. repeatdelay</A>
+      <LI><A HREF="#toc62">4.6.39. repeatinterval</A>
+      <LI><A HREF="#toc63">4.6.40. selectbackground</A>
+      <LI><A HREF="#toc64">4.6.41. selectborderwidth</A>
+      <LI><A HREF="#toc65">4.6.42. selectcolor</A>
+      <LI><A HREF="#toc66">4.6.43. selectforeground</A>
+      <LI><A HREF="#toc67">4.6.44. selectimage</A>
+      <LI><A HREF="#toc68">4.6.45. setgrid</A>
+      <LI><A HREF="#toc69">4.6.46. state</A>
+      <LI><A HREF="#toc70">4.6.47. takefocus</A>
+      <LI><A HREF="#toc71">4.6.48. text</A>
+      <LI><A HREF="#toc72">4.6.49. textvariable</A>
+      <LI><A HREF="#toc73">4.6.50. tristateimage</A>
+      <LI><A HREF="#toc74">4.6.51. tristatevalue</A>
+      <LI><A HREF="#toc75">4.6.52. troughcolor</A>
+      <LI><A HREF="#toc76">4.6.53. underline</A>
+      <LI><A HREF="#toc77">4.6.54. variable</A>
+      <LI><A HREF="#toc78">4.6.55. width</A>
+      <LI><A HREF="#toc79">4.6.56. wraplength</A>
+      <LI><A HREF="#toc80">4.6.57. xscrollcommand</A>
+      <LI><A HREF="#toc81">4.6.58. yscrollcommand</A>
+      <LI><A HREF="#toc82">4.6.59. Disponibles para</A>
+      </UL>
+    <LI><A HREF="#toc83">4.7. Variables</A>
     </UL>
   <LI><A HREF="#gestion">Gestión del diseño</A>
     <UL>
-    <LI><A HREF="#toc24">5.1. Métodos</A>
+    <LI><A HREF="#toc85">5.1. Métodos</A>
       <UL>
-      <LI><A HREF="#toc25">5.1.1. iconify</A>
-      <LI><A HREF="#toc26">5.1.2. deiconify</A>
-      <LI><A HREF="#toc27">5.1.3. title</A>
-      <LI><A HREF="#toc28">5.1.4. geometry</A>
-      <LI><A HREF="#toc29">5.1.5. maxsize</A>
-      <LI><A HREF="#toc30">5.1.6. minsize</A>
-      <LI><A HREF="#toc31">5.1.7. state</A>
-      <LI><A HREF="#toc32">5.1.8. resizable</A>
-      <LI><A HREF="#toc33">5.1.9. withdraw</A>
-      <LI><A HREF="#toc34">5.1.10. transient</A>
+      <LI><A HREF="#toc86">5.1.1. iconify</A>
+      <LI><A HREF="#toc87">5.1.2. deiconify</A>
+      <LI><A HREF="#toc88">5.1.3. title</A>
+      <LI><A HREF="#toc89">5.1.4. geometry</A>
+      <LI><A HREF="#toc90">5.1.5. maxsize</A>
+      <LI><A HREF="#toc91">5.1.6. minsize</A>
+      <LI><A HREF="#toc92">5.1.7. state</A>
+      <LI><A HREF="#toc93">5.1.8. resizable</A>
+      <LI><A HREF="#toc94">5.1.9. withdraw</A>
+      <LI><A HREF="#toc95">5.1.10. transient</A>
       </UL>
-    <LI><A HREF="#toc35">5.2. Gestión de la geometría</A>
+    <LI><A HREF="#toc96">5.2. Gestión de la geometría</A>
       <UL>
-      <LI><A HREF="#toc36">5.2.1. pack</A>
-      <LI><A HREF="#toc37">5.2.2. grid</A>
-      <LI><A HREF="#toc38">5.2.3. place</A>
+      <LI><A HREF="#toc97">5.2.1. pack</A>
+      <LI><A HREF="#toc98">5.2.2. grid</A>
+      <LI><A HREF="#toc99">5.2.3. place</A>
       </UL>
-    <LI><A HREF="#toc39">5.3. Frame</A>
+    <LI><A HREF="#toc100">5.3. Frame</A>
     <LI><A HREF="#colores">5.4. Colores</A>
       <UL>
-      <LI><A HREF="#toc41">5.4.1. Nombres de colores</A>
-      <LI><A HREF="#toc42">5.4.2. RGB hexadecimal</A>
-      <LI><A HREF="#toc43">5.4.3. Consejos</A>
+      <LI><A HREF="#toc102">5.4.1. Nombres de colores</A>
+      <LI><A HREF="#toc103">5.4.2. RGB hexadecimal</A>
+      <LI><A HREF="#toc104">5.4.3. Consejos</A>
       </UL>
-    <LI><A HREF="#toc44">5.5. Fuentes</A>
-    <LI><A HREF="#toc45">5.6. Unidades de medida</A>
-    <LI><A HREF="#toc46">5.7. Imágenes</A>
+    <LI><A HREF="#toc105">5.5. Fuentes</A>
+    <LI><A HREF="#toc106">5.6. Unidades de medida</A>
+    <LI><A HREF="#toc107">5.7. Imágenes</A>
       <UL>
-      <LI><A HREF="#toc47">5.7.1. PhotoImage</A>
-      <LI><A HREF="#toc48">5.7.2. PIL</A>
+      <LI><A HREF="#toc108">5.7.1. PhotoImage</A>
+      <LI><A HREF="#toc109">5.7.2. PIL</A>
       </UL>
     </UL>
-  <LI><A HREF="#toc49">Menús y barras de herramientas</A>
-  <LI><A HREF="#toc50">Ventanas de diálogos</A>
-  <LI><A HREF="#toc51">Eventos</A>
-  <LI><A HREF="#toc52">Ejemplos Avanzados</A>
-  <LI><A HREF="#toc53">Notas finales</A>
-  <LI><A HREF="#toc54">Enlaces de interés</A>
+  <LI><A HREF="#toc110">Menús y barras de herramientas</A>
+  <LI><A HREF="#toc111">Ventanas de diálogos</A>
+  <LI><A HREF="#toc112">Eventos</A>
+  <LI><A HREF="#toc113">Ejemplos Avanzados</A>
+  <LI><A HREF="#toc114">Notas finales</A>
+  <LI><A HREF="#toc115">Enlaces de interés</A>
   <LI><A HREF="#glosario">Glosario</A>
-  <LI><A HREF="#toc56">Anexos</A>
+  <LI><A HREF="#toc117">Anexos</A>
     <UL>
-    <LI><A HREF="#toc57">13.1. Colores</A>
+    <LI><A HREF="#toc118">13.1. Colores</A>
     </UL>
-  <LI><A HREF="#toc58">Licencia</A>
+  <LI><A HREF="#toc119">Licencia</A>
   </OL>
 
 </DIV>
-<A NAME="toc2"></A>
-<H1>2. Introducción</H1>
+<H1 ID="toc2">2. Introducción</H1>
 
 <P>
-Sean bienvenidos a esta noble guia que pretende a lo largo de sus capitulos mostrar las herramientas y conocimientos necesarios para el desarrollo de interfaces graficas con las librerias Tk y el lenguaje de programacion Python. El contenido de esta guia no pretende ser una referencia completa de lo que puede lograr pero si servir como una base al poco contenido que se logra en español sobre Tkinter.
+Sean bienvenidos a esta noble guía que pretende a lo largo de sus capítulos mostrar las herramientas y conocimientos necesarios para el desarrollo de interfaces gráficas con las librerías Tk y el lenguaje de programación Python. El contenido de esta guía no pretende ser una referencia completa de lo que puede lograr pero si servir como una base al poco contenido que se logra encontrar en español sobre Tkinter.
 </P>
 
-<A NAME="toc3"></A>
-<H2>2.1. Acerca de Tk</H2>
+<H2 ID="toc3">2.1. Acerca de Tk</H2>
 
 <P>
 Tkinter es un <A HREF="http://es.wikipedia.org/wiki/Binding">binding</A> de la biblioteca gráfica Tcl/Tk para el lenguaje de programación Python, con estos queremos decir que Tk se encuentra disponible para varios lenguajes de programación entre los cuales se encuentra Python con el nombre de Tkinter. Este no es mas que una adaptación de esta librería para el lenguaje Python con lo cual usar Tk en otro lenguaje no nos supondrá un inconveniente.
@@ -143,36 +215,27 @@ Tkinter es un <A HREF="http://es.wikipedia.org/wiki/Binding">binding</A> de la b
 Se considera un estándar para la interfaz gráfica de usuario (GUI) para Python y es el que viene por defecto con la instalación para Microsoft Windows y preinstalado en la mayoría de las distribuciones de GNU/Linux. Con Tkinter podremos conseguir resultados casi tan buenos como con otras librerías gráficas siempre teniendo en cuenta que quizás con otras herramientas podamos realizar trabajos mas complejos donde necesitemos una plataforma mas robusta, pero como herramienta didáctica e interfaces sencillas nos sobrara, dándonos una perspectiva de lo que se trata el desarrollo de una parte muy importante de una aplicación si deseamos distribuirla. Gracias a Tkinter veremos como interactuar con el usuario pidiéndole el ingreso de datos, capturando la pulsación de teclas, movimientos del mouse, entre algunas de las cosas que podremos lograr.
 </P>
 
-<A NAME="toc4"></A>
-<H3>2.1.1. Historia</H3>
+<H3 ID="toc4">2.1.1. Historia</H3>
 
-<A NAME="toc5"></A>
-<H3>2.1.2. Virtudes y limitaciones</H3>
+<H3 ID="toc5">2.1.2. Virtudes y limitaciones</H3>
 
-<A NAME="toc6"></A>
-<H2>2.2. Que es una interfaz grafica</H2>
+<H2 ID="toc6">2.2. Que es una interfaz grafica</H2>
 
-<A NAME="toc7"></A>
-<H2>2.3. Instalando Tkinter</H2>
+<H2 ID="toc7">2.3. Instalando Tkinter</H2>
 
-<A NAME="toc8"></A>
-<H3>2.3.1. Linux</H3>
+<H3 ID="toc8">2.3.1. Linux</H3>
 
-<A NAME="toc9"></A>
-<H3>2.3.2. Windows</H3>
+<H3 ID="toc9">2.3.2. Windows</H3>
 
-<A NAME="toc10"></A>
-<H3>2.3.3. Mac</H3>
+<H3 ID="toc10">2.3.3. Mac</H3>
 
-<A NAME="toc11"></A>
-<H2>2.4. Sobre esta guía</H2>
+<H2 ID="toc11">2.4. Sobre esta guía</H2>
 
 <P>
 Para los que deseen colaborar con esta guía así como en su contenido, pueden hacerlo registrándose en el <A HREF="http://foro.codigopython.com.ar/">Foro</A> o desde su repositorio en GitHub <A HREF="https://github.com/eliluminado/Guia-Tkinter">https://github.com/eliluminado/Guia-Tkinter</A>
 </P>
 
-<A NAME="toc12"></A>
-<H1>3. Empezando por lo básico</H1>
+<H1 ID="toc12">3. Empezando por lo básico</H1>
 
 <P>
 Lo primero que debemos hacer al igual que con otros módulos, es que debemos importarlo para poder comenzar a utilizarlo, y al igual que con otros módulos no hay una sola forma de hacerlo.
@@ -244,7 +307,7 @@ root.mainloop()
 </PRE>
 
 <P>
-Estas lineas son fundamentales, ya que de ellas dependerá gran parte del contenido así como pueden ser botones y menús, aunque mas adelante conforme vayamos viendo temas mas avanzados podremos hacer uso de otras herramientas y técnicas. 
+Estas lineas son fundamentales, ya que de ellas dependerá gran parte del contenido así como pueden ser botones y menús, aunque mas adelante conforme vayamos viendo temas mas avanzados podremos hacer uso de otras herramientas y técnicas.
 En la primera linea (No tengamos en cuenta la importación) se crea un identificador que sera el que utilizaremos para referirnos a la ventana, en este caso lo llamamos 'root' y es una de las funciones mas importantes de Tkinter. Siempre que iniciamos un identificador que en este caso lo llamamos 'root' debemos cerrarlo para capturar como veremos mas adelante los eventos.
 </P>
 
@@ -257,15 +320,13 @@ La variable 'root' usada para nombrar al identificador puede ser reemplazada por
 Con esto ya tendremos una ventana vacía que nos servirá para comenzar a trabajar, a partir de ahora iremos ampliando el contenido mostrando los distintos widgets con los que contamos en Tkinter y luego para finalizar crearemos un ejemplo sencillo para unir lo se vio a lo largo de este material.
 </P>
 
-<A NAME="toc13"></A>
-<H1>4. Widgets</H1>
+<H1 ID="toc13">4. Widgets</H1>
 
 <P>
 En esta sección no nos centraremos en el posicionamiento y diseño de los elementos que compondrán nuestra interfaz gráfica, lo dejaremos para la siguiente sección <A HREF="#gestion">"Gestión del diseño"</A> en donde se vera mas detenidamente este asunto.
 </P>
 
-<A NAME="toc14"></A>
-<H2>4.1. Etiquetas [Label]</H2>
+<H2 ID="toc14">4.1. Etiquetas [Label]</H2>
 
 <P>
 Para comenzar a llenar esa vacía ventana que acabamos de crear vamos a nombrar a las etiquetas o mas conocidas como <I>'label'</I> por su nombre en ingles, las podemos encontrar desde interfaces gráficas hasta en formularios en HTML y son sumamente útiles en la construcción de interfaces y formularios, al igual que cuando creamos nuestra ventana vacía declarándola de la siguiente forma <I>"root = Tkinter.Tk()"</I> tendremos que hacerlo con nuestra etiqueta, para esto necesitamos escoger un nombre en mi caso escogeré <B>"etiqueta"</B> para declararla y deberemos llamar al widget "Label" en vez de la función "Tk" como habíamos hecho anteriormente, como para orientarnos con lo ya visto quedando por ahora algo así:
@@ -353,8 +414,7 @@ Y así es como quedara nuestro ejemplo terminado:
 Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer widget y podemos seguir con el próximo.
 </P>
 
-<A NAME="toc15"></A>
-<H2>4.2. Botones [Button]</H2>
+<H2 ID="toc15">4.2. Botones [Button]</H2>
 
 <P>
 Los botones pueden contener texto o imágenes y se les puede asociar funciones o métodos, que al hacer clic sobre ellos Tkinter se encargara de llamar automáticamente a ese método o función y ejecutara el código Python contenido dentro de ellos.
@@ -400,8 +460,7 @@ En el se observa la ya conocida importación del modulo Tkinter, la función que
 <IMG ALIGN="middle" SRC="widgets/img/Button/Button-02.jpg" BORDER="0" ALT="">
 </P>
 
-<A NAME="toc16"></A>
-<H2>4.3. Cuadro de texto [Entry]</H2>
+<H2 ID="toc16">4.3. Cuadro de texto [Entry]</H2>
 
 <P>
 Este widget nos permite tanto mostrarle información al usuario como también obtenerla de su parte, dotando a nuestra ventana de un widget muy poderoso y útil, siendo el primero de los widgets mencionados que nos posibilitara la interacción del usuario solicitando la entrada de datos. Como venimos haciendo en esta guía se mostraran algunos conceptos básicos que te permitirán empezar a utilizarlo, pero luego en la sección 'Opciones' se detallan las opciones que tienen disponibles al crear un cuadro de texto.
@@ -410,7 +469,7 @@ Este widget nos permite tanto mostrarle información al usuario como también ob
 Este elemento es muy popular y sumamente útil así que deberemos de conocerlo y manejarlo, para esto comencemos explicando algunos conceptos básicos para entender mejor de se trata esto.
 </P>
 <P>
-Para empezar a utilizar nuestro elemento 'Entry' podemos primero declarar una variable del tipo 'StringVar' o del tipo 'IntVar' (tenemos mas opciones disponibles pero se verán mas detenidamente en otra sección), estas variables capturan el texto que el usuario ingrese en el cuadro de texto para luego poder trabajar con esos datos, aunque esta practica es muy recomendada y hasta imprescindible en ocasiones, no es un requisito obligatorio para utilizar nuestro cuadro de texto como es visto en algunos sitios web.
+Para empezar a utilizar nuestro elemento 'Entry' podemos primero declarar una variable del tipo 'StringVar' o del tipo 'IntVar' (tenemos mas opciones disponibles pero se verán mas detenidamente en otra sección), estas variables capturan el texto que el usuario ingrese en el cuadro para luego poder trabajar con esos datos, aunque esta practica es muy recomendada y hasta imprescindible en ocasiones, no es un requisito obligatorio para utilizar nuestro cuadro de texto como es visto en algunos sitios web.
 </P>
 <P>
 Por esto veremos primero un uso mas básico para luego entrar mas en detalle e incorporar estas variables a nuestro repertorio.
@@ -471,8 +530,7 @@ Seguramente ese rectángulo en nuestra ventana de poco serviría si no pudiésem
 Una observación que se debe hacer, es que para escribir varias lineas de texto se debe utilizar el widget 'Text' que esta pensado para esto, que sera visto mas adelante.
 </P>
 
-<A NAME="toc17"></A>
-<H3>4.3.1. Índices</H3>
+<H3 ID="toc17">4.3.1. Índices</H3>
 
 <P>
 Un concepto que hay que tener en cuenta antes de empezar a utilizar algunos métodos disponibles para 'Entry' son los índices, estos nos facilitan el insertado y eliminado de caracteres entre otras cosas, estableciendo desde y hasta donde deseamos por ejemplo borrar o insertar texto en el cuadro de texto. Para conseguir esto contamos con varias formas que las iremos viendo de a una para luego verlas dentro de los métodos que las soportan y ya con unos ejemplos para afianzar los conocimientos.
@@ -506,6 +564,12 @@ Obviamente cuando nos referimos a cursor nos referimos a la barra vertical que n
 </DL>
 
 <DL>
+<DT>sel.first y sel.last</DT><DD>
+Así como vimos opciones para trabajar con índices sobre el texto del cuadro, tenemos dos índices mas específicos que nos permiten trabajar únicamente con el texto que se encuentre seleccionado.
+Con sel.first indicamos que deseamos trabajar con el primer carácter del texto que se encuentre seleccionado y con sel.last indicamos que deseamos trabajar con el ultimo carácter de la selección.
+</DL>
+
+<DL>
 <DT>Coordenadas del Mouse</DT><DD>
 <P></P>
 Otras de la posibilidades disponibles es usar la posición del cursor del mouse para indicar el índice.
@@ -517,12 +581,51 @@ La forma en que trabaja es a través de la siguiente sintaxis
 Donde 'x' es un valor en píxeles con respecto al borde izquierdo del campo de texto. Por ejemplo '@0' indica el carácter mas a la izquierda del campo del texto.
 </DL>
 
-<A NAME="toc18"></A>
-<H3>4.3.2. Métodos</H3>
+<P>
+Estos índices nos permiten tener un mayor control sobre sobre los cuadros de texto y lo veremos mas claro en la sección siguiente cuando veamos los métodos disponibles para este.
+</P>
+<P>
+NOTA:
+Una observación que se puede hacer sobre los índices es que pueden usarse abreviaturas de los nombres, por ejemplo en vez de usar 'end' se puede utilizar 'e'. Como opinión personal no recomiendo el uso de esta practica ya que puede quitar legibilidad al código y generar malas costumbres.
+</P>
+
+<H3 ID="toc18">4.3.2. Métodos</H3>
 
 <P>
 Como habíamos comentando cuando estábamos viendo el widget Entry, dijimos que existían métodos que nos permitían trabajar con este, los cuales iremos viendo a continuación.
 </P>
+
+<UL>
+<LI>bbox
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<UL>
+<LI>cget(OPCION)
+<P></P>
+Este metodo nos permite obtener el valor de determinada opcion pasada al campo de texto, supongamos que deseamos obtener el color de fondo (background) del campo o el tipo de borde (relief) que tiene, para esto contamos con 'cget' el cual pasandole como una cadena el nombre de la opcion nos devuelve su valor.
+Por ejemplo si sobre nuestro campo de texto llamaramos al metodo 'cget' con los siguientes argumentos veriamos algo asi:
+<P></P>
+<PRE>
+&gt;&gt;&gt; campo_de_texto.cget('background')
+'SystemWindow'
+&gt;&gt;&gt; campo_de_texto.cget('relief')
+'sunken'
+</PRE>
+
+<P></P>
+Asi funcionaria de la misma forma para todas las opciones soportadas por el widget.
+<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<UL>
+<LI>configure
+</UL>
+
+<HR NOSHADE SIZE=1>
 
 <UL>
 <LI>delete(INICIO, FIN)
@@ -537,7 +640,6 @@ También podemos pasarle un solo argumento para borrar un solo carácter, veamos
 <P></P>
 Con un solo argumento:
 <P></P>
-
 <PRE>
 &gt;&gt;&gt; import Tkinter
 &gt;&gt;&gt; root = Tkinter.Tk()
@@ -548,7 +650,7 @@ Con un solo argumento:
 &gt;&gt;&gt; campo_de_texto.delete(0)
 &gt;&gt;&gt; campo_de_texto.get()
 'odigoPython.com.ar'
-&gt;&gt;&gt; 
+&gt;&gt;&gt;
 
 </PRE>
 
@@ -556,7 +658,6 @@ Con un solo argumento:
 <P></P>
 Con dos argumentos:
 <P></P>
-
 <PRE>
 &gt;&gt;&gt; import Tkinter
 &gt;&gt;&gt; root = Tkinter.Tk()
@@ -567,7 +668,7 @@ Con dos argumentos:
 &gt;&gt;&gt; campo_de_texto.delete(12, 19)
 &gt;&gt;&gt; campo_de_texto.get()
 'CodigoPython'
-&gt;&gt;&gt; 
+&gt;&gt;&gt;
 </PRE>
 
 <P></P>
@@ -575,17 +676,15 @@ Con dos argumentos:
 <P></P>
 Otra opción que tenemos es borrar desde un inicio fijado por nosotros hasta el final del texto disponible en el campo de texto gracias a un índice que nos da Tkinter que es 'END', con este podemos de la siguiente forma borrar desde el inicio hasta el final sin necesitar conocer cuantos caracteres componen el texto contenido en el widget
 <P></P>
-
 <PRE>
-campo_de_texto.delete(0, END)
+campo_de_texto.delete(0, Tkinter.END)
 </PRE>
 
 <P></P>
 Aunque no es necesario comenzar desde el inicio también podemos borrar desde el quinto carácter hasta el ultimo
 <P></P>
-
 <PRE>
-campo_de_texto.delete(5, END)
+campo_de_texto.delete(5, Tkinter.END)
 </PRE>
 
 <P></P>
@@ -598,7 +697,7 @@ También podemos utilizar los índices ya vistos en la sección 'Índices'.
 <UL>
 <LI>get()
 <P></P>
-Obtiene el contenido del campo de texto. Algo muy necesario para nosotros es poder obtener el texto contenido dentro del campo de texto, para conseguir esto podemos hacernos del método 'get' que nos lo permitirá, este nos retornara el texto como una cadena. Veamos con un ejemplo escribiendo cualquier texto y usamos el método 'get'
+Obtiene el contenido del campo de texto. Algo muy necesario para nosotros es poder obtener el texto contenido dentro del campo de texto, para conseguir esto podemos hacernos del método 'get' que nos lo permitirá, este nos retornara el texto como una cadena. Veamos con un ejemplo escribiendo cualquier texto y llamamos al método 'get'
 <P></P>
 <PRE>
 &gt;&gt;&gt; import Tkinter
@@ -668,6 +767,71 @@ Recuerden de haber escrito un texto en el campo y que tenemos a nuestra disposic
 
 <UL>
 <LI>index(INDICE)
+<P></P>
+Indica el valor numerico del indice indicado. La utilidad de 'index' esta en que nos permite saber por ejemplo cual es el indice del ultimo caracter, ya vimos que con END podiamos ir al ultimo caracter del cuadro de texto, pero como saber cuantos caracteres tiene esa cadena sin recurir a 'len()', ahi entra 'index' que nos permite obtener esos valores. Aclaremos estos conceptos con unos sencillos ejemplos.
+<P></P>
+<PRE>
+&gt;&gt;&gt; campo_de_texto.get()
+'ABCD'
+&gt;&gt;&gt; campo_de_texto.index("end")
+4
+&gt;&gt;&gt;
+</PRE>
+
+<P></P>
+Ahora probemos poniendo el cursor despues del tercer caracter y veamos si podemos obtener su posicion
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/Entry/Entry-05.jpg" BORDER="0" ALT="">
+<P></P>
+<PRE>
+&gt;&gt;&gt; campo_de_texto.index("insert")
+3
+&gt;&gt;&gt;
+</PRE>
+
+<P></P>
+Asi como funciono con 'end' y 'insert' tambien deberia hacerlo con 'anchor', asi que volvamos a la consola. Para el primer ejemplo seleccionemos desde el indice 4 al 0, es decir seleccionemos todo el texto de derecha hacia izquierda
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/Entry/Entry-06.jpg" BORDER="0" ALT="">
+<P></P>
+<PRE>
+&gt;&gt;&gt; campo_de_texto.index("anchor")
+4
+&gt;&gt;&gt;
+</PRE>
+
+<P></P>
+Y ahora hagamos algo similar pero seleccionando de izquierda hacia derecha
+<P></P>
+<IMG ALIGN="middle" SRC="widgets/img/Entry/Entry-07.jpg" BORDER="0" ALT="">
+<P></P>
+<PRE>
+&gt;&gt;&gt; campo_de_texto.index("anchor")
+0
+&gt;&gt;&gt;
+</PRE>
+
+<P></P>
+Como vemos pasandole el indice 'anchor' podemos obtener el indice numerico desde donde se inicio la seleccion del texto.
+<P></P>
+Y como ultimo ejemplo como resultaria logico si le pasamos como argumento un indice numerico nos deberia devolver ese mismo numero
+<P></P>
+<PRE>
+&gt;&gt;&gt; campo_de_texto.index(3)
+3
+&gt;&gt;&gt;
+</PRE>
+
+<P></P>
+Salvo que le indiquemos un numero mayor a la cantidad de caracteres disponibles, que en ese caso nos devolvera el valor del ultimo indice
+<P></P>
+<PRE>
+&gt;&gt;&gt; campo_de_texto.index(9)
+4
+&gt;&gt;&gt;
+</PRE>
+
+<P></P>
 </UL>
 
 <HR NOSHADE SIZE=1>
@@ -688,7 +852,7 @@ En este ejemplo insertaremos la cadena "GNU/" desde el índice 0
 &gt;&gt;&gt; campo_de_texto.insert(0, "GNU/")
 &gt;&gt;&gt; campo_de_texto.get()
 'GNU/Linux'
-&gt;&gt;&gt; 
+&gt;&gt;&gt;
 </PRE>
 
 <P></P>
@@ -705,13 +869,20 @@ En este ejemplo insertaremos la cadena "GNU/" desde el índice 0
 
 <UL>
 <LI>selection
-<P></P>
+</UL>
+
+<HR NOSHADE SIZE=1>
+
+<UL>
+<LI>validate
 </UL>
 
 <HR NOSHADE SIZE=1>
 
 <UL>
 <LI>xview
+<P></P>
+Este comando se utiliza para consultar y cambiar la posición horizontal del texto en la ventana del widget. Puede tomar cualquiera de las siguientes formas:
 <P></P>
 </UL>
 
@@ -721,15 +892,106 @@ En este ejemplo insertaremos la cadena "GNU/" desde el índice 0
 Con lo que vimos ahora estamos mas cerca de dominar los cuadros de texto, aunque no hay que apresurarnos que nos queda mucho camino por delante.
 </P>
 
-<A NAME="toc19"></A>
-<H3>4.3.3. Validando un campo de texto</H3>
+<H3 ID="toc19">4.3.3. Validando un campo de texto</H3>
 
 <P>
 Para referencias acerca de textvariable vea la sección "Variables".
 </P>
 
-<A NAME="toc20"></A>
-<H2>4.4. Opciones</H2>
+<H2 ID="toc20">4.4. Casillas de verificacion [Checkbutton]</H2>
+
+<P>
+Los que tengan conocimiento en interfaces o diseño web seguramente conoceran a los famosos 'checkbox' que en Tkinter tienen el nombre de 'checkbutton', para los nos los conocen se tratan de casillas de verificacion cuya funcion es la de permitir seleccionar o deseleccionar, activando o desactivando funciones u opciones. A quien no le a tocado activar ese pequeño cuadrado al lado de un texto que nos dice "He leído y acepto los términos y condiciones del sitio.", aunque haya aplicaciones que puedan no requerirlo no significa que se pueda prescindir de ellos ya que su uso esta en gran parte de las aplicaciones de uso cotidiano desde nuestros editores o entornos de desarrollo cuando programamos hasta en las utilidades de configuracion de nuestros sistemas operativos, aunque repetimos su uso nos es obligatorio siempre es bueno conocer las herramientas que tenemos disponibles.
+</P>
+<P>
+Como venimos haciendo escribamos un poco de codigo y luego vayamos viendo que se escribio
+</P>
+
+<PRE>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; int_var = Tkinter.IntVar()
+&gt;&gt;&gt; int_var.get()
+0
+&gt;&gt;&gt; check = Tkinter.Checkbutton(root, text="Probando", variable=int_var)
+&gt;&gt;&gt; check.pack()
+&gt;&gt;&gt; #Hacemos click en el checkbutton activandola
+&gt;&gt;&gt; int_var.get()
+1
+&gt;&gt;&gt; #Ahora desmarcamos la opcion del checkbutton
+&gt;&gt;&gt; int_var.get()
+0
+&gt;&gt;&gt;
+</PRE>
+
+<PRE>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; bool_var = Tkinter.BooleanVar()
+&gt;&gt;&gt; bool_var.get()
+0
+&gt;&gt;&gt; check = Tkinter.Checkbutton(root, text="Probando", variable=bool_var)
+&gt;&gt;&gt; check.pack()
+&gt;&gt;&gt; bool_var.get()
+True
+&gt;&gt;&gt; bool_var.get()
+False
+&gt;&gt;&gt;
+</PRE>
+
+<iframe frameborder="0" width="480" height="270" src="http://www.dailymotion.com/embed/video/x12ar0m"></iframe><br>
+<a href="http://www.dailymotion.com/video/x12ar0m_checkbutton-basico-en-tkinter_tech" target="_blank">Checkbutton Basico en Tkinter</a> <em>por <a href="http://www.dailymotion.com/eliluminado2010" target="_blank">eliluminado2010</a></em>
+<P>
+En los dos ejemplos establecemos una variable que puede ser del tipo 'IntVar' o 'BooleanVar', las dos cumplen con su trabajo aunque trabajen con distintos tipos de datos consiguen el mismo resultado, establecida nuestra variable pasamos a crear y mostrar nuestra casilla de verificacion y con ella marcandola y desmarcandola vemos como el valor de la variable alterna de True a False en el caso de 'BooleanVar' o de 0 a 1 en el caso de'IntVar'. Con este ejemplo podemos tener una idea de como trajaba 'Checkbutton' pero aun nos quedan ver algunos metodos para volverlo mas interesante.
+</P>
+
+<H3 ID="toc21">4.4.1. Métodos</H3>
+
+<UL>
+<LI>cget(OPCION)
+<P></P>
+Este metodo cumple la misma funcion que se vio en el widget 'Entry'.
+<P></P>
+<LI>configure
+<P></P>
+Este metodo cumple la misma funcion que se vio en el widget 'Entry'.
+<P></P>
+<LI>deselect
+<P></P>
+Desmarca la selección de la casilla de verificacion y establece el valor de la variable asociada a False. Usarlo es muy simple, para verlo deberiamos crear un 'Checkbutton' basico marcarlo y luego llamar al metodo 'deselect'
+<P></P>
+<PRE>
+&gt;&gt;&gt; checkbutton.deselect()
+</PRE>
+
+<P></P>
+<LI>flash
+</UL>
+
+<UL>
+<LI>invoke
+</UL>
+
+<UL>
+<LI>select
+<P></P>
+Asi como contamos con una forma de desmarcar nuestro 'Checkbutton' con 'select' podemos marcarla.
+<P></P>
+<PRE>
+&gt;&gt;&gt; checkbutton.select()
+</PRE>
+
+<P></P>
+<LI>toggle
+<P></P>
+Este ultimo metodo une a 'select' y 'deselect', nos permite alternar su estado actualizando el valor de su variable asociada, por ejemplo si la casilla se encontrara marcada al llamar a 'toggle' esta se desmarcaria y si volvieramos a llamar a 'toggle' esta se volveria a marcar.
+<P></P>
+== Barras de desplazamiento [Scrollbar] ==
+</UL>
+
+<H2 ID="toc22">4.5. Campo de texto multilinea [Text]</H2>
+
+<H2 ID="toc23">4.6. Opciones</H2>
 
 <P>
 Muchos de los widgets que utilizamos y vimos hasta ahora cuentan con opciones, con el fin de no repetir la descripcion de cada uno de ellos seran vistos uno a uno en esta seccion.
@@ -740,12 +1002,50 @@ NOTA:
 <P>
 Para mas informacion sobre los colores visite la seccion "Colores" que se ve en <A HREF="#colores">"Gestion del diseño"</A>
 </P>
+<P>
+Pueden encontrar mas informacion desde la documentacion oficial de Tcl/Tk sobre las opciones estandar <A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/options.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/options.htm</A>
+</P>
 
 <HR NOSHADE SIZE=1>
 
+<H3 ID="toc24">4.6.1. activebackground</H3>
+
 <P>
-anchor
+Con esta opcion podemos indicar que color de fondo se debera utilizar cuando el cursor del mouse se posicione sobre el widget, Para algunos elementos y en algunas plataformas solo sera visible cuando se hace click sobre el.
 </P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/activebackground.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc25">4.6.2. activeborderwidth</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc26">4.6.3. activeforeground</H3>
+
+<P>
+Al igual que pasa con 'activebackground' con esta otra opcion podemos especificar el color en este caso de la fuente del widget cuando se posiciona el cursor sobre este.
+</P>
+
+<PRE>
+boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/activeforeground.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc27">4.6.4. anchor</H3>
+
 <P>
 Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen con respecto al widget en el que se encuentra. La opcion por defecto es 'CENTER' que muestra el elemento centrado.
 </P>
@@ -870,43 +1170,8 @@ boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, he
 
 <HR NOSHADE SIZE=1>
 
-<P>
-activebackground
-</P>
-<P>
-Con esta opcion podemos indicar que color de fondo se debera utilizar cuando el cursor del mouse se posicione sobre el widget, Para algunos elementos y en algunas plataformas solo sera visible cuando se hace click sobre el.
-</P>
+<H3 ID="toc28">4.6.5. background (bg)</H3>
 
-<PRE>
-boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
-</PRE>
-
-<P>
-<IMG ALIGN="middle" SRC="widgets/img/opciones/activebackground.jpg" BORDER="0" ALT="">
-</P>
-
-<HR NOSHADE SIZE=1>
-
-<P>
-activeforeground
-</P>
-<P>
-Al igual que pasa con 'activebackground' con esta otra opcion podemos especificar el color en este caso de la fuente del widget cuando se posiciona el cursor sobre este.
-</P>
-
-<PRE>
-boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
-</PRE>
-
-<P>
-<IMG ALIGN="middle" SRC="widgets/img/opciones/activeforeground.jpg" BORDER="0" ALT="">
-</P>
-
-<HR NOSHADE SIZE=1>
-
-<P>
-background (bg)
-</P>
 <P>
 Sirve para indicar el color de fondo que tendra en area del widget cuando este se encuentre inactivo. Tambien se puede utilizar su forma abreviada 'bg' como podemos ver en el segundo ejemplo.
 </P>
@@ -925,15 +1190,12 @@ boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, bg="#38EB5C"
 
 <HR NOSHADE SIZE=1>
 
-<P>
-bitmap
-</P>
+<H3 ID="toc29">4.6.6. bitmap</H3>
 
 <HR NOSHADE SIZE=1>
 
-<P>
-borderwidth (bd)
-</P>
+<H3 ID="toc30">4.6.7. borderwidth (bd)</H3>
+
 <P>
 Nos da la posibilidad de especificar el ancho del borde del elemento con el que estemos trabajando, Tkinter nos permite especificar el valor en varias unidades de medida (centimetros, pulgadas, milimetros y puntos) las cuales seran vistas mas adelante en la guia. Si no se utiliza junto con la opcion 'relief' visualmente es similar a utilizar las opciones 'heigth' y 'width' como se puede observar en el ejemplo. El valor por defecto es de 2 pixeles.
 </P>
@@ -952,9 +1214,8 @@ etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", bd=15)
 
 <HR NOSHADE SIZE=1>
 
-<P>
-command
-</P>
+<H3 ID="toc31">4.6.8. command</H3>
+
 <P>
 Como ya lo mencionamos cuando vimos al widget Button este permite indicar la funcion o metodo que queremos que se llame cuando se preciona por ejemplo un boton, pero esta opcion tambien funciona con otros widgets de Tkinter cumpliendo la misma funcion.
 </P>
@@ -972,9 +1233,8 @@ boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion)
 
 <HR NOSHADE SIZE=1>
 
-<P>
-cursor
-</P>
+<H3 ID="toc32">4.6.9. cursor</H3>
+
 <P>
 Nos da la posiblidad de indicar que cursor queremos que se muestre cuando el mouse se posiciona sobre la etiqueta.
 En el siguiente enlace podremos encontrar una lista con los cursores disponibles en Tkinter
@@ -992,21 +1252,36 @@ etiqueta = Tkinter.Label(root, text="Que te parece la guia?", cursor="hand1")
 
 <HR NOSHADE SIZE=1>
 
+<H3 ID="toc33">4.6.10. compound</H3>
+
 <P>
-default
+Especifica si el widget debe mostrar texto y mapas/imágenes al mismo tiempo, y si es así, donde el mapa de bits o imagen debe estar en relación con el texto. Debe ser uno de los valores "none", "bottom", "top", "left", "right", o "center". Por ejemplo, el valor (predeterminado) "none" especifica que el mapa de bits o imagen (si se ha definido en el sistema) se mostrará en lugar del texto, el valor "left" especifica que el mapa de bits o imagen se muestra a la izquierda del texto y el valor "center" especifica que el mapa de bits o imagen debe aparecer en la parte superior del texto.
 </P>
 
 <HR NOSHADE SIZE=1>
 
-<P>
-font
-</P>
+<H3 ID="toc34">4.6.11. default</H3>
 
 <HR NOSHADE SIZE=1>
 
-<P>
-foreground (fg)
-</P>
+<H3 ID="toc35">4.6.12. disabledbackground</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc36">4.6.13. disabledforeground</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc37">4.6.14. exportselection</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc38">4.6.15. font</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc39">4.6.16. foreground (fg)</H3>
+
 <P>
 Si deseamos cambiar el color de las letras de nuestro texto cuando el widget se encuentra inactivo tendremos que utilizar esta opcion, que trabaja de forma similar al ya visto 'background'. En este se tambien se puede utilizar su abreviatura 'fg' como podemos ver en el segundo ejemplo
 </P>
@@ -1025,9 +1300,8 @@ boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, fg="#38EB5C"
 
 <HR NOSHADE SIZE=1>
 
-<P>
-height
-</P>
+<H3 ID="toc40">4.6.17. height</H3>
+
 <P>
 Permite indicar la altura a la que se posicionara nuestro widget en lineas no en pixeles. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo
 </P>
@@ -1042,20 +1316,55 @@ etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", height=10)
 
 <HR NOSHADE SIZE=1>
 
-<P>
-image
-</P>
+<H3 ID="toc41">4.6.18. highlightbackground</H3>
 
 <HR NOSHADE SIZE=1>
 
-<P>
-justify
-</P>
+<H3 ID="toc42">4.6.19. highlightcolor</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc43">4.6.20. highlightthickness</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc44">4.6.21. image</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc45">4.6.22. indicatoron</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc46">4.6.23. insertbackground</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc47">4.6.24. insertborderwidth</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc48">4.6.25. insertofftime</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc49">4.6.26. insertontime</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc50">4.6.27. insertwidth</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc51">4.6.28. jump</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc52">4.6.29. justify</H3>
 
 <UL>
 <LI>RIGHT
 <P></P>
-
 <PRE>
 etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="right")
 </PRE>
@@ -1065,7 +1374,6 @@ etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="right")
 <P></P>
 <LI>CENTER
 <P></P>
-
 <PRE>
 etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="center")
 </PRE>
@@ -1075,7 +1383,6 @@ etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="center")
 <P></P>
 <LI>LEFT
 <P></P>
-
 <PRE>
 etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="left")
 </PRE>
@@ -1087,9 +1394,53 @@ etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="left")
 
 <HR NOSHADE SIZE=1>
 
+<H3 ID="toc53">4.6.30. offrelief</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc54">4.6.31. offvalue</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc55">4.6.32. onvalue</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc56">4.6.33. orient</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc57">4.6.34. overrelief</H3>
+
 <P>
-relief
+Specifies an alternative relief for the button, to be used when the mouse cursor is over the widget. This option can be used to make toolbar buttons, by configuring -relief flat -overrelief raised. If the value of this option is the empty string, then no alternative relief is used when the mouse cursor is over the button. The empty string is the default value.
+Especifica un relieve alternativo para el botón, que se utilizará cuando el cursor del ratón sobre el widget. Esta opción se puede utilizar para hacer botones de la barra de herramientas, mediante la configuración de alivio-overrelief plana elevada. Si el valor de esta opción es la cadena vacía, entonces no hay alivio alternativa se utiliza cuando el cursor del ratón sobre el botón. La cadena vacía es el valor predeterminado.
 </P>
+<P>
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; button = Tkinter.Button(root, text="overrelief", overrelief="")
+&gt;&gt;&gt; button.pack()
+&gt;&gt;&gt; button2 = Tkinter.Button(root, text="overrelief flat", overrelief="flat")
+&gt;&gt;&gt; button2.pack()
+&gt;&gt;&gt; button3 = Tkinter.Button(root, text="overrelief raised", overrelief="raised")
+&gt;&gt;&gt; button3.pack()
+&gt;&gt;&gt;
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc58">4.6.35. padx</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc59">4.6.36. pady</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc60">4.6.37. relief</H3>
+
 <P>
 Especifica la apariencia de un borde decorativo alrededor del widget que simula un efecto 3D sobre el elemento, el ancho de esta sombra depende del valor que se especifique con el atributo 'borderwidth', los posibles valores son SUNKEN, RAISED, GROOVE, RIDGE, FLAT. El valor por defecto es FLAT que no coloca ningun borde sobre el widget.
 </P>
@@ -1173,9 +1524,103 @@ etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="flat", borderwidth=
 
 <HR NOSHADE SIZE=1>
 
+<H3 ID="toc61">4.6.38. repeatdelay</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc62">4.6.39. repeatinterval</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc63">4.6.40. selectbackground</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc64">4.6.41. selectborderwidth</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc65">4.6.42. selectcolor</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc66">4.6.43. selectforeground</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc67">4.6.44. selectimage</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc68">4.6.45. setgrid</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc69">4.6.46. state</H3>
+
 <P>
-text
+Esta opcion especifica tres estados 'normal', 'active' o 'disabled'. En estado normal se muestra el widget usando las opciones 'foreground' y 'background', en estado 'active' se muestra usando las opciones 'activeforeground' y 'activebackground' y por ultimo el estado 'disabled' es mostrado usando 'disabledforeground' y 'background'.
 </P>
+<P>
+En el siguiente ejemplo se definen tres etiquetas, las tres tienen los mismos argumentos con lo mismos valores a excepcion de la opcion 'state', en el resultado final podremos ver que al cambiar el valor de 'state' solo toma los valores que habiamos mencionado en la descipcion de la opcion ignorando el resto.
+</P>
+
+<PRE>
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt;
+&gt;&gt;&gt; foreground = "red"
+&gt;&gt;&gt; background = "blue"
+&gt;&gt;&gt; activeforeground = "green"
+&gt;&gt;&gt; activebackground = "black"
+&gt;&gt;&gt; disabledforeground = "white"
+&gt;&gt;&gt; label1 = Tkinter.Label(root,
+...                         text="normal",
+...                         state="normal",
+...                         foreground=foreground,
+...                         background=background,
+...                         activeforeground=activeforeground,
+...                         activebackground=activebackground,
+...                         disabledforeground=disabledforeground
+...                         )
+&gt;&gt;&gt;
+&gt;&gt;&gt; label2 = Tkinter.Label(root,
+...                         text="active",
+...                         state="active",
+...                         foreground=foreground,
+...                         background=background,
+...                         activeforeground=activeforeground,
+...                         activebackground=activebackground,
+...                         disabledforeground=disabledforeground
+...                         )
+&gt;&gt;&gt;
+&gt;&gt;&gt; label3 = Tkinter.Label(root,
+...                         text="disabled",
+...                         state="disabled",
+...                         foreground=foreground,
+...                         background=background,
+...                         activeforeground=activeforeground,
+...                         activebackground=activebackground,
+...                         disabledforeground=disabledforeground
+...                         )
+&gt;&gt;&gt; label1.pack()
+&gt;&gt;&gt; label2.pack()
+&gt;&gt;&gt; label3.pack()
+&gt;&gt;&gt;
+</PRE>
+
+<P>
+<IMG ALIGN="middle" SRC="widgets/img/opciones/state.jpg" BORDER="0" ALT="">
+</P>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc70">4.6.47. takefocus</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc71">4.6.48. text</H3>
+
 <P>
 Este es un elemento muy importante para los widgets como Label o Button entre otros, esta opcion nos da la posibilidad de incluir un texto dentro del widget, este texto puede contener saltos de lineas en caso de ser necesario y tambien se puede utilizar una variable para indicar la cadena de texto a usar. Si se utiliza una imagen este elemento es ignorado por Tkinter.
 </P>
@@ -1224,15 +1669,28 @@ etiqueta = Tkinter.Label(root, text="Hola \t a todos")
 
 <HR NOSHADE SIZE=1>
 
+<H3 ID="toc72">4.6.49. textvariable</H3>
+
 <P>
-textvariable
+Especifica el nombre de una variable global. El valor de la variable es una cadena de texto que se mostrará en el interior el widget, y si el valor de la variable cambia, el widget se actualizará automáticamente para reflejar el nuevo valor. La forma en que se muestra la cadena en el widget depende del widget en particular y puede ser determinada por otras opciones, tales como anclaje o justificar. Se puede ver mas detalladamente en la seccion "Variables"
 </P>
 
 <HR NOSHADE SIZE=1>
 
-<P>
-underline
-</P>
+<H3 ID="toc73">4.6.50. tristateimage</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc74">4.6.51. tristatevalue</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc75">4.6.52. troughcolor</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc76">4.6.53. underline</H3>
+
 <P>
 Permite subrayar una letra de nuestra etiqueta, algo que es muy util para por ejemplo destacar un atajo con el teclado. La forma en que se utiliza es indicandole el indice de la cadena de texto que conforma nuestra etiqueta comenzando desde cero. El valor por defecto de esta opcion es -1 lo que logra que no se subraye ninguna letra
 </P>
@@ -1261,9 +1719,12 @@ boton = Tkinter.Button(root, text="Imprimir Hola Mundo!!!", command=funcion, und
 
 <HR NOSHADE SIZE=1>
 
-<P>
-width
-</P>
+<H3 ID="toc77">4.6.54. variable</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc78">4.6.55. width</H3>
+
 <P>
 Esta opcion nos permite indicar en ancho del elemento con el que estamos trabajando midiendolo en caracteres no en pixeles si se trata de texto, si en cambio estamos trabajando con imagenes si deberemos medirlo en pixeles, si se le da un valor negativo este servira para indicar el ancho minimo del widget. Si esta opcion no se especifica el tamaño del elemento se ajustara dependiendo el contenido del mismo.
 </P>
@@ -1278,20 +1739,28 @@ etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", width=30)
 
 <HR NOSHADE SIZE=1>
 
+<H3 ID="toc79">4.6.56. wraplength</H3>
+
 <P>
-wraplength
+Para los widgets que pueden realizar ajuste de líneas, esta opción especifica la longitud máxima de la línea. Las líneas que exceden este tamaño saltan a la siguiente línea, de forma que ninguna línea es más larga que la longitud especificada. El valor puede especificarse en cualquiera de las medidas normalizados para distancias de pantalla. Si este valor es menor que o igual a 0, entonces no se realiza envoltura: líneas se romperán sólo en caracteres de nueva línea en el texto.
 </P>
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc21"></A>
-<H3>4.4.1. Disponibles para</H3>
+<H3 ID="toc80">4.6.57. xscrollcommand</H3>
 
-<A NAME="toc22"></A>
-<H2>4.5. Variables</H2>
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc81">4.6.58. yscrollcommand</H3>
+
+<HR NOSHADE SIZE=1>
+
+<H3 ID="toc82">4.6.59. Disponibles para</H3>
+
+<H2 ID="toc83">4.7. Variables</H2>
 
 <P>
-Acá es donde se muestra una de las opciones que disponemos en varios widgets y es 'textvariable' que tomara como valor la variable del tipo StringVar que habíamos mencionado en 'Entry', esta nos permitirá trabajar con varios métodos en Entry que se los iré mostrando y los iremos viendo con ejemplos.
+Acá es donde se muestra una de las opciones que disponemos en varios widgets y es 'textvariable' que tomara como valor la variable del tipo StringVar que habíamos mencionado en 'Entry', esta nos permitirá trabajar con varios métodos en Entry que se los iré mostrando y los iremos viendo con ejemplos. Cabe aclararse que el uso de estas variables no se limitan solamente a la opcion 'textvariable' como lo podremos iremos viendo en otros ejemplos mas adelante.
 </P>
 <P>
 Tengan en cuenta que StringVar no forma parte de Python sino de Tkinter así que la importación de este es fundamental para poder utilizarlo, aunque para algunos resulte una obviedad nunca esta de mas remarcarlo ya que si utilizamos la forma 'from Tkinter import *' estos detalles no se observan y pueden generar confusión cuando se ven los ejemplos.
@@ -1299,19 +1768,147 @@ Tengan en cuenta que StringVar no forma parte de Python sino de Tkinter así que
 <P>
 Como habíamos mencionado contamos con cuatro clases de variables con Tkinter las cuales son BooleanVar, DoubleVar, IntVar y StringVar, esta ultima suele ser la mas vista y utilizada en los tutoriales disponibles en internet pero no por esto mas importante que las demás.
 </P>
+<P>
+Para comenzar a utilizarlo veamoslo con un ejemplo simple, supongamos que tenemos un cuadro de texto y queremos almacenar el texto ingresado en una variable, el problema con usar el metodo 'get' del widget 'Entry' es que, lo que se almacenaria seria el valor que contiene el cuadro al momento de llamar al metodo lo cual es util, pero hay veces que queremos las modificaciones que se puedan ir realizando a dicho texto. En estos casos es donde se nos brindan herramientas como estas variables donde las modificaciones que se hacen en el cuadro de texto se ven reflejadas en la variable, mas adelante se vera que nos estan limitadas a cuadros de texto sino que contaremos con otros widgets que pueden hacer uso de estas.
+</P>
+<P>
+Un ejemplo sensillo para verlo en accion:
+</P>
 
-<A NAME="gestion"></A>
-<H1>5. Gestión del diseño</H1>
+<PRE>
+&gt;&gt;&gt; #Primero creamos nuestra ventana vacia
+&gt;&gt;&gt; import Tkinter
+&gt;&gt;&gt; root = Tkinter.Tk()
+&gt;&gt;&gt; #Definimos nuestra variable del tipo "StringVar"
+&gt;&gt;&gt; variable = Tkinter.StringVar()
+&gt;&gt;&gt; variable
+&lt;Tkinter.StringVar instance at 0x0000000002DBDA08&gt;
+&gt;&gt;&gt; #Creamos nuestro campo de texto pasandole nuestra variable
+&gt;&gt;&gt; campo_de_texto = Tkinter.Entry(root, textvariable=variable)
+&gt;&gt;&gt; campo_de_texto.pack()
+&gt;&gt;&gt; #Insertamos un poco de texto
+&gt;&gt;&gt; campo_de_texto.insert(0, "Probando")
+&gt;&gt;&gt; #Aca llamamos al metodo 'get' de 'Entry'
+&gt;&gt;&gt; campo_de_texto.get()
+'Probando'
+&gt;&gt;&gt;#y aca al metodo 'get' pero de nuestra variable para obtener su valor
+&gt;&gt;&gt; variable.get()
+'Probando'
+&gt;&gt;&gt; #Y para repetir su funcionamiento agregamos unpoco mas de texto
+&gt;&gt;&gt; campo_de_texto.insert('end', " como funciona")
+&gt;&gt;&gt; campo_de_texto.get()
+'Probando como funciona'
+&gt;&gt;&gt; variable.get()
+'Probando como funciona'
+&gt;&gt;&gt;
+</PRE>
 
-<A NAME="toc24"></A>
-<H2>5.1. Métodos</H2>
+<P>
+NOTA:
+Si desean ver como funcionan mas en detalle estas variables pueden ver estos objetos desde el codigo fuente de la libreria Tkinter, para esto deben dirigirse a la carpeta donde se encuentra instalado python y ahi van a la carpeta 'Lib' y luego a la carpeta 'lib-tk', alli se encuentra el codigo fuente de Tkinter, la clase que contieneal objeto 'StringVar' se encuentra dentro del archivo 'Tkinter.py' que es el que se carga cuando hacemos 'import Tkinter'
+</P>
+<P>
+Pudimos notar en ese ejemplo el uso de un metodo llamado 'get' el cual esta disponible para las cuatro tipos de variables, al igual que otros metodos que iremos viendo de a uno.
+</P>
+<P>
+Empecemos viendo esa linea donde creamos esa variable llamada 'variable', donde a 'StringVar' no le pasamos ningun argumento, si se dieron una vuelta por el codigo fuente de Tkinter.py habran visto cuando se inicializa el objeto se ve que toma 3 parametros con valores 'None', analicemos su funcionamiento
+</P>
+<P>
+master
+</P>
+<P>
+value
+Nos permite asignar un valor a la variable cuando esta es creada
+</P>
+
+<PRE>
+&gt;&gt;&gt; variable = Tkinter.StringVar(value="Hola")
+&gt;&gt;&gt; variable.get()
+'Hola'
+</PRE>
+
+<P>
+name
+Nos permite darle un nombre opcional, por defecto Tkinter le un nombre del tipo PY_VARnum, donde 'num' es reemplazado por un numero que varia dependiendo de la cantidad de variables que hayan sido creadas. Este valor es usado internamente por el lenguaje Tcl por lo queno nos interesara modificar su valor. Para conocer su valor simplemente llamamos al atributo '_name' que nos mostrara el valor de este.
+</P>
+
+<PRE>
+&gt;&gt;&gt; variable = Tkinter.StringVar()
+&gt;&gt;&gt; variable._name
+'PY_VAR0'
+</PRE>
+
+<P>
+Ahora que ya sabemos como y con que crear nuestra variable veamos los metodos que tememos disponibles.
+</P>
+<P>
+get()
+Aunque ya vimos a 'get' no esta demas mencionarlo nuevamente ya que este seguramente sera el mas utilizado junto a 'set', 'get' nos permite obtener el valor contenido en la variable.
+</P>
+
+<PRE>
+&gt;&gt;&gt; variable.get()
+</PRE>
+
+<P>
+set(value)
+Como se menciono en la descripcion de 'get' estos forman una gran pareja resultando en dos metodos basicos muy utiles, este metodo en particular nos permite modificar el contenido
+</P>
+
+<PRE>
+&gt;&gt;&gt; variable.set("Valor que deseamos guardar")
+</PRE>
+
+<P>
+trace_variable(mode, callback)
+Ya vimos dos metodos sencillos, pero ahora mostraremos tres con un uso un poco mas avanzado pero una vez que entendamos como funcionan nos permitiran conseguir resultados bastantes avanzados. En primer lugar tenemos a 'trace_variable' el cual nos permite definir una funcion a la cual llamar cuando se realice una determinada accion sobre la variable para ello cuenta con dos parametros uno de ellos es 'mode' que nos pide en que modo de captura es que llamara a la funcion, puede tomar tres valores 'w', 'r' y 'u' donde 'w' es para cuando se escribe en la variable, 'r' corresponde a la lectura de la misma y por ultimo 'u'.
+</P>
+<P>
+trace_vdelete
+Mientras que con 'trace_variable' podiamos definir una funcion para determinados eventos tambien necesitabamos una herramienta que nos permitiera quitar esa respuesta para ese evento y es cuando entra 'trace_vdelete'. Su funcionamiento es es muy simple este toma un modo que ya habiamos visto y ademas nos pide el valor que nos devolvio 'trace_variable' al momento de ser ejecutado, veamoslo con un pequeño ejemplo y luego retomamos su explicacion
+</P>
+<P>
+trace_vinfo
+</P>
+<P>
+Para finalizar veremos la diferencia entre las cuatro variables disponibles, ya vimos como crear y trabajar con las variables del tipo 'StringVar' pero que paso con el resto. Trabajar con 'StringVar' o con las demas es exactamente igual, las distinguimos por el tipo de valores que manejan, por ejemplo si necesitamos trabajar con cadenas de texto debemos utilizar a 'StringVar' como lo veniamos haciendo, si se trata de numeros enteros utilizaremos a 'IntVar', tambien puede ser el caso de que queremos trabajar con numeros pero con decimales para esto tenemos a 'DoubleVar' y por ultimo esta 'BooleanVar' que maneja los valores booleanos como 'True' y 'False'
+</P>
+<P>
+La siguiente tabla es a modo de resumen:
+</P>
+
+<TABLE BORDER="1">
+<TR>
+<TD>Nombre</TD>
+<TD ALIGN="right">Tipo de valor en Python</TD>
+</TR>
+<TR>
+<TD>StringVar</TD>
+<TD ALIGN="center">str</TD>
+</TR>
+<TR>
+<TD>IntVar</TD>
+<TD ALIGN="center">int</TD>
+</TR>
+<TR>
+<TD>DoubleVar</TD>
+<TD ALIGN="center">float</TD>
+</TR>
+<TR>
+<TD>BooleanVar</TD>
+<TD ALIGN="center">bool</TD>
+</TR>
+</TABLE>
+
+<H1 ID="gestion">5. Gestión del diseño</H1>
+
+<H2 ID="toc85">5.1. Métodos</H2>
 
 <P>
 Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra aplicacion y cada una de sus ventanas
 </P>
 
-<A NAME="toc25"></A>
-<H3>5.1.1. iconify</H3>
+<H3 ID="toc86">5.1.1. iconify</H3>
 
 <DL>
 <DT>Descripcion:</DT><DD>
@@ -1363,8 +1960,7 @@ root.mainloop()
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc26"></A>
-<H3>5.1.2. deiconify</H3>
+<H3 ID="toc87">5.1.2. deiconify</H3>
 
 <DL>
 <DT>Descripcion:</DT><DD>
@@ -1406,8 +2002,7 @@ root.mainloop()
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc27"></A>
-<H3>5.1.3. title</H3>
+<H3 ID="toc88">5.1.3. title</H3>
 
 <DL>
 <DT>Descripcion:</DT><DD>
@@ -1470,8 +2065,7 @@ root.mainloop()
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc28"></A>
-<H3>5.1.4. geometry</H3>
+<H3 ID="toc89">5.1.4. geometry</H3>
 
 <DL>
 <DT>Descripcion:</DT><DD>
@@ -1569,8 +2163,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc29"></A>
-<H3>5.1.5. maxsize</H3>
+<H3 ID="toc90">5.1.5. maxsize</H3>
 
 <DL>
 <DT>Descripcion:</DT><DD>
@@ -1618,8 +2211,7 @@ root.maxsize(height=600, witdh=400)
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc30"></A>
-<H3>5.1.6. minsize</H3>
+<H3 ID="toc91">5.1.6. minsize</H3>
 
 <DL>
 <DT>Descripcion:</DT><DD>
@@ -1662,8 +2254,7 @@ root.minsize(height=600, witdh=400)
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc31"></A>
-<H3>5.1.7. state</H3>
+<H3 ID="toc92">5.1.7. state</H3>
 
 <DL>
 <DT>Descripcion:</DT><DD>
@@ -1706,8 +2297,7 @@ root.mainloop()
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc32"></A>
-<H3>5.1.8. resizable</H3>
+<H3 ID="toc93">5.1.8. resizable</H3>
 
 <DL>
 <DT>Descripcion:</DT><DD>
@@ -1762,8 +2352,7 @@ root.resizable(width=False, height=False)
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc33"></A>
-<H3>5.1.9. withdraw</H3>
+<H3 ID="toc94">5.1.9. withdraw</H3>
 
 <DL>
 <DT>Descripcion:</DT><DD>
@@ -1807,8 +2396,7 @@ root.mainloop()
 
 <HR NOSHADE SIZE=1>
 
-<A NAME="toc34"></A>
-<H3>5.1.10. transient</H3>
+<H3 ID="toc95">5.1.10. transient</H3>
 
 <DL>
 <DT>Descripcion:</DT><DD>
@@ -1846,8 +2434,7 @@ root.mainloop()
 Como ven si intentan mover la ventana padre observaran que esta permanece siempre debajo de la ventana hija.
 </DL>
 
-<A NAME="toc35"></A>
-<H2>5.2. Gestión de la geometría</H2>
+<H2 ID="toc96">5.2. Gestión de la geometría</H2>
 
 <P>
 Todos los widgets de Tkinter tienen acceso a métodos específicos para la gestión de la geometría, que tienen como propósito ordenarlos y organizarlos en el área donde están contenidos.
@@ -1856,32 +2443,27 @@ Todos los widgets de Tkinter tienen acceso a métodos específicos para la gesti
 Para conseguir esto tenemos tres gestores para la geometría, aunque muchos recomiendan solamente usar solo uno de ellos, esperamos que luego de leer acerca de estos tres seas capaz de elegir el que mas se adapte a tus necesidades y a tu forma de trabajar.
 </P>
 
-<A NAME="toc36"></A>
-<H3>5.2.1. pack</H3>
+<H3 ID="toc97">5.2.1. pack</H3>
 
 <P>
 .
 </P>
 
-<A NAME="toc37"></A>
-<H3>5.2.2. grid</H3>
+<H3 ID="toc98">5.2.2. grid</H3>
 
 <P>
 .
 </P>
 
-<A NAME="toc38"></A>
-<H3>5.2.3. place</H3>
+<H3 ID="toc99">5.2.3. place</H3>
 
 <P>
 .
 </P>
 
-<A NAME="toc39"></A>
-<H2>5.3. Frame</H2>
+<H2 ID="toc100">5.3. Frame</H2>
 
-<A NAME="colores"></A>
-<H2>5.4. Colores</H2>
+<H2 ID="colores">5.4. Colores</H2>
 
 <P>
 Todos los widgets estándar de Tkinter proporcionan un conjunto básico de opciones para poder personalizarlos, que nos permiten modificar sus colores, fuentes, bordes y tamaños entre otros. La mayoría de ellos permite especificar un color de fondo y de primer plano que nos serán muy útiles cuando intentemos darle un aspecto mas pulido a nuestra aplicación.
@@ -1890,8 +2472,7 @@ Todos los widgets estándar de Tkinter proporcionan un conjunto básico de opcio
 Para especificar dichos colores tenemos dos formas, una es utilizar el nombre del color y la otra consiste en especificar la proporción de rojo, verde y azul que componen a dicho color en dígitos hexadecimales que es la forma mas popular y la mas precisa a la hora de trabajar.
 </P>
 
-<A NAME="toc41"></A>
-<H3>5.4.1. Nombres de colores</H3>
+<H3 ID="toc102">5.4.1. Nombres de colores</H3>
 
 <P>
 Como se había mencionado se puede especificar un color con solo usar su nombre en ingles, por ejemplo para el color blanco usaríamos la palabra 'white' y para el color rojo 'red', aunque Tkinter no nos limita a usar solamente los colores básicos sino que nos ofrece una paleta bastante amplia de colores.
@@ -1919,11 +2500,10 @@ boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion, bac
 Otra de las posibilidades que tenemos es utilizar los colores del sistema para conseguir un aspecto mas acorde a la plataforma con que estemos trabajando.
 </P>
 <P>
-Podemos obtener una lista de los posibles colores que nos da Tkinter en la siguiente pagina [<A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm</A>] o también en los anexos de esta guía los podrán encontrar:
+Podemos obtener una lista de los posibles colores que nos da Tcl/Tk en la siguiente pagina [<A HREF="http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm">http://www.tcl.tk/man/tcl8.5/TkCmd/colors.htm</A>] o también en los anexos de esta guía los podrán encontrar:
 </P>
 
-<A NAME="toc42"></A>
-<H3>5.4.2. RGB hexadecimal</H3>
+<H3 ID="toc103">5.4.2. RGB hexadecimal</H3>
 
 <P>
 Aunque este método sea un poco mas complicado en su uso, es mas preciso que el método que habíamos mencionado arriba. La forma en que se utiliza es la siguiente:
@@ -1957,18 +2537,15 @@ boton = Tkinter.Button(root, text="Que te parece la guia?", command=función, ba
 Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nombre del color.
 </P>
 
-<A NAME="toc43"></A>
-<H3>5.4.3. Consejos</H3>
+<H3 ID="toc104">5.4.3. Consejos</H3>
 
 <P>
 En esta parte final de la seccion colores nos detendremos un momento para analizar la utilizacion de colores en nuestra aplicacion y la utilizacion de paletas y esquemas de colores que nos permitan conseguir aspectos mas prolijos y agradables a la vista.
 </P>
 
-<A NAME="toc44"></A>
-<H2>5.5. Fuentes</H2>
+<H2 ID="toc105">5.5. Fuentes</H2>
 
-<A NAME="toc45"></A>
-<H2>5.6. Unidades de medida</H2>
+<H2 ID="toc106">5.6. Unidades de medida</H2>
 
 <P>
 En Tkinter podemos especificar las medidas de los elementos no solo en píxeles sino que también podemos especificar los valores en centímetros, pulgadas, milímetros y puntos; para esto debemos pasar el valor como cadena que se compone de un numero entero o no (porque también podemos usar decimales en caso de ser necesario), seguido de una letra que indique el tipo de unidad a utilizar, que están especificados en la siguiente tabla:
@@ -2060,32 +2637,23 @@ boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10p')
 Estas unidades de medida a excepción de los píxeles, no es recomendable usarlos ya que no están pensados específicamente para trabajar con elementos de la pantalla de nuestro ordenador y al usarlos es muy probable que no consigamos los tamaños o proporciones que esperábamos en la pantalla, por ejemplo los puntos se utiliza muy frecuentemente para la impresión ya que fueron diseñados para ese propósito y lo mismo pasa con los milímetros o las pulgadas que fueron diseñadas para otros ámbitos.
 </P>
 
-<A NAME="toc46"></A>
-<H2>5.7. Imágenes</H2>
+<H2 ID="toc107">5.7. Imágenes</H2>
 
-<A NAME="toc47"></A>
-<H3>5.7.1. PhotoImage</H3>
+<H3 ID="toc108">5.7.1. PhotoImage</H3>
 
-<A NAME="toc48"></A>
-<H3>5.7.2. PIL</H3>
+<H3 ID="toc109">5.7.2. PIL</H3>
 
-<A NAME="toc49"></A>
-<H1>6. Menús y barras de herramientas</H1>
+<H1 ID="toc110">6. Menús y barras de herramientas</H1>
 
-<A NAME="toc50"></A>
-<H1>7. Ventanas de diálogos</H1>
+<H1 ID="toc111">7. Ventanas de diálogos</H1>
 
-<A NAME="toc51"></A>
-<H1>8. Eventos</H1>
+<H1 ID="toc112">8. Eventos</H1>
 
-<A NAME="toc52"></A>
-<H1>9. Ejemplos Avanzados</H1>
+<H1 ID="toc113">9. Ejemplos Avanzados</H1>
 
-<A NAME="toc53"></A>
-<H1>10. Notas finales</H1>
+<H1 ID="toc114">10. Notas finales</H1>
 
-<A NAME="toc54"></A>
-<H1>11. Enlaces de interés</H1>
+<H1 ID="toc115">11. Enlaces de interés</H1>
 
 <P>
 <A HREF="http://www.tcl.tk/man/tcl8.5/">Tcl/Tk 8.5 Manual</A>
@@ -2109,8 +2677,7 @@ Estas unidades de medida a excepción de los píxeles, no es recomendable usarlo
 <A HREF="http://infohost.nmt.edu/tcc/help/pubs/Tkinter/index.html">Tkinter 8.4 reference: a GUI for Python</A>
 </P>
 
-<A NAME="glosario"></A>
-<H1>12. Glosario</H1>
+<H1 ID="glosario">12. Glosario</H1>
 
 <DL>
 <DT>toolkit</DT><DD>
@@ -2122,11 +2689,9 @@ Estas unidades de medida a excepción de los píxeles, no es recomendable usarlo
 Es un termino genérico para referirse a cualquiera de los elementos básicos que componen la interfaz gráfica de una aplicación. Ejemplos de widgets son botones, etiquetas, cuadros de texto, etc.
 </DL>
 
-<A NAME="toc56"></A>
-<H1>13. Anexos</H1>
+<H1 ID="toc117">13. Anexos</H1>
 
-<A NAME="toc57"></A>
-<H2>13.1. Colores</H2>
+<H2 ID="toc118">13.1. Colores</H2>
 
 <P>
 Paleta de colores de Tk:
@@ -2315,8 +2880,7 @@ WindowText
 Paleta de colores X11:
 </P>
 
-<A NAME="toc58"></A>
-<H1>14. Licencia</H1>
+<H1 ID="toc119">14. Licencia</H1>
 
 <P>
 THE WORK (AS DEFINED BELOW) IS PROVIDED UNDER THE TERMS OF THIS CREATIVE COMMONS PUBLIC LICENSE ("CCPL" OR "LICENSE"). THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW. ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR COPYRIGHT LAW IS PROHIBITED.
@@ -2422,6 +2986,6 @@ UNLESS OTHERWISE MUTUALLY AGREED TO BY THE PARTIES IN WRITING, LICENSOR OFFERS T
 </OL>
 
 </DIV>
-<!-- html code generated by txt2tags 2.6 (http://txt2tags.org) -->
-<!-- cmdline: txt2tags Interfaz grafica con Tkinter.txt -->
+<!-- html code generated by txt2tags 2.6. (http://txt2tags.org) -->
+<!-- cmdline: txt2tags -t html Interfaz grafica con Tkinter.txt -->
 </BODY></HTML>

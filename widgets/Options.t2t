@@ -159,7 +159,7 @@ boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion)
 
 [widgets/img/Button/Button-01.jpg]
 
-% Para funciones con argumentos (usar lambda)
+%TODO: Para funciones con argumentos (usar lambda)
 % http://effbot.org/zone/tkinter-callbacks.htm
 
 --------------------------------------------------------
@@ -175,15 +175,26 @@ El valor 'none' consigue eliminar el cursor cuando se pasa el cursor sobre el wi
 ``` etiqueta = Tkinter.Label(root, text="Que te parece la guia?", cursor="hand1")
 
 [widgets/img/opciones/cursor.jpg]
+
 --------------------------------------------------------
 
 
 === compound ===
 
+%FIXME: Mejorar descipcion
+Especifica si el widget debe mostrar texto y mapas/imágenes al mismo tiempo, y si es así, donde el mapa de bits o imagen debe estar en relación con el texto. Debe ser uno de los valores "none", "bottom", "top", "left", "right", o "center". Por ejemplo, el valor (predeterminado) "none" especifica que el mapa de bits o imagen (si se ha definido en el sistema) se mostrará en lugar del texto, el valor "left" especifica que el mapa de bits o imagen se muestra a la izquierda del texto y el valor "center" especifica que el mapa de bits o imagen debe aparecer en la parte superior del texto.
+
+%TODO: Mostrar con ejemplos
+
 --------------------------------------------------------
 
 
 === default ===
+
+--------------------------------------------------------
+
+
+=== disabledbackground ===
 
 --------------------------------------------------------
 
@@ -247,6 +258,11 @@ Permite indicar la altura a la que se posicionara nuestro widget en lineas no en
 --------------------------------------------------------
 
 
+=== indicatoron ===
+
+--------------------------------------------------------
+
+
 === insertbackground ===
 
 --------------------------------------------------------
@@ -299,9 +315,44 @@ Permite indicar la altura a la que se posicionara nuestro widget en lineas no en
 
 --------------------------------------------------------
 
+
+=== offrelief ===
+
+--------------------------------------------------------
+
+
+=== offvalue ===
+
+--------------------------------------------------------
+
+
+=== onvalue ===
+
+--------------------------------------------------------
+
+
 === orient ===
 
 %http://www.tcl.tk/man/tcl8.5/TkCmd/options.htm#M-orient
+
+--------------------------------------------------------
+
+
+=== overrelief ===
+Specifies an alternative relief for the button, to be used when the mouse cursor is over the widget. This option can be used to make toolbar buttons, by configuring -relief flat -overrelief raised. If the value of this option is the empty string, then no alternative relief is used when the mouse cursor is over the button. The empty string is the default value.
+Especifica un relieve alternativo para el botón, que se utilizará cuando el cursor del ratón sobre el widget. Esta opción se puede utilizar para hacer botones de la barra de herramientas, mediante la configuración de alivio-overrelief plana elevada. Si el valor de esta opción es la cadena vacía, entonces no hay alivio alternativa se utiliza cuando el cursor del ratón sobre el botón. La cadena vacía es el valor predeterminado.
+
+
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> button = Tkinter.Button(root, text="overrelief", overrelief="")
+>>> button.pack()
+>>> button2 = Tkinter.Button(root, text="overrelief flat", overrelief="flat")
+>>> button2.pack()
+>>> button3 = Tkinter.Button(root, text="overrelief raised", overrelief="raised")
+>>> button3.pack()
+>>>
 
 --------------------------------------------------------
 
@@ -395,12 +446,78 @@ Ejemplos:
 --------------------------------------------------------
 
 
+=== selectcolor ===
+
+--------------------------------------------------------
+
+
 === selectforeground ===
 
 --------------------------------------------------------
 
 
+=== selectimage ===
+
+--------------------------------------------------------
+
+
 === setgrid ===
+
+--------------------------------------------------------
+
+
+=== state ===
+
+Esta opcion especifica tres estados 'normal', 'active' o 'disabled'. En estado normal se muestra el widget usando las opciones 'foreground' y 'background', en estado 'active' se muestra usando las opciones 'activeforeground' y 'activebackground' y por ultimo el estado 'disabled' es mostrado usando 'disabledforeground' y 'background'.
+
+
+En el siguiente ejemplo se definen tres etiquetas, las tres tienen los mismos argumentos con lo mismos valores a excepcion de la opcion 'state', en el resultado final podremos ver que al cambiar el valor de 'state' solo toma los valores que habiamos mencionado en la descipcion de la opcion ignorando el resto.
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>>
+>>> foreground = "red"
+>>> background = "blue"
+>>> activeforeground = "green"
+>>> activebackground = "black"
+>>> disabledforeground = "white"
+>>> label1 = Tkinter.Label(root,
+...                         text="normal",
+...                         state="normal",
+...                         foreground=foreground,
+...                         background=background,
+...                         activeforeground=activeforeground,
+...                         activebackground=activebackground,
+...                         disabledforeground=disabledforeground
+...                         )
+>>>
+>>> label2 = Tkinter.Label(root,
+...                         text="active",
+...                         state="active",
+...                         foreground=foreground,
+...                         background=background,
+...                         activeforeground=activeforeground,
+...                         activebackground=activebackground,
+...                         disabledforeground=disabledforeground
+...                         )
+>>>
+>>> label3 = Tkinter.Label(root,
+...                         text="disabled",
+...                         state="disabled",
+...                         foreground=foreground,
+...                         background=background,
+...                         activeforeground=activeforeground,
+...                         activebackground=activebackground,
+...                         disabledforeground=disabledforeground
+...                         )
+>>> label1.pack()
+>>> label2.pack()
+>>> label3.pack()
+>>>
+```
+
+[widgets/img/opciones/state.jpg]
 
 --------------------------------------------------------
 
@@ -446,6 +563,16 @@ Especifica el nombre de una variable global. El valor de la variable es una cade
 --------------------------------------------------------
 
 
+=== tristateimage ===
+
+--------------------------------------------------------
+
+
+=== tristatevalue ===
+
+--------------------------------------------------------
+
+
 === troughcolor ===
 
 --------------------------------------------------------
@@ -467,6 +594,11 @@ Ejemplo con un boton
 ``` boton = Tkinter.Button(root, text="Imprimir Hola Mundo!!!", command=funcion, underline=3)
 
 [widgets/img/opciones/underline-02.jpg]
+
+--------------------------------------------------------
+
+
+=== variable ===
 
 --------------------------------------------------------
 

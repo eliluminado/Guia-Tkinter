@@ -86,6 +86,7 @@ Ya vimos dos metodos sencillos, pero ahora mostraremos tres con un uso un poco m
 %FIXME: Terminar descripcion modo 'u'
 
 trace_vdelete
+Mientras que con 'trace_variable' podiamos definir una funcion para determinados eventos tambien necesitabamos una herramienta que nos permitiera quitar esa respuesta para ese evento y es cuando entra 'trace_vdelete'. Su funcionamiento es es muy simple este toma un modo que ya habiamos visto y ademas nos pide el valor que nos devolvio 'trace_variable' al momento de ser ejecutado, veamoslo con un pequeño ejemplo y luego retomamos su explicacion
 
 trace_vinfo
 

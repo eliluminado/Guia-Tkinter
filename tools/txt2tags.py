@@ -112,22 +112,25 @@ import time  # %%date, %%mtime
 import getopt
 import textwrap
 import csv
-import string
 import struct
 import unicodedata
-# base64 is required by embedImage, so I import it here // by Chaos
-
-import base64
+import base64  # embedImage()
+import shlex  # CommandLine.tokenize()
 
 # import urllib  # read remote files (URLs) -- postponed, see issue 96
 # import email  # %%mtime for remote files -- postponed, see issue 96
 
+try:
+    import targets
+except ImportError:
+    targets = None
+    TARGETS_LIST = []
 
 # Program information
 my_url = 'http://txt2tags.org'
 my_name = 'txt2tags'
 my_email = 'verde@aurelio.net'
-my_revision = '$Revision: 910 $'  # automatic, from SVN
+my_revision = '$Revision$'  # automatic, from SVN
 my_version = '2.6'
 
 # Add SVN revision number to version: 1.2.345
@@ -260,57 +263,79 @@ CONFIG_KEYWORDS = [
 
 
 TARGET_NAMES = {
-  'txt2t'  : _('Txt2tags document'),
-  'html'   : _('HTML page'),
-  'html5'  : _('HTML5 page'),
-  'xhtml'  : _('XHTML page'),
-  'xhtmls' : _('XHTML Strict page'),
-  'htmls'  : _('HTML Spreadsheet'),
-  'sgml'   : _('SGML document'),
-  'dbk'    : _('DocBook document'),
-  'tex'    : _('LaTeX document'),
-  'texs'   : _('LaTeX Spreadsheet'),
-  'lout'   : _('Lout document'),
-  'man'    : _('UNIX Manual page'),
-  'mgp'    : _('MagicPoint presentation'),
-  'wiki'   : _('Wikipedia page'),
-  'gwiki'  : _('Google Wiki page'),
-  'doku'   : _('DokuWiki page'),
-  'pmw'    : _('PmWiki page'),
-  'moin'   : _('MoinMoin page'),
-  'pm6'    : _('PageMaker document'),
-  'txt'    : _('Plain Text'),
-  'aat'    : _('ASCII Art Text'),
-  'aap'    : _('ASCII Art Presentation'),
-  'aas'    : _('ASCII Art Spreadsheet'),
-  'aatw'   : _('ASCII Art Text Web'),
-  'aapw'   : _('ASCII Art Presentation Web'),
-  'aasw'   : _('ASCII Art Spreadsheet Web'),
-  'db'     : _('SQLite database'),
-  'adoc'   : _('AsciiDoc document'),
-  'rst'    : _('ReStructuredText document'),
-  'csv'    : _('CSV spreadsheet'),
-  'ods'    : _('Open Document Spreadsheet'),
-  'creole' : _('Creole 1.0 document'),
-  'md'     : _('Markdown document'),
-  'bbcode' : _('BBCode document'),
-  'red'    : _('Redmine Wiki page'),
-  'spip'   : _('SPIP article'),
-  'rtf'    : _('RTF document'),
-  'wp'     : _('WordPress post'),
+  'txt2t'   : _('Txt2tags document'),
+  'html'    : _('HTML page'),
+  'html5'   : _('HTML5 page'),
+  'xhtml'   : _('XHTML page'),
+  'xhtmls'  : _('XHTML Strict page'),
+  'htmls'   : _('HTML Spreadsheet'),
+  'sgml'    : _('SGML document'),
+  'dbk'     : _('DocBook document'),
+  'tex'     : _('LaTeX document'),
+  'texs'    : _('LaTeX Spreadsheet'),
+  'lout'    : _('Lout document'),
+  'man'     : _('UNIX Manual page'),
+  'mgp'     : _('MagicPoint presentation'),
+  'wiki'    : _('Wikipedia page'),
+  'gwiki'   : _('Google Wiki page'),
+  'doku'    : _('DokuWiki page'),
+  'pmw'     : _('PmWiki page'),
+  'moin'    : _('MoinMoin page'),
+  'pm6'     : _('PageMaker document'),
+  'txt'     : _('Plain Text'),
+  'aat'     : _('ASCII Art Text'),
+  'aap'     : _('ASCII Art Presentation'),
+  'aas'     : _('ASCII Art Spreadsheet'),
+  'aatw'    : _('ASCII Art Text Web'),
+  'aapw'    : _('ASCII Art Presentation Web'),
+  'aasw'    : _('ASCII Art Spreadsheet Web'),
+  'db'      : _('SQLite database'),
+  'adoc'    : _('AsciiDoc document'),
+  'rst'     : _('ReStructuredText document'),
+  'csv'     : _('CSV table'),
+  'csvs'    : _('CSV Spreadsheet'),
+  'ods'     : _('Open Document Spreadsheet'),
+  'creole'  : _('Creole 1.0 document'),
+  'md'      : _('Markdown document'),
+  'bbcode'  : _('BBCode document'),
+  'red'     : _('Redmine Wiki page'),
+  'spip'    : _('SPIP article'),
+  'rtf'     : _('RTF document'),
+  'wp'      : _('WordPress post'),
   'tml'     : _('Foswiki or TWiki page'),
+  'mom'     : _('MOM groff macro'),
+  'vimwiki' : _('Vimwiki document')
 }
-TARGETS = TARGET_NAMES.keys()
-TARGETS.sort()
 
 
 TARGET_TYPES = {
-  'html'   : (_('HTML'), ('html', 'html5', 'xhtml', 'xhtmls', 'htmls', 'aatw', 'aapw', 'aasw', 'wp')),
-  'wiki'   : (_('WIKI'), ('txt2t', 'wiki', 'gwiki', 'doku', 'pmw', 'moin', 'adoc', 'rst', 'creole', 'md', 'bbcode', 'red', 'spip', 'tml')),
-  'office' : (_('OFFICE'), ('sgml', 'dbk', 'tex', 'texs', 'lout', 'mgp', 'pm6', 'csv', 'ods', 'rtf', 'db')),
-  'text'   : (_('TEXT'), ('man', 'txt', 'aat', 'aap', 'aas')),
+  'html'   : (_('HTML'), ['html', 'html5', 'xhtml', 'xhtmls', 'htmls', 'aatw', 'aapw', 'aasw', 'wp']),
+  'wiki'   : (_('WIKI'), ['txt2t', 'wiki', 'gwiki', 'doku', 'pmw', 'moin', 'adoc', 'rst', 'creole', 'md', 'bbcode', 'red', 'spip', 'tml', 'vimwiki']),
+  'office' : (_('OFFICE'), ['sgml', 'dbk', 'tex', 'texs', 'lout', 'mgp', 'pm6', 'csv', 'csvs', 'ods', 'rtf', 'db', 'mom']),
+  'text'   : (_('TEXT'), ['man', 'txt', 'aat', 'aap', 'aas']),
 }
 
+if targets:
+    TARGETS_LIST = targets.TARGETS_LIST
+
+OTHER_TARGETS = []
+
+NOT_LOADED = []
+LOADED = []
+for target in TARGETS_LIST:
+    if target not in TARGET_NAMES:
+        LOADED.append(target)
+        TARGET_NAMES[target] = getattr(getattr(targets, target), 'NAME', target.capitalize() + ' target')
+        try:
+            TARGET_TYPES[getattr(targets, target).TYPE][1].append(target)
+        except:
+            OTHER_TARGETS.append(target)
+    else:
+        NOT_LOADED.append(target)
+TARGETS_LIST = LOADED
+
+TARGETS = TARGET_NAMES.keys()
+TARGETS.sort()
 
 DEBUG = 0     # do not edit here, please use --debug
 VERBOSE = 0   # do not edit here, please use -v, -vv or -vvv
@@ -323,16 +348,18 @@ DFT_SLIDE_WIDTH  = 80  # do not edit here, please use --width
 DFT_SLIDE_HEIGHT = 25  # do not edit here, please use --height
 
 # ASCII Art config
-AA_KEYS = 'corner border side bar1 bar2 level2 level3 level4 level5 bullet hhead vhead'.split()
-AA_VALUES = '+-|-==-^"-=$'  # do not edit here, please use --chars
-AA = dict(zip(AA_KEYS, AA_VALUES))
+AA_KEYS = 'tlcorner trcorner blcorner brcorner tcross bcross lcross rcross lhhead hheadcross rhhead headerscross tvhead vheadcross bvhead cross border side bar1 bar2 level2 level3 level4 level5 bullet hhead vhead'.split()
+AA_SIMPLE = '+-|-==-^"-=$'  # do not edit here, please use --chars
+AA_ADVANCED = '+++++++++++++++' + AA_SIMPLE  # do not edit here, please use --chars
+AA = dict(zip(AA_KEYS, AA_ADVANCED))
 AA_COUNT = 0
-AA_PAGE = 0
 AA_PW_TOC = {}
 AA_IMG = 0
 AA_TITLE = ''
 AA_MARKS = []
-AA_QA = """       ________
+
+AA_QA = """\
+       ________
    /#**TXT2TAGS**#\\
  /#####/      \####CC\\
 /###/            \#BY#|
@@ -348,13 +375,18 @@ AA_QA = """       ________
 
          ___
         F2.7G
-         (C)""".split('\n')
+         (C)\
+""".split('\n')
 
 # ReStructuredText config
 # http://docs.python.org/release/2.7/documenting/rest.html#sections
 RST_KEYS = 'title level1 level2 level3 level4 level5 bar1 bullet'.split()
 RST_VALUES = '#*=-^"--'  # do not edit here, please use --chars
 RST = dict(zip(RST_KEYS, RST_VALUES))
+
+CSV_KEYS = 'separator quotechar'.split()
+CSV_VALUES = ','  # do not edit here, please use --chars
+CSV = dict(zip(CSV_KEYS, CSV_VALUES))
 
 RC_RAW = []
 CMDLINE_RAW = []
@@ -366,10 +398,7 @@ TAGS = {}
 rules = {}
 
 # Gui globals
-askopenfilename = None
-showinfo = None
-showwarning = None
-showerror = None
+Tkinter = tkFileDialog = tkMessageBox = None
 
 lang = 'english'
 TARGET = ''
@@ -390,6 +419,9 @@ ESCAPES = {  'pm6':  [(ESCCHAR + '<', 'vvvvPm6Bracketvvvv', r'<\#92><')],
              'rtf':  [('\t', 'vvvvRtfTabvvvv', ESCCHAR + 'tab')],
           }
 
+for target in TARGETS_LIST:
+    ESCAPES[target] = getattr(getattr(targets, target), 'ESCAPES', [])
+
 # Platform specific settings
 LB = LINEBREAK.get(sys.platform[:3]) or LINEBREAK['default']
 
@@ -406,9 +438,10 @@ def Usage():
         fmt1 % (''  , '--targets'      , _("print a list of all the available targets and exit")),
         fmt2 % ('-t', '--target=TYPE'  , _("set target document type. currently supported:")),
         fmt1 % (''  , ''               , ', '.join(TARGETS[:8]) + ','),
-        fmt1 % (''  , ''               , ', '.join(TARGETS[8:17]) + ','),
-        fmt1 % (''  , ''               , ', '.join(TARGETS[17:26]) + ','),
-        fmt1 % (''  , ''               , ', '.join(TARGETS[26:])),
+        fmt1 % (''  , ''               , ', '.join(TARGETS[8:16]) + ','),
+        fmt1 % (''  , ''               , ', '.join(TARGETS[16:25]) + ','),
+        fmt1 % (''  , ''               , ', '.join(TARGETS[25:34]) + ','),
+        fmt1 % (''  , ''               , ', '.join(TARGETS[34:])),
         fmt2 % ('-i', '--infile=FILE'  , _("set FILE as the input file name ('-' for STDIN)")),
         fmt2 % ('-o', '--outfile=FILE' , _("set FILE as the output file name ('-' for STDOUT)")),
         fmt1 % (''  , '--encoding=ENC' , _("inform source file encoding (UTF-8, iso-8859-1, etc)")),
@@ -427,7 +460,7 @@ def Usage():
         fmt1 % (''  , '--width=N'      , _("set the output's width to N columns (used by aat, aap and aatw targets)")),
         fmt1 % (''  , '--height=N'     , _("set the output's height to N rows (used by aap target)")),
         fmt1 % (''  , '--chars=S'      , _("set the output's chars to S (used by all aa targets and rst)")),
-        fmt1 % (''  , ''               , _("aa default " + AA_VALUES + " rst default " + RST_VALUES)),
+        fmt1 % (''  , ''               , _("aa default " + AA_SIMPLE + " rst default " + RST_VALUES)),
         fmt2 % ('-C', '--config-file=F', _("read configuration from file F")),
         fmt1 % (''  , '--fix-path'     , _("fix resources path (image, links, CSS) when needed")),
         fmt1 % (''  , '--gui'          , _("invoke Graphical Tk Interface")),
@@ -470,11 +503,14 @@ HEADER_TEMPLATE = {
 """,
     'csv': """\
 """,
+    'csvs': """\
+""",
     'db': """\
 """,
     'rst': """\
 """,
-    'ods': """<?xml version='1.0' encoding='UTF-8'?>
+    'ods': """\
+<?xml version='1.0' encoding='UTF-8'?>
 <office:document xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:manifest="urn:oasis:names:tc:opendocument:xmlns:manifest:1.0" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" office:version="1.1" office:mimetype="application/vnd.oasis.opendocument.spreadsheet"><office:meta><meta:generator>Txt2tags www.txt2tags.org</meta:generator></office:meta><office:automatic-styles/><office:body><office:spreadsheet>
 """,
     'txt': """\
@@ -533,14 +569,17 @@ HEADER_TEMPLATE = {
 </DIV>
 """,
 
+# HTML5 reference code:
+# https://github.com/h5bp/html5-boilerplate/blob/master/index.html
+# https://github.com/murtaugh/HTML5-Reset/blob/master/index.html
     'html5': """\
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset=%(ENCODING)s>
+<meta charset="%(ENCODING)s">
 <title>%(HEADER1)s</title>
-<meta name="generator" content="http://txt2tags.org"/>
-<link rel="stylesheet" href="%(STYLE)s"/>
+<meta name="generator" content="http://txt2tags.org">
+<link rel="stylesheet" href="%(STYLE)s">
 <style>
 body{background-color:#fff;color:#000;}
 hr{background-color:#000;border:0;color:#000;}
@@ -548,10 +587,12 @@ hr.heavy{height:5px;}
 hr.light{height:1px;}
 img{border:0;display:block;}
 img.right{margin:0 0 0 auto;}
-table,img.center{border:0;margin:0 auto;}
+img.center{border:0;margin:0 auto;}
 table th,table td{padding:4px;}
 .center,header{text-align:center;}
+table.center {margin-left:auto; margin-right:auto;}
 .right{text-align:right;}
+.left{text-align:left;}
 .tableborder,.tableborder td,.tableborder th{border:1px solid #000;}
 .underline{text-decoration:underline;}
 </style>
@@ -568,13 +609,13 @@ table th,table td{padding:4px;}
 """,
 
     'html5css': """\
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset=%(ENCODING)s>
+<meta charset="%(ENCODING)s">
 <title>%(HEADER1)s</title>
-<meta name="generator" content="http://txt2tags.org"/>
-<link rel="stylesheet" href="%(STYLE)s"/>
+<meta name="generator" content="http://txt2tags.org">
+<link rel="stylesheet" href="%(STYLE)s">
 </head>
 <body>
 <header>
@@ -588,13 +629,13 @@ table th,table td{padding:4px;}
 """,
 
     'htmls': """\
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset=%(ENCODING)s>
+<meta charset="%(ENCODING)s">
 <title>%(HEADER1)s</title>
-<meta name="generator" content="http://txt2tags.org"/>
-<link rel="stylesheet" href="%(STYLE)s"/>
+<meta name="generator" content="http://txt2tags.org">
+<link rel="stylesheet" href="%(STYLE)s">
 <style>
 body{background-color:#fff;color:#000;}
 hr{background-color:#000;border:0;color:#000;}
@@ -744,7 +785,11 @@ table th,table td{padding:4px;}
 %(HEADER2)s
 %(HEADER3)s
 """,
-
+    'vimwiki': """\
+%%title %(HEADER1)s
+## by %(HEADER2)s in %(HEADER3)s
+%%toc %(HEADER1)s
+""",
     'mgp': """\
 #!/usr/X11R6/bin/mgp -t 90
 %%deffont "normal"    xfont  "utopia-medium-r", charset "iso8859-1"
@@ -992,8 +1037,533 @@ r"""{\rtf1\ansi\ansicpg1252\deff0
 ---+!! %(HEADER1)s
 *%(HEADER2)s* %%BR%% __%(HEADER3)s__
 """,
+## MOM ##
+#
+# "mom" is a sort of "LaTeX" for groff and has a lot of macro
+# commands and variables to customize for specific needs.
+# These few lines of commands are sufficient anyway for a good
+# postscript typesetted document (and so also pdf): the author
+# of "mom" is a professional typoghrapher so the typesetting
+# defaults are pleasant and sane.  See mom's author site:
+# http://www.schaffter.ca/mom/mom-01.html that's a good
+# example of documentation too!
+# NB: \# are commented lines in groff.
+# I put here a lot of options, commented or not, to let you
+# see the possibilities but there many more...
+# NB: use "-k" option for groff if input/output is UTF-8
+#
+    'mom': """\
+\# Cover and title
+.TITLE "%(HEADER1)s"
+.AUTHOR "%(HEADER2)s"
+\#.DOCTITLE \" ONLY to collate different files (sections, chapters etc.)
+.SUBTITLE "%(HEADER3)s"
+\#
+\# printstyle: typeset or typewrite it's MANDATORY!
+.PRINTSTYLE TYPESET
+\#.PRINTSTYLE TYPEWRITE
+\#
+\# doctype: default, chapter, user-defined, letter (commented is "default")
+\#.DOCTYPE DEFAULT
+\#
+\# copystyle: draft or final
+.COPYSTYLE FINAL
+\#.COPYSTYLE DRAFT
+\#
+\# Default values for some strings
+\# They're valid in every printstyle or copystyle
+\# Here are MY defaults (italian)
+\# For a more general use I think they should be groff commented
+\#
+\#.CHAPTER_STRING "Capitolo"
+\#.ATTRIBUTE_STRING "di"
+\#.TOC_HEADER_STRING "Indice"
+\#.ENDNOTE_TITLE "Note"
+\#
+\# section break char "#" for 1 time (LINEBREAK)
+\#.LINEBREAK_CHAR # 1
+\# a null end string
+.FINIS_STRING ""
+\#
+\# Typesetting values
+\# These are all MY preferences! Comment out for default.
+\#
+.PAPER A4
+\# Left margin (c=centimeters)
+\#.L_MARGIN 2.8c
+\# Length of line (it's for 62 chars a line for point size 12 in typewrite style)
+\#.LL 15.75c
+\# Palatino groff font, better than Times for reading. IMHO
+.FAMILY P
+.PT_SIZE 12
+\# line spacing
+.LS 18
+\# left aligned (mom macro defaults to "both aligned")
+.QUAD L
+\# No hyphenation
+.HY OFF
+\# Header and footer sizes
+.HEADER_SIZE -1
+.FOOTER_SIZE -1
+.PAGENUM_SIZE -2
+\#
+\# Other options
+\#
+\# Indent space for "quote" and "blockquote" (defaults are good too!)
+\#.QUOTE_INDENT 2
+\#.BLOCKQUOTE_INDENT 2
+\#
+\# Footnotes
+\#
+\# Next gives you superscript numbers (use STAR for symbols, it's default)
+\# use additional argument NO_SUPERSCRIPT for typewrite printstyle
+\#.FOOTNOTE_MARKER_STYLE NUMBER
+\# Cover title at about 1/3 from top
+\#.DOCHEADER_ADVANCE 7.5c
+\#
+\# Double quotes italian style! aka << and >> It works only for "typeset" printstyle
+\#.SMARTQUOTES IT
+\# Next cmd is MANDATORY.
+.START
+""",
+
 }
 
+for target in TARGETS_LIST:
+    HEADER_TEMPLATE[target] = getattr(getattr(targets, target), 'HEADER', '')
+    HEADER_TEMPLATE[target + 'css'] = getattr(getattr(targets, target), 'HEADERCSS', '')
+
+# Generated files are easier to edit with the DZSlides engine at the end, but breaks W3C validator.
+AAPW_FOOT = """\
+</html>
+<style>
+  html { background-color: black; }
+  body { background-color: white; }
+  /* A section is a slide. It's size is 800x600, and this will never change */
+  section {
+      font-family: monospace;
+      font-size: 18px;
+  }
+
+/*  footer {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+  } */
+
+  /* Transition effect */
+  /* Feel free to change the transition effect for original
+     animations. See here:
+     https://developer.mozilla.org/en/CSS/CSS_transitions
+     How to use CSS3 Transitions: */
+  section {
+      -moz-transition: top 400ms linear 0s;
+      -webkit-transition: top 400ms linear 0s;
+      -ms-transition: top 400ms linear 0s;
+      transition: top 400ms linear 0s;
+  }
+
+  /* Before */
+  section { left: -150%; }
+  /* Now */
+  section[aria-selected] { left: 0; }
+  /* After */
+  section[aria-selected] ~ section { left: +150%; }
+
+  /* Incremental elements */
+
+  /* By default, visible */
+  .incremental > * { opacity: 1; }
+
+  /* The current item */
+  .incremental > *[aria-selected] { color: red; opacity: 1; }
+
+  /* The items to-be-selected */
+  .incremental > *[aria-selected] ~ * { opacity: 0.2; }
+
+</style>
+
+ <!-- {{{{ dzslides core
+#
+#
+#     __  __  __       .  __   ___  __
+#    |  \  / /__` |    | |  \ |__  /__`
+#    |__/ /_ .__/ |___ | |__/ |___ .__/ core :(
+#
+#
+# The following block of code is not supposed to be edited.
+# But if you want to change the behavior of these slides,
+# feel free to hack it!
+#
+-->
+
+<!-- Default Style -->
+<style>
+  * { margin: 0; padding: 0; }
+  details { display: none; }
+  body {
+    width: 800px; height: 600px;
+    margin-left: -400px; margin-top: -300px;
+    position: absolute; top: 50%; left: 50%;
+    overflow: hidden;
+  }
+  section {
+    position: absolute;
+    pointer-events: none;
+    width: 100%; height: 100%;
+  }
+  section[aria-selected] { pointer-events: auto; }
+  html { overflow: hidden; }
+  body { display: none; }
+  body.loaded { display: block; }
+  .incremental {visibility: hidden; }
+  .incremental[active] {visibility: visible; }
+</style>
+
+<script>
+  var Dz = {
+    remoteWindows: [],
+    idx: -1,
+    step: 0,
+    slides: null,
+    params: {
+      autoplay: "1"
+    }
+  };
+
+  Dz.init = function() {
+    document.body.className = "loaded";
+    this.slides = $$("body > section");
+    this.setupParams();
+    this.onhashchange();
+    this.setupTouchEvents();
+    this.onresize();
+  }
+  
+  Dz.setupParams = function() {
+    var p = window.location.search.substr(1).split('&');
+    p.forEach(function(e, i, a) {
+      var keyVal = e.split('=');
+      Dz.params[keyVal[0]] = decodeURIComponent(keyVal[1]);
+    });
+  }
+
+  Dz.onkeydown = function(aEvent) {
+    // Don't intercept keyboard shortcuts
+    if (aEvent.altKey
+      || aEvent.ctrlKey
+      || aEvent.metaKey
+      || aEvent.shiftKey) {
+      return;
+    }
+    if ( aEvent.keyCode == 37 // left arrow
+      || aEvent.keyCode == 38 // up arrow
+      || aEvent.keyCode == 33 // page up
+    ) {
+      aEvent.preventDefault();
+      this.back();
+    }
+    if ( aEvent.keyCode == 39 // right arrow
+      || aEvent.keyCode == 40 // down arrow
+      || aEvent.keyCode == 34 // page down
+    ) {
+      aEvent.preventDefault();
+      this.forward();
+    }
+    if (aEvent.keyCode == 35) { // end
+      aEvent.preventDefault();
+      this.goEnd();
+    }
+    if (aEvent.keyCode == 36) { // home
+      aEvent.preventDefault();
+      this.goStart();
+    }
+    if (aEvent.keyCode == 32) { // space
+      aEvent.preventDefault();
+      this.toggleContent();
+    }
+  }
+
+  /* Touch Events */
+
+  Dz.setupTouchEvents = function() {
+    var orgX, newX;
+    var tracking = false;
+
+    var db = document.body;
+    db.addEventListener("touchstart", start.bind(this), false);
+    db.addEventListener("touchmove", move.bind(this), false);
+
+    function start(aEvent) {
+      aEvent.preventDefault();
+      tracking = true;
+      orgX = aEvent.changedTouches[0].pageX;
+    }
+
+    function move(aEvent) {
+      if (!tracking) return;
+      newX = aEvent.changedTouches[0].pageX;
+      if (orgX - newX > 100) {
+        tracking = false;
+        this.forward();
+      } else {
+        if (orgX - newX < -100) {
+          tracking = false;
+          this.back();
+        }
+      }
+    }
+  }
+
+  /* Adapt the size of the slides to the window */
+
+  Dz.onresize = function() {
+    var db = document.body;
+    var sx = db.clientWidth / window.innerWidth;
+    var sy = db.clientHeight / window.innerHeight;
+    var transform = "scale(" + (1/Math.max(sx, sy)) + ")";
+
+    db.style.MozTransform = transform;
+    db.style.WebkitTransform = transform;
+    db.style.OTransform = transform;
+    db.style.msTransform = transform;
+    db.style.transform = transform;
+  }
+
+
+  Dz.getDetails = function(aIdx) {
+    var s = $("section:nth-of-type(" + aIdx + ")");
+    var d = s.$("details");
+    return d ? d.innerHTML : "";
+  }
+
+  Dz.onmessage = function(aEvent) {
+    var argv = aEvent.data.split(" "), argc = argv.length;
+    argv.forEach(function(e, i, a) { a[i] = decodeURIComponent(e) });
+    var win = aEvent.source;
+    if (argv[0] === "REGISTER" && argc === 1) {
+      this.remoteWindows.push(win);
+      this.postMsg(win, "REGISTERED", document.title, this.slides.length);
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+      return;
+    }
+    if (argv[0] === "BACK" && argc === 1)
+      this.back();
+    if (argv[0] === "FORWARD" && argc === 1)
+      this.forward();
+    if (argv[0] === "START" && argc === 1)
+      this.goStart();
+    if (argv[0] === "END" && argc === 1)
+      this.goEnd();
+    if (argv[0] === "TOGGLE_CONTENT" && argc === 1)
+      this.toggleContent();
+    if (argv[0] === "SET_CURSOR" && argc === 2)
+      window.location.hash = "#" + argv[1];
+    if (argv[0] === "GET_CURSOR" && argc === 1)
+      this.postMsg(win, "CURSOR", this.idx + "." + this.step);
+    if (argv[0] === "GET_NOTES" && argc === 1)
+      this.postMsg(win, "NOTES", this.getDetails(this.idx));
+  }
+
+  Dz.toggleContent = function() {
+    // If a Video is present in this new slide, play it.
+    // If a Video is present in the previous slide, stop it.
+    var s = $("section[aria-selected]");
+    if (s) {
+      var video = s.$("video");
+      if (video) {
+        if (video.ended || video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+    }
+  }
+
+  Dz.setCursor = function(aIdx, aStep) {
+    // If the user change the slide number in the URL bar, jump
+    // to this slide.
+    aStep = (aStep != 0 && typeof aStep !== "undefined") ? "." + aStep : ".0";
+    window.location.hash = "#" + aIdx + aStep;
+  }
+
+  Dz.onhashchange = function() {
+    var cursor = window.location.hash.split("#"),
+        newidx = 1,
+        newstep = 0;
+    if (cursor.length == 2) {
+      newidx = ~~cursor[1].split(".")[0];
+      newstep = ~~cursor[1].split(".")[1];
+      if (newstep > Dz.slides[newidx - 1].$$('.incremental > *').length) {
+        newstep = 0;
+        newidx++;
+      }
+    }
+    if (newidx != this.idx) {
+      this.setSlide(newidx);
+    }
+    if (newstep != this.step) {
+      this.setIncremental(newstep);
+    }
+    for (var i = 0; i < this.remoteWindows.length; i++) {
+      this.postMsg(this.remoteWindows[i], "CURSOR", this.idx + "." + this.step);
+    }
+  }
+
+  Dz.back = function() {
+    if (this.idx == 1 && this.step == 0) {
+      return;
+    }
+    if (this.step == 0) {
+      this.setCursor(this.idx - 1,
+                     this.slides[this.idx - 2].$$('.incremental > *').length);
+    } else {
+      this.setCursor(this.idx, this.step - 1);
+    }
+  }
+
+  Dz.forward = function() {
+    if (this.idx >= this.slides.length &&
+        this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+        return;
+    }
+    if (this.step >= this.slides[this.idx - 1].$$('.incremental > *').length) {
+      this.setCursor(this.idx + 1, 0);
+    } else {
+      this.setCursor(this.idx, this.step + 1);
+    }
+  }
+
+  Dz.goStart = function() {
+    this.setCursor(1, 0);
+  }
+
+  Dz.goEnd = function() {
+    var lastIdx = this.slides.length;
+    var lastStep = this.slides[lastIdx - 1].$$('.incremental > *').length;
+    this.setCursor(lastIdx, lastStep);
+  }
+
+  Dz.setSlide = function(aIdx) {
+    this.idx = aIdx;
+    var old = $("section[aria-selected]");
+    var next = $("section:nth-of-type("+ this.idx +")");
+    if (old) {
+      old.removeAttribute("aria-selected");
+      var video = old.$("video");
+      if (video) {
+        video.pause();
+      }
+    }
+    if (next) {
+      next.setAttribute("aria-selected", "true");
+      var video = next.$("video");
+      if (video && !!+this.params.autoplay) {
+        video.play();
+      }
+    } else {
+      // That should not happen
+      this.idx = -1;
+      // console.warn("Slide doesn't exist.");
+    }
+  }
+
+  Dz.setIncremental = function(aStep) {
+    this.step = aStep;
+    var old = this.slides[this.idx - 1].$('.incremental > *[aria-selected]');
+    if (old) {
+      old.removeAttribute('aria-selected');
+    }
+    var incrementals = this.slides[this.idx - 1].$$('.incremental');
+    if (this.step <= 0) {
+      incrementals.forEach(function(aNode) {
+        aNode.removeAttribute('active');
+      });
+      return;
+    }
+    var next = this.slides[this.idx - 1].$$('.incremental > *')[this.step - 1];
+    if (next) {
+      next.setAttribute('aria-selected', true);
+      next.parentNode.setAttribute('active', true);
+      var found = false;
+      incrementals.forEach(function(aNode) {
+        if (aNode != next.parentNode)
+          if (found)
+            aNode.removeAttribute('active');
+          else
+            aNode.setAttribute('active', true);
+        else
+          found = true;
+      });
+    } else {
+      setCursor(this.idx, 0);
+    }
+    return next;
+  }
+  
+  Dz.postMsg = function(aWin, aMsg) { // [arg0, [arg1...]]
+    aMsg = [aMsg];
+    for (var i = 2; i < arguments.length; i++)
+      aMsg.push(encodeURIComponent(arguments[i]));
+    aWin.postMessage(aMsg.join(" "), "*");
+  }
+
+  function init() {
+    Dz.init();
+    window.onkeydown = Dz.onkeydown.bind(Dz);
+    window.onresize = Dz.onresize.bind(Dz);
+    window.onhashchange = Dz.onhashchange.bind(Dz);
+    window.onmessage = Dz.onmessage.bind(Dz);
+  }
+
+  window.onload = init;
+</script>
+
+
+<script> // Helpers
+  if (!Function.prototype.bind) {
+    Function.prototype.bind = function (oThis) {
+
+      // closest thing possible to the ECMAScript 5 internal IsCallable
+      // function 
+      if (typeof this !== "function")
+      throw new TypeError(
+        "Function.prototype.bind - what is trying to be fBound is not callable"
+      );
+
+      var aArgs = Array.prototype.slice.call(arguments, 1),
+          fToBind = this,
+          fNOP = function () {},
+          fBound = function () {
+            return fToBind.apply( this instanceof fNOP ? this : oThis || window,
+                   aArgs.concat(Array.prototype.slice.call(arguments)));
+          };
+
+      fNOP.prototype = this.prototype;
+      fBound.prototype = new fNOP();
+
+      return fBound;
+    };
+  }
+
+  var $ = (HTMLElement.prototype.$ = function(aQuery) {
+    return this.querySelector(aQuery);
+  }).bind(document);
+
+  var $$ = (HTMLElement.prototype.$$ = function(aQuery) {
+    return this.querySelectorAll(aQuery);
+  }).bind(document);
+
+  NodeList.prototype.forEach = function(fun) {
+    if (typeof fun !== "function") throw new TypeError();
+    for (var i = 0; i < this.length; i++) {
+      fun.call(this, this[i]);
+    }
+  }
+
+</script>
+"""
 
 ##############################################################################
 
@@ -1149,6 +1719,12 @@ def getTags(config):
     },
 
     'csv': {
+        'tableCellSep' : CSV['separator'] ,
+        'tableCellOpen' : CSV.get('quotechar') or '' ,
+        'tableCellClose' : CSV.get('quotechar') or '' ,
+    },
+    'csvs': {
+        #TIP csvs inherits all csv tags
     },
 
     'db': {
@@ -1214,7 +1790,7 @@ def getTags(config):
     },
 
     'ods': {
-        'tableOpen'            : '<table:table table:name="' + _('Sheet') + '">',
+        'tableOpen'            : '<table:table table:name="' + _('Sheet') + 'n_table">',
         'tableClose'           : '</table:table>'                  ,
         'tableRowOpen'         : '<table:table-row>'               ,
         'tableRowClose'        : '</table:table-row>'              ,
@@ -1336,16 +1912,26 @@ def getTags(config):
         'deflistItem2Close'    : '</dd>'          ,
         'bar1'                 : '<hr class="light" />',
         'bar2'                 : '<hr class="heavy" />',
-        'img'                  : '<img~a~ src="\a" alt=""/>',
+        'img'                  : '<img style="display: block;~a~" src="\a" alt=""/>',
         'imgEmbed'             : '<img~a~ src="\a" alt=""/>',
-        '_imgAlignLeft'        : ' style="text-align:left"'  ,
-        '_imgAlignCenter'      : ' style="text-align:center"',
-        '_imgAlignRight'       : ' style="text-align:right"' ,
-        '_tableAlignCenter'    : ' style="text-align:center"',
+        '_imgAlignLeft'        : 'margin: 0 auto 0 0;'  ,
+        '_imgAlignCenter'      : 'margin: 0 auto 0 auto;',
+        '_imgAlignRight'       : 'margin: 0 0 0 auto;' ,
+        '_tableAlignCenter'    : ' style="margin-left: auto; margin-right: auto;"',
         '_tableCellAlignRight' : ' style="text-align:right"' ,
         '_tableCellAlignCenter': ' style="text-align:center"',
     },
     'html5': {
+        'title1Open'           : '<section~A~>\n<h1>\a</h1>' ,
+        'title1Close'          : '</section>'                ,
+        'title2Open'           : '<section~A~>\n<h2>\a</h2>' ,
+        'title2Close'          : '</section>'                ,
+        'title3Open'           : '<section~A~>\n<h3>\a</h3>' ,
+        'title3Close'          : '</section>'                ,
+        'title4Open'           : '<section~A~>\n<h4>\a</h4>' ,
+        'title4Close'          : '</section>'                ,
+        'title5Open'           : '<section~A~>\n<h5>\a</h5>' ,
+        'title5Close'          : '</section>'                ,
         'fontBoldOpen'         : '<strong>'       ,
         'fontBoldClose'        : '</strong>'      ,
         'fontItalicOpen'       : '<em>'           ,
@@ -1357,16 +1943,16 @@ def getTags(config):
         'listItemClose'        : '</li>'          ,
         'numlistItemClose'     : '</li>'          ,
         'deflistItem2Close'    : '</dd>'          ,
-        'bar1'                 : '<hr class="light"/>'        ,
-        'bar2'                 : '<hr class="heavy"/>'        ,
-        'img'                  : '<img~a~ src="\a" alt=""/>'  ,
-        'imgEmbed'             : '<img~a~ src="\a" alt=""/>'  ,
+        'bar1'                 : '<hr class="light">'        ,
+        'bar2'                 : '<hr class="heavy">'        ,
+        'img'                  : '<img~a~ src="\a" alt="">'  ,
+        'imgEmbed'             : '<img~a~ src="\a" alt="">'  ,
         '_imgAlignLeft'        : ' class="left"'  ,
         '_imgAlignCenter'      : ' class="center"',
         '_imgAlignRight'       : ' class="right"' ,
         'tableOpen'            : '<table~a~~b~>'  ,
         '_tableBorder'         : ' class="tableborder"'      ,
-        '_tableAlignCenter'    : ' style="text-align:center"',
+        '_tableAlignCenter'    : ' style="margin-left: auto; margin-right: auto;"',
         '_tableCellAlignRight' : ' class="right"' ,
         '_tableCellAlignCenter': ' class="center"',
         'cssOpen'              : '<style>'        ,
@@ -1375,6 +1961,7 @@ def getTags(config):
         'EOD'                  : '</article></body></html>'
     },
     'htmls': {
+        #TIP htmls inherits all html5 tags
     },
 
     'sgml': {
@@ -1477,7 +2064,7 @@ def getTags(config):
         # '_imgAlignLeft'        : ''                                 ,  # Don't know
         # '_imgAlignCenter'      : ''                                 ,  # Don't know
         # '_imgAlignRight'       : ''                                 ,  # Don't know
-        'tableOpenDbk'         : '<informaltable><tgroup cols="n_cols"><tbody>',
+        'tableOpen'            : '<informaltable><tgroup cols="n_cols"><tbody>',
         'tableClose'           : '</tbody></tgroup></informaltable>' ,
         'tableRowOpen'         : '<row>'                             ,
         'tableRowClose'        : '</row>'                            ,
@@ -1564,6 +2151,7 @@ def getTags(config):
         'EOD'                  : '\\end{document}'
     },
     'texs': {
+        #TIP texs inherits all tex tags
     },
 
     'lout': {
@@ -1714,7 +2302,7 @@ def getTags(config):
         'tableCellSep'         : ' || '          ,
     },
 
-    # http://powerman.name/doc/asciidoc
+    # http://asciidoc.org/asciidoc.css-embedded.html
     'adoc': {
         'title1'               : '== \a'         ,
         'title2'               : '=== \a'        ,
@@ -1723,15 +2311,19 @@ def getTags(config):
         'title5'               : '===== \a'      ,
         'blockVerbOpen'        : '----'          ,
         'blockVerbClose'       : '----'          ,
+        'deflistItem1Close'    : '::'            ,
+        'deflistClose'         : ''              ,
+        'deflistItem2Open'     : '	'            ,
+        'deflistItem2LinePrefix': '	'            ,
         'fontMonoOpen'         : '+'             ,
         'fontMonoClose'        : '+'             ,
         'fontBoldOpen'         : '*'             ,
         'fontBoldClose'        : '*'             ,
         'fontItalicOpen'       : '_'             ,
         'fontItalicClose'      : '_'             ,
-        'listItemOpen'         : '- '            ,
-        'listItemLine'         : '\t'            ,
-        'numlistItemOpen'      : '. '            ,
+        'listItemOpen'         : ' '             ,
+        'listItemLine'         : '*'             ,
+        'numlistItemOpen'      : '1. '           ,
         'url'                  : '\a'            ,
         'urlMark'              : '\a[\a]'        ,
         'email'                : 'mailto:\a'     ,
@@ -1946,7 +2538,49 @@ def getTags(config):
         'bar2'                  : '---'      ,
         'TOC'                   : '{{toc}}'  ,
     },
-
+    'vimwiki': {
+        'title1'                : '= \a ='        ,
+        'title2'                : '== \a =='        ,
+        'title3'                : '=== \a ==='      ,
+        'title4'                : '==== \a ===='    ,
+        'title5'                : '===== \a ====='  ,
+        'blockVerbOpen'         : '{{{'           ,
+        'blockVerbClose'        : '}}}'          ,
+        'blockQuoteOpen'        : '{{{'    ,
+        'blockQuoteClose'       : '}}}'   ,
+        'fontMonoOpen'          : '`'            ,
+        'fontMonoClose'         : '`'           ,
+        'fontBoldOpen'          : ' *'             ,
+        'fontBoldClose'         : '* '           ,
+        'fontItalicOpen'        : ' _'              ,
+        'fontItalicClose'       : '_ '              ,
+        #'fontUnderlineOpen'     : '<u>'             ,
+        #'fontUnderlineClose'    : '</u>'            ,
+        'fontStrikeOpen'        : ' ~~'             ,
+        'fontStrikeClose'       : '~~ '            ,
+        'listItemOpen'         : '- '            ,
+        'listItemLine'         : '\t'            ,
+        'numlistItemOpen'      : '# '            ,
+        'numlistItemLine'       : '\t'               ,
+        'bar1'                  : '----'            ,
+        'url'                   : '[\a]'            ,
+        'urlMark'               : '[\a \a]'         ,
+        'email'                 : 'mailto:\a'       ,
+        'emailMark'             : '[mailto:\a \a]'  ,
+        'img'                  : '[\a]'          ,
+        #'_imgAlignLeft'         : '|left'           ,
+        #'_imgAlignCenter'       : '|center'         ,
+        #'_imgAlignRight'        : '|right'          ,
+        'tableRowOpen'          : '| '          ,
+        'tableRowClose'          : ' |'          ,
+        #'tableTitleRowOpen'     : '|-\n! '          ,
+        'tableCellSep'          : ' | '            ,
+        #'tableTitleCellSep'     : ' | '            ,
+        #'_tableBorder'          : ' border="1"'     ,
+        #'_tableAlignCenter'     : ' align="center"' ,
+        'comment'               : '%% \a'     ,
+        'TOC'                   : '%toc'         ,
+    },
     # http://www.inference.phy.cam.ac.uk/mackay/mgp/SYNTAX
     # http://en.wikipedia.org/wiki/MagicPoint
     'mgp': {
@@ -2377,7 +3011,106 @@ def getTags(config):
         'comment'               : '<!-- \a -->',
         'TOC'                   : '%TOC%',
      },
+#
+## MOM ##
+#
+# for mom macros documentation see: http://www.schaffter.ca/mom/mom-01.html
+# I commented the difficult parts...
+    'mom': {
+        'paragraphOpen'        : '.PP'            ,
+        'title1'               : '.HEAD "\a"'     ,
+        'title2'               : '.SUBHEAD "\a"' ,
+        'title3'               : '.SUBSUBHEAD "\a"' ,
+        'title4'               : '.PP\n.PARAHEAD "\a"' ,
+        'title5'               : '.PP\n.PARAHEAD "\\*[UL]\a\\f[R]\\"' , # my choice
+# NB for mom ALL heads of a level after the first numbered are numbered!
+# The "NUMBER_*" macros are toggle ones
+        'numtitle1'            : '.NUMBER_HEADS\n.HEAD "\a"' ,
+        'numtitle2'            : '.NUMBER_SUBHEADS\n.SUBHEAD "\a"' ,
+        'numtitle3'            : '.NUMBER_SUBSUBHEADS\n.SUBSUBHEAD "\a"' ,
+        'numtitle4'            : '.NUMBER_PARAHEADS\n.PP\nPARAHEAD "\a"' ,
+        'numtitle5'            : '.NUMBER_PARAHEADS\n.PP\n.PARAHEAD "\\*[UL]\a\\f[R]\\"' , # my choice
+#        'anchor'               : '"\a"', # not supported
+        'blockVerbOpen'        : '.QUOTE\n.CODE' , # better for quoting code
+        'blockVerbClose'       : '.CODE OFF\n.QUOTE OFF'         ,
+        'blockVerbLine '       : '.QUOTE\n.CODE\n\a\n.CODE OFF\n.QUOTE OFF' ,
+        'blockQuoteOpen'       : '.BLOCKQUOTE'   ,
+        'blockQuoteClose'      : '.BLOCKQUOTE OFF'  ,
+#        'blockQuoteLine'       : '.BLOCKQUOTE\n\a\.BLOCKQUOTE OFF' , 
+        'fontMonoOpen'         : '\\f[CR]' ,
+        'fontMonoClose'        : '\\f[]'  ,
+        'fontBoldOpen'         : '\\f[B]'  ,
+        'fontBoldClose'        : '\\f[]'  ,
+        'fontItalicOpen'       : '\\f[I]'  ,
+        'fontItalicClose'      : '\\f[]'  ,
+        'fontUnderlineOpen'    : '\\*[FWD 8p]\\*[UL]' , # dirty trick for a bug(?) in mom!
+        'fontUnderlineClose'   : '\\*[ULX]'           ,
+# Strike. Not directly supported. A groff geek could do a macro for that, not me! :-(
+# Use this tricks to emulate "a sort of" strike through word.
+# It strikes start and end of a word.
+# Not good for less than 3 chars word
+# For 4 or 5 chars word is not bad!
+# Beware of escapes trying to change it!
+# No! It's too ugly!
+#        'fontStrikeOpen'       : '\\v\'-0.25m\'\\l\'1P\'\\h\'-1P\'\\v\'0.25m\'' ,
+#        'fontStrikeClose'      : '\\v\'-0.25m\'\\l\'-1P\'\\v\'0.25m\'' ,
+# Prefer a sort of tag to point out situation
+        'fontStrikeOpen'       : '[\(mi' ,
+        'fontStrikeClose'      : '\(mi]' ,
+        'listOpen'             : '.LIST BULLET' , # other kinds of lists are possible, see mom documentation at site
+        'listClose'            : '.LIST OFF'  ,
+        'listItemOpen'         : '.ITEM\n'    ,
+        'numlistOpen'          : '.LIST DIGIT',
+        'numlistClose'         : '.LIST OFF'  ,
+        'numlistItemOpen'      : '.ITEM\n'    ,
+        'deflistOpen'          : '\\# DEF LIST ON'        , # deflist non supported but "permitted" using PARAHEAD macro or some other hack
+        'deflistClose'         : '\\# DEF LIST OFF'        ,
+#        'deflistItem1Open'     : '.BR\n.PT_SIZE +1\n\\f[B]' , # trick 1
+#        'deflistItem1Close'    : '\\f[P]\n.PT_SIZE -1'      , # trick 2 for deflist
+        'deflistItem1Open'     : '.PP\n.PARAHEAD "'        , # using PARAHEAD is better, it needs PP before.
+        'deflistItem1Close'    : ': "'      , # "colon" is a personal choice...
+        'bar1'                 : '.LINEBREAK' , # section break
+        'bar2'                 : '.NEWPAGE' , # new page
+        'url'                  : '\a' ,
+# urlMark outputs like this: "label (http://ser.erfg.gov)". Needs a
+# preproc rule to transform #anchor links, not used by mom, in
+# labels only. Like this one: '\[(.+) #.+\]' '\1'   without that
+# one obtains: label (#anchor)
+        'urlMark'              : '\a (\a)' ,
+        'email'                : '\a' ,
+        'emailMark'            : '\a (\a)' , # like urlMark
+        'urlImg'               : '.PSPIC "\a"\n.(\a)\n.SHIM\n', # Mmmh...
+ # NB images: works only with .ps and .eps images (postscript and
+ # encapsulated postscript) easily obtained with "convert" (in
+ # ImageMagick suite) from *jpg, *png ecc. It's groff!
+        'img'                 : '.PSPIC "\a"\n.SHIM\n',
+        'imgAlignLeft'        : '.PSPIC -L "\a"\n.SHIM\n'  ,
+        'imgAlignCenter'      : '.PSPIC "\a"\n.SHIM\n',
+        'imgAlignRight'       : '.PSPIC -R "\a"\n.SHIM\n' ,
+# All table stuff copied from man target! Tables need
+# preprocessing with "tbl" using option "-t" with groff
+        'tableOpen'             : '.TS\n~A~~B~tab(^); ~C~.', 
+        'tableClose'            : '.TE'     ,
+        'tableRowOpen'          : ' '       ,
+        'tableCellSep'          : '^'       ,
+        '_tableAlignCenter'     : 'center, ',
+        '_tableBorder'          : 'allbox, ',
+        '_tableColAlignLeft'    : 'l'       ,
+        '_tableColAlignRight'   : 'r'       ,
+        '_tableColAlignCenter'  : 'c'       ,
+#        'cssOpen'              : '<STYLE TYPE="text/css">',
+#        'cssClose'             : '</STYLE>',
+        'comment'              : '\\# \a'    ,
+        'blockCommentOpen'     : '.COMMENT' ,
+        'blockCommentClose'    : '.COMMENT OFF' ,
+        'TOC'                  : '.TOC', # NB: it must be the last macro in file!
+        'EOD'                  : '.FINIS'
+    },
     }
+    for target in TARGETS_LIST:
+        if getattr(getattr(targets, target), 'RULES', {}).get('confdependenttags'):
+            reload(getattr(targets, target))
+        alltags[target] = getattr(getattr(targets, target), 'TAGS', {})
 
     # Exceptions for --css-sugar
     if (config['css-sugar'] and config['target'] in ('html', 'xhtml', 'xhtmls')) or config['target'] == 'wp':
@@ -2402,6 +3135,8 @@ def getTags(config):
         alltags['htmls'] = alltags['html5'].copy()
     if config['target'] == 'texs':
         alltags['texs'] = alltags['tex'].copy()
+    if config['target'] == 'csvs':
+        alltags['csvs'] = alltags['csv'].copy()
     if config['target'] in ('xhtml', 'xhtmls', 'html5', 'htmls', 'wp'):
         xhtml.update(alltags[config['target']])
         alltags[config['target']] = xhtml.copy()
@@ -2418,9 +3153,9 @@ def getTags(config):
         alltags['aat']['img'] = '<img src="\a" alt=""/>'
         alltags['aat']['anchor'] = '<a id="\a">'
         alltags['aat']['comment'] = '<!-- \a -->'
-        for beautifier  in ['Bold', 'Italic', 'Underline', 'Strike']:
-            open, close = 'font' + beautifier + 'Open', 'font' + beautifier + 'Close'
-            alltags['aat'][open], alltags['aat'][close] = alltags['html'][open].lower(), alltags['html'][close].lower()
+        for beautifier in ['Bold', 'Italic', 'Underline', 'Strike']:
+            _open, close = 'font' + beautifier + 'Open', 'font' + beautifier + 'Close'
+            alltags['aat'][_open], alltags['aat'][close] = alltags['html'][_open].lower(), alltags['html'][close].lower()
 
     # Compose the target tags dictionary
     tags = {}
@@ -2461,6 +3196,9 @@ def getRules(config):
         # target rules (ON/OFF)
         'linkable',               # target supports external links
         'tableable',              # target supports tables
+        'tableonly',              # target computes only the tables
+        'spread',                 # target uses the spread.py engine
+        'spreadgrid',             # target adds the reference grid to the sheet
         'imglinkable',            # target supports images as links
         'imgalignable',           # target supports image alignment
         'imgasdefterm',           # target supports image as definition term
@@ -2484,11 +3222,14 @@ def getRules(config):
         'tablecellstrip',         # strip extra spaces from each table cell
         'tablecellspannable',     # the table cells can have span attribute
         'tablecellmulticol',      # separate open+close tags for multicol cells
+        'tablecolumnsnumber',     # set the number of columns in place of n_cols in tableOpen
+        'tablenumber',            # set the number of the table in place of n_table in tableOpen
         'barinsidequote',         # bars are allowed inside quote blocks
         'finalescapetitle',       # perform final escapes on title lines
         'autotocnewpagebefore',   # break page before automatic TOC
         'autotocnewpageafter',    # break page after automatic TOC
         'autotocwithbars',        # automatic TOC surrounded by bars
+        'plaintexttoc',           # TOC will be plain text (no links)
         'mapbar2pagebreak',       # map the strong bar to a page break
         'titleblocks',            # titles must be on open/close section blocks
         'listlineafteropen',      # put listItemLine after listItemOpen
@@ -2497,6 +3238,8 @@ def getRules(config):
         'zerodepthparagraph',     # non-nested paras have block depth of 0 instead of 1
         'cellspancumulative',     # cell span value adds up for each cell of a row
         'keepblankheaderline',    # template lines are not removed if headers are blank
+        'confdependenttags',      # tags are configuration dependent
+        'confdependentrules',     # rules are configuration dependent
 
         # Target code beautify (ON/OFF)
         'indentverbblock',        # add leading spaces to verb block lines
@@ -2530,6 +3273,7 @@ def getRules(config):
         'blockdepthmultiply',     # block depth multiple for encoding
         'depthmultiplyplus',      # add to block depth before multiplying
         'cellspanmultiplier',     # cell span is multiplied by this value
+        'spreadmarkup',           # the markup spread engine option: 'txt', 'html' or 'tex'
     ]
 
     rules_bank = {
@@ -2540,6 +3284,7 @@ def getRules(config):
             'keeplistindent': 1,
             'barinsidequote': 1,
             'autotocwithbars': 1,
+            'plaintexttoc': 1,
 
             'blanksaroundpara': 1,
             'blanksaroundverb': 1,
@@ -2606,14 +3351,25 @@ def getRules(config):
         },
         'csv': {
             'tableable': 1,
+            'tableonly': 1,
+            'tablecellstrip': 1,
+            'blanksaroundtable': 1,
+        },
+        'csvs': {
+            #TIP csvs inherits all csv rules
+            'spread': 1,
+            'spreadmarkup': 'txt',
         },
         'db': {
             'tableable': 1,
+            'tableonly': 1,
         },
         'ods': {
             'escapexmlchars': 1,
             'tableable': 1,
+            'tableonly': 1,
             'tablecellstrip': 1,
+            'tablenumber': 1,
         },
         'html': {
             'escapexmlchars': 1,
@@ -2658,6 +3414,7 @@ def getRules(config):
             'onelinequote': 1,
             'tagnotindentable': 1,
             'blanksaroundpara': 1,
+            'quotemaxdepth': 1,
             'keepquoteindent': 0,
             'keeplistindent': 0,
             'notbreaklistitemclose': 1,
@@ -2668,9 +3425,14 @@ def getRules(config):
         },
         'html5': {
             #TIP html5 inherits all HTML rules
+            'titleblocks' : 1,
         },
         'htmls': {
             #TIP htmls inherits all HTML rules
+            'tableonly': 1,
+            'spread': 1,
+            'spreadgrid': 1,
+            'spreadmarkup': 'html',
         },
 
         'sgml': {
@@ -2703,7 +3465,7 @@ def getRules(config):
         'dbk': {
             'escapexmlchars': 1,
             'linkable': 1,
-            'tableable': 1,  # activate when table tags are ready
+            'tableable': 1, 
             'imglinkable': 1,
             'imgalignable': 1,
             'imgasdefterm': 1,
@@ -2712,6 +3474,32 @@ def getRules(config):
             'parainsidelist': 1,
             'spacedlistitem': 1,
             'titleblocks': 1,
+            'tablecolumnsnumber': 1,
+        },
+        'vimwiki': {
+            'linkable':1,
+            'tableable':1,
+            #'spacedlistitem':1,
+            #'tablecellstrip':1,
+            #'autotocwithbars':1,
+            #'spacedlistitemopen':1,
+            #'spacednumlistitemopen':1,
+            #'deflisttextstrip':1,
+            'autonumberlist':1,
+            'autonumbertitle':1,
+            'imgalignable':1,
+            'keeplistindent':1,
+
+            'blanksaroundpara':1,
+            'blanksaroundverb':1,
+            # 'blanksaroundquote':1,
+            #'blanksaroundlist':1,
+            #'blanksaroundnumlist':1,
+            #'blanksarounddeflist':1,
+            'blanksaroundtable':1,
+            'blanksaroundbar':1,
+            'blanksaroundtitle':1,
+            'blanksaroundnumtitle':1,
         },
         'mgp': {
             'tagnotindentable': 1,
@@ -2765,6 +3553,11 @@ def getRules(config):
             'blanksaroundnumtitle': 1,
         },
         'texs': {
+            #TIP texs inherits all tex rules
+            'tableonly': 1,
+            'spread': 1,
+            'spreadgrid': 1,
+            'spreadmarkup': 'tex',
         },
         'lout': {
             'keepquoteindent': 1,
@@ -2835,7 +3628,7 @@ def getRules(config):
         'adoc': {
             'spacedlistitem': 1,
             'linkable': 1,
-            'keeplistindent': 1,
+            'keeplistindent': 0,
             'autonumberlist': 1,
             'autonumbertitle': 1,
             'listnotnested': 1,
@@ -2960,8 +3753,9 @@ def getRules(config):
             'tablecellstrip': 1,
             'barinsidequote': 1,
             'parainsidelist': 0,
+            'plaintexttoc': 1,
 
-            'blanksaroundpara': 1,
+            'blanksaroundpara': 0,
             'blanksaroundverb': 1,
             # 'blanksaroundquote': 1,
             'blanksaroundlist': 1,
@@ -2969,7 +3763,7 @@ def getRules(config):
             'blanksarounddeflist': 1,
             'blanksaroundtable': 1,
             # 'blanksaroundbar': 1,
-            'blanksaroundtitle': 1,
+            'blanksaroundtitle': 0,
             'blanksaroundnumtitle': 1,
         },
         'pm6': {
@@ -3123,7 +3917,37 @@ def getRules(config):
             'blanksaroundtitle': 1,
             'blanksaroundnumtitle': 1,
        },
+        'mom': {
+        'autonumberlist': 1,         # target supports numbered lists natively
+        'autonumbertitle': 1,        # target supports numbered titles natively
+        'imgalignable': 1,           # target supports image alignment
+#        'stylable': 1,               # target supports external style files
+        'parainsidelist': 1,         # lists items supports paragraph
+        'spacedlistitem': 1,         # lists support blank lines between items
+        'labelbeforelink': 1,        # label comes before the link on the tag
+        'barinsidequote': 1,         # bars are allowed inside quote blocks
+        'quotenotnested': 1,         # quotes cannot be nested
+        'autotocnewpagebefore': 1,   # break page before automatic TOC
+        'autotocnewpageafter': 1,    # break page after automatic TOC
+        'mapbar2pagebreak': 1,       # map the strong bar to a page break
+        'tableable': 1,              # target supports tables
+        'tablecellaligntype': 'column',
+        'tabletitlerowinbold': 1,
+        'tablecellstrip': 1,
+        'blanksaroundlist': 1,       # put a blank line before and after lists
+#        'blanksaroundnumlist': 1,    # put a blank line before and after numlists
+#        'blanksarounddeflist': 1,    # put a blank line before and after deflists
+#        'blanksaroundnestedlist': 1, # put a blank line before and after all type of nested lists
+#        'blanksaroundquote',      # put a blank line before and after quotes
+        'blanksaroundtable': 1,      # put a blank line before and after tables
+        'blankendautotoc': 1,        # append a blank line at the auto TOC end
+        'tagnotindentable': 1,       # tags must be placed at the line beginning
+        },
     }
+    for target in TARGETS_LIST:
+        if getattr(getattr(targets, target), 'RULES', {}).get('confdependentrules'):
+            reload(getattr(targets, target))
+        rules_bank[target] = getattr(getattr(targets, target), 'RULES', {})
 
     # Exceptions for --css-sugar
     if (config['css-sugar'] and config['target'] in ('html', 'xhtml', 'xhtmls', 'html5')) or config['target'] == 'wp':
@@ -3146,8 +3970,19 @@ def getRules(config):
             myrules['linkable'] = 1
             myrules['imglinkable'] = 1
             myrules['escapexmlchars'] = 1
+        if config['spread']:
+            myrules['tableonly'] = 1
+            myrules['spread'] = 1
+            myrules['spreadgrid'] = 1,
+            myrules['spreadmarkup'] = 'txt'
+            if config['web']:
+                myrules['spreadmarkup'] = 'html'
     elif config['target'] == 'texs':
         myrules = rules_bank['tex'].copy()    # inheritance
+        myrules.update(rules_bank[config['target']])   # get specific
+    elif config['target'] == 'csvs':
+        myrules = rules_bank['csv'].copy()    # inheritance
+        myrules.update(rules_bank[config['target']])   # get specific
     else:
         myrules = rules_bank[config['target']].copy()
 
@@ -3220,7 +4055,7 @@ def getRegexes():
     'bar':
         re.compile(r'^(\s*)([_=-]{20,})\s*$'),
     'table':
-        re.compile(r'^ *\|(\||_|/)? '),
+        re.compile(r'^ *\|([|_/])? '),
     'blankline':
         re.compile(r'^\s*$'),
     'comment':
@@ -3323,8 +4158,7 @@ def getRegexes():
     return bank
 ### END OF regex nightmares
 
-################# functions for the ASCII Art backend ########################
-
+# The ASCII Art library
 
 def aa_line(char, width):
     return char * width
@@ -3333,29 +4167,30 @@ def aa_line(char, width):
 def aa_under(txt, char, width, over):
     ret = []
     if over:
-        ret.append(aa_line(char, aa_len_cjk(txt)))
-    for line in textwrap.wrap(txt, width):
-        ret.extend([line, aa_line(char, aa_len_cjk(line))])
+        ret.append(aa_line(char, aa_lencjk(txt)))
+    for lin in textwrap.wrap(txt, width):
+        ret.extend([lin, aa_line(char, aa_lencjk(lin))])
     return ret
 
 
 def aa_box(txt, chars, width, centred=True, web=False, slides=False):
     wrap_txt = []
-    char_start = ''
+    char_side = ''
     if slides:
         width = width - 2
-        char_start = ' '
-    for line in txt:
-        wrap_txt.extend(aa_textwrap(line, width - 4, web))
-    len_cjk = max([aa_len_cjk(line, web) for line in wrap_txt])
-    line_box = char_start + aa_center(chars['corner'] + chars['border'] * (len_cjk + 2) + chars['corner'], width)
+        char_side = ' '
+    for lin in txt:
+        wrap_txt.extend(aa_wrap(lin, width - 4, web))
+    len_cjk = max([aa_lencjk(lin, web) for lin in wrap_txt])
+    tline_box = char_side + aa_center(chars['tlcorner'] + chars['border'] * (len_cjk + 2) + chars['trcorner'], width) + char_side
+    bline_box = char_side + aa_center(chars['blcorner'] + chars['border'] * (len_cjk + 2) + chars['brcorner'], width) + char_side
     line_txt = []
-    for line in wrap_txt:
+    for lin in wrap_txt:
         if centred:
-            line_txt.append(char_start + aa_center(chars['side'] + ' ' + aa_center(line, len_cjk, web) + ' ' + chars['side'], width, web))
+            line_txt.append(char_side + aa_center(chars['side'] + ' ' + aa_center(lin, len_cjk, web) + ' ' + chars['side'], width, web) + char_side)
         else:
-            line_txt.append(char_start + aa_center(chars['side'] + ' ' + line + ' ' * (len_cjk - aa_len_cjk(line, web) + 1) + chars['side'], width, web))
-    return [line_box] + line_txt + [line_box]
+            line_txt.append(char_side + aa_center(chars['side'] + ' ' + lin + ' ' * (len_cjk - aa_lencjk(lin, web) + 1) + chars['side'], width, web) + char_side)
+    return [tline_box] + line_txt + [bline_box]
 
 
 def aa_header(header_data, chars, width, height, web, slides):
@@ -3386,8 +4221,6 @@ def aa_header(header_data, chars, width, height, web, slides):
 
 
 def aa_slide(title, char, width, web):
-    global AA_PAGE
-    AA_PAGE += 1
     res = [aa_line(char, width)]
     res.append('')
     res.append(aa_center(title, width)[:width])
@@ -3398,99 +4231,119 @@ def aa_slide(title, char, width, web):
     return res
 
 
-def aa_table(data, chars, width, border, h_header, v_header, align, spread, web):
-    n = max([len(line[0]) for line in data])
+def aa_table(data, chars, width, borders, h_header, v_header, align, spread, web):
+    n = max([len(lin[0]) for lin in data])
     data3 = []
-    for line in data:
-        if  max(line[1]) == 1:
-            data3.append(line[0])
+    for lin in data:
+        if  max(lin[1]) == 1:
+            data3.append(lin[0])
         else:
             newline = []
-            for i, el in enumerate(line[0]):
-                if line[1][i] == 1:
+            for i, el in enumerate(lin[0]):
+                if lin[1][i] == 1:
                     newline.append(el)
                 else:
-                    newline.extend(line[1][i] * [''])
+                    newline.extend(lin[1][i] * [''])
             data3.append(newline)
     tab = []
     for i in range(n):
-        tab.append([line[i] for line in data3])
+        tab.append([lin[i] for lin in data3])
     if web:
-        length = [max([aa_len_cjk(re.sub('<a.*">|</a>', '', el)) for el in line]) for line in tab]
+        length = [max([aa_lencjk(re.sub('<a.*">|</a>', '', el)) for el in lin]) for lin in tab]
     else:
-        length = [max([aa_len_cjk(el) for el in line]) for line in tab]
+        length = [max([aa_lencjk(el) for el in lin]) for lin in tab]
     if spread:
         data[0][0] = [data[0][0][i].center(length[i]) for i in range(n)]
-    bord, side, corner, vhead = chars['border'], chars['side'], chars['corner'], chars['vhead']
-    if border:
-        hhead = chars['hhead']
-    else:
-        hhead = chars['border']
-    resh = res = corner
-    for i in range(n):
-        res = res + (length[i] + 2) * bord + corner
-        resh = resh + (length[i] + 2) * hhead + corner
+    tcross, border, bcross, lcross, side, rcross, tlcorner, trcorner, cross, blcorner, brcorner, tvhead, vhead, vheadcross, bvhead ,headerscross, hhead, hheadcross, lhhead, rhhead= chars['tcross'], chars['border'], chars['bcross'], chars['lcross'], chars['side'], chars['rcross'], chars['tlcorner'], chars['trcorner'], chars['cross'], chars['blcorner'], chars['brcorner'], chars['tvhead'], chars['vhead'], chars['vheadcross'], chars['bvhead'], chars['headerscross'], chars['hhead'], chars['hheadcross'], chars['lhhead'], chars['rhhead']
+    if not v_header:
+        tvhead, bvhead = tcross, bcross
+        if borders:
+            vheadcross = cross
+            if h_header:
+                headerscross = hheadcross
+    if not borders:
+        hhead, hheadcross, lhhead, rhhead, headerscross = border, cross, lcross, rcross, vheadcross
+        if h_header and not v_header:
+                headerscross = cross
+    if v_header and not h_header:
+        headerscross = vheadcross
+
+    len0 = length[0] + 2
+    res = lcross + len0 * border + vheadcross
+    resh = lhhead + len0 * hhead + headerscross
+    rest = tlcorner + len0 * border + tvhead
+    resb = blcorner + len0 * border + bvhead
+    for i in range(1, n):
+        res = res + (length[i] + 2) * border + cross
+        resh = resh + (length[i] + 2) * hhead + hheadcross
+        rest = rest + (length[i] + 2) * border + tcross
+        resb = resb + (length[i] + 2) * border + bcross
+    res = res[:-1] + rcross
+    resh = resh[:-1] + rhhead
+    rest = rest[:-1] + trcorner
+    resb = resb[:-1] + brcorner
     ret = []
-    for i, line in enumerate(data):
+    for i, lin in enumerate(data):
         aff = side
         if i == 1 and h_header:
             ret.append(resh)
-        else:
-            if i == 0 or border:
-                ret.append(res)
-        for j, el in enumerate(line[0]):
+        elif i == 0:
+            ret.append(rest)
+        elif borders:
+            ret.append(res)
+        for j, el in enumerate(lin[0]):
             if web:
-                aff = aff + " " + el + (sum(length[j:(j + line[1][j])]) + line[1][j] * 3 - aa_len_cjk(re.sub('<a.*">|</a>', '',el)) - 2) * " " + side
+                aff = aff + " " + el + (sum(length[j:(j + lin[1][j])]) + lin[1][j] * 3 - aa_lencjk(re.sub('<a.*">|</a>', '',el)) - 2) * " " + side
             else:
-                aff = aff + " " + el + (sum(length[j:(j + line[1][j])]) + line[1][j] * 3 - aa_len_cjk(el) - 2) * " " + side
+                aff = aff + " " + el + (sum(length[j:(j + lin[1][j])]) + lin[1][j] * 3 - aa_lencjk(el) - 2) * " " + side
             if j == 0 and v_header:
                 aff = aff[:-1] + vhead
         ret.append(aff)
-    ret.append(res)
+    ret.append(resb)
     if align == 'Left':
-        ret = [' ' * 2  + line for line in ret]
+        ret = [' ' * 2  + lin for lin in ret]
     elif align == 'Center' and not (web and spread):
-        ret = [aa_center(line, width) for line in ret]
+        ret = [aa_center(lin, width) for lin in ret]
     return ret
 
 
 def aa_image(image):
     art_table = '#$!;:,. '
     art_image = []
-    for line in image:
+    for lin in image:
         art_line = ''
-        for pixel in line:
+        for pixel in lin:
             art_line = art_line + art_table[pixel/32]
         art_image.append(art_line)
     return art_image
 
 
-def aa_textwrap(txt, width, web):
+def aa_wrap(txt, width, web):
     if not web:
         return textwrap.wrap(txt, width)
     txt = re.split('(<a href=.*?>)|(</a>)|(<img src=.*?>)', txt)
-    line, length, ret = '', 0, []
+    lin, length, ret = '', 0, []
     for el in txt:
         if el:
             if el[0] != '<':
                 if len(el) > width:
-                    line = line + el
-                    multi = textwrap.wrap(line, width)
+                    lin = lin + el
+                    multi = textwrap.wrap(lin, width)
                     ret.extend(multi[:-1])
-                    line = multi[-1]
+                    lin = multi[-1]
                 elif length + len(el) <= width:
                     length = length + len(el)
-                    line = line + el
+                    lin = lin + el
                 else:
-                    ret.append(line)
-                    line, length = el, len(el)
+                    ret.append(lin)
+                    lin, length = el, len(el)
             else:
-                    line = line + el
-    ret.append(line)
+                    lin = lin + el
+    ret.append(lin)
     return ret
 
 
-def aa_len_cjk(txt, web=False):
+def aa_lencjk(txt, web=False):
     if web:
         txt = re.sub('(<a href=.*?>)|(</a>)|(<img src=.*?>)', '', txt)
     if isinstance(txt, str):
@@ -3505,18 +4358,19 @@ def aa_len_cjk(txt, web=False):
 
 
 def aa_center(txt, width, web=False):
-    n_before = (width - aa_len_cjk(txt, web)) / 2
-    n_after = width - aa_len_cjk(txt, web) - n_before
+    n_before = (width - aa_lencjk(txt, web)) / 2
+    n_after = width - aa_lencjk(txt, web) - n_before
     return ' ' * n_before + txt + ' ' * n_after
 
 
-##############################################################################
+# The Spreadsheet library
 
-########################## SpreadSheet engine ################################
+ascii_uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-
-# Raymond Hettinger's recipe
 class SpreadSheet:
+    """Raymond Hettinger's recipe
+    http://code.activestate.com/recipes/355045-spreadsheet
+    """
     _cells = {}
     def __setitem__(self, key, formula):
         self._cells[key] = formula
@@ -3532,47 +4386,35 @@ class SpreadSheet:
             return self._cells[key].strip()
 
 
-def office():
-    global SIN, COS, TAN, ASIN, ACOS, ATAN, SINH, COSH, TANH
-    SIN = sin
-    COS = cos
-    TAN = tan
-    ASIN = asin
-    ACOS = acos
-    ATAN = atan
-    SINH = sinh
-    COSH = cosh
-    TANH = tanh
-
-
-def spreadsheet(data, format):
+def spreadsheet(data, markup, grid):
     n = max([len(line[0]) for line in data])
     if n > 676:
-        Error(_("Spreadsheet tables are limited to 676 columns, and your table has %i columns.") % n)
+        Error("Spreadsheet tables are limited to 676 columns, and your table has %i columns." % n)
     s = SpreadSheet()
     for j, row in enumerate(data):
         for i, el in enumerate(row[0]):
-            ind = string.ascii_uppercase[i/26 - 1].replace('Z', '') + string.ascii_uppercase[i%26] + str(j+1)
+            ind = ascii_uppercase[i/26 - 1].replace('Z', '') + ascii_uppercase[i%26] + str(j+1)
             if el and el.strip():
                 s[ind] = el
     for j, row in enumerate(data):
         for i, el in enumerate(row[0]):
-            ind = string.ascii_uppercase[i/26 - 1].replace('Z', '') + string.ascii_uppercase[i%26] + str(j+1)
+            ind = ascii_uppercase[i/26 - 1].replace('Z', '') + ascii_uppercase[i%26] + str(j+1)
             if el and el.strip():
-                if format == 'html':
+                if markup == 'html':
                     row[0][i] = '<a title="' + el.strip() + '">' + str(s[ind]) + '</a>'
-                elif format == 'tex':
+                elif markup == 'tex':
                     if el.strip()[0] == '=':
                         tooltip = 'formula: '
                     else:
                         tooltip = 'value: '
                     row[0][i] = '\htmladdnormallink{' + str(s[ind]) + '}{' + tooltip + el.strip() + '}'
-                elif format == 'txt':
+                elif markup == 'txt':
                     row[0][i] = str(s[ind])
-    h = [(string.ascii_uppercase[i/26 - 1].replace('Z', '') + string.ascii_uppercase[i%26]) for i in range(n)]
-    data = [[h, [1] * n]] + data
-    data = [[[str(i)] + line[0], [1] + line[1]] for i, line in enumerate(data)]
-    data[0][0][0] = ''
+    if grid:
+        h = [(ascii_uppercase[i/26 - 1].replace('Z', '') + ascii_uppercase[i%26]) for i in range(n)]
+        data = [[h, [1] * n]] + data
+        data = [[[str(i)] + line[0], [1] + line[1]] for i, line in enumerate(data)]
+        data[0][0][0] = ''
     return data
 
 
@@ -3588,7 +4430,51 @@ def completes_table(table):
     return data2
 
 
+def convert_to_table(itera, headers, borders, center):
+    if center:
+        row_ini = ' | '
+    else:
+        row_ini = '| '
+    if borders:
+        row_end = ' |'
+    else:
+        row_end = ''
+    table = []
+    for row in itera:
+        table.append(row_ini + ' | '.join(row).expandtabs() + row_end)
+    if headers:
+        table[0] = table[0].replace('|', '||', 1)
+    return table
+
+
+def parse_convert_table(table, tableable, target):
+    ret = []
+    # Note: cell contents is raw, no t2t marks are parsed
+    if tableable:
+        ret.extend(BLOCK.blockin('table'))
+        if table:
+            BLOCK.tableparser.__init__(table[0])
+            for row in table:
+                tablerow = TableMaster().parse_row(row)
+                BLOCK.tableparser.add_row(tablerow)
+
+                # Very ugly, but necessary for escapes
+                line = SEPARATOR.join(tablerow['cells'])
+                BLOCK.holdadd(doEscape(target, line))
+            ret.extend(BLOCK.blockout())
+
+    # Tables are mapped to verb when target is not table-aware
+    else:
+        ret.extend(BLOCK.blockin('verb'))
+        BLOCK.propset('mapped', 'table')
+        for row in table:
+            BLOCK.holdadd(row)
+        ret.extend(BLOCK.blockout())
+    return ret
+
+
 ##############################################################################
+
 
 class error(Exception):
     pass
@@ -3704,7 +4590,7 @@ def Savefile(file_path, contents):
     else:
         doit = f.write
     cont = []
-    if CONF['target'] in ('aat', 'rst', 'txt'):
+    if CONF['encoding'].lower() == 'utf-8' and CONF['target'] != 'mgp':
         for line in contents:
             if isinstance(line, unicode):
                 cont.append(line.encode('utf-8'))
@@ -3863,23 +4749,23 @@ class CommandLine:
         #Debug('Valid SHORT options: %s' % ret)
         return ''.join(ret)
 
-    def _compose_long_opts(self):
+    def _compose_long_opts(self, extra=True):
         "Returns a list with all the valid long options/flags"
         ret = map(lambda x: x + '=', self.all_options)        # add =
         ret.extend(self.all_flags)                            # flag ON
         ret.extend(self.all_actions)                          # actions
         ret.extend(map(lambda x: 'no-' + x, self.all_flags))  # add no-*
-        ret.extend(['no-style', 'no-encoding'])               # turn OFF
-        ret.extend(['no-outfile', 'no-infile'])               # turn OFF
-        ret.extend(['no-dump-config', 'no-dump-source'])      # turn OFF
-        ret.extend(['no-targets'])                            # turn OFF
+        if extra:
+            ret.extend(['no-style', 'no-encoding'])           # turn OFF
+            ret.extend(['no-outfile', 'no-infile'])           # turn OFF
+            ret.extend(['no-dump-config', 'no-dump-source'])  # turn OFF
+            ret.extend(['no-targets'])                        # turn OFF
         #Debug('Valid LONG options: %s' % ret)
         return ret
 
-    def _tokenize(self, cmd_string=''):
+    def tokenize(self, cmdline=''):
         "Convert a command line string to a list"
-        #TODO protect quotes contents -- Don't use it, pass cmdline as list
-        return cmd_string.split()
+        return shlex.split(cmdline)
 
     def parse(self, cmdline=[]):
         "Check/Parse a command line list     TIP: no program name!"
@@ -3901,7 +4787,9 @@ class CommandLine:
 
         # We need lists, not strings (such as from %!options)
         if type(cmdline) in (type(''), type(u'')):
-            cmdline = self._tokenize(cmdline)
+            if isinstance(cmdline, unicode):
+                cmdline = cmdline.encode('utf-8')
+            cmdline = self.tokenize(cmdline)
 
         # Extract name/value pair of all configs, check for invalid names
         options, arguments = self.parse(cmdline[:])
@@ -4028,6 +4916,187 @@ class CommandLine:
         return args
 
 
+class BaseOptions(CommandLine):
+
+    def __init__(self, cmdline=None, dft_options={}, dft_flags={}, short_long={}):
+
+        # Available options
+        self.dft_options = dft_options
+        self.dft_flags = dft_flags
+        self.short_long = short_long
+
+        # Default values for all options
+        self.defaults = {}
+        self.defaults.update(self.dft_options)
+        self.defaults.update(self.dft_flags)
+
+        # Needed by self._compose_*_opts()
+        self.all_flags = self.dft_flags.keys()
+        self.all_options = self.dft_options.keys()
+        self.all_actions = []
+
+        # Compose valid short and long options data for getopt
+        self.short_opts = self._compose_short_opts()
+        self.long_opts = self._compose_long_opts(extra=False)
+
+        # Got data? Parse it!
+        if cmdline:
+            self.raw = self.get_raw_config(cmdline)
+            self.parsed = self.parse_raw()
+        else:
+            self.raw = []
+            self.parsed = {}
+
+    def get(self, key):
+        return self.parsed.get(key, self.defaults[key])
+
+    def parse(self, cmdline):
+        try:
+            opts, args = getopt.getopt(cmdline, self.short_opts, self.long_opts)
+        except getopt.error, errmsg:
+            Error(_("%s in %%!%s command") % (errmsg, self.__class__.__name__[:-7].upper()))
+        return (opts, args)
+
+    def parse_raw(self, raw=None):
+        if not raw:
+            raw = self.raw
+        # Reset attributes to our modest needs
+        cm = ConfigMaster(raw)
+        cm.dft_options  = self.dft_options.copy()
+        cm.dft_flags    = self.dft_flags.copy()
+        cm.dft_actions  = {}
+        cm.dft_settings = {}
+        cm.incremental  = []
+        cm.numeric      = []
+        cm.multi        = []  # maybe in the future: ['infile']
+        cm.defaults     = self.defaults.copy()
+        cm.off          = cm._get_off()
+        return cm.parse()
+
+
+class CsvOptions(BaseOptions):
+    """Tokenize and parse the %!CSV command arguments.
+    
+    When you find this line in the user document:
+    
+        %!CSV: -s tab foo.csv
+    
+    Just feed everything after the first : to this class,
+    as a single string. It will be tokenized, parsed and
+    saved to self.raw and self.parsed.
+    
+    Use the self.get() method to get the value of a config.
+    If missing, the default value will be returned.
+    
+    Example:
+        >>> import txt2tags, pprint
+        >>> csvopt = txt2tags.CsvOptions('-s tab foo.csv')
+        >>> pprint.pprint(csvopt.raw)
+        [['all', 'separator', 'tab'],
+         ['all', 'infile', 'foo.csv'],
+         ['all', 'realcmdline', ['-s', 'tab', 'foo.csv']]]
+        >>> pprint.pprint(csvopt.parsed)
+        {'infile': 'foo.csv',
+         'realcmdline': ['-s', 'tab', 'foo.csv'],
+         'separator': 'tab'}
+        >>> csvopt.get('separator')
+        'tab'
+        >>>
+    """
+
+    def __init__(self, cmdline=None):
+
+        # Available options for %!CSV
+        self.dft_options = {
+            'separator': ',',
+            'quotechar': '',
+            'infile': '',
+        }
+        self.dft_flags = {
+            'headers': 0,
+            'borders': 0,
+            'center': 0,
+        }
+        self.short_long = {
+            'b': 'borders',
+            'c': 'center',
+            'h': 'headers',
+            's': 'separator',
+            'q': 'quotechar',
+        }
+
+        BaseOptions.__init__(self, cmdline, self.dft_options, self.dft_flags, self.short_long)
+
+
+class DbOptions(BaseOptions):
+    """Tokenize and parse the %!DB command arguments.
+    
+    When you find this line in the user document:
+    
+        %!DB: -q "select * from table" foo.db
+    
+    Just feed everything after the first : to this class,
+    as a single string. It will be tokenized, parsed and
+    saved to self.raw and self.parsed.
+    
+    Use the self.get() method to get the value of a config.
+    If missing, the default value will be returned.
+    
+    Example:
+        >>> import txt2tags, pprint
+        >>> dbopt = txt2tags.DbOptions('-q "select * from table" foo.db')
+        >>> pprint.pprint(dbopt.raw)
+        [['all', 'query', 'select * from table'],
+         ['all', 'infile', 'foo.db'],
+         ['all', 'realcmdline', ['-q', 'select * from table', 'foo.db']]]
+        >>> pprint.pprint(dbopt.parsed)
+        {'infile': 'foo.db',
+         'query': 'select * from table'}
+        >>> dbopt.get('query')
+        'select * from table'
+        >>>
+    """
+
+    def __init__(self, cmdline=None):
+
+        # Available options for %!DB
+        self.dft_options = {
+            'query': '',
+            'infile': '',
+        }
+        self.dft_flags = {
+            'borders': 0,
+            'center': 0,
+            'headers': 0,
+        }
+        self.short_long = {
+            'b': 'borders',
+            'c': 'center',
+            'h': 'headers',
+            'q': 'query',
+        }
+
+        BaseOptions.__init__(self, cmdline, self.dft_options, self.dft_flags, self.short_long)
+
+
+class FenOptions(BaseOptions):
+
+    def __init__(self, cmdline=None):
+
+        # Available options for %!FEN
+        self.dft_options = {
+            'infile': '',
+        }
+        self.dft_flags = {
+            'unicode': 0,
+        }
+        self.short_long = {
+            'u': 'unicode',
+        }
+
+        BaseOptions.__init__(self, cmdline, self.dft_options, self.dft_flags, self.short_long)
+
+
 ##############################################################################
 
 class SourceDocument:
@@ -4144,8 +5213,9 @@ class SourceDocument:
                rgx['macros'].match(buf[i]) or  # ... %%macro
                rgx['toc'].match(buf[i])    or  # ... %%toc
                cfg_parser(buf[i], 'include')[1] or  # ... %!include
-               cfg_parser(buf[i], 'csv')[1] or      # ... %!csv
-               cfg_parser(buf[i], 'csvheader')[1]   # ... %!csvheader
+               cfg_parser(buf[i], 'csv')[1] or # ... %!csv
+               cfg_parser(buf[i], 'db')[1]  or # ... %!db
+               cfg_parser(buf[i], 'fen')[1]    # ... %!fen
             ):
                 ref[2] = i
                 break
@@ -4213,7 +5283,7 @@ class ConfigMaster:
       config. The configs of other targets are ignored.
 
     The CommandLine and ConfigLines classes have the get_raw_config()
-    method which convert the configuration found to the RAW format.
+    method to convert the configuration found to the RAW format.
     Just feed it to parse() and get a brand-new ready-to-use config
     dictionary. Example:
 
@@ -4367,6 +5437,7 @@ class ConfigMaster:
         "Basic config sanity checking"
         global AA
         global RST
+        global CSV
         if not config:
             return {}
         target = config.get('target')
@@ -4406,30 +5477,16 @@ class ConfigMaster:
         # Check split level value
         if config['split'] not in (0, 1, 2):
             Error(_('Option --split must be 0, 1 or 2'))
-        if target in ['csv', 'ods']:
-            config['spread'] = True
         if target == 'aap':
             target, config['slides'] = 'aat', True
         if target == 'aas':
             target, config['spread'] = 'aat', True
-            exec('from math import *', globals())
-            office()
         if target == 'aatw':
             target, config['web'] = 'aat', True
         if target == 'aapw':
             target, config['slides'], config['web'] = 'aat', True, True
         if target == 'aasw':
             target, config['spread'], config['web'] = 'aat', True, True
-            exec('from math import *', globals())
-            office()
-        if target == 'htmls':
-            config['spread'], config['web'] = True, True
-            exec('from math import *', globals())
-            office()
-        if target == 'texs':
-            config['spread'] = True
-            exec('from math import *', globals())
-            office()
         # Slides needs width and height
         if config['slides'] and target == 'aat':
             if config['web']:
@@ -4461,13 +5518,22 @@ class ConfigMaster:
                     else:
                         Error(_("--chars: Expected an UTF-8 file for your chars from an UTF-8 terminal"))
             if target == 'aat':
-                if len(config['chars']) != len(AA_VALUES):
-                    Error(_("--chars: Expected %i chars, got %i") % (
-                        len(AA_VALUES), len(config['chars'])))
+                if config['chars'] == 'unicode':
+                    if config['encoding'].lower() != 'utf-8':
+                        if not config['encoding']:
+                            Error(_("--chars: Expected an UTF-8 file for the unicode chars set, you could set %!encoding: UTF-8"))
+                        else:
+                            Error(_("--chars: Expected an UTF-8 file for the unicode chars set"))
+                    config['chars'] = unichr(0x250c) + unichr(0x2510) + unichr(0x2514) + unichr(0x2518) + unichr(0x252C) + unichr(0x2534) + unichr(0x251c) + unichr(0x2524) + unichr(0x255e) + unichr(0x256a) + unichr(0x2561) + unichr(0x256c) + unichr(0x2565) + unichr(0x256b) + unichr(0x2568) + unichr(0x253c) + unichr(0x2500) + unichr(0x2502) + unichr(0x2500) + unichr(0x2550) + unichr(0x2550) + unichr(0x2500) + '^"' + unichr(0x2043) + unichr(0x2550) + unichr(0x2551)
+                if len(config['chars']) != len(AA_SIMPLE) and len(config['chars']) != len(AA_ADVANCED):
+                    Error(_("--chars: Expected %i or %i chars, got %i") % (
+                        len(AA_SIMPLE), len(AA_ADVANCED), len(config['chars'])))
                 if isinstance(config['chars'], unicode):
                     for char in config['chars']:
                         if unicodedata.east_asian_width(char) in ('F', 'W'):
                             Error(_("--chars: Expected no CJK double width chars, but got %s") % char.encode('utf-8'))
+                if len(config['chars']) == len(AA_SIMPLE):
+                    config['chars'] = 15 * config['chars'][0] + config['chars']
                 AA = dict(zip(AA_KEYS, config['chars']))
             elif target == 'rst':
                 if len(config['chars']) != len(RST_VALUES):
@@ -4488,6 +5554,12 @@ class ConfigMaster:
                             char_8 = char_8.encode('utf-8')
                         Error(_("--chars: Expected chars in : %s but got %s") % (chars_bullet, char_8))
                     RST = dict(zip(RST_KEYS, config['chars']))
+            elif target in ('csv', 'csvs'):
+                if len(config['chars']) != len(CSV_VALUES) and len(config['chars']) != len(CSV_VALUES) + 1:
+                    Error(_("--chars: Expected %i or %i chars, got %i") % (
+                        len(CSV_VALUES), len(CSV_VALUES) + 1, len(config['chars'])))
+                else:
+                    CSV = dict(zip(CSV_KEYS, config['chars']))
 
         # --toc-only is stronger than others
         if config['toc-only']:
@@ -4511,7 +5583,6 @@ class ConfigMaster:
                 import sqlite3
             except:
                 Error('No sqlite3 module')
-            config['spread'] = True
             global DB, DBC
             try:
                 os.remove(config['outfile'])
@@ -4709,8 +5780,6 @@ class ConfigLines:
         if not line:
             return empty
         no_target = ['target', 'includeconf']
-        re_name   = keyname or '[a-z]+'
-        re_target = target  or '[a-z]*'
         # XXX TODO <value>\S.+?  requires TWO chars, breaks %!include:a
         cfgregex  = ConfigLines._parse_cfg
         prepostregex = ConfigLines._parse_prepost
@@ -4763,14 +5832,35 @@ class ConfigLines:
 ##############################################################################
 
 class MaskMaster:
-    "(Un)Protect important structures from escaping and formatting"
+    """(Un)Protect important structures from escaping and formatting.
+
+    Some inline markup must be protected, because its contents may match
+    other markup, or because we should not escape or format its contents
+    in any way.
+
+    When the source line is read, we call the mask() method to identify
+    those inliners (link, mono, macro, raw, tagged) and change each one
+    for an (ugly) internal identifier.
+
+    For example, ''<b>this</b>'' will become vvvTAGGED0vvv. The number
+    increases as other inliners of the same type are found. 
+
+    The method undo() is called at the end of the line processing,
+    expanding all masks back to their original (untouched) content.
+    """
+
     def __init__(self):
-        self.linkmask   = 'vvvLINKvvv'
-        self.monomask   = 'vvvMONOvvv'
-        self.macromask  = 'vvvMACROvvv'
-        self.rawmask    = 'vvvRAWvvv'
-        self.taggedmask = 'vvvTAGGEDvvv'
+        self.linkmask   = 'vvvLINKNNNvvv'  # NNN will be replaced by the index
+        self.monomask   = 'vvvMONONNNvvv'
+        self.macromask  = 'vvvMACRONNNvvv'
+        self.rawmask    = 'vvvRAWNNNvvv'
+        self.taggedmask = 'vvvTAGGEDNNNvvv'
         self.tocmask    = 'vvvTOCvvv'
+        self.linkmaskre   = re.compile('vvvLINK(\d+)vvv')
+        self.monomaskre   = re.compile('vvvMONO(\d+)vvv')
+        self.macromaskre  = re.compile('vvvMACRO(\d+)vvv')
+        self.rawmaskre    = re.compile('vvvRAW(\d+)vvv')
+        self.taggedmaskre = re.compile('vvvTAGGED(\d+)vvv')
         self.macroman   = MacroMaster()
         self.reset()
 
@@ -4797,7 +5887,7 @@ class MaskMaster:
         while True:
 
             # Try to match the line for the three marks
-            # Note: 'z' > 999999
+            # Note: 'z' > 99999999...
             #
             t = r = v = 'z'
             try:
@@ -4817,30 +5907,38 @@ class MaskMaster:
             if t >= 0 and t < r and t < v:
                 txt = regex['tagged'].search(line).group(1)
                 txt = doProtect(TARGET, txt)
+                i = len(self.taggedbank)
                 self.taggedbank.append(txt)
-                line = regex['tagged'].sub(self.taggedmask, line, 1)
+                mask = self.taggedmask.replace('NNN', str(i))
+                line = regex['tagged'].sub(mask, line, 1)
 
             # Protect raw text
             elif r >= 0 and r < t and r < v:
                 txt = regex['raw'].search(line).group(1)
                 txt = doEscape(TARGET, txt)
+                i = len(self.rawbank)
                 self.rawbank.append(txt)
-                line = regex['raw'].sub(self.rawmask, line, 1)
+                mask = self.rawmask.replace('NNN', str(i))
+                line = regex['raw'].sub(mask, line, 1)
 
             # Protect verbatim text
             elif v >= 0 and v < t and v < r:
                 txt = regex['fontMono'].search(line).group(1)
                 txt = doEscape(TARGET, txt)
+                i = len(self.monobank)
                 self.monobank.append(txt)
-                line = regex['fontMono'].sub(self.monomask, line, 1)
+                mask = self.monomask.replace('NNN', str(i))
+                line = regex['fontMono'].sub(mask, line, 1)
             else:
                 break
 
         # Protect macros
         while regex['macros'].search(line):
             txt = regex['macros'].search(line).group()
+            i = len(self.macrobank)
             self.macrobank.append(txt)
-            line = regex['macros'].sub(self.macromask, line, 1)
+            mask = self.macromask.replace('NNN', str(i))
+            line = regex['macros'].sub(mask, line, 1)
 
         # Protect TOC location
         while regex['toc'].search(line):
@@ -4874,36 +5972,57 @@ class MaskMaster:
                 link = fix_relative_path(m.group('link'))
                 label = m.group('label').rstrip()
                 link_re = regex['linkmark']
-            line = link_re.sub(self.linkmask, line, 1)
 
             # Save link data to the link bank
+            i = len(self.linkbank)
             self.linkbank.append((label, link))
+
+            # Mask the link mark in the original line
+            mask = self.linkmask.replace('NNN', str(i))
+            line = link_re.sub(mask, line, 1)
+
         return line
 
     def undo(self, line):
 
         # url & email
-        for label, url in self.linkbank:
+        matches = list(self.linkmaskre.finditer(line))
+        while matches:
+            m = matches.pop()
+            i = int(m.group(1))
+            label, url = self.linkbank[i]
             link = get_tagged_link(label, url)
-            line = line.replace(self.linkmask, link, 1)
+            line = line[0:m.start()] + link + line[m.end():]
 
         # Expand macros
-        for macro in self.macrobank:
-            macro = self.macroman.expand(macro)
-            line = line.replace(self.macromask, macro, 1)
+        matches = list(self.macromaskre.finditer(line))
+        while matches:
+            m = matches.pop()
+            i = int(m.group(1))
+            macro = self.macroman.expand(self.macrobank[i])
+            line = line[0:m.start()] + macro + line[m.end():]
 
         # Expand verb
-        for mono in self.monobank:
+        matches = list(self.monomaskre.finditer(line))
+        while matches:
+            m = matches.pop()
+            i = int(m.group(1))
             open_, close = TAGS['fontMonoOpen'], TAGS['fontMonoClose']
-            line = line.replace(self.monomask, open_ + mono + close, 1)
+            line = line[0:m.start()] + open_ + self.monobank[i] + close + line[m.end():]
 
         # Expand raw
-        for raw in self.rawbank:
-            line = line.replace(self.rawmask, raw, 1)
+        matches = list(self.rawmaskre.finditer(line))
+        while matches:
+            m = matches.pop()
+            i = int(m.group(1))
+            line = line[0:m.start()] + self.rawbank[i] + line[m.end():]
 
         # Expand tagged
-        for tagged in self.taggedbank:
-            line = line.replace(self.taggedmask, tagged, 1)
+        matches = list(self.taggedmaskre.finditer(line))
+        while matches:
+            m = matches.pop()
+            i = int(m.group(1))
+            line = line[0:m.start()] + self.taggedbank[i] + line[m.end():]
 
         return line
 
@@ -4924,7 +6043,6 @@ class TitleMaster:
         self.tag_hold = []
         self.last_level = 0
         self.count_id = ''
-        self.user_labels = {}
         self.anchor_count = 0
         self.anchor_prefix = 'toc'
 
@@ -5116,7 +6234,7 @@ class TitleMaster:
             if BLOCK.count > 1:
                 ret.append('')  # blank line before
             ret.append(tagged)
-            i = aa_len_cjk(full_title)
+            i = aa_lencjk(full_title)
             ret.append(regex['x'].sub('=' * i, self.tag))
         elif TARGET == 'aat' and self.level == 1:
             if CONF['slides'] :
@@ -5184,7 +6302,7 @@ class TitleMaster:
 
             # TOC will be plain text (no links)
             else:
-                if TARGET in ['txt', 'man', 'aat'] and not CONF['slides']:
+                if rules['plaintexttoc'] and not CONF['slides']:
                     # For these, the list is not necessary, just dump the text
                     tocitem = '%s""%s""' % (indent, id_txt)
                 elif TARGET == 'aat' and CONF['enum-title'] and level == 1:
@@ -5237,7 +6355,7 @@ class TableMaster:
             self.align     = prop['align']
             self.cellalign = prop['cellalign']
             self.cellspan  = prop['cellspan']
-            self.n_cols    = str(sum(self.cellspan))
+            self.n_cols    = sum(self.cellspan)
             self.colalign  = self._get_col_align()
 
     def _get_col_align(self):
@@ -5379,7 +6497,9 @@ class TableMaster:
             chead = head
             if self.vert_head and i == 0:
                 copen = TAGS['tableTitleCellOpen']
-                cclose = TAGS['tableTitleCellClose'] + '\n'
+                cclose = TAGS['tableTitleCellClose']
+                if rules['breaktablecell']:
+                    cclose = cclose + '\n'
 
             # Make sure we will pop from some filled lists
             # Fixes empty line bug '| |'
@@ -5491,6 +6611,10 @@ class TableMaster:
 
     def dump(self):
         open_ = self._get_full_tag(TAGS['tableOpen'])
+        if rules['tablenumber']:
+            open_ = re.sub('n_table', str(BLOCK.tablecount), open_)
+        if rules['tablecolumnsnumber']:
+            open_ = re.sub('n_cols', str(self.n_cols), open_)
         rows  = self.rows
         close = self._get_full_tag(TAGS['tableClose'])
 
@@ -5657,7 +6781,7 @@ class BlockMaster:
         self.PRP.pop()
         self.depth = len(self.BLK)
 
-        if CONF['spread'] and blockname != 'table':
+        if rules['tableonly'] and blockname != 'table':
             return []
 
         if blockname == 'table':
@@ -5687,7 +6811,7 @@ class BlockMaster:
                         if not line or blockname in ('verb', 'tagged'):
                             final.append(line)
                         else:
-                            final.extend(aa_textwrap(line, CONF['width'], False))
+                            final.extend(aa_wrap(line, CONF['width'], False))
                 elif CONF['slides'] and blockname in ('list', 'numlist', 'deflist'):
                     final.extend(aa_box(result, AA, CONF['width'], False, web=CONF['web'], slides=CONF['slides']))
                 else:
@@ -5698,9 +6822,9 @@ class BlockMaster:
                             if CONF['slides'] and blockname in ('table', 'tagged', 'verb'):
                                 final.append(line[:CONF['width']])
                             elif CONF['slides']:
-                                final.extend(' ' + line for line in aa_textwrap(line, CONF['width'] - 2, CONF['web']))
+                                final.extend(' ' + line for line in aa_wrap(line, CONF['width'] - 2, CONF['web']))
                             else:
-                                final.extend(aa_textwrap(line, CONF['width'], CONF['web']))
+                                final.extend(aa_wrap(line, CONF['width'], CONF['web']))
                 result = final[:]
 
             Debug('BLOCK: %s' % result, 6)
@@ -5947,23 +7071,21 @@ class BlockMaster:
         self.tablecount += 1
         result = []
 
-        if TARGET == 'aat':
+        if TARGET == 'aat' and self.tableparser.rows:
             if CONF['spread']:
-                if CONF['web']:
-                    data = spreadsheet(completes_table(self.tableparser.rows), 'html')
-                else:
-                    data = spreadsheet(completes_table(self.tableparser.rows), 'txt')
+                data = spreadsheet(completes_table(self.tableparser.rows), rules['spreadmarkup'], rules['spreadgrid'])
                 return aa_table(data, AA, CONF['width'], True, True, True, 'Center', True, CONF['web']) + ['']
             else:
                 return aa_table(completes_table(self.tableparser.rows), AA, CONF['width'], self.tableparser.border, self.tableparser.title, self.tableparser.vert_head, self.tableparser.align, False, False) + ['']
 
-        if TARGET == 'rst':
+        if TARGET == 'rst' and self.tableparser.rows:
             chars = AA.copy()
             if not self.tableparser.border:
-                chars['border'], chars['corner'], chars['side'] = '=', ' ', ' '
+                chars['border'] = '='
+                chars['tlcorner'] = chars['trcorner'] = chars['cross'] = chars['blcorner'] = chars['brcorner'] = chars['lcross'] = chars['side'] = chars['rcross'] = chars['tcross'] = chars['bcross'] = chars['lhhead'] = chars['rhhead'] = ' '
             return aa_table(completes_table(self.tableparser.rows), chars, CONF['width'], self.tableparser.border, self.tableparser.title, False, 'Left', False, False) + ['']
 
-        if TARGET == 'mgp':
+        if TARGET == 'mgp' and self.tableparser.rows:
             aa_t = aa_table(completes_table(self.tableparser.rows), AA, CONF['width'], True, self.tableparser.title, False, 'Left', False, False)
             try:
                 import aafigure
@@ -5973,10 +7095,7 @@ class BlockMaster:
             except:
                 return ['%font "mono"'] + aa_t + ['']
 
-        if TARGET == 'csv':
-            return [','.join([cell.strip() for cell in row['cells']]) for row in self.tableparser.rows] + ['']
-
-        if TARGET == 'db':
+        if TARGET == 'db' and self.tableparser.rows:
             data = completes_table(self.tableparser.rows)
             n = max([len(line[0]) for line in data])
             table = 'table_' + str(self.tablecount)
@@ -6000,35 +7119,29 @@ class BlockMaster:
         if self._should_add_blank_line('before', 'table'):
             result.append('')
 
-        # DocBook needs to know the number of columns
-        if TARGET == 'dbk':
-            result.append(re.sub('n_cols', self.tableparser.n_cols, TAGS['tableOpenDbk']))
-
         # Rewrite all table cells by the unmasked and escaped data
         lines = self._get_escaped_hold()
         for i in xrange(len(lines)):
             cells = lines[i].split(SEPARATOR)
             self.tableparser.rows[i]['cells'] = cells
-        if TARGET in  ['htmls', 'texs']:
-            if TARGET == 'htmls':
-                data = spreadsheet(completes_table(self.tableparser.rows), 'html')
-            elif TARGET == 'texs':
-                data = spreadsheet(completes_table(self.tableparser.rows), 'tex')
+        if rules['spread']:
+            data = spreadsheet(completes_table(self.tableparser.rows), rules['spreadmarkup'], rules['spreadgrid'])
             self.tableparser.border, len_line = True, len(data[0][0])
             self.tableparser.cellalign = len_line
             self.tableparser.colalign = len_line * ['Left']
-            self.tableparser.vert_head = True
-            self.tableparser.rows = [{'cells':data[0][0], 'cellspan':data[0][1], 'cellalign':['Left']*len_line, 'title':1}] + self.tableparser.rows
-            for i, row in enumerate(self.tableparser.rows[1:]):
-                row['cells'], row['cellspan'], row['cellalign'], row['title'] = data[i+1][0], data[i+1][1], ['Left']*len_line, 0
+            if rules['spreadgrid']:
+                self.tableparser.vert_head = True
+                self.tableparser.rows = [{'cells':data[0][0], 'cellspan':data[0][1], 'cellalign':['Left']*len_line, 'title':1}] + self.tableparser.rows
+                for i, row in enumerate(self.tableparser.rows[1:]):
+                    row['cells'], row['cellspan'], row['cellalign'], row['title'] = data[i+1][0], data[i+1][1], ['Left']*len_line, 0
+            else:
+                for i, row in enumerate(self.tableparser.rows):
+                    row['cells'], row['cellspan'], row['cellalign'], row['title'] = data[i][0], data[i][1], ['Left']*len_line, 0
         result.extend(self.tableparser.dump())
 
         # Blank line after?
         if self._should_add_blank_line('after', 'table'):
             result.append('')
-
-        if TARGET == 'ods':
-            result[0] = result[0][:-2] + str(self.tablecount) + '">'
 
         return result
 
@@ -6060,7 +7173,7 @@ class BlockMaster:
 
         # Get contents
         if rules['onelinequote']:
-            # XXX Dirty hack, won't work for nested blocks inside quote, even subquotes
+            # XXX Dirty hack, won't work for nested blocks inside quote (when TABS are used in your t2t source), even subquotes
             result.append(' '.join([regex['quote'].sub('', x) for x in self.hold()]))
         else:
             for item in self.hold():
@@ -6440,7 +7553,15 @@ def listTargets():
         print TARGET_TYPES[typ][0] + ':'
         for target in targets:
             print "\t%s\t%s" % (target, TARGET_NAMES.get(target))
+    if OTHER_TARGETS:
+        print
+        print _('OTHERS:')
+        for target in OTHER_TARGETS:
+            print "\t%s\t%s" % (target, TARGET_NAMES.get(target))
     print
+    if NOT_LOADED:
+        print _('Targets %s from the targets directory not loaded, because there is already targets with the same name in txt2tags core.') % ', '.join(NOT_LOADED)
+        print
 
 
 def dumpConfig(source_raw, parsed_config):
@@ -6772,17 +7893,20 @@ def doHeader(headers, config):
     if target == 'aat' and not (config['spread'] and not config['web']):
         template = aa_header(head_data, AA, config['width'], config['height'], CONF['web'], CONF['slides'])
         if config['slides']:
-            l = aa_len_cjk(head_data['HEADER2']) + aa_len_cjk(head_data['HEADER3']) + 2
+            l = aa_lencjk(head_data['HEADER2']) + aa_lencjk(head_data['HEADER3']) + 2
             bar_1 = bar_2 = aa_line(AA['bar2'], config['width'])
             if config['web']:
                 bar_1 = '<section><pre>' + bar_1
+            n_page = 0
+            for i, line in enumerate(config['fullBody']):
+                if config['fullBody'][i - 1] == bar_1 and config['fullBody'][i + 3] == bar_2:
+                    n_page += 1
             page = 1
             for i, line in enumerate(config['fullBody']):
                 if config['fullBody'][i - 1] == bar_1 and config['fullBody'][i + 3] == bar_2:
-                    pages = str(page) + '/' + str(AA_PAGE)
-                    l1 = aa_len_cjk(head_data['HEADER1']) + len(pages) + 2
-                    if l1 < config['width']:
-                        config['fullBody'][i] = ' ' + head_data['HEADER1'] + ' ' * (config['width'] - l1) + pages + ' '
+                    pages = str(page) + '/' + str(n_page)
+                    l1 = aa_lencjk(head_data['HEADER1']) + len(pages) + 3
+                    config['fullBody'][i] = ' ' + head_data['HEADER1'][:config['width'] - len(pages) - 3] + ' ' * (config['width'] - l1) + ' ' + pages + ' '
                     page += 1
                 if config['fullBody'][i - 3] == bar_1 and config['fullBody'][i + 1] == bar_2:
                     if l < config['width']:
@@ -6801,7 +7925,7 @@ def doHeader(headers, config):
             head_web = ['<!doctype html><html>' + encoding + '<title>' + config['header1'] + '</title>' + pre]
             foot_web = ['</pre></html>']
             if config['slides']:
-                foot_web = ['</html>'] + Readfile('templates/dzslides-aapw.html', remove_linebreaks=1)
+                foot_web = [AAPW_FOOT]
             if config['spread']:
                 return head_web + config['fullBody'] + foot_web
             else:
@@ -7229,12 +8353,10 @@ def get_tagged_link(label, url):
                 label = "(%s)" % fix_relative_path(img_path)
 
         if TARGET == 'aat' and not CONF['slides'] and not CONF['web'] and not CONF['spread'] and not CONF['toc-only']:
-            for macro in MASK.macrobank:
-                macro = MASK.macroman.expand(macro)
-                url = url.replace(MASK.macromask, macro, 1)
-            if url not in AA_MARKS:
-                AA_MARKS.append(url)
-            url = str(AA_MARKS.index(url) + 1)
+            url_unmasked = MASK.undo(url)
+            if url_unmasked not in AA_MARKS:
+                AA_MARKS.append(url_unmasked)
+            url = str(AA_MARKS.index(url_unmasked) + 1)
 
         # Putting data on the right appearance order
         if rules['labelbeforelink'] or not rules['linkable']:
@@ -7425,7 +8547,6 @@ def get_infiles_config(infiles):
 def convert_this_files(configs):
     global CONF
     for myconf, doc in configs:                 # multifile support
-        target_head = []
         target_toc  = []
         target_body = []
         target_foot = []
@@ -7484,12 +8605,14 @@ def convert_this_files(configs):
                 else:
                     target_body = target_body + head + [''] * (myconf['height'] - 7) + [end_qa]
 
-        if myconf['target'] == 'mgp' and myconf['qa']:
-                target_body = target_body + ['%page', '', 'Q&A', '', '%center', '%newimage "templates/QA.png"', '']
+        # Uncomment the three next lines and specify your qa_image to use --qa option with the mgp target
+        #if myconf['target'] == 'mgp' and myconf['qa']:
+        #        qa_image = path_to_your_qa_image
+        #        target_body = target_body + ['%page', '', 'Q&A', '', '%center', '%newimage "' + qa_image + '"', '']
 
         if myconf['target'] == 'aat' and not myconf['slides'] and not myconf['web'] and not myconf['spread'] and not myconf['toc-only']:
             for i, url in enumerate(AA_MARKS):
-                target_body.extend(aa_textwrap('[' + str(i + 1) + '] ' + url, myconf['width'], myconf['web']))
+                target_body.extend(aa_wrap('[' + str(i + 1) + '] ' + url, myconf['width'], myconf['web']))
 
         # Compose the target file Footer
         Message(_("Composing target Footer"), 1)
@@ -7806,6 +8929,20 @@ def set_global_config(config):
     regex  = getRegexes()
     TARGET = config['target']  # save for buggy functions that need global
 
+    if rules.get('spread'):
+        # Python math functions
+        exec('from math import *', globals())
+        # LibreOffice compatibility
+        global SIN, COS, TAN, ASIN, ACOS, ATAN, SINH, COSH, TANH
+        SIN = sin
+        COS = cos
+        TAN = tan
+        ASIN = asin
+        ACOS = acos
+        ATAN = atan
+        SINH = sinh
+        COSH = cosh
+        TANH = tanh
 
 def convert(bodylines, config, firstlinenr=1):
     global BLOCK, TITLE, MASK
@@ -7830,7 +8967,6 @@ def convert(bodylines, config, firstlinenr=1):
     lineref = 0
     while lineref < len(bodylines):
         # Defaults
-        MASK.reset()
         results_box = ''
 
         untouchedline = bodylines[lineref]
@@ -8058,53 +9194,123 @@ def convert(bodylines, config, firstlinenr=1):
                     CONF['currentsourcefile'] = val
                 # This line is done, go to next
                 continue
+            
+            # %!fen command
+            # Forsyth-Edward Notation
+            elif key == 'fen':
+
+                # Handle options and arguments
+                fenopt = FenOptions(val)
+                filename = fenopt.get('infile')
+                fen_unicode = fenopt.get('unicode')
+
+                if fen_unicode:
+                    if CONF['encoding'].lower() != 'utf-8':
+                        if not config['encoding']:
+                            Error(_("%!fen: Expected an UTF-8 file to use unicode fen option, you could set %!encoding: UTF-8"))
+                        else: 
+                            Error(_("%!fen: Expected an UTF-8 file to use unicode fen option"))
+                    unicode_chars = [unichr(char) for char in range(0x2654,0x2660)]
+                    uni = dict(zip('KQRBNPkqrbnp', unicode_chars))
+
+                for line in Readfile(filename):
+                    board = line.split()[0]
+                    for i in range(1, 9):
+                        board = board.replace(str(i), i * ' ')
+                    if fen_unicode:
+                        for piece in uni:
+                            board = board.replace(piece, uni[piece])
+                    board = board.split('/')
+                    table = convert_to_table(board, False, True, True)
+                    ret.extend(parse_convert_table(table, rules['tableable'], CONF['target']))
+                # This line is done, go to next
+                continue
+            
+            # %!db command
+            elif key == 'db':
+
+                try:
+                    import sqlite3
+                except:
+                    Error('No sqlite3 module')
+
+                # Handle options and arguments
+                dbopt = DbOptions(val)
+                filename = dbopt.get('infile')
+                db_query = dbopt.get('query')
+                db_borders = dbopt.get('borders')
+                db_center = dbopt.get('center')
+                db_headers = dbopt.get('headers')
+                
+                sqlite3.register_converter('NULL', unicode)
+                sqlite3.register_converter('INTEGER', unicode)
+                sqlite3.register_converter('REAL', unicode)
+                sqlite3.register_converter('BLOB', unicode)
+
+                db = sqlite3.connect(filename, detect_types=sqlite3.PARSE_DECLTYPES)
+                dbc = db.cursor()
+
+                if db_query:
+                    res = dbc.execute(db_query)
+                    if db_headers:
+                        result = [[[header[0] for header in dbc.description]] + res.fetchall()]
+                    else:
+                        result = [res.fetchall()]
+                else:
+                    result = []
+                    table_names = dbc.execute("select name from sqlite_master where type='table'").fetchall()
+                    for table_name in table_names:
+                        res = dbc.execute("select * from " + table_name[0])
+                        if db_headers:
+                            result.append([[header[0] for header in dbc.description]] + res.fetchall())
+                        else:
+                            result.append(res.fetchall())
+
+                db.close()
+
+                for tab in result:
+                    # Convert each DB line to a txt2tags' table line
+                    table = convert_to_table(tab, db_headers, db_borders, db_center)
+                    # Parse and convert the new table
+                    ret.extend(parse_convert_table(table, rules['tableable'], CONF['target']))
+
+                # This line is done, go to next
+                continue
 
             # %!csv command
-            elif key in ['csv', 'csvheader']:
+            elif key == 'csv':
 
-                table = []
-                try:
-                    filename, delimiter = val.split()
-                except:
-                    filename, delimiter = val, ','
-                if delimiter == 'space':
-                    delimiter = ' '
-                elif delimiter == 'tab':
-                    delimiter = '\t'
-                reader = csv.reader(Readfile(filename), delimiter=delimiter)
+                # Handle options and arguments
+                csvopt = CsvOptions(val)
+                filename = csvopt.get('infile')
+                csv_separator = csvopt.get('separator')
+                csv_quotechar = csvopt.get('quotechar')
+                csv_headers = csvopt.get('headers')
+                csv_borders = csvopt.get('borders')
+                csv_center = csvopt.get('center')
+
+                if not filename:
+                    Error(_('%!CSV command: Missing CSV file path:') + ' ' + val)
+
+                if csv_separator == 'space':
+                    csv_separator = ' '
+                elif csv_separator == 'tab':
+                    csv_separator = '\t'
+
+                if csv_quotechar:
+                    reader = csv.reader(Readfile(filename), delimiter=csv_separator, quotechar=csv_quotechar, quoting=csv.QUOTE_MINIMAL)
+                else:
+                    reader = csv.reader(Readfile(filename), delimiter=csv_separator, quoting=csv.QUOTE_NONE)
 
                 # Convert each CSV line to a txt2tags' table line
                 # foo,bar,baz -> | foo | bar | baz |
                 try:
-                    for row in reader:
-                        table.append('| %s |' % ' | '.join(row))
-                    if key == 'csvheader':
-                        table[0] = '|' + table[0]
+                    table = convert_to_table(reader, csv_headers, csv_borders, csv_center)
                 except csv.Error, e:
                     Error('CSV: file %s: %s' % (filename, e))
 
                 # Parse and convert the new table
-                # Note: cell contents is raw, no t2t marks are parsed
-                if rules['tableable']:
-                    ret.extend(BLOCK.blockin('table'))
-                    if table:
-                        BLOCK.tableparser.__init__(table[0])
-                        for row in table:
-                            tablerow = TableMaster().parse_row(row)
-                            BLOCK.tableparser.add_row(tablerow)
-
-                            # Very ugly, but necessary for escapes
-                            line = SEPARATOR.join(tablerow['cells'])
-                            BLOCK.holdadd(doEscape(target, line))
-                        ret.extend(BLOCK.blockout())
-
-                # Tables are mapped to verb when target is not table-aware
-                else:
-                    ret.extend(BLOCK.blockin('verb'))
-                    BLOCK.propset('mapped', 'table')
-                    for row in table:
-                        BLOCK.holdadd(row)
-                    ret.extend(BLOCK.blockout())
+                ret.extend(parse_convert_table(table, rules['tableable'], CONF['target']))
 
                 # This line is done, go to next
                 continue
@@ -8394,10 +9600,10 @@ def convert(bodylines, config, firstlinenr=1):
 
 def load_GUI_resources():
     "Load all extra modules and methods used by GUI"
-    global askopenfilename, showinfo, showwarning, showerror, Tkinter
-    from tkFileDialog import askopenfilename
-    from tkMessageBox import showinfo, showwarning, showerror
+    global Tkinter, tkFileDialog, tkMessageBox
     import Tkinter
+    import tkFileDialog
+    import tkMessageBox
 
 
 class Gui:
@@ -8523,7 +9729,7 @@ class Gui:
 
     def askfile(self):
         ftypes = [(_('txt2tags files'), ('*.t2t', '*.txt')), (_('All files'), '*')]
-        newfile = askopenfilename(filetypes=ftypes)
+        newfile = tkFileDialog.askopenfilename(filetypes=ftypes)
         if newfile:
             self.infile.set(newfile)
             newconf = process_source_file(newfile)[0]
@@ -8560,10 +9766,10 @@ class Gui:
         infile, target = self.infile.get(), self.target.get()
         # Sanity
         if not target:
-            showwarning(my_name, _("You must select a target type!"))
+            tkMessageBox.showwarning(my_name, _("You must select a target type!"))
             return
         if not infile:
-            showwarning(my_name, _("You must provide the source file location!"))
+            tkMessageBox.showwarning(my_name, _("You must provide the source file location!"))
             return
         # Compose cmdline
         guiflags = []
@@ -8634,14 +9840,14 @@ class Gui:
                     _('Conversion done!'),
                     _('FROM:'), infile,
                     _('TO:'), config['outfile'])
-                showinfo(my_name, msg)
+                tkMessageBox.showinfo(my_name, msg)
         except error:         # common error (windowed), not quit
             pass
         except:               # fatal error (windowed and printed)
             errormsg = getUnknownErrorMessage()
             print errormsg
-            showerror(_('%s FATAL ERROR!') % my_name, errormsg)
-            self.exit(1)
+            tkMessageBox.showerror(_('%s FATAL ERROR!') % my_name, errormsg)
+            self.exit()
         CMDLINE_RAW = cmdline_raw_orig
 
     def mainwindow(self):
@@ -8802,11 +10008,14 @@ def exec_command_line(user_cmdline=[]):
         try:
             load_GUI_resources()
             Debug("GUI resources OK (Tk module is installed)")
+        except:
+            Error(_('Tkinter module not found, so GUI is not available, use CLI instead.'))
+        try:
             winbox = Gui()
             Debug("GUI display OK")
             GUI = 1
         except:
-            Debug("GUI Error: no Tk module or no DISPLAY")
+            Debug("GUI Error: no DISPLAY")
             GUI = 0
 
     # User forced --gui, but it's not available
@@ -8824,7 +10033,7 @@ def exec_command_line(user_cmdline=[]):
 
         # Redefine Error function to raise exception instead sys.exit()
         def Error(msg):
-            showerror(_('txt2tags ERROR!'), msg)
+            tkMessageBox.showerror(_('txt2tags ERROR!'), msg)
             raise error
 
         # If no input file, get RC+cmdline config, else full config
