@@ -29,3 +29,8 @@ or send a letter to Creative Commons, 444 Castro Street, Suite 900, Mountain Vie
 Alejandro Alvarez (eliluminado) <contacto@codigopython.com.ar>
 
 ## Colaboradores:
+Ante todo gracias a todos los lectores y a aquellos que me enviaron correos con consultas y sugerencias y desde ya a los ayudaron a mejorar esta guía
+
+[moisesicaza]  (https://github.com/moisesicaza/Guia-Tkinter/commit/048f4656c6bd414dc75396643d3a1cf8d3e414f5)
+
+[lordcaos]  (https://github.com/eliluminado/Guia-Tkinter/commit/a21e3234c232019a65ef0f29551039d70fc18e90)
