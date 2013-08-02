@@ -115,23 +115,15 @@ Como habíamos comentando cuando estábamos viendo el widget Entry, dijimos que 
 
 - cget(OPCION)
 
-Este metodo nos permite obtener el valor de determinada opcion pasada al campo de texto, supongamos que deseamos obtener el color de fondo (background) del campo o el tipo de borde (relief) que tiene, para esto contamos con 'cget' el cual pasandole como una cadena el nombre de la opcion nos devuelve su valor.
-Por ejemplo si sobre nuestro campo de texto llamaramos al metodo 'cget' con los siguientes argumentos veriamos algo asi:
-
-```
->>> campo_de_texto.cget('background')
-'SystemWindow'
->>> campo_de_texto.cget('relief')
-'sunken'
-```
-
-Asi funcionaria de la misma forma para todas las opciones soportadas por el widget.
+Este método cumple la misma función que se vio en el widget 'Label'.
 
 --------------------------------------------------------
 
 
 - configure
-%TODO: Desarrollar explicacion
+
+Este método cumple la misma función que se vio en el widget 'Label'.
+
 --------------------------------------------------------
 
 
@@ -337,12 +329,12 @@ En este ejemplo insertaremos la cadena "GNU/" desde el índice 0
 
 - scan
 
-% Disponible en la documentacion de Tcl/Tk pero no en Python
+% Ver: scan_mark, scan_dragto
 --------------------------------------------------------
 
 
 - selection
-% Disponible en la documentacion de Tcl/Tk pero no en Python
+% Ver: selection_adjust, selection_clear, selection_from, selection_present, selection_range, selection_to
 --------------------------------------------------------
 
 

@@ -34,3 +34,67 @@ En el se observa la ya conocida importación del modulo Tkinter, la función que
 [widgets/img/Button/Button-01.jpg]
 
 [widgets/img/Button/Button-02.jpg]
+
+
+=== Métodos ===
+
+- cget(OPCION)
+
+Este método cumple la misma función que se vio en el widget 'Label'.
+
+--------------------------------------------------------
+
+
+- configure
+
+Este método cumple la misma función que se vio en el widget 'Label'.
+
+--------------------------------------------------------
+
+- flash
+
+%TODO: Desarrollar
+
+--------------------------------------------------------
+
+
+- invoke
+
+Este método invoca al comando asociado al botón, El valor que retorna es el valor de retorno del comando o una cadena vacía en caso de no existir un comando asociado. En caso de que el botón se encuentre desactivado este método se ignora.
+
+```
+>>> import Tkinter
+>>> def funcion():
+...     print "Excelente guia"
+...
+>>> root = Tkinter.Tk()
+>>> boton = Tkinter.Button(root, text="Probando el boton", command=funcion)
+>>> boton.pack()
+>>> boton.invoke()
+Excelente guia
+'None'
+>>>
+```
+
+```
+>>> import Tkinter
+>>> def funcion():
+...     return "Excelente guia"
+...
+>>> root = Tkinter.Tk()
+>>> boton = Tkinter.Button(root, text="Probando el boton", command=funcion)
+>>> boton.pack()
+>>> boton.invoke()
+Excelente guia
+>>>
+```
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> boton = Tkinter.Button(root, text="Probando el boton")
+>>> boton.pack()
+>>> boton.invoke()
+''
+>>>
+```

@@ -23,13 +23,13 @@ Expliquemos los dos ejemplos, en el primero usamos un texto fijo no dinámico pa
 
 Pero (siempre hay un pero) antes de poder ejecutar este ejemplo en nuestra consola tendremos que declarar este widget en nuestra ventana dándole una ubicación en la misma, sino hacemos esto nuestra etiqueta simplemente no aparecerá en nuestra ventana. Para hacerlo tenemos tres formas (Esto se vera mas detenidamente mas adelante) una es usando **'pack'** y las otras dos son **'grid'** y **'place'**. Como esto se vera mas adelante haré una breve síntesis de las tres opciones que tenemos:
 
-- 'pack': 
+- 'pack':
 %[TODO]
 
-- 'grid': 
+- 'grid':
 %[TODO]
 
-- 'place: 
+- 'place:
 %[TODO]
 
 
@@ -57,4 +57,27 @@ Y así es como quedara nuestro ejemplo terminado:
 
 [widgets/img/Label/Label-01.jpg]
 
-Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer widget y podemos seguir con el próximo.
+Habiendo ya escrito esas lineas se da por finalizada la muestra de este primer widget, pero antes veamos algunos métodos que tenemos disponibles.
+
+
+=== Métodos ===
+
+- cget(OPCION)
+
+Este método nos permite obtener el valor de determinada opción pasada al widget, supongamos que deseamos obtener el color de fondo (background) o el tipo de borde (relief) que tiene, para esto contamos con 'cget' el cual pasandole como una cadena el nombre de la opción nos devuelve su valor.
+Por ejemplo si sobre nuestro widget llamáramos al método 'cget' con los siguientes argumentos veríamos algo así:
+
+```
+>>> etiqueta.cget('background')
+'SystemButtonFace'
+>>> campo_de_texto.cget('relief')
+'flat'
+```
+
+Así funcionaria de la misma forma para todas las opciones soportadas por el widget.
+
+--------------------------------------------------------
+
+
+- configure
+%TODO: Desarrollar explicación
