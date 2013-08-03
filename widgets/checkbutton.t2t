@@ -1,6 +1,6 @@
 
 
-Los que tengan conocimiento en interfaces o diseño web seguramente conoceran a los famosos 'checkbox' que en Tkinter tienen el nombre de 'checkbutton', para los nos los conocen se tratan de casillas de verificacion cuya funcion es la de permitir seleccionar o deseleccionar, activando o desactivando funciones u opciones. A quien no le a tocado activar ese pequeño cuadrado al lado de un texto que nos dice "He leído y acepto los términos y condiciones del sitio.", aunque haya aplicaciones que puedan no requerirlo no significa que se pueda prescindir de ellos ya que su uso esta en gran parte de las aplicaciones de uso cotidiano desde nuestros editores o entornos de desarrollo cuando programamos hasta en las utilidades de configuracion de nuestros sistemas operativos, aunque repetimos su uso nos es obligatorio siempre es bueno conocer las herramientas que tenemos disponibles.
+Los que tengan conocimiento en interfaces o diseño web seguramente conocerán a los famosos 'checkbox' que en Tkinter tienen el nombre de 'checkbutton', para los nos los conocen se tratan de casillas de verificación cuya función es la de permitir seleccionar o deseleccionar, activando o desactivando funciones u opciones. A quien no le a tocado activar ese pequeño cuadrado al lado de un texto que nos dice "He leído y acepto los términos y condiciones del sitio.", aunque haya aplicaciones que puedan no requerirlo no significa que se pueda prescindir de ellos ya que su uso esta en gran parte de las aplicaciones de uso cotidiano desde nuestros editores o entornos de desarrollo cuando programamos hasta en las utilidades de configuración de nuestros sistemas operativos, aunque repetimos su uso nos es obligatorio siempre es bueno conocer las herramientas que tenemos disponibles.
 
 Como venimos haciendo escribamos un poco de codigo y luego vayamos viendo que se escribio
 
@@ -41,21 +41,21 @@ False
 <a href="http://www.dailymotion.com/video/x12ar0m_checkbutton-basico-en-tkinter_tech" target="_blank">Checkbutton Basico en Tkinter</a> <em>por <a href="http://www.dailymotion.com/eliluminado2010" target="_blank">eliluminado2010</a></em>
 '''
 
-En los dos ejemplos establecemos una variable que puede ser del tipo 'IntVar' o 'BooleanVar', las dos cumplen con su trabajo aunque trabajen con distintos tipos de datos consiguen el mismo resultado, establecida nuestra variable pasamos a crear y mostrar nuestra casilla de verificacion y con ella marcandola y desmarcandola vemos como el valor de la variable alterna de True a False en el caso de 'BooleanVar' o de 0 a 1 en el caso de'IntVar'. Con este ejemplo podemos tener una idea de como trajaba 'Checkbutton' pero aun nos quedan ver algunos metodos para volverlo mas interesante.
+En los dos ejemplos establecemos una variable que puede ser del tipo 'IntVar' o 'BooleanVar', las dos cumplen con su trabajo aunque trabajen con distintos tipos de datos consiguen el mismo resultado, establecida nuestra variable pasamos a crear y mostrar nuestra casilla de verificación y con ella marcándola y desmarcandola vemos como el valor de la variable alterna de True a False en el caso de 'BooleanVar' o de 0 a 1 en el caso de'IntVar'. Con este ejemplo podemos tener una idea de como trabaja 'Checkbutton' pero aun nos quedan ver algunos métodos para volverlo mas interesante.
 
 === Métodos ===
 
 - cget(OPCION)
 
-Este metodo cumple la misma funcion que se vio en el widget 'Entry'.
+Este método cumple la misma función que se vio en el widget 'Label'.
 
 - configure
 
-Este metodo cumple la misma funcion que se vio en el widget 'Entry'.
+Este método cumple la misma función que se vio en el widget 'Label'.
 
 - deselect
 
-Desmarca la selección de la casilla de verificacion y establece el valor de la variable asociada a False. Usarlo es muy simple, para verlo deberiamos crear un 'Checkbutton' basico marcarlo y luego llamar al metodo 'deselect'
+Desmarca la selección de la casilla de verificación y establece el valor de la variable asociada a False. Usarlo es muy simple, para verlo deberíamos crear un 'Checkbutton' básico marcarlo y luego llamar al método 'deselect'
 
 ``` >>> checkbutton.deselect()
 
@@ -65,7 +65,11 @@ Desmarca la selección de la casilla de verificacion y establece el valor de la 
 
 - invoke
 
-%TODO: Desarrollar "http://www.tcl.tk/man/tcl8.5/TkCmd/checkbutton.htm#M12"
+Este comando tiene la particularidad de realizar la misma acción que el método 'toggle' pero se diferencia porque 'invoke' se comporta como si el usuario hubiera hecho clic sobre el 'Checkbutton', con esto nos referimos a que si nuestra casilla de verificación tuviera asociado un comando a través de la opción 'command' esta se ejecutaría a diferencia de los métodos 'select', 'deselect' y 'toggle' que lo ignoran.
+
+%TODO: Hacer vídeo
+
+``` >>> checkbutton.invoke()
 
 - select
 
@@ -76,3 +80,5 @@ Asi como contamos con una forma de desmarcar nuestro 'Checkbutton' con 'select' 
 - toggle
 
 Este ultimo metodo une a 'select' y 'deselect', nos permite alternar su estado actualizando el valor de su variable asociada, por ejemplo si la casilla se encontrara marcada al llamar a 'toggle' esta se desmarcaria y si volvieramos a llamar a 'toggle' esta se volveria a marcar.
+
+``` >>> checkbutton.toggle()
