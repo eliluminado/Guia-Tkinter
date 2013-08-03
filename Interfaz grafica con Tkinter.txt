@@ -22,7 +22,7 @@ Puede descargar la versión más reciente de esta guía gratuitamente en la web
 
 Agradecimientos
 
-Ante todo gracias a todos los lectores y a aquellos que me enviaron correos con consultas y suguerencias y desde ya a los ayudaron a mejorar esta guia
+Ante todo gracias a todos los lectores y a aquellos que me enviaron correos con consultas y sugerencias y desde ya a los ayudaron a mejorar esta guía
 
 [moisesicaza https://github.com/moisesicaza/Guia-Tkinter/commit/048f4656c6bd414dc75396643d3a1cf8d3e414f5]
 
@@ -157,6 +157,12 @@ En esta sección no nos centraremos en el posicionamiento y diseño de los eleme
 == Casillas de verificacion [Checkbutton] ==
 
 %!include: widgets/checkbutton.t2t
+
+
+== Botones de opción [Radiobutton] ==
+
+%!include: widgets/radiobutton.t2t
+
 
 == Barras de desplazamiento [Scrollbar] ==
 
