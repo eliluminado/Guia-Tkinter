@@ -41,17 +41,19 @@ Un ejemplo sensillo para verlo en accion:
 >>>
 ```
 
-NOTA:
+: NOTA:
 Si desean ver como funcionan mas en detalle estas variables pueden ver estos objetos desde el codigo fuente de la libreria Tkinter, para esto deben dirigirse a la carpeta donde se encuentra instalado python y ahi van a la carpeta 'Lib' y luego a la carpeta 'lib-tk', alli se encuentra el codigo fuente de Tkinter, la clase que contieneal objeto 'StringVar' se encuentra dentro del archivo 'Tkinter.py' que es el que se carga cuando hacemos 'import Tkinter'
 
 Pudimos notar en ese ejemplo el uso de un metodo llamado 'get' el cual esta disponible para las cuatro tipos de variables, al igual que otros metodos que iremos viendo de a uno.
 
 Empecemos viendo esa linea donde creamos esa variable llamada 'variable', donde a 'StringVar' no le pasamos ningun argumento, si se dieron una vuelta por el codigo fuente de Tkinter.py habran visto cuando se inicializa el objeto se ve que toma 3 parametros con valores 'None', analicemos su funcionamiento
 
-master
+
+- master
 %TODO: Desarrollar
 
-value
+- value
+
 Nos permite asignar un valor a la variable cuando esta es creada
 
 ```
@@ -60,7 +62,8 @@ Nos permite asignar un valor a la variable cuando esta es creada
 'Hola'
 ```
 
-name
+- name
+
 Nos permite darle un nombre opcional, por defecto Tkinter le un nombre del tipo PY_VARnum, donde 'num' es reemplazado por un numero que varia dependiendo de la cantidad de variables que hayan sido creadas. Este valor es usado internamente por el lenguaje Tcl por lo queno nos interesara modificar su valor. Para conocer su valor simplemente llamamos al atributo '_name' que nos mostrara el valor de este.
 
 ```
@@ -71,24 +74,29 @@ Nos permite darle un nombre opcional, por defecto Tkinter le un nombre del tipo 
 
 Ahora que ya sabemos como y con que crear nuestra variable veamos los metodos que tememos disponibles.
 
-get()
+- get()
+
 Aunque ya vimos a 'get' no esta demas mencionarlo nuevamente ya que este seguramente sera el mas utilizado junto a 'set', 'get' nos permite obtener el valor contenido en la variable.
 
 ``` >>> variable.get()
 
-set(value)
+- set(value)
+
 Como se menciono en la descripcion de 'get' estos forman una gran pareja resultando en dos metodos basicos muy utiles, este metodo en particular nos permite modificar el contenido
 
 ``` >>> variable.set("Valor que deseamos guardar")
 
-trace_variable(mode, callback)
+- trace_variable(mode, callback)
+
 Ya vimos dos metodos sencillos, pero ahora mostraremos tres con un uso un poco mas avanzado pero una vez que entendamos como funcionan nos permitiran conseguir resultados bastantes avanzados. En primer lugar tenemos a 'trace_variable' el cual nos permite definir una funcion a la cual llamar cuando se realice una determinada accion sobre la variable para ello cuenta con dos parametros uno de ellos es 'mode' que nos pide en que modo de captura es que llamara a la funcion, puede tomar tres valores 'w', 'r' y 'u' donde 'w' es para cuando se escribe en la variable, 'r' corresponde a la lectura de la misma y por ultimo 'u'.
 %FIXME: Terminar descripcion modo 'u'
 
-trace_vdelete
+- trace_vdelete
+
 Mientras que con 'trace_variable' podiamos definir una funcion para determinados eventos tambien necesitabamos una herramienta que nos permitiera quitar esa respuesta para ese evento y es cuando entra 'trace_vdelete'. Su funcionamiento es es muy simple este toma un modo que ya habiamos visto y ademas nos pide el valor que nos devolvio 'trace_variable' al momento de ser ejecutado, veamoslo con un pequeño ejemplo y luego retomamos su explicacion
 
-trace_vinfo
+- trace_vinfo
+%TODO: Desarrollar descripción
 
 
 
