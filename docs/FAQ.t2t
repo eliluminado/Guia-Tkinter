@@ -14,6 +14,10 @@ Esta FAQ se encuentra en construcción, cualquier aporte o sugerencia siempre so
 Esta guía esta destinada a todos los que desean iniciarse en la construcción de interfaces gráficas, a través de un entorno simple y fácil de aprender a de mas de ser portable por ser distribuido junto con Python en los entornos Windows y preinstalado en la mayoría de las distribuciones Linux
 
 
+: Que temas no comprenderá la guía
+Una de las funciones que no se pretenderán cubrir dentro de la guía es el uso del widget 'canvas'
+
+
 : Como puedo realizar un aporte
 Cualquier aporte o comentario siempre son bienvenidos y pueden hacerlo a través del foro
 [http://foro.codigopython.com.ar/forum-4.html] o mandándome un correo a
