@@ -1,56 +1,41 @@
 
 
-Los siguiente metodos nos daran la posibilidad de personalizar al maximo nuestra aplicacion y cada una de sus ventanas
+Los siguiente métodos nos darán la posibilidad de personalizar al máximo nuestra aplicación y cada una de sus ventanas, estas nos proveen de funciones para la comunicación con el gestor de ventanas de Tkinter, donde nos permite desde controlar cosas como el titulo de una ventana, sus icono o hasta modificar sus dimensiones
 
-% Para mas información http://www.tcl.tk/man/tcl8.5/TkCmd/wm.htm
+Antes de verlos cabe aclararse que hay dos formas de llamarlos "una para eventos y otra una funcion directa"
 
-=== iconify ===
+Para mas información [http://www.tcl.tk/man/tcl8.5/TkCmd/wm.htm http://www.tcl.tk/man/tcl8.5/TkCmd/wm.htm]
 
-: Descripcion:
-
-Permite minimizar la ventana que le indiquemos, esto es util para por ejemplo minimizar una ventana padre cuando se abre una ventana hija. Lo mejor sera verlo con unos ejemplos.
-
-
-: Argumentos:
-
-No tiene
-
-
-: Ejemplos:
-
-- En este ejemplo usamos el metodo 'iconify' en un boton para minimizar la ventana cuando se haga click sobre el:
-
-```
-import Tkinter
-
-root = Tkinter.Tk()
-boton = Tkinter.Button(root, text="Minimizar", command=root.iconify)
-boton.pack()
-root.mainloop()
-```
-
-- En este otro ejemplo creamos un boton que abre otra ventana y minimiza la ventana padre
-
-```
-import Tkinter
-
-def funcion():
-    otra_ventana = Tkinter.Toplevel(root)
-    root.iconify()
-
-root = Tkinter.Tk()
-boton = Tkinter.Button(root, text="Abrir otra ventana", command=funcion)
-boton.pack()
-root.mainloop()
-```
+=== aspect ===
 
 --------------------------------------------------------
+
+
+=== attributes ===
+
+--------------------------------------------------------
+
+
+=== client ===
+
+--------------------------------------------------------
+
+
+=== colormapwindows ===
+
+--------------------------------------------------------
+
+
+=== command ===
+
+--------------------------------------------------------
+
 
 === deiconify ===
 
 : Descripcion:
 
-Al contrario de como vimos en 'iconify' que podiamos minimizar la ventana, con 'deiconify' podemos restaurar la ventana, como paso con 'iconify' veamoslo con unos ejemplos
+Al contrario de como veremos en 'iconify' que podremos minimizar la ventana, con 'deiconify' se podrá restaurar la ventana
 
 
 : Argumentos:
@@ -79,55 +64,16 @@ root.mainloop()
 
 --------------------------------------------------------
 
-=== title ===
 
-: Descripcion:
-
-Permite indicar el titulo de la ventana. Podria decirse que este valor se hereda ya que si creamos una nueva ventana a traves de Toplevel esta tomaria el nombre de la ventana padre.
-
-
-: Argumentos:
-
-String (Cadena)
-
-
-: Ejemplos:
-
-- Ejemplos simple:
-```
-root = Tkinter.Tk()
-root.title("Bienvenido a Codigo Python")
-root.mainloop()
-```
-
-[diseno/metodos/img/title-01.jpg]
-
-
-- Heredando el titulo de la ventana padre:
-
-```
-root = Tkinter.Tk()
-root.title("Bienvenido a Codigo Python")
-otra_ventana = Tkinter.Toplevel(root)
-root.mainloop()
-```
-
-[diseno/metodos/img/title-02.jpg]
-
-
-- Ejemplo de dos ventanas con titulos distintos:
-
-```
-root = Tkinter.Tk()
-root.title("Bienvenido a")
-otra_ventana = Tkinter.Toplevel(root)
-otra_ventana.title("Codigo Python")
-root.mainloop()
-```
-
-[diseno/metodos/img/title-03.jpg]
+=== focusmodel ===
 
 --------------------------------------------------------
+
+
+=== frame ===
+
+--------------------------------------------------------
+
 
 === geometry ===
 
@@ -215,6 +161,85 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 --------------------------------------------------------
 
+
+=== grid ===
+
+--------------------------------------------------------
+
+
+=== group ===
+
+--------------------------------------------------------
+
+
+=== iconbitmap ===
+
+--------------------------------------------------------
+
+
+=== iconify ===
+
+: Descripcion:
+
+Permite minimizar la ventana que le indiquemos, esto es util para por ejemplo minimizar una ventana padre cuando se abre una ventana hija. Lo mejor sera verlo con unos ejemplos.
+
+
+: Argumentos:
+
+No tiene
+
+
+: Ejemplos:
+
+- En este ejemplo usamos el metodo 'iconify' en un boton para minimizar la ventana cuando se haga click sobre el:
+
+```
+import Tkinter
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Minimizar", command=root.iconify)
+boton.pack()
+root.mainloop()
+```
+
+- En este otro ejemplo creamos un boton que abre otra ventana y minimiza la ventana padre
+
+```
+import Tkinter
+
+def funcion():
+    otra_ventana = Tkinter.Toplevel(root)
+    root.iconify()
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Abrir otra ventana", command=funcion)
+boton.pack()
+root.mainloop()
+```
+
+--------------------------------------------------------
+
+
+=== iconmask ===
+
+--------------------------------------------------------
+
+
+=== iconname ===
+
+--------------------------------------------------------
+
+
+=== iconposition ===
+
+--------------------------------------------------------
+
+
+=== iconwindow ===
+
+--------------------------------------------------------
+
+
 === maxsize ===
 
 : Descripcion:
@@ -288,42 +313,21 @@ root.minsize(height=600, witdh=400)
 
 --------------------------------------------------------
 
-=== state ===
 
-: Descripcion:
-
-Podemos cambiar el estado en el que se encuentra la ventana a 'normal', 'iconic' o 'withdraw'. Con la opcion 'normal' la ventana se comporta normalmente apareciendo en la ventana, con la opcion 'iconic' obtenemos los mismos resultados que el metodo 'iconify()'  minimizando la ventana y por ultimo con 'withdraw' obtendremos como se imaginaran el mismo resultado que con 'withdraw' ocultando la ventana.
-
-
-: Argumentos:
-
-newstate=ESTADO
-
-Donde ESTADO toma estos valores:
-```
-"normal"
-"withdraw"
-"iconic"
-```
-
-: Ejemplos:
-
-```
-import Tkinter
-import time
-
-def funcion():
-    root.state(newstate='withdraw')
-    time.sleep(5)
-    root.state(newstate='normal')
-
-root = Tkinter.Tk()
-boton = Tkinter.Button(root, text="Probando el metodo state", command=funcion)
-boton.pack()
-root.mainloop()
-```
+=== overrideredirect ===
 
 --------------------------------------------------------
+
+
+=== positionfrom ===
+
+--------------------------------------------------------
+
+
+=== protocol ===
+
+--------------------------------------------------------
+
 
 === resizable ===
 
@@ -363,38 +367,97 @@ o tambien esta forma:
 
 --------------------------------------------------------
 
-=== withdraw ===
+
+=== sizefrom ===
+
+--------------------------------------------------------
+
+
+=== state ===
 
 : Descripcion:
 
-Este metodo permite ocultar una ventana; la forma que podemos usar para restaurarla es con 'deiconify()' o 'iconify()', o a traves del metodo 'state' que nos puede resultar mas comodo de usar. No se requiere de ningun argumento para funcionar como sucede tanto con 'deiconify' e 'iconify'.
-
-``` root.withdraw()
+Podemos cambiar el estado en el que se encuentra la ventana a 'normal', 'iconic' o 'withdraw'. Con la opcion 'normal' la ventana se comporta normalmente apareciendo en la ventana, con la opcion 'iconic' obtenemos los mismos resultados que el metodo 'iconify()'  minimizando la ventana y por ultimo con 'withdraw' obtendremos como se imaginaran el mismo resultado que con 'withdraw' ocultando la ventana.
 
 
 : Argumentos:
 
-No tiene
+newstate=ESTADO
 
+Donde ESTADO toma estos valores:
+```
+"normal"
+"withdraw"
+"iconic"
+```
 
 : Ejemplos:
 
 ```
-#!/usr/bin/env python
-
 import Tkinter
 import time
 
 def funcion():
-    root.withdraw()
+    root.state(newstate='withdraw')
     time.sleep(5)
-    root.deiconify()
+    root.state(newstate='normal')
 
 root = Tkinter.Tk()
-boton = Tkinter.Button(root, text="Probando el metodo withdraw", command=funcion)
+boton = Tkinter.Button(root, text="Probando el metodo state", command=funcion)
 boton.pack()
 root.mainloop()
 ```
+
+--------------------------------------------------------
+
+
+=== title ===
+
+: Descripcion:
+
+Permite indicar el titulo de la ventana. Podria decirse que este valor se hereda ya que si creamos una nueva ventana a traves de Toplevel esta tomaria el nombre de la ventana padre.
+
+
+: Argumentos:
+
+String (Cadena)
+
+
+: Ejemplos:
+
+- Ejemplos simple:
+```
+root = Tkinter.Tk()
+root.title("Bienvenido a Codigo Python")
+root.mainloop()
+```
+
+[diseno/metodos/img/title-01.jpg]
+
+
+- Heredando el titulo de la ventana padre:
+
+```
+root = Tkinter.Tk()
+root.title("Bienvenido a Codigo Python")
+otra_ventana = Tkinter.Toplevel(root)
+root.mainloop()
+```
+
+[diseno/metodos/img/title-02.jpg]
+
+
+- Ejemplo de dos ventanas con titulos distintos:
+
+```
+root = Tkinter.Tk()
+root.title("Bienvenido a")
+otra_ventana = Tkinter.Toplevel(root)
+otra_ventana.title("Codigo Python")
+root.mainloop()
+```
+
+[diseno/metodos/img/title-03.jpg]
 
 --------------------------------------------------------
 
@@ -433,3 +496,39 @@ root.mainloop()
 ```
 
 Como ven si intentan mover la ventana padre observaran que esta permanece siempre debajo de la ventana hija.
+
+--------------------------------------------------------
+
+
+=== withdraw ===
+
+: Descripcion:
+
+Este metodo permite ocultar una ventana; la forma que podemos usar para restaurarla es con 'deiconify()' o 'iconify()', o a traves del metodo 'state' que nos puede resultar mas comodo de usar. No se requiere de ningun argumento para funcionar como sucede tanto con 'deiconify' e 'iconify'.
+
+``` root.withdraw()
+
+
+: Argumentos:
+
+No tiene
+
+
+: Ejemplos:
+
+```
+#!/usr/bin/env python
+
+import Tkinter
+import time
+
+def funcion():
+    root.withdraw()
+    time.sleep(5)
+    root.deiconify()
+
+root = Tkinter.Tk()
+boton = Tkinter.Button(root, text="Probando el metodo withdraw", command=funcion)
+boton.pack()
+root.mainloop()
+```
