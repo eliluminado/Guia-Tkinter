@@ -55,6 +55,26 @@ Así como veremos mas adelante tenemos funciones que nos permitirán interactuar
 
 === winfo_geometry ===
 
+Devuelve los datos de la geometría de la ventana o widget, usando la forma 'WxH+x+y'; donde 'W' indica el ancho, 'H' la altura y donde x e y sus posiciones.
+
+Veamos un ejemplos usándolo con una ventana y otro sobre un widget
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> label = Tkinter.Label(root, text="Probando wfinfo_geometry")
+>>> label.pack()
+>>> root.winfo_geometry()
+'151x21+620+132'
+>>> label.winfo_geometry()
+'151x21+0+0'
+>>>
+```
+
+Como podemos apreciar cuando se llama sobre 'root' quien es nuestra ventana nos muestra sus dimensiones y su posición respecto de la pantalla de nuestro monitor mientras que cuando lo llamamos sobre el widget 'label' nos muestra ademas de sus dimensiones su posición pero respecto del elemento que lo contiene que en nuestro caso es la ventana 'root'. Les dejo como experiencia crear una ventana con mas elementos e ir experimentando un poco mas.
+
+%TODO: Ampliar con una explicación mas avanzada
+
 --------------------------------------------------------
 
 
