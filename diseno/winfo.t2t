@@ -11,6 +11,8 @@ Para ir probando las distintas funciones que tenemos disponibles tomaremos como 
 >>> label.pack()
 ```
 
+%TODO: Desarrollar ejemplos avanzados
+
 === winfo_atom ===
 
 --------------------------------------------------------
@@ -28,10 +30,32 @@ Para ir probando las distintas funciones que tenemos disponibles tomaremos como 
 
 === winfo_children ===
 
+Devuelve una lista de todos los widgets que son hijos del widget sobre el cual se lo llama.
+
+%TODO: Explicar orden en el que se muestran los hijos (http://www.tcl.tk/man/tcl8.5/TkCmd/winfo.htm#M8)
+
+```
+>>> root.winfo_children()
+[<Tkinter.Label instance at 0x00000000025C3D48>]
+>>> label.winfo_children()
+[]
+>>>
+```
+
 --------------------------------------------------------
 
 
 === winfo_class ===
+
+Devuelve el nombre de la clase para el widget, recuerden que cada widget es una clase contenida dentro de la librería 'Tkinter.py'
+
+```
+>>> root.winfo_class()
+'Tk'
+>>> label.winfo_class()
+'Label'
+>>>
+```
 
 --------------------------------------------------------
 
