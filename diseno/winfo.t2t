@@ -2,6 +2,14 @@
 
 Así como veremos mas adelante tenemos funciones que nos permitirán interactuar con nuestras ventanas, tenemos otras que nos devuelven información de ellas como sus dimensiones, ademas veremos como no solo pueden trabajar con ventanas sino también con nuestros widgets.
 
+Para ir probando las distintas funciones que tenemos disponibles tomaremos como el siguiente código como base:
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> label = Tkinter.Label(root, text="Probando winfo")
+>>> label.pack()
+```
 
 === winfo_atom ===
 
@@ -60,10 +68,6 @@ Devuelve los datos de la geometría de la ventana o widget, usando la forma 'WxH
 Veamos un ejemplos usándolo con una ventana y otro sobre un widget
 
 ```
->>> import Tkinter
->>> root = Tkinter.Tk()
->>> label = Tkinter.Label(root, text="Probando wfinfo_geometry")
->>> label.pack()
 >>> root.winfo_geometry()
 '151x21+620+132'
 >>> label.winfo_geometry()
@@ -179,20 +183,57 @@ Como nos anticipa su nombre nos devuelve la altura de la ventana/widget.
 
 === winfo_screendepth ===
 
+Nos devuelve un numero entero la profundidad del color de la ventana raíz de la pantalla. Para mas referencias consultar con la Wikipedia ([http://es.wikipedia.org/wiki/Profundidad_de_color http://es.wikipedia.org/wiki/Profundidad_de_color]).
+
+```
+>>> root.winfo_screendepth()
+32
+```
+
 --------------------------------------------------------
 
 
 === winfo_screenheight ===
+
+Devuelve en pixeles la altura de la pantalla.
+
+```
+>>> root.winfo_screenheight()
+768
+>>> label.winfo_screenheight()
+768
+>>>
+```
 
 --------------------------------------------------------
 
 
 === winfo_screenmmheight ===
 
+Devuelve en milímetros la altura de la pantalla.
+
+```
+>>> root.winfo_screenmmheight()
+203
+>>> label.winfo_screenmmheight()
+203
+>>>
+```
+
 --------------------------------------------------------
 
 
 === winfo_screenmmwidth ===
+
+Devuelve en milímetros el ancho de la pantalla.
+
+```
+>>> root.winfo_screenmmwidth()
+271
+>>> label.winfo_screenmmwidth()
+271
+>>>
+```
 
 --------------------------------------------------------
 
@@ -203,6 +244,16 @@ Como nos anticipa su nombre nos devuelve la altura de la ventana/widget.
 
 
 === winfo_screenwidth ===
+
+Devuelve en pixeles el ancho de la pantalla.
+
+```
+>>> root.winfo_screenwidth()
+1024
+>>> label.winfo_screenwidth()
+1024
+>>>
+```
 
 --------------------------------------------------------
 
