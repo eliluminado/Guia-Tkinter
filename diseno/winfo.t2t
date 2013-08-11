@@ -80,6 +80,10 @@ Como podemos apreciar cuando se llama sobre 'root' quien es nuestra ventana nos 
 
 === winfo_height ===
 
+Como nos anticipa su nombre nos devuelve la altura de la ventana/widget.
+
+``` root.winfo_height()
+
 --------------------------------------------------------
 
 
@@ -255,12 +259,24 @@ Como podemos apreciar cuando se llama sobre 'root' quien es nuestra ventana nos 
 
 === winfo_width ===
 
+Complementando a 'winfo_height' tenemos a 'winfo_width' que devuelve el ancho del elemento que le pasamos.
+
+``` root.winfo_width()
+
 --------------------------------------------------------
 
 
 === winfo_x ===
 
+Devuelve la posición en el eje 'x' de la ventana sobre el elemento que lo contiene.
+
+``` root.winfo_x()
+
 --------------------------------------------------------
 
 
 === winfo_y ===
+
+Devuelve la posición en el eje 'y' de la ventana sobre el elemento que lo contiene.
+
+``` root.winfo_y()
