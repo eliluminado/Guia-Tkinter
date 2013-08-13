@@ -132,6 +132,25 @@ Como nos anticipa su nombre nos devuelve la altura de la ventana/widget.
 
 === winfo_manager ===
 
+Retorna el nombre del gestor de ventanas para el widget o una cadena vacía si no se encuentra administrador por un gestor. El nombre es por lo general el nombre del comando de Tk para el gestor, como pueden ser 'grid', 'pack', 'place' o 'wm'.
+%FIXME: Mejor descripción
+%TODO: Detallar valores de retorno
+
+En el siguiente ejemplo creamos un campo de texto pero no lo colocamos en la pantalla solo lo definimos.
+
+```
+>>> root.winfo_manager()
+'wm'
+>>> label.winfo_manager()
+'pack'
+>>> entry = Tkinter.Entry(root)
+>>> entry.winfo_manager()
+''
+>>>
+```
+
+Como se observa 'entry' no se encuentra administrador por ningún gestor por esto nos devuelve una cadena vacía.
+
 --------------------------------------------------------
 
 
