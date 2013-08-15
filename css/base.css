@@ -1,56 +1,115 @@
+
 body {
-    font-family: serif;
+    background-color: #FFFFFF;
+    color: #1E1E1E;
+    font-family: Georgia,"Times New Roman",Times,serif;
     font-size: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    outline: medium none;
+    text-decoration: none;
+}
+
+address, article, aside, figcaption, figure, footer, header, hgroup, nav, section {
+    clear: both;
+    display: block;
+    margin-left: 1em;
+    padding: 0;
+}
+
+header, footer {
+    background-color: #333333;
+    color: #C0BAB6;
+    display: block;
     margin: 0 auto;
-    padding: 3em;
+    padding: 1.250em 0 1.250em 0.938em;
 }
-.toc {
-    page-break-after: always;
-}
-h1 {
-    page-break-before: always;
-}
-pre {
-    background-attachment: scroll;
-    background-color: #D3D3D3;
-    background-image: none;
-    background-position: 0 0;
-    background-repeat: repeat;
-    border: 1px dashed black;
-    border-radius: 5px 5px 5px 5px;
-    color: #000000;
-    direction: ltr;
-    font-family: monospace;
-    font-size: 0.75em;
+
+/* Titulos */
+h1, h2, h3, h4, h5, h6 {
     font-style: normal;
     font-weight: normal;
-    letter-spacing: normal;
-    line-height: 1.5em;
-    margin: 1em 0 1em 1em;
-    opacity: 1;
-    padding: 1em;
-    text-align: left;
-    text-decoration: none;
-    text-overflow: clip;
-    text-transform: none;
-    vertical-align: baseline;
-    white-space: pre-wrap;
-    word-spacing: 0;
+    line-height: normal;
+    margin: 0;
+    padding: 0;
 }
-pre:before {
-    
-}
-pre:after {
 
+h1 {
+    font-size: 200%;
 }
-/* Estilos para la impresion */
-@media print {
-    pre {
-        background-color: transparent;
-        background-image: none;
-        background-repeat: repeat;
-        background-position: 0 0;
-        background-attachment: scroll;
-        opacity: 1;
-    }
+h2 {
+    font-size: 160%;
+}
+h3 {
+    font-size: 140%;
+}
+h4 {
+    font-size: 120%;
+}
+h5 {
+    font-size: 100%;
+}
+h6 {
+    font-size: 90%;
+}
+
+#start_intro {
+    float: left;
+    width: 45%;
+}
+
+/* Indice */
+#toc {
+    background-color: #D9EDF7;
+    border-color: #BCE8F1;
+    border-radius: 0.25em 0.25em 0.25em 0.25em;
+    clear: right;
+    color: #3A87AD;
+    float: right;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin-bottom: 2em;
+    padding: 0.5em 2.188em 0.5em 0.875em;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+#toc h1 {
+    margin-bottom: 0.25em;
+}
+#toc ol {
+    line-height: 1.429em;
+    list-style: decimal outside none;
+    margin-bottom: 0.5em;
+    margin-left: 1.786em;
+}
+#toc ul {
+    list-style-type: none;
+    margin-left: 1.25em;
+}
+#toc a {
+    color: #0088CC;
+    text-decoration: none;
+}
+#toc nav {
+    margin-bottom: 1em;
+}
+
+dd {
+    border: 1px solid #AAAAAA;
+    border-radius: 0.313em 0.313em 0.313em 0.313em;
+    margin: 1em;
+    padding: 0.6em;
+}
+
+/* Formato para pre */
+pre {
+    border-left: 0.688em solid #CCCCCC;
+    color: #555555;
+    font-family: "Courier New",Courier,monospace,sans-serif;
+    font-size: 0.813em;
+    margin: 1.7em 0 1.7em 0.3em;
+    overflow: auto;
+    padding: 0.1em 0.5em 0.3em 0.7em;
+    width: 93%;
 }
