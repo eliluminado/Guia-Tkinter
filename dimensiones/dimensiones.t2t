@@ -18,31 +18,31 @@ Ejemplos:
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth=10)
 
-[dimensiones/img/dimensiones_pixeles.jpg]
+[img/dimensiones/img/dimensiones_pixeles.jpg]
 
 - Centímetros:
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='1c')
 
-[dimensiones/img/dimensiones_centrimetros.jpg]
+[img/dimensiones/img/dimensiones_centrimetros.jpg]
 
 - Pulgadas:
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='1i')
 
-[dimensiones/img/dimensiones_pulgadas.jpg]
+[img/dimensiones/img/dimensiones_pulgadas.jpg]
 
 - Milímetros:
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10m')
 
-[dimensiones/img/dimensiones_milimetros.jpg]
+[img/dimensiones/img/dimensiones_milimetros.jpg]
 
 - Puntos:
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", borderwidth='10p')
 
-[dimensiones/img/dimensiones_puntos.jpg]
+[img/dimensiones/img/dimensiones_puntos.jpg]
 
 
 Estas unidades de medida a excepción de los píxeles, no es recomendable usarlos ya que no están pensados específicamente para trabajar con elementos de la pantalla de nuestro ordenador y al usarlos es muy probable que no consigamos los tamaños o proporciones que esperábamos en la pantalla, por ejemplo los puntos se utiliza muy frecuentemente para la impresión ya que fueron diseñados para ese propósito y lo mismo pasa con los milímetros o las pulgadas que fueron diseñadas para otros ámbitos.
