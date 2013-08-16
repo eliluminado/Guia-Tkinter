@@ -19,7 +19,7 @@ Con esta opcion podemos indicar que color de fondo se debera utilizar cuando el 
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activebackground="#F50743")
 
-[widgets/img/opciones/activebackground.jpg]
+[img/widgets/img/opciones/activebackground.jpg]
 
 --------------------------------------------------------
 
@@ -35,7 +35,7 @@ Al igual que pasa con 'activebackground' con esta otra opcion podemos especifica
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, activeforeground="#F50743")
 
-[widgets/img/opciones/activeforeground.jpg]
+[img/widgets/img/opciones/activeforeground.jpg]
 
 --------------------------------------------------------
 
@@ -54,63 +54,63 @@ Tkinter nos permite controlar de que forma se va a posicionar un texto o imagen 
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="nw")
 
-[widgets/img/opciones/anchor/anchor_nw.jpg]
+[img/widgets/img/opciones/anchor/anchor_nw.jpg]
 
 
 - Posiciona el texto/imagen en la parte superior del widget
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="n")
 
-[widgets/img/opciones/anchor/anchor_n.jpg]
+[img/widgets/img/opciones/anchor/anchor_n.jpg]
 
 
 - Posiciona el texto/imagen en la esquina superior derecha del widget
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="ne")
 
-[widgets/img/opciones/anchor/anchor_ne.jpg]
+[img/widgets/img/opciones/anchor/anchor_ne.jpg]
 
 
 - Posiciona el texto/imagen en la parte izquierda del widget
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="w")
 
-[widgets/img/opciones/anchor/anchor_w.jpg]
+[img/widgets/img/opciones/anchor/anchor_w.jpg]
 
 
 - Posiciona el texto/imagen en el centro del widget
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="center")
 
-[widgets/img/opciones/anchor/anchor_center.jpg]
+[img/widgets/img/opciones/anchor/anchor_center.jpg]
 
 
 - Posiciona el texto/imagen en la parte derecha del widget
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="e")
 
-[widgets/img/opciones/anchor/anchor_e.jpg]
+[img/widgets/img/opciones/anchor/anchor_e.jpg]
 
 
 - Posiciona el texto/imagen en la esquina inferior izquierda del widget
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="sw")
 
-[widgets/img/opciones/anchor/anchor_sw.jpg]
+[img/widgets/img/opciones/anchor/anchor_sw.jpg]
 
 
 - Posiciona el texto/imagen en la parte inferior del widget
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="s")
 
-[widgets/img/opciones/anchor/anchor_s.jpg]
+[img/widgets/img/opciones/anchor/anchor_s.jpg]
 
 
 - Posiciona el texto/imagen en la esquina inferior derecha del widget
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, width=20, height=10, anchor="se")
 
-[widgets/img/opciones/anchor/anchor_se.jpg]
+[img/widgets/img/opciones/anchor/anchor_se.jpg]
 
 --------------------------------------------------------
 
@@ -123,7 +123,7 @@ Sirve para indicar el color de fondo que tendra en area del widget cuando este s
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, bg="#38EB5C")
 
-[widgets/img/opciones/background.jpg]
+[img/widgets/img/opciones/background.jpg]
 
 --------------------------------------------------------
 
@@ -141,7 +141,7 @@ Nos da la posibilidad de especificar el ancho del borde del elemento con el que 
 
 ``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", bd=15)
 
-[widgets/img/opciones/borderwidth.jpg]
+[img/widgets/img/opciones/borderwidth.jpg]
 
 --------------------------------------------------------
 
@@ -157,7 +157,7 @@ def funcion():
 boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion)
 ```
 
-[widgets/img/Button/Button-01.jpg]
+[img/widgets/img/Button/Button-01.jpg]
 
 %TODO: Para funciones con argumentos (usar lambda)
 % http://effbot.org/zone/tkinter-callbacks.htm
@@ -174,7 +174,7 @@ El valor 'none' consigue eliminar el cursor cuando se pasa el cursor sobre el wi
 
 ``` etiqueta = Tkinter.Label(root, text="Que te parece la guia?", cursor="hand1")
 
-[widgets/img/opciones/cursor.jpg]
+[img/widgets/img/opciones/cursor.jpg]
 
 --------------------------------------------------------
 
@@ -222,7 +222,7 @@ Si deseamos cambiar el color de las letras de nuestro texto cuando el widget se 
 
 ``` boton = Tkinter.Button(root, text="Hola Mundo!!!", command=funcion, fg="#38EB5C")
 
-[widgets/img/opciones/foreground.jpg]
+[img/widgets/img/opciones/foreground.jpg]
 
 --------------------------------------------------------
 
@@ -233,7 +233,7 @@ Permite indicar la altura a la que se posicionara nuestro widget en lineas no en
 
 ``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", height=10)
 
-[widgets/img/opciones/height.jpg]
+[img/widgets/img/opciones/height.jpg]
 
 --------------------------------------------------------
 
@@ -299,19 +299,19 @@ Permite indicar la altura a la que se posicionara nuestro widget en lineas no en
 
 ``` etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="right")
 
-[widgets/img/opciones/justify/justify_right.jpg]
+[img/widgets/img/opciones/justify/justify_right.jpg]
 
 - CENTER
 
 ``` etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="center")
 
-[widgets/img/opciones/justify/justify_center.jpg]
+[img/widgets/img/opciones/justify/justify_center.jpg]
 
 - LEFT
 
 ``` etiqueta = Tkinter.Label(root, text="Hola\n Mundo!!!", justify="left")
 
-[widgets/img/opciones/justify/justify_left.jpg]
+[img/widgets/img/opciones/justify/justify_left.jpg]
 
 --------------------------------------------------------
 
@@ -397,31 +397,31 @@ Ejemplos:
 
 ``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="sunken", borderwidth=5)
 
-[widgets/img/opciones/relief/relief_sunken.jpg]
+[img/widgets/img/opciones/relief/relief_sunken.jpg]
 
 - RAISED
 
 ``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="raised", borderwidth=5)
 
-[widgets/img/opciones/relief/relief_raised.jpg]
+[img/widgets/img/opciones/relief/relief_raised.jpg]
 
 - GROOVE
 
 ``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="groove", borderwidth=5)
 
-[widgets/img/opciones/relief/relief_groove.jpg]
+[img/widgets/img/opciones/relief/relief_groove.jpg]
 
 - RIDGE
 
 ``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="ridge", borderwidth=5)
 
-[widgets/img/opciones/relief/relief_ridge.jpg]
+[img/widgets/img/opciones/relief/relief_ridge.jpg]
 
 - FLAT
 
 ``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", relief="flat", borderwidth=5)
 
-[widgets/img/opciones/relief/relief_flat.jpg]
+[img/widgets/img/opciones/relief/relief_flat.jpg]
 
 --------------------------------------------------------
 
@@ -517,7 +517,7 @@ En el siguiente ejemplo se definen tres etiquetas, las tres tienen los mismos ar
 >>>
 ```
 
-[widgets/img/opciones/state.jpg]
+[img/widgets/img/opciones/state.jpg]
 
 --------------------------------------------------------
 
@@ -540,17 +540,17 @@ texto = "Codigo Python"
 etiqueta = Tkinter.Label(root, text=texto)
 ```
 
-[widgets/img/Label/Label-01.jpg]
+[img/widgets/img/Label/Label-01.jpg]
 
 Ejemplo con salto de linea (recuerden que deben usar el caracter \n para el salto de linea):
 ``` etiqueta = Tkinter.Label(root, text="Hola \n a todos")
 
-[widgets/img/opciones/text-01.jpg]
+[img/widgets/img/opciones/text-01.jpg]
 
 Ejemplo con tabulacion (recuerden que deben usar el caracter \t para la tabulacion):
 ``` etiqueta = Tkinter.Label(root, text="Hola \t a todos")
 
-[widgets/img/opciones/text-02.jpg]
+[img/widgets/img/opciones/text-02.jpg]
 
 --------------------------------------------------------
 
@@ -586,14 +586,14 @@ Ejemplo con una etiqueta
 
 ``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", underline=3)
 
-[widgets/img/opciones/underline-01.jpg]
+[img/widgets/img/opciones/underline-01.jpg]
 
 
 Ejemplo con un boton
 
 ``` boton = Tkinter.Button(root, text="Imprimir Hola Mundo!!!", command=funcion, underline=3)
 
-[widgets/img/opciones/underline-02.jpg]
+[img/widgets/img/opciones/underline-02.jpg]
 
 --------------------------------------------------------
 
@@ -610,7 +610,7 @@ Esta opcion nos permite indicar en ancho del elemento con el que estamos trabaja
 
 ``` etiqueta = Tkinter.Label(root, text="Hola Mundo!!!", width=30)
 
-[widgets/img/opciones/activeforeground.jpg]
+[img/widgets/img/opciones/activeforeground.jpg]
 
 --------------------------------------------------------
 
