@@ -23,7 +23,7 @@ Esa es su forma mas básica en donde como se observa no se llama a ninguna de la
 ''
 >>>
 ```
-[widgets/img/Entry/Entry-01.jpg]
+[img/widgets/img/Entry/Entry-01.jpg]
 
 Si escribiéramos un texto en el cuadro y escribimos en la consola lo siguiente
 
@@ -41,7 +41,7 @@ estaríamos usando el método 'get' del widget Entry que nos permite obtener el 
 'CodigoPython.com.ar'
 >>>
 ```
-[widgets/img/Entry/Entry-02.jpg]
+[img/widgets/img/Entry/Entry-02.jpg]
 
 Seguramente ese rectángulo en nuestra ventana de poco serviría si no pudiésemos interactuar con este. A continuación veremos los métodos a lo podemos llamar para trabajar con este widget.
 
@@ -152,7 +152,7 @@ Con un solo argumento:
 >>>
 
 ```
-[widgets/img/Entry/Entry-03.jpg]
+[img/widgets/img/Entry/Entry-03.jpg]
 
 Con dos argumentos:
 
@@ -169,7 +169,7 @@ Con dos argumentos:
 >>>
 ```
 
-[widgets/img/Entry/Entry-04.jpg]
+[img/widgets/img/Entry/Entry-04.jpg]
 
 Otra opción que tenemos es borrar desde un inicio fijado por nosotros hasta el final del texto disponible en el campo de texto gracias a un índice que nos da Tkinter que es 'END', con este podemos de la siguiente forma borrar desde el inicio hasta el final sin necesitar conocer cuantos caracteres componen el texto contenido en el widget
 
@@ -257,7 +257,7 @@ Indica el valor numerico del indice indicado. La utilidad de 'index' esta en que
 
 Ahora probemos poniendo el cursor despues del tercer caracter y veamos si podemos obtener su posicion
 
-[widgets/img/Entry/Entry-05.jpg]
+[img/widgets/img/Entry/Entry-05.jpg]
 
 ```
 >>> campo_de_texto.index("insert")
@@ -267,7 +267,7 @@ Ahora probemos poniendo el cursor despues del tercer caracter y veamos si podemo
 
 Asi como funciono con 'end' y 'insert' tambien deberia hacerlo con 'anchor', asi que volvamos a la consola. Para el primer ejemplo seleccionemos desde el indice 4 al 0, es decir seleccionemos todo el texto de derecha hacia izquierda
 
-[widgets/img/Entry/Entry-06.jpg]
+[img/widgets/img/Entry/Entry-06.jpg]
 
 ```
 >>> campo_de_texto.index("anchor")
@@ -277,7 +277,7 @@ Asi como funciono con 'end' y 'insert' tambien deberia hacerlo con 'anchor', asi
 
 Y ahora hagamos algo similar pero seleccionando de izquierda hacia derecha
 
-[widgets/img/Entry/Entry-07.jpg]
+[img/widgets/img/Entry/Entry-07.jpg]
 
 ```
 >>> campo_de_texto.index("anchor")
