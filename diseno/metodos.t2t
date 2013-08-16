@@ -136,7 +136,7 @@ segunda_ventana.mainloop()
 
 Como se observa se crean dos ventanas donde a una se le pasa valores positivos y a la otra por el contrario sus valores seran negativos.
 
-[diseno/metodos/img/geometry.jpg]
+[img/diseno/metodos/img/geometry.jpg]
 
 
 - Si no le pasamos ningun argumento nos devolveria el tamaño y la posicion de la ventana como vemos a continuacion:
@@ -432,7 +432,7 @@ root.title("Bienvenido a Codigo Python")
 root.mainloop()
 ```
 
-[diseno/metodos/img/title-01.jpg]
+[img/diseno/metodos/img/title-01.jpg]
 
 
 - Heredando el titulo de la ventana padre:
@@ -444,7 +444,7 @@ otra_ventana = Tkinter.Toplevel(root)
 root.mainloop()
 ```
 
-[diseno/metodos/img/title-02.jpg]
+[img/diseno/metodos/img/title-02.jpg]
 
 
 - Ejemplo de dos ventanas con titulos distintos:
@@ -457,7 +457,7 @@ otra_ventana.title("Codigo Python")
 root.mainloop()
 ```
 
-[diseno/metodos/img/title-03.jpg]
+[img/diseno/metodos/img/title-03.jpg]
 
 --------------------------------------------------------
 
