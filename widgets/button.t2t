@@ -31,9 +31,9 @@ root.mainloop()
 En el se observa la ya conocida importación del modulo Tkinter, la función que ya habíamos declarado y la creación del botón. Como se puede ver la creación de un botón básico es muy similar al de una etiqueta pero se incluye un parámetro mas que nos dará la posibilidad de especificar dentro de el la función que utilizaremos; el parámetro mencionado es **'command'** y en el podemos llamar a funciones o métodos, en este caso llamamos a la función 'función' que va a imprimir en la consola la palabra //'Excelente'//.
 
 
-[widgets/img/Button/Button-01.jpg]
+[img/widgets/img/Button/Button-01.jpg]
 
-[widgets/img/Button/Button-02.jpg]
+[img/widgets/img/Button/Button-02.jpg]
 
 
 === Métodos ===
