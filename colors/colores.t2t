@@ -12,11 +12,11 @@ Les dejo dos ejemplos para que puedan observarlo en funcionamiento:
 
 ``` boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion, background="red")
 
-[colors/img/color_red.jpg]
+[img/colors/img/color_red.jpg]
 
 ``` boton = Tkinter.Button(root, text="Que te parece la guia?", command=funcion, background="CadetBlue")
 
-[colors/img/color_CadetBlue.jpg]
+[img/colors/img/color_CadetBlue.jpg]
 
 
 Otra de las posibilidades que tenemos es utilizar los colores del sistema para conseguir un aspecto mas acorde a la plataforma con que estemos trabajando.
@@ -40,7 +40,7 @@ Su uso es muy simple, solo debemos usar la forma que habíamos visto cuando colo
 
 ``` boton = Tkinter.Button(root, text="Que te parece la guia?", command=función, background="#FA0000")
 
-[colors/img/color_FA0000.jpg]
+[img/colors/img/color_FA0000.jpg]
 
 Donde "#FA0000" es el equivalente a utilizar la cadena 'red' para indicar el nombre del color.
 
