@@ -14,5 +14,9 @@ Thumbs.db
 ######################
 *.log
 
-
+# Respaldos #
 *~
+
+# Generados por IDE's #
+.project
+.pydevproject

@@ -1,0 +1,61 @@
+
+
+Dentro de la familia de los botones acabamos de ver a //Checkbutton// y ahora le toca a //Radiobutton//. Estos dos se diferencian no solo en su forma sino que en //Radiobutton// solo uno de ellos puede estar seleccionado en la practica seria una opción cuando tenemos un tipo de selección de uno de muchos. Cada //Radiobutton// puede contener texto e imágenes y ser asociado a una función o método, que cuando se selección Tkinter llamaría automáticamente a esa función al igual que como lo haría con un botón.
+
+Para conseguir este comportamiento hay que asegurarse de que todos los //Radiobutton// apunten a la misma variable.
+
+%FIXME: Mejorar descripción
+
+Veamos un ejemplo sencillo para entenderlos un poco mas. Tenemos que tener en cuenta que opciones tendríamos que pasarles para poder utilizarlos, por un lado un texto o imagen para diferenciarlos y por el otro lado el valor que tendrían y una variable a la que estuvieran asociados. Como habíamos mencionado la variable debe coincidir en todos los //Radiobutton// del grupo y un valor único para cada uno. Ahora si pasemos al ejemplo:
+
+```
+>>> import Tkinter
+>>> root = Tkinter.Tk()
+>>> variable = Tkinter.StringVar()
+>>> def prueba():
+...     print "Se ha elegido la opcion", variable.get()
+... 
+>>> radiobutton1 = Tkinter.Radiobutton(text="Opcion 1", variable=variable, value=1, command=prueba)
+>>> radiobutton2 = Tkinter.Radiobutton(text="Opcion 2", variable=variable, value=2, command=prueba)
+>>> radiobutton3 = Tkinter.Radiobutton(text="Opcion 3", variable=variable, value=3, command=prueba)
+>>> radiobutton1.pack()
+>>> radiobutton2.pack()
+>>> radiobutton3.pack()
+>>> variable.get()
+''
+>>> #Ahora iremos seleccionando las distintas opciones
+... 
+>>> Se ha elegido la opcion 1
+Se ha elegido la opcion 2
+Se ha elegido la opcion 3
+>>>
+```
+
+Como se habrán dado cuenta solo permite elegir una de las tres opciones, esto es debido a que como se había mencionado apuntan a la misma variable.
+
+
+
+=== Métodos ===
+
+- cget(OPCION)
+
+Este método cumple la misma función que se vio en el widget 'Label'.
+
+- configure
+
+Este método cumple la misma función que se vio en el widget 'Label'.
+
+- deselect
+ Deselects the radiobutton and sets the associated variable to an empty string. If this radiobutton was not currently selected, the command has no effect. 
+ Anula el botón de radio y establece la variable asociada a una cadena vacía. Si no se ha seleccionado el botón de radio, el comando no tiene efecto.
+
+- flash
+
+
+- invoke
+ Does just what would have happened if the user invoked the radiobutton with the mouse: selects the button and invokes its associated Tcl command, if there is one. The return value is the return value from the Tcl command, or an empty string if there is no command associated with the radiobutton. This command is ignored if the radiobutton's state is disabled. 
+ Hace exactamente lo que habría ocurrido si el usuario invoca el botón de radio con el ratón: selecciona el botón e invoca el comando Tcl asociado, si es que existe. El valor de retorno es el valor de retorno del comando Tcl, o una cadena vacía si no hay un comando asociado al botón de radio. Este comando se ignora si el estado del botón de radio está desactivada.
+
+- select
+ Selects the radiobutton and sets the associated variable to the value corresponding to this widget. 
+ Selecciona el botón de radio y establece la variable asociada al valor correspondiente a este widget.
