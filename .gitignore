@@ -20,3 +20,5 @@ Thumbs.db
 # Generados por IDE's #
 .project
 .pydevproject
+.settings
+org.eclipse.core.resources.prefs
