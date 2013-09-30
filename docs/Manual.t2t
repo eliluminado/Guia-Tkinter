@@ -13,6 +13,9 @@ Esta guía esta formateada con txt2tags el cual lo pueden encontrar en la siguie
 
 == Conversion ==
 
+Para la conversión de la guiá a formatos amigables para la lectura y difusión se ofrece una herramienta llamada 'build.py' que se encuentra en el directorio raíz del código de la guiá, la cual se encarga de generar en la carpeta 'build' cuatro archivos en formato PDF, ePub, HTML y Rst. 
+Esta mini-aplicación escrita en Python 2.x se encarga automáticamente de realizar todas las acciones necesarias para la conversión, esta aplicación debe ser ejecutada usando Python 2.x debido a la incompatibilidad de txt2tags con Python 3.x, como requisitos tiene a [glob2 https://pypi.python.org/pypi/glob2/] para algunas tareas internas, [rst2pdf https://pypi.python.org/pypi/rst2pdf/] para la conversión a PDF y por ultimo esta [rst2epub2 https://pypi.python.org/pypi/rst2epub2/] para convertirlo en un libro ePub.
+
 == Editar ==
 
 == Interactuando con el repositorio GIT ==
